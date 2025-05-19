@@ -5,11 +5,12 @@ import Hero from '@/components/Hero';
 import MainCTAs from '@/components/MainCTAs';
 import FeaturedCourses from '@/components/FeaturedCourses';
 import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-yutime-white">
       <Navbar />
       <main className="flex-1">
         <Hero />
@@ -19,6 +20,9 @@ const Index = () => {
         </div>
         <div id="testimonials">
           <Testimonials />
+        </div>
+        <div id="faq">
+          <FAQ />
         </div>
       </main>
       <Footer />

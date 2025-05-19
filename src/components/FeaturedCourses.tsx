@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Badge } from "@/components/ui/badge";
 
 const courses = [
   {
@@ -54,17 +55,12 @@ const FeaturedCourses = () => {
   return (
     <section id="courses" className="section">
       <div className="container">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div>
-            <h2 className="text-yutime-navy mb-4">Featured Courses</h2>
-            <p className="text-gray-700 max-w-2xl">
-              Our most popular courses, designed with your learning goals in mind.
-              Start your learning journey today.
-            </p>
-          </div>
-          <Link to="/courses" className="mt-4 md:mt-0 text-yutime-blue font-medium text-lg hover:underline">
-            View all courses
-          </Link>
+        <div className="mb-12 text-center">
+          <h2 className="text-yutime-charcoal mb-4">Featured Courses</h2>
+          <p className="text-yutime-grey max-w-2xl mx-auto">
+            Our most popular courses, designed with your learning goals in mind.
+            Start your learning journey today.
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -79,21 +75,19 @@ const FeaturedCourses = () => {
               </div>
               <div className="flex-1 flex flex-col p-4">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
-                  <span className="text-yutime-blue text-sm font-medium">{course.level}</span>
+                  <Badge variant="outline" className="bg-yutime-gold/10 text-yutime-charcoal border-yutime-gold/20">
+                    {course.category}
+                  </Badge>
+                  <span className="text-yutime-purple text-sm font-medium">{course.level}</span>
                 </div>
-                <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-                <div className="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
-                  <span className="text-sm text-gray-600">{course.lessons} lessons</span>
-                  <span className="text-sm text-gray-600">{course.duration}</span>
+                <h3 className="text-xl font-bold mb-2 text-yutime-charcoal">{course.title}</h3>
+                <div className="mt-auto pt-4 flex justify-between items-center border-t border-yutime-white">
+                  <span className="text-sm text-yutime-grey">{course.lessons} lessons</span>
+                  <span className="text-sm text-yutime-grey">{course.duration}</span>
                 </div>
               </div>
             </Link>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <Link to="/courses" className="btn-primary">Browse All Courses</Link>
         </div>
       </div>
     </section>

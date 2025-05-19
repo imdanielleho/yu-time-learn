@@ -30,13 +30,13 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					navy: '#103661',
-					navy_dark: '#0A2341',
-					blue: '#3A7BBD',
-					yellow: '#F7D054',
-					yellow_light: '#FBEAAC',
-					sand: '#F1F0FB',
-					sand_dark: '#E5E4EB',
+					purple: '#6D597A', // Plum Purple
+					purple_light: '#8A7491',
+					coral: '#FF805D', // Warm Coral
+					gold: '#F2C94C', // Muted Gold
+					white: '#F8F8F8', // Soft White
+					charcoal: '#333333', // Charcoal
+					grey: '#888888', // Cool Grey
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
