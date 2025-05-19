@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const courses = [
   {
@@ -28,6 +29,24 @@ const courses = [
     lessons: 10,
     duration: "5 weeks",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600"
+  },
+  {
+    id: 4,
+    title: "Managing Personal Finances",
+    category: "Finance",
+    level: "Intermediate",
+    lessons: 6,
+    duration: "3 weeks",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600"
+  },
+  {
+    id: 5,
+    title: "Introduction to Social Media",
+    category: "Technology",
+    level: "Beginner",
+    lessons: 7,
+    duration: "4 weeks",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600"
   }
 ];
 
@@ -43,14 +62,14 @@ const FeaturedCourses = () => {
               Start your learning journey today.
             </p>
           </div>
-          <a href="#" className="mt-4 md:mt-0 text-yutime-blue font-medium text-lg hover:underline">
+          <Link to="/courses" className="mt-4 md:mt-0 text-yutime-blue font-medium text-lg hover:underline">
             View all courses
-          </a>
+          </Link>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <div key={course.id} className="card hover:shadow-lg transition-shadow cursor-pointer overflow-hidden flex flex-col h-full">
+            <Link key={course.id} to={`/courses/${course.id}`} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full">
               <div className="relative h-48 overflow-hidden rounded-lg mb-4">
                 <img 
                   src={course.image} 
@@ -58,7 +77,7 @@ const FeaturedCourses = () => {
                   className="w-full h-full object-cover transition-transform hover:scale-105 duration-300" 
                 />
               </div>
-              <div className="flex-1 flex flex-col">
+              <div className="flex-1 flex flex-col p-4">
                 <div className="flex justify-between items-center mb-3">
                   <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
                   <span className="text-yutime-blue text-sm font-medium">{course.level}</span>
@@ -69,12 +88,12 @@ const FeaturedCourses = () => {
                   <span className="text-sm text-gray-600">{course.duration}</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         
         <div className="mt-12 text-center">
-          <button className="btn-primary">Browse All Courses</button>
+          <Link to="/courses" className="btn-primary">Browse All Courses</Link>
         </div>
       </div>
     </section>

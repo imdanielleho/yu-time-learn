@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import CategoryList from '@/components/CategoryList';
+import MainCTAs from '@/components/MainCTAs';
 import FeaturedCourses from '@/components/FeaturedCourses';
 import Testimonials from '@/components/Testimonials';
 import Footer from '@/components/Footer';
@@ -13,7 +13,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <CategoryList />
+        <MainCTAs />
         <div id="courses">
           <FeaturedCourses />
         </div>
