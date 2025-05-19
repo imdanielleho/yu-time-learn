@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Badge } from "@/components/ui/badge";
+import { ArrowRight } from 'lucide-react';
 
 const courses = [
   {
@@ -53,7 +54,7 @@ const courses = [
 
 const FeaturedCourses = () => {
   return (
-    <section id="courses" className="section">
+    <section id="courses" className="section bg-gradient-to-b from-yutime-white to-white">
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-yutime-charcoal mb-4">Featured Courses</h2>
@@ -65,25 +66,39 @@ const FeaturedCourses = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <Link key={course.id} to={`/courses/${course.id}`} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full">
-              <div className="relative h-48 overflow-hidden rounded-lg mb-4">
+            <Link 
+              key={course.id} 
+              to={`/courses/${course.id}`} 
+              className="group flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-yutime-charcoal/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <img 
                   src={course.image} 
                   alt={course.title} 
-                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-300" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                 />
-              </div>
-              <div className="flex-1 flex flex-col p-4">
-                <div className="flex justify-between items-center mb-3">
-                  <Badge variant="outline" className="bg-yutime-gold/10 text-yutime-charcoal border-yutime-gold/20">
+                <div className="absolute top-4 left-4 z-20">
+                  <Badge variant="outline" className="bg-yutime-gold/90 text-yutime-charcoal border-none font-medium shadow-sm">
                     {course.category}
                   </Badge>
-                  <span className="text-yutime-purple text-sm font-medium">{course.level}</span>
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-yutime-charcoal">{course.title}</h3>
-                <div className="mt-auto pt-4 flex justify-between items-center border-t border-yutime-white">
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="px-2 py-1 rounded-md bg-white/90 text-yutime-charcoal text-xs font-medium">
+                    {course.level}
+                  </span>
+                </div>
+              </div>
+              <div className="flex-1 flex flex-col p-5">
+                <h3 className="text-xl font-bold mb-3 text-yutime-charcoal group-hover:text-yutime-purple transition-colors">
+                  {course.title}
+                </h3>
+                <div className="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
                   <span className="text-sm text-yutime-grey">{course.lessons} lessons</span>
                   <span className="text-sm text-yutime-grey">{course.duration}</span>
+                </div>
+                <div className="mt-4 flex items-center justify-end text-yutime-purple font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
+                  View Course <ArrowRight className="ml-1 w-4 h-4" />
                 </div>
               </div>
             </Link>
