@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,9 +16,9 @@ const Navbar = () => {
     <header className="sticky top-0 z-40 w-full bg-white shadow-soft">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center">
-          <a href="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <span className="font-heading text-2xl font-bold text-yutime-navy">YŪ<span className="text-yutime-blue">TIME</span></span>
-          </a>
+          </Link>
         </div>
         
         {/* Mobile menu button */}
@@ -34,18 +35,18 @@ const Navbar = () => {
         
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#categories" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
+          <Link to="/#categories" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
             Categories
-          </a>
-          <a href="#courses" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
+          </Link>
+          <Link to="/#courses" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
             Courses
-          </a>
-          <a href="#testimonials" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
+          </Link>
+          <Link to="/#testimonials" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
             Testimonials
-          </a>
-          <button className="btn-primary">
+          </Link>
+          <Link to="/join" className="btn-primary">
             Join Now
-          </button>
+          </Link>
         </nav>
         
         {/* Mobile navigation */}
@@ -67,30 +68,30 @@ const Navbar = () => {
               </Button>
             </div>
             <nav className="flex flex-col p-6 space-y-6">
-              <a 
-                href="#categories" 
+              <Link 
+                to="/#categories" 
                 className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
                 onClick={toggleMenu}
               >
                 Categories
-              </a>
-              <a 
-                href="#courses" 
+              </Link>
+              <Link 
+                to="/#courses" 
                 className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
                 onClick={toggleMenu}
               >
                 Courses
-              </a>
-              <a 
-                href="#testimonials" 
+              </Link>
+              <Link 
+                to="/#testimonials" 
                 className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
                 onClick={toggleMenu}
               >
                 Testimonials
-              </a>
-              <button className="btn-primary w-full mt-4">
+              </Link>
+              <Link to="/join" className="btn-primary w-full mt-4" onClick={toggleMenu}>
                 Join Now
-              </button>
+              </Link>
             </nav>
           </div>
         </div>

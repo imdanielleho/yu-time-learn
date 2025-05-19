@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const categories = [
   {
@@ -60,8 +61,9 @@ const CategoryList = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category) => (
-            <div 
+            <Link 
               key={category.id} 
+              to={`/categories/${category.id}`}
               className={`card hover:shadow-lg transition-shadow cursor-pointer ${category.color} border-2 border-white`}
             >
               <div className="flex flex-col items-center text-center p-2">
@@ -69,12 +71,12 @@ const CategoryList = () => {
                 <h3 className="text-xl font-bold text-yutime-navy mb-2">{category.name}</h3>
                 <p className="text-gray-700">{category.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         
         <div className="mt-10 text-center">
-          <button className="btn-primary">View All Categories</button>
+          <Link to="/categories" className="btn-primary">View All Categories</Link>
         </div>
       </div>
     </section>

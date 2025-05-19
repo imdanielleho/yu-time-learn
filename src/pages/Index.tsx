@@ -14,8 +14,12 @@ const Index = () => {
       <main className="flex-1">
         <Hero />
         <CategoryList />
-        <FeaturedCourses />
-        <Testimonials />
+        <div id="courses">
+          <FeaturedCourses />
+        </div>
+        <div id="testimonials">
+          <Testimonials />
+        </div>
       </main>
       <Footer />
     </div>

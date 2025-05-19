@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -16,13 +17,13 @@ const Hero = () => {
               enjoy life more, and develop practical everyday skills.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <button className="btn-primary flex items-center justify-center gap-2 group">
+              <Link to="/#courses" className="btn-primary flex items-center justify-center gap-2 group">
                 Browse Courses
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="btn-secondary">
+              </Link>
+              <Link to="/about" className="btn-secondary">
                 Learn More
-              </button>
+              </Link>
             </div>
             <div className="pt-4 flex items-center text-yutime-navy">
               <div className="flex -space-x-3">
