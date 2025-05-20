@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <section className="bg-gradient-to-b from-yutime-sand to-white py-16 md:py-24">
+    <section className="bg-gradient-to-b from-yutime-sand/50 to-white py-14 md:py-20">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 animate-fade-in">
             <h1 className="text-yutime-navy leading-tight">
               Learn New Skills at <span className="text-yutime-blue">Your Pace</span>
@@ -16,32 +16,29 @@ const Hero = () => {
               Join YŪTIME and discover courses designed for adults 45+ who want to stay mentally active, 
               enjoy life more, and develop practical everyday skills.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Link to="/#courses" className="btn-primary flex items-center justify-center gap-2 group">
-                Browse Courses
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link to="/about" className="btn-secondary">
-                Learn More
+            <div className="pt-2">
+              <Link to="/#courses" className="btn-primary inline-flex items-center justify-center gap-2 group">
+                Explore Courses
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             <div className="pt-4 flex items-center text-yutime-navy">
-              <div className="flex -space-x-3">
+              <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full bg-yutime-blue/20 border-2 border-white flex items-center justify-center text-sm font-medium">
+                  <div key={i} className="w-8 h-8 rounded-full bg-yutime-blue/20 border border-white flex items-center justify-center text-sm font-medium">
                     {i}
                   </div>
                 ))}
               </div>
-              <p className="ml-4 font-medium">Join <span className="font-bold">2,500+</span> active learners</p>
+              <p className="ml-3 text-sm font-medium">Join <span className="font-bold">2,500+</span> active learners</p>
             </div>
           </div>
-          <div className="relative h-80 md:h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-card animate-fade-in">
-            <div className="absolute inset-0 bg-yutime-yellow/10 z-10 rounded-2xl"></div>
+          <div className="relative h-72 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-md">
+            <div className="absolute inset-0 bg-yutime-yellow/10 z-10 rounded-lg"></div>
             <img 
               src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800" 
               alt="Senior woman using laptop" 
-              className="w-full h-full object-cover rounded-2xl" 
+              className="w-full h-full object-cover rounded-lg" 
             />
           </div>
         </div>

@@ -54,27 +54,22 @@ const FeaturedCourses = () => {
   return (
     <section id="courses" className="section">
       <div className="container">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div>
-            <h2 className="text-yutime-navy mb-4">Featured Courses</h2>
-            <p className="text-gray-700 max-w-2xl">
-              Our most popular courses, designed with your learning goals in mind.
-              Start your learning journey today.
-            </p>
-          </div>
-          <Link to="/courses" className="mt-4 md:mt-0 text-yutime-blue font-medium text-lg hover:underline">
-            View all courses
-          </Link>
+        <div className="mb-10">
+          <h2 className="text-yutime-navy mb-4">Featured Courses</h2>
+          <p className="text-gray-700 max-w-2xl">
+            Our most popular courses, designed with your learning goals in mind.
+            Start your learning journey today.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
-            <Link key={course.id} to={`/courses/${course.id}`} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full">
+            <Link key={course.id} to={`/courses/${course.id}`} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full group">
               <div className="relative h-48 overflow-hidden rounded-lg mb-4">
                 <img 
                   src={course.image} 
                   alt={course.title} 
-                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-300" 
+                  className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
                 />
               </div>
               <div className="flex-1 flex flex-col p-4">
@@ -90,10 +85,6 @@ const FeaturedCourses = () => {
               </div>
             </Link>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <Link to="/courses" className="btn-primary">Browse All Courses</Link>
         </div>
       </div>
     </section>
