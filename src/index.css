@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,24 +16,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 25% 20%;
 
-    --primary: 215 70% 22%;
+    --primary: 210 100% 18%; /* Adjusted to match deep indigo */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 45 90% 65%;
-    --secondary-foreground: 215 70% 22%;
+    --secondary: 45 90% 42%; /* Adjusted to match gold */
+    --secondary-foreground: 210 100% 18%;
 
     --muted: 220 10% 94%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 45 85% 90%;
-    --accent-foreground: 215 70% 22%;
+    --accent: 190 53% 40%; /* Adjusted to match slate blue */
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 220 13% 90%;
     --input: 220 13% 90%;
-    --ring: 215 70% 22%;
+    --ring: 210 100% 18%;
 
     --radius: 0.5rem;
   }
@@ -71,15 +71,19 @@
   p {
     @apply text-base md:text-lg leading-relaxed;
   }
+
+  .grid-12 {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-6;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-navy hover:bg-yutime-navy/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow;
+    @apply bg-yutime-indigo hover:bg-yutime-indigo/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow;
   }
   
   .btn-secondary {
-    @apply bg-yutime-yellow hover:bg-yutime-yellow/90 text-yutime-navy py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow;
+    @apply bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow;
   }
   
   .card {

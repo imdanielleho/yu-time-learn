@@ -18,8 +18,8 @@ export default {
 				'sm': '640px',
 				'md': '768px',
 				'lg': '1024px',
-				'xl': '1280px',
-				'2xl': '1400px'
+				'xl': '1140px', // Updated to match the 1140px content area
+				'2xl': '1440px' // Updated to match the 1440px width
 			}
 		},
 		extend: {
@@ -30,9 +30,11 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					navy: '#103661',
+					indigo: '#00335D', // Deep indigo
+					gold: '#D8A602',   // Gold 
+					blue: '#2F8C9E',   // Slate blue
+					navy: '#103661',   // Keep original navy for compatibility
 					navy_dark: '#0A2341',
-					blue: '#3A7BBD',
 					yellow: '#F7D054',
 					yellow_light: '#FBEAAC',
 					sand: '#F1F0FB',
@@ -68,7 +70,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ["Open Sans", "sans-serif"],
+				sans: ["Inter", "Noto Sans", "sans-serif"], // Updated fonts
 				heading: ["Nunito", "sans-serif"]
 			},
 			borderRadius: {

@@ -55,7 +55,7 @@ const FeaturedCourses = () => {
     <section id="courses" className="section">
       <div className="container">
         <div className="mb-10">
-          <h2 className="text-yutime-navy mb-4">Featured Courses</h2>
+          <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
           <p className="text-gray-700 max-w-2xl">
             Our most popular courses, designed with your learning goals in mind.
             Start your learning journey today.
