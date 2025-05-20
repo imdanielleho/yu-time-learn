@@ -12,6 +12,18 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleScrollTo = (id: string) => {
+    setIsMenuOpen(false);
+    
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full bg-white shadow-soft">
       <div className="container flex h-16 items-center justify-between">
@@ -35,15 +47,24 @@ const Navbar = () => {
         
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/#categories" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
-            Categories
-          </Link>
-          <Link to="/#courses" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
+          <button 
+            onClick={() => handleScrollTo('courses')} 
+            className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+          >
             Courses
-          </Link>
-          <Link to="/#testimonials" className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">
+          </button>
+          <button 
+            onClick={() => handleScrollTo('testimonials')} 
+            className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+          >
             Testimonials
-          </Link>
+          </button>
+          <button 
+            onClick={() => handleScrollTo('faq')} 
+            className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+          >
+            FAQ
+          </button>
           <Link to="/join" className="btn-primary">
             Join Now
           </Link>
@@ -68,27 +89,24 @@ const Navbar = () => {
               </Button>
             </div>
             <nav className="flex flex-col p-6 space-y-6">
-              <Link 
-                to="/#categories" 
+              <button
+                onClick={() => handleScrollTo('courses')}
                 className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
-                onClick={toggleMenu}
-              >
-                Categories
-              </Link>
-              <Link 
-                to="/#courses" 
-                className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
-                onClick={toggleMenu}
               >
                 Courses
-              </Link>
-              <Link 
-                to="/#testimonials" 
+              </button>
+              <button
+                onClick={() => handleScrollTo('testimonials')}
                 className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
-                onClick={toggleMenu}
               >
                 Testimonials
-              </Link>
+              </button>
+              <button
+                onClick={() => handleScrollTo('faq')}
+                className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
+              >
+                FAQ
+              </button>
               <Link to="/join" className="btn-primary w-full mt-4" onClick={toggleMenu}>
                 Join Now
               </Link>
