@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const PricingSection = () => {
   return (
-    <section className="section bg-white">
+    <section id="pricing" className="section bg-white">
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-yutime-indigo mb-4">Choose Your Learning Path</h2>
