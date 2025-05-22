@@ -75,8 +75,8 @@ const Testimonials = () => {
               ))}
             </CarouselContent>
             <div className="flex justify-center mt-6">
-              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 mx-2" />
-              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 mx-2" />
+              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 mx-2 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
+              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 mx-2 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
             </div>
           </Carousel>
         </div>
