@@ -10,7 +10,9 @@ const courses = [
     level: "Beginner",
     lessons: 8,
     duration: "4 weeks",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600"
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600",
+    price: 880,
+    description: "Master essential smartphone skills for daily use, from messaging to apps."
   },
   {
     id: 2,
@@ -19,7 +21,9 @@ const courses = [
     level: "All Levels",
     lessons: 12,
     duration: "6 weeks",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600"
+    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600",
+    price: 880,
+    description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices."
   },
   {
     id: 3,
@@ -28,7 +32,9 @@ const courses = [
     level: "Beginner",
     lessons: 10,
     duration: "5 weeks",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600"
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600",
+    price: 880,
+    description: "Learn to capture beautiful photos using any camera, with simple composition techniques."
   },
   {
     id: 4,
@@ -37,7 +43,9 @@ const courses = [
     level: "Intermediate",
     lessons: 6,
     duration: "3 weeks",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600"
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600",
+    price: 880,
+    description: "Organize your finances, reduce debt, and plan for a secure retirement."
   },
   {
     id: 5,
@@ -46,7 +54,9 @@ const courses = [
     level: "Beginner",
     lessons: 7,
     duration: "4 weeks",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600"
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600",
+    price: 880,
+    description: "Connect with family and friends across popular social media platforms safely."
   }
 ];
 
@@ -71,6 +81,9 @@ const FeaturedCourses = () => {
                   alt={course.title} 
                   className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
                 />
+                <div className="absolute top-2 right-2 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
+                  HKD {course.price}
+                </div>
               </div>
               <div className="flex-1 flex flex-col p-4">
                 <div className="flex justify-between items-center mb-3">
@@ -78,6 +91,7 @@ const FeaturedCourses = () => {
                   <span className="text-yutime-blue text-sm font-medium">{course.level}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-2">{course.title}</h3>
+                <p className="text-gray-600 text-sm mb-4">{course.description}</p>
                 <div className="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
                   <span className="text-sm text-gray-600">{course.lessons} lessons</span>
                   <span className="text-sm text-gray-600">{course.duration}</span>

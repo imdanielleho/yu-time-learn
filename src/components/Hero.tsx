@@ -37,7 +37,7 @@ const Hero = () => {
           <div className="relative h-72 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-md">
             <div className="absolute inset-0 bg-yutime-gold/10 z-10 rounded-lg"></div>
             <img 
-              src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800" 
+              src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800" 
               alt="Asian seniors learning online" 
               className="w-full h-full object-cover rounded-lg" 
             />

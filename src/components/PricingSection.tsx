@@ -4,6 +4,14 @@ import { Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PricingSection = () => {
+  const scrollToCourses = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const coursesSection = document.getElementById('courses');
+    if (coursesSection) {
+      coursesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="pricing" className="section bg-white">
       <div className="container">
@@ -39,9 +47,13 @@ const PricingSection = () => {
             </div>
             
             <div className="p-6 pt-0">
-              <Link to="/courses" className="btn-secondary w-full text-center block">
+              <a 
+                href="#courses" 
+                onClick={scrollToCourses}
+                className="btn-secondary w-full text-center block"
+              >
                 Browse Courses
-              </Link>
+              </a>
             </div>
           </div>
           
