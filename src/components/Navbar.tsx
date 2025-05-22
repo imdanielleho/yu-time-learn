@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ const Navbar = () => {
         </div>
         
         {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-4">
           <button 
             onClick={() => handleScrollTo('courses')} 
             className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
@@ -65,9 +65,18 @@ const Navbar = () => {
           >
             FAQ
           </button>
-          <Link to="/join" className="btn-primary">
-            Join Now
-          </Link>
+          <div className="flex items-center space-x-3">
+            <button 
+              onClick={() => handleScrollTo('courses')}
+              className="btn-primary"
+            >
+              Enroll Now
+            </button>
+            <Link to="/login" className="flex items-center space-x-1 px-4 py-2 text-yutime-indigo hover:text-yutime-blue transition-colors">
+              <LogIn size={18} />
+              <span>Log In</span>
+            </Link>
+          </div>
         </nav>
         
         {/* Mobile navigation */}
@@ -107,8 +116,18 @@ const Navbar = () => {
               >
                 FAQ
               </button>
-              <Link to="/join" className="btn-primary w-full mt-4" onClick={toggleMenu}>
-                Join Now
+              <button 
+                onClick={() => {
+                  handleScrollTo('courses');
+                  toggleMenu();
+                }}
+                className="btn-primary w-full mt-4"
+              >
+                Enroll Now
+              </button>
+              <Link to="/login" className="flex items-center justify-center space-x-2 w-full p-2 border border-yutime-indigo text-yutime-indigo rounded-md" onClick={toggleMenu}>
+                <LogIn size={18} />
+                <span>Log In</span>
               </Link>
             </nav>
           </div>

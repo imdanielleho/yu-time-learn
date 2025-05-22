@@ -37,7 +37,7 @@ const Hero = () => {
           <div className="relative h-72 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-md">
             <div className="absolute inset-0 bg-yutime-gold/10 z-10 rounded-lg"></div>
             <img 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800" 
+              src="https://cdn.elderlifefinancial.com/wp-content/uploads/2023/11/Technology-for-Seniors-To-Stay-in-Touch-With-Family.jpg?strip=all&lossy=1&ssl=1" 
               alt="Senior adult using laptop at home" 
               className="w-full h-full object-cover rounded-lg" 
             />
