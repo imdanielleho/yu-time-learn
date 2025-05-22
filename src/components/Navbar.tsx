@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
-import { Menu, X, LogIn } from 'lucide-react';
+import { Menu, X, LogIn, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // In a real app, this would come from auth state
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -21,6 +22,18 @@ const Navbar = () => {
         behavior: 'smooth',
         block: 'start'
       });
+    }
+  };
+
+  const handleResumeLearning = () => {
+    // Check if user is logged in
+    if (isLoggedIn) {
+      // Redirect to dashboard if logged in
+      window.location.href = "/dashboard";
+    } else {
+      // Show login modal if not logged in
+      // In a real implementation, this would open a modal
+      alert("Please log in to resume your learning");
     }
   };
 
@@ -70,12 +83,15 @@ const Navbar = () => {
               onClick={() => handleScrollTo('courses')}
               className="btn-primary"
             >
-              Enroll Now
+              Log In/Sign Up
             </button>
-            <Link to="/login" className="flex items-center space-x-1 px-4 py-2 text-yutime-indigo hover:text-yutime-blue transition-colors">
-              <LogIn size={18} />
-              <span>Log In</span>
-            </Link>
+            <button 
+              onClick={handleResumeLearning}
+              className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+            >
+              <Play size={18} />
+              <span>Resume Learning</span>
+            </button>
           </div>
         </nav>
         
@@ -123,12 +139,18 @@ const Navbar = () => {
                 }}
                 className="btn-primary w-full mt-4"
               >
-                Enroll Now
+                Log In/Sign Up
               </button>
-              <Link to="/login" className="flex items-center justify-center space-x-2 w-full p-2 border border-yutime-indigo text-yutime-indigo rounded-md" onClick={toggleMenu}>
-                <LogIn size={18} />
-                <span>Log In</span>
-              </Link>
+              <button 
+                onClick={() => {
+                  handleResumeLearning();
+                  toggleMenu();
+                }}
+                className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
+              >
+                <Play size={18} />
+                <span>Resume Learning</span>
+              </button>
             </nav>
           </div>
         </div>
