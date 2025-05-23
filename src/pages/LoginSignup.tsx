@@ -17,6 +17,7 @@ const LoginSignup = () => {
     password: "", 
     confirmPassword: "" 
   });
+  const [activeTab, setActiveTab] = useState("login");
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -70,6 +71,10 @@ const LoginSignup = () => {
     });
   };
 
+  const switchToSignup = () => {
+    setActiveTab("signup");
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <div className="container max-w-md mx-auto py-12 px-4 sm:px-6">
@@ -81,7 +86,7 @@ const LoginSignup = () => {
         </div>
         
         <div className="bg-white shadow-md rounded-lg p-6 sm:p-8">
-          <Tabs defaultValue="login">
+          <Tabs defaultValue={activeTab} onValueChange={setActiveTab} value={activeTab}>
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="login">Login</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
@@ -157,6 +162,19 @@ const LoginSignup = () => {
                 >
                   <Linkedin className="h-5 w-5 text-gray-600" />
                 </Button>
+              </div>
+              
+              <div className="text-center border-t border-gray-200 pt-4 mt-4">
+                <p>
+                  Not a member yet?{" "}
+                  <Button
+                    variant="link"
+                    className="p-0 text-yutime-blue font-semibold"
+                    onClick={switchToSignup}
+                  >
+                    Sign Up
+                  </Button>
+                </p>
               </div>
             </TabsContent>
             

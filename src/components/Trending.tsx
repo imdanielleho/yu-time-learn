@@ -56,8 +56,8 @@ const Trending = () => {
     <section className="section bg-white">
       <div className="container">
         <div className="mb-8">
-          <h2 className="text-yutime-navy mb-2">Recommended</h2>
-          <p className="text-gray-600">Based on topics you follow and interests from your profile</p>
+          <h2 className="text-yutime-navy mb-2">Trending</h2>
+          <p className="text-gray-600">Today's hottest takes</p>
         </div>
         
         <div className="relative px-12">
@@ -72,7 +72,7 @@ const Trending = () => {
               {trendingVideos.map((video) => (
                 <CarouselItem key={video.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                   <div className="h-full">
-                    <div className="relative group cursor-pointer rounded-lg overflow-hidden h-64 shadow-md transition-all hover:shadow-lg">
+                    <div className="relative group cursor-pointer rounded-lg overflow-hidden h-[400px] shadow-md transition-all hover:shadow-lg">
                       <img 
                         src={video.thumbnail} 
                         alt={video.title} 
