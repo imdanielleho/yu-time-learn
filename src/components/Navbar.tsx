@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { Menu, X, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginModal from './LoginModal';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // In a real app, this would come from auth state
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const navigate = useNavigate();
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -31,7 +32,7 @@ const Navbar = () => {
     // Check if user is logged in
     if (isLoggedIn) {
       // Redirect to dashboard if logged in
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     } else {
       // Show login modal if not logged in
       setIsLoginModalOpen(true);
@@ -45,7 +46,11 @@ const Navbar = () => {
     setIsLoggedIn(true);
     setIsLoginModalOpen(false);
     // Navigate to dashboard after successful login
-    window.location.href = "/dashboard";
+    navigate("/dashboard");
+  };
+
+  const handleLoginSignupClick = () => {
+    navigate("/login");
   };
 
   return (
@@ -92,7 +97,7 @@ const Navbar = () => {
             </button>
             <div className="flex items-center space-x-3">
               <button 
-                onClick={() => handleScrollTo('courses')}
+                onClick={handleLoginSignupClick}
                 className="btn-primary"
               >
                 Log In/Sign Up
@@ -146,8 +151,8 @@ const Navbar = () => {
                 </button>
                 <button 
                   onClick={() => {
-                    handleScrollTo('courses');
                     toggleMenu();
+                    handleLoginSignupClick();
                   }}
                   className="btn-primary w-full mt-4"
                 >

@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Facebook, Twitter, Linkedin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -14,10 +15,16 @@ interface LoginModalProps {
 const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onLogin(username, password);
+  };
+
+  const handleSignUpClick = () => {
+    onClose();
+    navigate("/login?tab=signup");
   };
 
   return (
@@ -72,10 +79,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             <Button
               variant="link"
               className="p-0 text-yutime-blue font-semibold"
-              onClick={() => {
-                // Handle sign up action
-                console.log("Sign up clicked");
-              }}
+              onClick={handleSignUpClick}
             >
               Sign Up
             </Button>

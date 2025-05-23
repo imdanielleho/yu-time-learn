@@ -5,6 +5,7 @@ import Hero from '@/components/Hero';
 import ValueProposition from '@/components/ValueProposition';
 import MainCTAs from '@/components/MainCTAs';
 import FeaturedCourses from '@/components/FeaturedCourses';
+import Trending from '@/components/Trending';
 import LearningProcess from '@/components/LearningProcess';
 import PricingSection from '@/components/PricingSection';
 import Testimonials from '@/components/Testimonials';
@@ -22,6 +23,7 @@ const Index = () => {
         <div id="courses">
           <FeaturedCourses />
         </div>
+        <Trending />
         <LearningProcess />
         <PricingSection />
         <div id="testimonials">
