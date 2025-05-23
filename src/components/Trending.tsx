@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Carousel,
   CarouselContent,
@@ -8,49 +8,62 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-import { Play } from 'lucide-react';
+import { Play, X } from 'lucide-react';
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 
 interface VideoItem {
   id: string;
   title: string;
   thumbnail: string;
   category: string;
+  videoUrl?: string;
 }
 
 const Trending = () => {
+  const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
+
   // Mock data for trending videos
   const trendingVideos: VideoItem[] = [
     {
       id: "vid1",
       title: "What are RMNs?",
       thumbnail: "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      category: "COMMERCE"
+      category: "COMMERCE",
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid2",
       title: "Why does Web3 matter?",
       thumbnail: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      category: "WEB3"
+      category: "WEB3",
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid3",
       title: "Three Lenses of AI",
       thumbnail: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      category: "AI"
+      category: "AI",
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid4",
       title: "Are metaverse and Web3 the same thing?",
       thumbnail: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      category: "METAVERSE"
+      category: "METAVERSE",
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid5",
       title: "What's the role of Assessments within Learning?",
       thumbnail: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      category: "FUTURE OF WORK"
+      category: "FUTURE OF WORK",
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     }
   ];
+
+  const handleVideoClick = (video: VideoItem) => {
+    setSelectedVideo(video);
+  };
 
   return (
     <section className="section bg-white">
@@ -72,7 +85,10 @@ const Trending = () => {
               {trendingVideos.map((video) => (
                 <CarouselItem key={video.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                   <div className="h-full">
-                    <div className="relative group cursor-pointer rounded-lg overflow-hidden h-[400px] shadow-md transition-all hover:shadow-lg">
+                    <div 
+                      className="relative group cursor-pointer rounded-lg overflow-hidden h-[400px] shadow-md transition-all hover:shadow-lg"
+                      onClick={() => handleVideoClick(video)}
+                    >
                       <img 
                         src={video.thumbnail} 
                         alt={video.title} 
@@ -99,6 +115,32 @@ const Trending = () => {
           </Carousel>
         </div>
       </div>
+
+      {/* Video Player Dialog */}
+      <Dialog open={!!selectedVideo} onOpenChange={(open) => !open && setSelectedVideo(null)}>
+        <DialogContent className="sm:max-w-4xl max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
+            <X className="h-6 w-6" />
+          </DialogClose>
+          
+          {selectedVideo && (
+            <div className="w-full h-full flex flex-col">
+              <video
+                src={selectedVideo.videoUrl}
+                className="w-full max-h-[80vh]"
+                controls
+                autoPlay
+              />
+              <div className="p-4 bg-black text-white">
+                <h3 className="text-xl font-medium">{selectedVideo.title}</h3>
+                <div className="mt-2">
+                  <Badge className="bg-yutime-blue/90">{selectedVideo.category}</Badge>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
