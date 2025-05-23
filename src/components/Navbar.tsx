@@ -91,7 +91,7 @@ const Navbar = () => {
             </button>
             <button 
               onClick={() => handleScrollTo('faq')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-6"
             >
               FAQ
             </button>

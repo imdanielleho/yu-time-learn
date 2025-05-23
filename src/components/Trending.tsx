@@ -84,7 +84,7 @@ const Trending = () => {
                         </div>
                       </div>
                       <div className="absolute top-3 left-3">
-                        <Badge className="bg-pink-600 hover:bg-pink-700">{video.category}</Badge>
+                        <Badge className="bg-yutime-blue hover:bg-yutime-blue/90 text-white">{video.category}</Badge>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                         <p className="text-white font-medium text-base">{video.title}</p>
