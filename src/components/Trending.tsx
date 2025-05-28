@@ -100,7 +100,7 @@ const Trending = () => {
                         </div>
                       </div>
                       <div className="absolute top-3 left-3">
-                        <Badge className="bg-yutime-blue hover:bg-yutime-blue/90 text-white">{video.category}</Badge>
+                        <Badge className="bg-yutime-navy hover:bg-yutime-navy/90 text-white">{video.category}</Badge>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                         <p className="text-white font-medium text-base">{video.title}</p>
@@ -118,14 +118,14 @@ const Trending = () => {
 
       {/* Video Player Dialog */}
       <Dialog open={!!selectedVideo} onOpenChange={(open) => !open && setSelectedVideo(null)}>
-        <DialogContent className="sm:max-w-lg max-h-[100vh] p-0 bg-black flex items-center justify-center">
+        <DialogContent className="sm:max-w-lg max-h-[80vh] p-0 bg-black flex items-center justify-center">
           <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
             <X className="h-6 w-6" />
           </DialogClose>
           
           {selectedVideo && (
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <div className="w-full max-w-lg" style={{ aspectRatio: '9/16' }}>
+              <div className="w-full max-w-lg h-[80vh]" style={{ aspectRatio: '9/16' }}>
                 <video
                   src={selectedVideo.videoUrl}
                   className="w-full h-full object-cover"

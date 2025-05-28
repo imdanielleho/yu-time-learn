@@ -91,7 +91,7 @@ const Navbar = () => {
             </button>
             <button 
               onClick={() => handleScrollTo('faq')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-6"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-8"
             >
               FAQ
             </button>
@@ -106,8 +106,8 @@ const Navbar = () => {
                 onClick={handleResumeLearning}
                 className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
               >
-                <Play size={18} />
                 <span>Resume Learning</span>
+                <Play size={18} />
               </button>
             </div>
           </nav>
@@ -165,8 +165,8 @@ const Navbar = () => {
                   }}
                   className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
                 >
-                  <Play size={18} />
                   <span>Resume Learning</span>
+                  <Play size={18} />
                 </button>
               </nav>
             </div>
