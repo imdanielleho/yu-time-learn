@@ -10,6 +10,7 @@ import PricingSection from '@/components/PricingSection';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
+import CustomerServiceButton from '@/components/CustomerServiceButton';
 
 const Index = () => {
   return (
@@ -32,6 +33,7 @@ const Index = () => {
         </div>
       </main>
       <Footer />
+      <CustomerServiceButton />
     </div>
   );
 };

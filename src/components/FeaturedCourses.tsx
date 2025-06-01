@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
 
 const courses = [
   {
@@ -74,29 +75,45 @@ const FeaturedCourses = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
-            <Link key={course.id} to={`/courses/${course.id}`} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full group">
-              <div className="relative h-48 overflow-hidden rounded-lg mb-4">
-                <img 
-                  src={course.image} 
-                  alt={course.title} 
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
-                />
-                <div className="absolute top-2 right-2 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
-                  {course.level}
+            <div key={course.id} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full group relative">
+              <Link to={`/courses/${course.id}`} className="block">
+                <div className="relative h-48 overflow-hidden rounded-lg mb-4">
+                  <img 
+                    src={course.image} 
+                    alt={course.title} 
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
+                  />
+                  <div className="absolute top-2 right-2 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
+                    {course.level}
+                  </div>
                 </div>
+                <div className="flex-1 flex flex-col p-4">
+                  <div className="mb-3">
+                    <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{course.title}</h3>
+                  <p className="text-gray-600 text-sm mb-2">{course.description}</p>
+                  <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
+                  <div className="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
+                    <span className="text-sm text-gray-600">{course.totalTime}</span>
+                  </div>
+                </div>
+              </Link>
+              
+              {/* CTA Button */}
+              <div className="absolute bottom-4 right-4">
+                <Button 
+                  className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Handle free trial or course enrollment
+                    console.log(`Get started for free with course ${course.id}`);
+                  }}
+                >
+                  Get started for free
+                </Button>
               </div>
-              <div className="flex-1 flex flex-col p-4">
-                <div className="mb-3">
-                  <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-                <p className="text-gray-600 text-sm mb-2">{course.description}</p>
-                <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
-                <div className="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
-                  <span className="text-sm text-gray-600">{course.totalTime}</span>
-                </div>
-              </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
