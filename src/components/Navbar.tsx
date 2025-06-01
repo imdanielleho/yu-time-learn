@@ -102,13 +102,15 @@ const Navbar = () => {
               >
                 Log In/Sign Up
               </button>
-              <button 
-                onClick={handleResumeLearning}
-                className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
-              >
-                <span>Resume Learning</span>
-                <Play size={18} />
-              </button>
+              {isLoggedIn && (
+                <button 
+                  onClick={handleResumeLearning}
+                  className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+                >
+                  <span>Resume Learning</span>
+                  <Play size={18} />
+                </button>
+              )}
             </div>
           </nav>
           
@@ -158,16 +160,18 @@ const Navbar = () => {
                 >
                   Log In/Sign Up
                 </button>
-                <button 
-                  onClick={() => {
-                    handleResumeLearning();
-                    toggleMenu();
-                  }}
-                  className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
-                >
-                  <span>Resume Learning</span>
-                  <Play size={18} />
-                </button>
+                {isLoggedIn && (
+                  <button 
+                    onClick={() => {
+                      handleResumeLearning();
+                      toggleMenu();
+                    }}
+                    className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
+                  >
+                    <span>Resume Learning</span>
+                    <Play size={18} />
+                  </button>
+                )}
               </nav>
             </div>
           </div>

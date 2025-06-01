@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ValueProposition from '@/components/ValueProposition';
 import FeaturedCourses from '@/components/FeaturedCourses';
-import Trending from '@/components/Trending';
 import LearningProcess from '@/components/LearningProcess';
 import PricingSection from '@/components/PricingSection';
 import Testimonials from '@/components/Testimonials';
@@ -19,7 +18,6 @@ const Index = () => {
       <main className="flex-1">
         <Hero />
         <ValueProposition />
-        <Trending />
         <div id="courses">
           <FeaturedCourses />
         </div>

@@ -46,7 +46,7 @@ const LearningProcess = () => {
               </div>
               
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                <div className="hidden lg:block absolute top-1/2 -right-2 transform -translate-y-1/2">
                   <ArrowRight size={24} className="text-yutime-gold" />
                 </div>
               )}
