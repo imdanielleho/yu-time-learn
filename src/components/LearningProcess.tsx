@@ -49,19 +49,17 @@ const LearningProcess = () => {
             ))}
           </div>
           
-          {/* Arrows positioned between cards */}
+          {/* Arrows positioned in the middle between cards */}
           <div className="hidden lg:block">
             {[0, 1, 2].map((index) => (
               <div 
                 key={index} 
-                className="absolute top-1/2 transform -translate-y-1/2 z-10"
+                className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10"
                 style={{
-                  left: `${25 + (index * 25) - 6}%`
+                  left: `${25 + (index * 25)}%`
                 }}
               >
-                <div className="bg-yutime-gold p-3 rounded-full shadow-lg">
-                  <ArrowRight size={20} className="text-yutime-indigo" />
-                </div>
+                <ArrowRight size={24} className="text-yutime-gold" />
               </div>
             ))}
           </div>
