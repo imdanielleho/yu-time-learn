@@ -27,27 +27,27 @@ const LearningProcess = () => {
   ];
 
   return (
-    <section className="section bg-yutime-indigo text-white">
+    <section className="py-20 bg-white">
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="mb-4">How YŪTIME Works</h2>
-          <p className="max-w-2xl mx-auto text-white/80">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">How YŪTIME Works</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Our simple 4-step learning process is designed to make education accessible and effective for everyone.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {steps.map((step, index) => (
             <div key={index} className="relative">
-              <div className="bg-white/10 p-6 rounded-lg h-full">
-                <div className="text-yutime-gold text-3xl font-bold mb-4">{step.number}</div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-white/80">{step.description}</p>
+              <div className="bg-gray-50 border border-gray-100 p-8 rounded-2xl h-full hover:border-gray-200 transition-colors">
+                <div className="text-gray-400 text-2xl font-bold mb-4">{step.number}</div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-900">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
               </div>
               
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 translate-x-1/2">
-                  <ArrowRight size={24} className="text-yutime-gold" />
+                <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2">
+                  <ArrowRight size={20} className="text-gray-300" />
                 </div>
               )}
             </div>
