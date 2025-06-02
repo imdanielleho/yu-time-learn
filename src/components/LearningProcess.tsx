@@ -36,25 +36,36 @@ const LearningProcess = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div className="bg-white/10 p-8 rounded-xl h-full backdrop-blur-sm">
-                <div className="text-yutime-gold text-2xl font-bold mb-6">{step.number}</div>
-                <h3 className="text-xl font-bold mb-4 text-white">{step.title}</h3>
-                <p className="text-white/80 leading-relaxed">{step.description}</p>
-              </div>
-              
-              {/* Fixed arrow positioning to avoid overlap */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:flex absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                  <div className="bg-yutime-indigo p-1 rounded-full">
-                    <ArrowRight size={16} className="text-yutime-gold" />
-                  </div>
+        <div className="relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+            {steps.map((step, index) => (
+              <div key={index} className="relative">
+                <div className="bg-white/10 p-8 rounded-xl h-full backdrop-blur-sm">
+                  <div className="text-yutime-gold text-2xl font-bold mb-6">{step.number}</div>
+                  <h3 className="text-xl font-bold mb-4 text-white">{step.title}</h3>
+                  <p className="text-white/80 leading-relaxed">{step.description}</p>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
+          
+          {/* Arrows positioned between cards */}
+          <div className="hidden lg:block">
+            {[0, 1, 2].map((index) => (
+              <div 
+                key={index} 
+                className="absolute top-1/2 transform -translate-y-1/2 z-10"
+                style={{
+                  left: `${25 + (index * 25)}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
+              >
+                <div className="bg-yutime-indigo p-2 rounded-full border-2 border-yutime-gold">
+                  <ArrowRight size={16} className="text-yutime-gold" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

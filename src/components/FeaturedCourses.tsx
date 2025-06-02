@@ -63,7 +63,7 @@ const courses = [
 
 const FeaturedCourses = () => {
   return (
-    <section id="courses" className="section">
+    <section id="courses" className="bg-slate-50 py-20 md:py-32">
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
