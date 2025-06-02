@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -94,25 +93,22 @@ const FeaturedCourses = () => {
                   <h3 className="text-xl font-bold mb-2">{course.title}</h3>
                   <p className="text-gray-600 text-sm mb-2">{course.description}</p>
                   <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
-                  <div className="mt-auto pt-4 flex justify-between items-center border-t border-gray-100">
+                  <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-100 gap-3">
                     <span className="text-sm text-gray-600">{course.totalTime}</span>
+                    {/* CTA Button - below time on mobile, right side on desktop */}
+                    <Button 
+                      className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        // Handle free trial or course enrollment
+                        console.log(`Get started for free with course ${course.id}`);
+                      }}
+                    >
+                      Get started for free
+                    </Button>
                   </div>
                 </div>
               </Link>
-              
-              {/* CTA Button */}
-              <div className="absolute bottom-4 right-4">
-                <Button 
-                  className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Handle free trial or course enrollment
-                    console.log(`Get started for free with course ${course.id}`);
-                  }}
-                >
-                  Get started for free
-                </Button>
-              </div>
             </div>
           ))}
         </div>

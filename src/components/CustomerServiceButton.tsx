@@ -17,6 +17,11 @@ const CustomerServiceButton = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
+      {/* Helper text */}
+      <div className="mb-3 mr-16 bg-white rounded-lg shadow-lg p-3 text-sm text-gray-700 max-w-[200px] hidden md:block">
+        Need help? Click to contact me.
+      </div>
+      
       {isExpanded && (
         <div className="mb-3 bg-white rounded-lg shadow-lg p-3 min-w-[200px]">
           <div className="flex justify-between items-center mb-3">

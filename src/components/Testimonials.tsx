@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Carousel,
   CarouselContent,
@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 const testimonials = [
   {
@@ -33,6 +34,21 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
   return (
     <section id="testimonials" className="section bg-yutime-indigo text-white">
       <div className="container">
@@ -40,6 +56,7 @@ const Testimonials = () => {
         
         <div className="max-w-4xl mx-auto">
           <Carousel
+            setApi={setApi}
             opts={{
               align: "center",
               loop: true,
@@ -74,9 +91,22 @@ const Testimonials = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center mt-6 gap-4">
               <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 mx-2 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
               <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 mx-2 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
+            </div>
+            
+            {/* Carousel Indicators */}
+            <div className="flex justify-center mt-4 gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === current ? 'bg-yutime-gold' : 'bg-white/30'
+                  }`}
+                  onClick={() => api?.scrollTo(index)}
+                />
+              ))}
             </div>
           </Carousel>
         </div>
