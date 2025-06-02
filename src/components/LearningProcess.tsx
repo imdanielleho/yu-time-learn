@@ -54,10 +54,10 @@ const LearningProcess = () => {
             {[0, 1, 2].map((index) => (
               <div 
                 key={index} 
-                className="absolute top-1/2 transform -translate-y-1/2 z-10"
+                className="absolute top-1/2 z-10"
                 style={{
-                  left: `calc(${12.5 + (index + 1) * 25}% - 10px)`,
-                  transform: 'translateY(-50%)'
+                  left: `${(index + 1) * 25}%`,
+                  transform: 'translateX(-50%) translateY(-50%)'
                 }}
               >
                 <ArrowRight size={20} className="text-yutime-gold" />
