@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -30,37 +31,36 @@ const LearningProcess = () => {
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">How YŪTIME Works</h2>
-          <p className="max-w-2xl mx-auto text-white/80 text-xl leading-relaxed">
+          <p className="max-w-3xl mx-auto text-white/90 text-lg leading-relaxed">
             Our simple 4-step learning process is designed to make education accessible and effective for everyone.
           </p>
         </div>
         
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {steps.map((step, index) => (
               <div key={index} className="relative">
-                <div className="bg-white/10 p-8 rounded-xl h-full backdrop-blur-sm">
-                  <div className="text-yutime-gold text-2xl font-bold mb-6">{step.number}</div>
+                <div className="bg-white/10 p-8 rounded-2xl h-full backdrop-blur-sm border border-white/20 hover:bg-white/15 transition-colors duration-300">
+                  <div className="text-yutime-gold text-3xl font-bold mb-6">{step.number}</div>
                   <h3 className="text-xl font-bold mb-4 text-white">{step.title}</h3>
-                  <p className="text-white/80 leading-relaxed">{step.description}</p>
+                  <p className="text-white/80 leading-relaxed text-sm">{step.description}</p>
                 </div>
               </div>
             ))}
           </div>
           
-          {/* Arrows positioned in the center of gaps between cards */}
+          {/* Arrows positioned between cards */}
           <div className="hidden lg:block">
             {[0, 1, 2].map((index) => (
               <div 
                 key={index} 
                 className="absolute top-1/2 transform -translate-y-1/2 z-10"
                 style={{
-                  left: `${(index + 1) * 25}%`,
-                  transform: 'translateX(-50%) translateY(-50%)'
+                  left: `${25 + (index * 25) - 6}%`
                 }}
               >
-                <div className="bg-yutime-indigo p-2 rounded-full border-2 border-yutime-gold">
-                  <ArrowRight size={16} className="text-yutime-gold" />
+                <div className="bg-yutime-gold p-3 rounded-full shadow-lg">
+                  <ArrowRight size={20} className="text-yutime-indigo" />
                 </div>
               </div>
             ))}
