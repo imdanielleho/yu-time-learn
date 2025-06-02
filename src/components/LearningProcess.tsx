@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -37,7 +36,7 @@ const LearningProcess = () => {
         </div>
         
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             {steps.map((step, index) => (
               <div key={index} className="relative">
                 <div className="bg-white/10 p-8 rounded-xl h-full backdrop-blur-sm">
@@ -49,15 +48,15 @@ const LearningProcess = () => {
             ))}
           </div>
           
-          {/* Arrows positioned between cards */}
+          {/* Arrows positioned in the center of gaps between cards */}
           <div className="hidden lg:block">
             {[0, 1, 2].map((index) => (
               <div 
                 key={index} 
                 className="absolute top-1/2 transform -translate-y-1/2 z-10"
                 style={{
-                  left: `${25 + (index * 25)}%`,
-                  transform: 'translate(-50%, -50%)'
+                  left: `${(index + 1) * 25}%`,
+                  transform: 'translateX(-50%) translateY(-50%)'
                 }}
               >
                 <div className="bg-yutime-indigo p-2 rounded-full border-2 border-yutime-gold">

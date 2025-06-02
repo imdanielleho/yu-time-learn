@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -63,7 +62,7 @@ const courses = [
 
 const FeaturedCourses = () => {
   return (
-    <section id="courses" className="bg-slate-50 py-20 md:py-32">
+    <section id="courses" className="bg-white py-20 md:py-32">
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
