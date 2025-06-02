@@ -50,11 +50,9 @@ const Testimonials = () => {
   }, [api]);
 
   return (
-    <section id="testimonials" className="py-24 bg-white">
-      <div className="container max-w-5xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Learners Say</h2>
-        </div>
+    <section id="testimonials" className="section bg-yutime-indigo text-white">
+      <div className="container">
+        <h2 className="text-center mb-12">What Our Learners Say</h2>
         
         <div className="max-w-4xl mx-auto">
           <Carousel
@@ -68,10 +66,10 @@ const Testimonials = () => {
             <CarouselContent>
               {testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id}>
-                  <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
-                    <div className="flex flex-col md:flex-row md:items-center gap-8">
+                  <div className="bg-yutime-navy_dark rounded-2xl p-6 md:p-10 shadow-lg">
+                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
                       <div className="flex-shrink-0 mx-auto md:mx-0">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden">
+                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-yutime-gold">
                           <img 
                             src={testimonial.avatar} 
                             alt={testimonial.name} 
@@ -79,13 +77,13 @@ const Testimonials = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex-1 text-center md:text-left">
-                        <blockquote className="text-xl md:text-2xl text-gray-700 italic mb-6 leading-relaxed">
+                      <div className="flex-1">
+                        <blockquote className="text-lg md:text-xl italic mb-6">
                           "{testimonial.quote}"
                         </blockquote>
                         <div>
-                          <p className="font-bold text-lg text-gray-900">{testimonial.name}</p>
-                          <p className="text-gray-600">{testimonial.role}</p>
+                          <p className="font-bold text-lg">{testimonial.name}</p>
+                          <p className="text-yutime-gold">{testimonial.role}</p>
                         </div>
                       </div>
                     </div>
@@ -94,22 +92,24 @@ const Testimonials = () => {
               ))}
             </CarouselContent>
             
-            <div className="flex justify-center items-center mt-8 gap-4">
-              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200" />
+            {/* Navigation with Indicators in Center */}
+            <div className="flex justify-center items-center mt-6 gap-4">
+              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
               
+              {/* Carousel Indicators */}
               <div className="flex gap-2">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === current ? 'bg-yutime-indigo' : 'bg-gray-300'
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === current ? 'bg-yutime-gold' : 'bg-white/30'
                     }`}
                     onClick={() => api?.scrollTo(index)}
                   />
                 ))}
               </div>
               
-              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200" />
+              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
             </div>
           </Carousel>
         </div>
