@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -62,7 +63,7 @@ const courses = [
 
 const FeaturedCourses = () => {
   return (
-    <section id="courses" className="bg-white py-20 md:py-32">
+    <section id="courses" className="bg-slate-50 py-20 md:py-32">
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
@@ -74,7 +75,7 @@ const FeaturedCourses = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <div key={course.id} className="bg-white rounded-lg overflow-hidden flex flex-col h-full group">
+            <div key={course.id} className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
               <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
                 <div className="relative h-48 overflow-hidden rounded-t-lg">
                   <img 

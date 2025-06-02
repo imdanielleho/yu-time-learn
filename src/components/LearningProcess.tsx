@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -48,20 +49,18 @@ const LearningProcess = () => {
             ))}
           </div>
           
-          {/* Arrows positioned in the center of gaps between cards */}
+          {/* Simplified arrows positioned between cards */}
           <div className="hidden lg:block">
             {[0, 1, 2].map((index) => (
               <div 
                 key={index} 
                 className="absolute top-1/2 transform -translate-y-1/2 z-10"
                 style={{
-                  left: `${(index + 1) * 25}%`,
+                  left: `calc(${(index + 1) * 25}% - 0.5rem)`,
                   transform: 'translateX(-50%) translateY(-50%)'
                 }}
               >
-                <div className="bg-yutime-indigo p-2 rounded-full border-2 border-yutime-gold">
-                  <ArrowRight size={16} className="text-yutime-gold" />
-                </div>
+                <ArrowRight size={20} className="text-yutime-gold" />
               </div>
             ))}
           </div>

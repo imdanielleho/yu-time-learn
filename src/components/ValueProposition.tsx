@@ -32,7 +32,7 @@ const ValueProposition = () => {
                   {value.icon}
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900">{value.title}</h3>
+              <h3 className="text-xl font-bold text-yutime-indigo">{value.title}</h3>
               <p className="text-gray-600 leading-relaxed">{value.description}</p>
             </div>
           ))}
