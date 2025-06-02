@@ -49,15 +49,15 @@ const LearningProcess = () => {
             ))}
           </div>
           
-          {/* Simplified arrows positioned between cards */}
+          {/* Arrows positioned between cards with proper centering */}
           <div className="hidden lg:block">
             {[0, 1, 2].map((index) => (
               <div 
                 key={index} 
                 className="absolute top-1/2 transform -translate-y-1/2 z-10"
                 style={{
-                  left: `calc(${(index + 1) * 25}% - 0.5rem)`,
-                  transform: 'translateX(-50%) translateY(-50%)'
+                  left: `calc(${12.5 + (index + 1) * 25}% - 10px)`,
+                  transform: 'translateY(-50%)'
                 }}
               >
                 <ArrowRight size={20} className="text-yutime-gold" />

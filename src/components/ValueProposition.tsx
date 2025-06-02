@@ -22,13 +22,13 @@ const ValueProposition = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-20 md:py-32">
+    <section className="bg-white py-20 md:py-32">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {values.map((value, index) => (
             <div key={index} className="text-center space-y-6">
               <div className="flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center">
                   {value.icon}
                 </div>
               </div>
