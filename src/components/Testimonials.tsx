@@ -91,22 +91,25 @@ const Testimonials = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center mt-6 gap-4">
-              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 mx-2 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
-              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 mx-2 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
-            </div>
             
-            {/* Carousel Indicators */}
-            <div className="flex justify-center mt-4 gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === current ? 'bg-yutime-gold' : 'bg-white/30'
-                  }`}
-                  onClick={() => api?.scrollTo(index)}
-                />
-              ))}
+            {/* Navigation with Indicators in Center */}
+            <div className="flex justify-center items-center mt-6 gap-4">
+              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
+              
+              {/* Carousel Indicators */}
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === current ? 'bg-yutime-gold' : 'bg-white/30'
+                    }`}
+                    onClick={() => api?.scrollTo(index)}
+                  />
+                ))}
+              </div>
+              
+              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
             </div>
           </Carousel>
         </div>
