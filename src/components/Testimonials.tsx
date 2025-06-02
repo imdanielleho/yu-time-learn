@@ -14,21 +14,21 @@ const testimonials = [
     id: 1,
     name: "Margaret T., 62",
     role: "Retired Teacher",
-    quote: "YŪTIME helped me learn how to use my smartphone better. The instructor was patient and the videos were easy to follow. Now I can video chat with my grandchildren and even share photos! The course materials were well-designed for beginners like me, and I never felt rushed or confused. I'm now taking my second course with them.",
+    quote: "YŪTIME helped me learn how to use my smartphone better. The instructor was patient and the videos were easy to follow. Now I can video chat with my grandchildren and even share photos!",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg"
   },
   {
     id: 2,
     name: "Robert J., 58",
     role: "Small Business Owner",
-    quote: "I took the Digital Marketing course and was able to create a Facebook page for my business. The step-by-step guidance was exactly what I needed. Within a month, I was running simple ads and connecting with customers online. The instructor answered all my questions promptly and even provided additional resources tailored to my specific business needs. This course has truly transformed my business approach.",
+    quote: "I took the Digital Marketing course and was able to create a Facebook page for my business. The step-by-step guidance was exactly what I needed. Within a month, I was running simple ads.",
     avatar: "https://randomuser.me/api/portraits/men/54.jpg"
   },
   {
     id: 3,
     name: "Susan K., 64",
     role: "Retired Nurse",
-    quote: "The yoga classes are perfect for my schedule and physical abilities. The instructor demonstrates modifications for all levels, which I really appreciate. After just six weeks, I've noticed significant improvement in my flexibility and overall well-being. The community aspect of the course has also been wonderful - I've connected with other students my age who share similar health goals. I look forward to each session.",
+    quote: "The yoga classes are perfect for my schedule and physical abilities. After just six weeks, I've noticed significant improvement in my flexibility and overall well-being.",
     avatar: "https://randomuser.me/api/portraits/women/56.jpg"
   }
 ];
@@ -50,11 +50,13 @@ const Testimonials = () => {
   }, [api]);
 
   return (
-    <section id="testimonials" className="section bg-yutime-indigo text-white">
+    <section id="testimonials" className="py-20 bg-gray-50">
       <div className="container">
-        <h2 className="text-center mb-12">What Our Learners Say</h2>
-        
         <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Learners Say</h2>
+          </div>
+          
           <Carousel
             setApi={setApi}
             opts={{
@@ -66,10 +68,10 @@ const Testimonials = () => {
             <CarouselContent>
               {testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id}>
-                  <div className="bg-yutime-navy_dark rounded-2xl p-6 md:p-10 shadow-lg">
-                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+                  <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-200">
+                    <div className="flex flex-col md:flex-row md:items-center gap-8">
                       <div className="flex-shrink-0 mx-auto md:mx-0">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-yutime-gold">
+                        <div className="w-20 h-20 rounded-full overflow-hidden">
                           <img 
                             src={testimonial.avatar} 
                             alt={testimonial.name} 
@@ -77,13 +79,13 @@ const Testimonials = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex-1">
-                        <blockquote className="text-lg md:text-xl italic mb-6">
+                      <div className="flex-1 text-center md:text-left">
+                        <blockquote className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
                           "{testimonial.quote}"
                         </blockquote>
                         <div>
-                          <p className="font-bold text-lg">{testimonial.name}</p>
-                          <p className="text-yutime-gold">{testimonial.role}</p>
+                          <p className="font-semibold text-lg text-gray-900">{testimonial.name}</p>
+                          <p className="text-yutime-blue font-medium">{testimonial.role}</p>
                         </div>
                       </div>
                     </div>
@@ -92,24 +94,22 @@ const Testimonials = () => {
               ))}
             </CarouselContent>
             
-            {/* Navigation with Indicators in Center */}
-            <div className="flex justify-center items-center mt-6 gap-4">
-              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
+            <div className="flex justify-center items-center mt-8 gap-6">
+              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200" />
               
-              {/* Carousel Indicators */}
               <div className="flex gap-2">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
                     className={`w-2 h-2 rounded-full transition-colors ${
-                      index === current ? 'bg-yutime-gold' : 'bg-white/30'
+                      index === current ? 'bg-yutime-indigo' : 'bg-gray-300'
                     }`}
                     onClick={() => api?.scrollTo(index)}
                   />
                 ))}
               </div>
               
-              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
+              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200" />
             </div>
           </Carousel>
         </div>
