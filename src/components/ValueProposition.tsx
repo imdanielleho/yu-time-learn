@@ -24,14 +24,14 @@ const ValueProposition = () => {
   return (
     <section className="section bg-white">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {values.map((value, index) => (
-            <div key={index} className="card flex flex-col items-center text-center p-6 border border-gray-100">
-              <div className="mb-4 p-3 rounded-full bg-yutime-blue/10">
+            <div key={index} className="flex flex-col items-center text-center">
+              <div className="mb-6 p-4 rounded-full bg-yutime-sand">
                 {value.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-yutime-indigo">{value.title}</h3>
-              <p className="text-gray-700">{value.description}</p>
+              <h3 className="text-xl font-bold mb-4 text-yutime-indigo">{value.title}</h3>
+              <p className="text-gray-700 leading-relaxed">{value.description}</p>
             </div>
           ))}
         </div>

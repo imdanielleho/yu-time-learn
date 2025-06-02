@@ -29,25 +29,25 @@ const LearningProcess = () => {
   return (
     <section className="section bg-yutime-indigo text-white">
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="mb-4">How YŪTIME Works</h2>
-          <p className="max-w-2xl mx-auto text-white/80">
+        <div className="text-center mb-16">
+          <h2 className="mb-6">How YŪTIME Works</h2>
+          <p className="max-w-2xl mx-auto text-white/80 text-lg">
             Our simple 4-step learning process is designed to make education accessible and effective for everyone.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {steps.map((step, index) => (
             <div key={index} className="relative">
-              <div className="bg-white/10 p-6 rounded-lg h-full">
-                <div className="text-yutime-gold text-3xl font-bold mb-4">{step.number}</div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-white/80">{step.description}</p>
+              <div className="bg-white/5 p-8 rounded-lg h-full">
+                <div className="text-yutime-gold text-3xl font-bold mb-6">{step.number}</div>
+                <h3 className="text-xl font-bold mb-4">{step.title}</h3>
+                <p className="text-white/80 leading-relaxed">{step.description}</p>
               </div>
               
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 translate-x-1/2">
-                  <ArrowRight size={24} className="text-yutime-gold" />
+                <div className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2">
+                  <ArrowRight size={20} className="text-yutime-gold" />
                 </div>
               )}
             </div>
