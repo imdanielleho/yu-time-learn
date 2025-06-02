@@ -57,11 +57,11 @@
   }
   
   h1 {
-    @apply text-3xl md:text-4xl lg:text-5xl tracking-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl tracking-tight;
   }
   
   h2 {
-    @apply text-2xl md:text-3xl lg:text-4xl tracking-tight;
+    @apply text-3xl md:text-4xl tracking-tight;
   }
   
   h3 {
@@ -72,6 +72,10 @@
     @apply text-base md:text-lg leading-relaxed;
   }
 
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
   .grid-12 {
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-6;
   }
@@ -79,11 +83,11 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-indigo hover:bg-yutime-indigo/90 text-white py-3 px-6 rounded-md font-medium text-lg transition-all;
+    @apply bg-yutime-indigo hover:bg-yutime-indigo/90 text-white py-3 px-6 rounded-lg font-medium text-lg transition-all;
   }
   
   .btn-secondary {
-    @apply bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo py-3 px-6 rounded-md font-medium text-lg transition-all;
+    @apply bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo py-3 px-6 rounded-lg font-medium text-lg transition-all;
   }
   
   .card {
@@ -91,6 +95,6 @@
   }
   
   .section {
-    @apply py-16 md:py-20;
+    @apply py-20 md:py-32;
   }
 }
