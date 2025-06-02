@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -63,56 +62,45 @@ const courses = [
 
 const FeaturedCourses = () => {
   return (
-    <section id="courses" className="py-20 bg-white">
+    <section id="courses" className="section">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Featured Courses</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <div className="mb-10">
+          <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
+          <p className="text-gray-700 max-w-2xl">
             Our most popular courses, designed with your learning goals in mind.
             Start your learning journey today.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
-            <div key={course.id} className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:border-gray-200 transition-all duration-300 flex flex-col h-full group">
-              <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
-                <div className="relative h-48 overflow-hidden">
+            <div key={course.id} className="card hover:shadow-lg transition-shadow overflow-hidden flex flex-col h-full group relative">
+              <Link to={`/courses/${course.id}`} className="block">
+                <div className="relative h-48 overflow-hidden rounded-lg mb-4">
                   <img 
                     src={course.image} 
                     alt={course.title} 
                     className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
                   />
-                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute top-2 right-2 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
                     {course.level}
                   </div>
                 </div>
-                
-                <div className="flex-1 flex flex-col p-6">
-                  <div className="mb-4">
-                    <span className="inline-block bg-gray-50 text-gray-600 px-3 py-1 rounded-full text-sm font-medium">
-                      {course.category}
-                    </span>
+                <div className="flex-1 flex flex-col p-4">
+                  <div className="mb-3">
+                    <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
                   </div>
-                  
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                    {course.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1">
-                    {course.description}
-                  </p>
-                  
-                  <div className="mt-auto">
-                    <div className="flex items-center justify-between mb-4">
-                      <p className="text-2xl font-bold text-gray-900">HKD {course.price}</p>
-                      <span className="text-sm text-gray-500">{course.totalTime}</span>
-                    </div>
-                    
+                  <h3 className="text-xl font-bold mb-2">{course.title}</h3>
+                  <p className="text-gray-600 text-sm mb-2">{course.description}</p>
+                  <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
+                  <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-100 gap-3">
+                    <span className="text-sm text-gray-600">{course.totalTime}</span>
+                    {/* CTA Button - below time on mobile, right side on desktop */}
                     <Button 
-                      className="w-full bg-gray-900 hover:bg-gray-800 text-white border-0 py-3 text-sm font-medium transition-colors"
+                      className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
                       onClick={(e) => {
                         e.preventDefault();
+                        // Handle free trial or course enrollment
                         console.log(`Get started for free with course ${course.id}`);
                       }}
                     >
