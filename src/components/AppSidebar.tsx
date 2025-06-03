@@ -50,7 +50,7 @@ const AppSidebar = () => {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="/dashboard" className="flex items-center space-x-2">
           <span className="font-heading text-xl font-bold text-yutime-navy">
             YŪ<span className="text-yutime-blue">TIME</span>
           </span>
