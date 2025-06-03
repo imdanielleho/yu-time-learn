@@ -11,7 +11,8 @@ const MyCourses = () => {
       progress: 75,
       totalLessons: 12,
       completedLessons: 9,
-      estimatedTime: "2 hours left"
+      estimatedTime: "1h 30m left",
+      totalTime: "4h 30m"
     },
     {
       id: 2,
@@ -19,7 +20,8 @@ const MyCourses = () => {
       progress: 40,
       totalLessons: 15,
       completedLessons: 6,
-      estimatedTime: "4 hours left"
+      estimatedTime: "3h 15m left",
+      totalTime: "5h 45m"
     },
     {
       id: 3,
@@ -27,7 +29,9 @@ const MyCourses = () => {
       progress: 100,
       totalLessons: 10,
       completedLessons: 10,
-      estimatedTime: "Completed"
+      estimatedTime: "Completed",
+      totalTime: "3h 20m",
+      completedDate: "March 15, 2024"
     }
   ];
 
@@ -61,16 +65,28 @@ const MyCourses = () => {
               </div>
             </div>
 
+            {course.progress === 100 && course.completedDate && (
+              <div className="mb-4 p-3 bg-green-50 rounded-lg">
+                <p className="text-sm text-green-700 font-medium">
+                  Completed on {course.completedDate}
+                </p>
+              </div>
+            )}
+
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 text-sm text-gray-600">
                 <Clock className="h-4 w-4" />
-                <span>{course.estimatedTime}</span>
+                <span>
+                  {course.progress === 100 
+                    ? `Total: ${course.totalTime}` 
+                    : course.estimatedTime
+                  }
+                </span>
               </div>
               <Button 
                 className="bg-yutime-blue hover:bg-yutime-blue/90"
-                disabled={course.progress === 100}
               >
-                {course.progress === 100 ? 'Completed' : 'Continue Learning'}
+                {course.progress === 100 ? 'Revisit the course' : 'Continue Learning'}
               </Button>
             </div>
           </div>
