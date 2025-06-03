@@ -1,68 +1,64 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
+import { Timer } from 'lucide-react';
 
 const Courses = () => {
   const availableCourses = [
     {
       id: 1,
-      title: "Introduction to Social Media",
-      description: "Learn to connect with family and friends safely on social platforms",
-      duration: "3 hours",
-      level: "Beginner",
-      price: 880,
+      title: "Smartphone Basics for Everyday Use",
       category: "Technology",
-      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600"
+      level: "Beginner",
+      lessons: 8,
+      totalTime: "3 hours 20 min",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600",
+      price: 880,
+      description: "Master essential smartphone skills for daily use, from messaging to apps."
     },
     {
       id: 2,
-      title: "Basic Computer Skills",
-      description: "Master essential computer operations and file management",
-      duration: "4 hours",
-      level: "Beginner",
+      title: "Gentle Yoga for Better Mobility",
+      category: "Health & Wellness",
+      level: "All Levels",
+      lessons: 12,
+      totalTime: "4 hours 45 min",
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600",
       price: 880,
-      category: "Technology",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600"
+      description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices."
     },
     {
       id: 3,
-      title: "Financial Planning Basics",
-      description: "Learn to manage your finances and plan for the future",
-      duration: "5 hours",
+      title: "Digital Photography Fundamentals",
+      category: "Creative Arts",
       level: "Beginner",
+      lessons: 10,
+      totalTime: "5 hours 15 min",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600",
       price: 880,
-      category: "Finance",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600"
+      description: "Learn to capture beautiful photos using any camera, with simple composition techniques."
     },
     {
       id: 4,
-      title: "Healthy Cooking Essentials",
-      description: "Discover nutritious recipes and cooking techniques",
-      duration: "3.5 hours",
-      level: "Beginner",
+      title: "Managing Personal Finances",
+      category: "Finance",
+      level: "Intermediate",
+      lessons: 6,
+      totalTime: "2 hours 30 min",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600",
       price: 880,
-      category: "Health",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600"
+      description: "Organize your finances, reduce debt, and plan for a secure retirement."
     },
     {
       id: 5,
-      title: "Digital Photography Fundamentals",
-      description: "Learn to capture beautiful photos using any camera, with simple composition techniques",
-      duration: "5 hours 15 min",
+      title: "Introduction to Social Media",
+      category: "Technology",
       level: "Beginner",
+      lessons: 7,
+      totalTime: "3 hours 45 min",
+      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600",
       price: 880,
-      category: "Creative Arts",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600"
-    },
-    {
-      id: 6,
-      title: "Smartphone Photography Tips",
-      description: "Master smartphone camera features and photo editing apps",
-      duration: "2 hours 30 min",
-      level: "Intermediate",
-      price: 880,
-      category: "Creative Arts",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600"
+      description: "Connect with family and friends across popular social media platforms safely."
     }
   ];
 
@@ -100,7 +96,10 @@ const Courses = () => {
               <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
               
               <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                <span className="text-sm text-gray-500">{course.duration}</span>
+                <div className="flex items-center gap-1 text-sm text-gray-500">
+                  <Timer size={16} />
+                  <span>{course.totalTime}</span>
+                </div>
                 <Button 
                   className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
                   onClick={() => {
