@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -99,15 +100,13 @@ const FeaturedCourses = () => {
                       <Timer size={16} />
                       <span>{course.totalTime}</span>
                     </div>
-                    <Button 
-                      className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        console.log(`Get started for free with course ${course.id}`);
-                      }}
-                    >
-                      Get started for free
-                    </Button>
+                    <Link to={`/courses/${course.id}`} className="w-full md:w-auto">
+                      <Button 
+                        className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full"
+                      >
+                        Get started for free
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Link>

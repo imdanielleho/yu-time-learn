@@ -65,14 +65,17 @@ const Navbar = () => {
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={toggleMenu}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
+            <div className="flex flex-col items-center">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={toggleMenu}
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </Button>
+              <span className="text-xs text-gray-600 mt-1">Menu</span>
+            </div>
           </div>
           
           {/* Desktop navigation */}
@@ -91,7 +94,7 @@ const Navbar = () => {
             </button>
             <button 
               onClick={() => handleScrollTo('faq')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-8"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-12"
             >
               FAQ
             </button>
@@ -135,19 +138,19 @@ const Navbar = () => {
               <nav className="flex flex-col p-6 space-y-6">
                 <button
                   onClick={() => handleScrollTo('courses')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
+                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
                 >
                   Courses
                 </button>
                 <button
                   onClick={() => handleScrollTo('testimonials')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
+                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
                 >
                   Testimonials
                 </button>
                 <button
                   onClick={() => handleScrollTo('faq')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
+                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
                 >
                   FAQ
                 </button>

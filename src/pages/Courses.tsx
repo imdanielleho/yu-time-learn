@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Timer } from 'lucide-react';
 
@@ -14,7 +15,8 @@ const Courses = () => {
       totalTime: "3 hours 20 min",
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600",
       price: 880,
-      description: "Master essential smartphone skills for daily use, from messaging to apps."
+      description: "Master essential smartphone skills for daily use, from messaging to apps.",
+      isPurchased: true
     },
     {
       id: 2,
@@ -25,7 +27,8 @@ const Courses = () => {
       totalTime: "4 hours 45 min",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600",
       price: 880,
-      description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices."
+      description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices.",
+      isPurchased: true
     },
     {
       id: 3,
@@ -36,7 +39,8 @@ const Courses = () => {
       totalTime: "5 hours 15 min",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600",
       price: 880,
-      description: "Learn to capture beautiful photos using any camera, with simple composition techniques."
+      description: "Learn to capture beautiful photos using any camera, with simple composition techniques.",
+      isPurchased: false
     },
     {
       id: 4,
@@ -47,7 +51,8 @@ const Courses = () => {
       totalTime: "2 hours 30 min",
       image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600",
       price: 880,
-      description: "Organize your finances, reduce debt, and plan for a secure retirement."
+      description: "Organize your finances, reduce debt, and plan for a secure retirement.",
+      isPurchased: false
     },
     {
       id: 5,
@@ -58,7 +63,8 @@ const Courses = () => {
       totalTime: "3 hours 45 min",
       image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600",
       price: 880,
-      description: "Connect with family and friends across popular social media platforms safely."
+      description: "Connect with family and friends across popular social media platforms safely.",
+      isPurchased: false
     }
   ];
 
@@ -72,16 +78,18 @@ const Courses = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {availableCourses.map((course) => (
           <div key={course.id} className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
-            <div className="relative h-48 overflow-hidden rounded-t-lg">
-              <img 
-                src={course.image} 
-                alt={course.title} 
-                className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
-              />
-              <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
-                {course.level}
+            <Link to={`/courses/${course.id}`} className="block">
+              <div className="relative h-48 overflow-hidden rounded-t-lg">
+                <img 
+                  src={course.image} 
+                  alt={course.title} 
+                  className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
+                />
+                <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
+                  {course.level}
+                </div>
               </div>
-            </div>
+            </Link>
             
             <div className="flex-1 flex flex-col p-6">
               <div className="mb-3">
@@ -100,14 +108,13 @@ const Courses = () => {
                   <Timer size={16} />
                   <span>{course.totalTime}</span>
                 </div>
-                <Button 
-                  className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
-                  onClick={() => {
-                    console.log(`Get started for free with course ${course.id}`);
-                  }}
-                >
-                  Get started for free
-                </Button>
+                <Link to={`/courses/${course.id}`} className="w-full md:w-auto">
+                  <Button 
+                    className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full"
+                  >
+                    {course.isPurchased ? 'Continue Learning' : 'Get started for free'}
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

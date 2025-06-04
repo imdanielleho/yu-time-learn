@@ -65,12 +65,13 @@ const Dashboard = () => {
         <h2 className="text-lg md:text-xl font-bold text-yutime-navy mb-4">In Progress Courses</h2>
         <div className="space-y-4">
           <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <h3 className="font-semibold text-yutime-navy">Smartphone Basics for Everyday Use</h3>
-                <p className="text-sm text-gray-500">Session 3: Managing Apps and Settings</p>
+            <div className="mb-3">
+              <h3 className="font-semibold text-yutime-navy">Smartphone Basics for Everyday Use</h3>
+              <p className="text-sm text-gray-500">Session 3: Managing Apps and Settings</p>
+              <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
+                <span>9/12 lessons</span>
+                <span className="font-medium">75% complete</span>
               </div>
-              <span className="text-sm text-gray-600">75% complete</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
               <div className="bg-yutime-blue h-2 rounded-full" style={{ width: '75%' }}></div>
@@ -79,12 +80,13 @@ const Dashboard = () => {
           </div>
           
           <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <h3 className="font-semibold text-yutime-navy">Gentle Yoga for Better Mobility</h3>
-                <p className="text-sm text-gray-500">Session 2: Standing Poses and Balance</p>
+            <div className="mb-3">
+              <h3 className="font-semibold text-yutime-navy">Gentle Yoga for Better Mobility</h3>
+              <p className="text-sm text-gray-500">Session 2: Standing Poses and Balance</p>
+              <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
+                <span>6/15 lessons</span>
+                <span className="font-medium">40% complete</span>
               </div>
-              <span className="text-sm text-gray-600">40% complete</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
               <div className="bg-yutime-blue h-2 rounded-full" style={{ width: '40%' }}></div>

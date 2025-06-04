@@ -1,11 +1,44 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 const Settings = () => {
+  const [fullName, setFullName] = useState("John Doe");
+  const [email, setEmail] = useState("john.doe@email.com");
+  const { toast } = useToast();
+
+  const handleSaveProfile = () => {
+    // Here you would normally update the user data via API
+    console.log("Saving profile:", { fullName, email });
+    toast({
+      title: "Profile Updated",
+      description: "Your profile has been saved successfully.",
+    });
+  };
+
+  const handleChangePassword = () => {
+    // Here you would implement password change functionality
+    console.log("Change password clicked");
+    toast({
+      title: "Password Change",
+      description: "Password change functionality would be implemented here.",
+    });
+  };
+
+  const handleDeleteAccount = () => {
+    // Here you would implement account deletion
+    console.log("Delete account clicked");
+    toast({
+      title: "Account Deletion",
+      description: "Account deletion functionality would be implemented here.",
+      variant: "destructive"
+    });
+  };
+
   return (
     <div className="p-6 max-w-4xl">
       <div className="mb-8">
@@ -20,17 +53,29 @@ const Settings = () => {
           <div className="space-y-4">
             <div>
               <Label htmlFor="fullName">Full Name</Label>
-              <Input id="fullName" defaultValue="John Doe" className="mt-1" />
+              <Input 
+                id="fullName" 
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="mt-1" 
+              />
             </div>
             <div>
               <Label htmlFor="email">Email Address</Label>
-              <Input id="email" type="email" defaultValue="john.doe@email.com" className="mt-1" />
+              <Input 
+                id="email" 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1" 
+              />
             </div>
-            <div>
-              <Label htmlFor="phone">Phone Number</Label>
-              <Input id="phone" type="tel" defaultValue="+1 (555) 123-4567" className="mt-1" />
-            </div>
-            <Button className="bg-yutime-blue hover:bg-yutime-blue/90">Save Profile</Button>
+            <Button 
+              onClick={handleSaveProfile}
+              className="bg-yutime-blue hover:bg-yutime-blue/90"
+            >
+              Save Profile
+            </Button>
           </div>
         </div>
 
@@ -87,10 +132,18 @@ const Settings = () => {
         <div className="bg-white rounded-lg p-6 shadow-sm border">
           <h2 className="text-xl font-semibold text-yutime-navy mb-4">Account</h2>
           <div className="space-y-4">
-            <Button variant="outline" className="w-full sm:w-auto">
+            <Button 
+              variant="outline" 
+              className="w-full sm:w-auto"
+              onClick={handleChangePassword}
+            >
               Change Password
             </Button>
-            <Button variant="outline" className="w-full sm:w-auto text-red-600 border-red-200 hover:bg-red-50">
+            <Button 
+              variant="outline" 
+              className="w-full sm:w-auto text-red-600 border-red-200 hover:bg-red-50 ml-0 sm:ml-4"
+              onClick={handleDeleteAccount}
+            >
               Delete Account
             </Button>
           </div>

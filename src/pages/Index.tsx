@@ -22,7 +22,9 @@ const Index = () => {
           <FeaturedCourses />
         </div>
         <LearningProcess />
-        <PricingSection />
+        <div id="pricing">
+          <PricingSection />
+        </div>
         <div id="testimonials">
           <Testimonials />
         </div>
