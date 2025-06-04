@@ -50,7 +50,7 @@ const Navbar = () => {
   };
 
   const handleLoginSignupClick = () => {
-    navigate("/login");
+    setIsLoginModalOpen(true);
   };
 
   return (
@@ -74,7 +74,7 @@ const Navbar = () => {
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </Button>
-              <span className="text-xs text-gray-600 mt-1">Menu</span>
+              <span className="text-xs text-gray-600 mt-0">Menu</span>
             </div>
           </div>
           
