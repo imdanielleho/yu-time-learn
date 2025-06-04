@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { BookOpen, Clock, Trophy, Activity } from 'lucide-react';
@@ -21,8 +22,8 @@ const Dashboard = () => {
           <p className="text-gray-600">Continue your learning journey</p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-          <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8" data-tour="stats-cards">
+          <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
             <div className="flex items-start space-x-2 md:space-x-3">
               <div className="p-1.5 md:p-2 bg-yutime-blue/10 rounded-lg flex-shrink-0">
                 <BookOpen className="h-4 w-4 md:h-6 md:w-6 text-yutime-blue" />
@@ -71,7 +72,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div>
+        <div data-tour="course-cards">
           <h2 className="text-lg md:text-xl font-bold text-yutime-navy mb-4">In Progress Courses</h2>
           <div className="space-y-4">
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">

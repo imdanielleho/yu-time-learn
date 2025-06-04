@@ -29,11 +29,13 @@ const AppSidebar = () => {
       title: "My Courses",
       url: "/my-courses",
       icon: BookOpen,
+      tourId: "sidebar-nav"
     },
     {
       title: "Courses",
       url: "/courses",
       icon: Book,
+      tourId: "courses-nav"
     },
     {
       title: "Settings",
@@ -74,7 +76,10 @@ const AppSidebar = () => {
                         }
                       `}
                     >
-                      <Link to={item.url}>
+                      <Link 
+                        to={item.url}
+                        data-tour={item.tourId}
+                      >
                         <item.icon />
                         <span>{item.title}</span>
                       </Link>
