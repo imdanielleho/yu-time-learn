@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Menu, X, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,7 @@ import LoginModal from './LoginModal';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // In a real app, this would come from auth state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const navigate = useNavigate();
   
@@ -29,23 +28,17 @@ const Navbar = () => {
   };
 
   const handleResumeLearning = () => {
-    // Check if user is logged in
     if (isLoggedIn) {
-      // Redirect to dashboard if logged in
       navigate("/dashboard");
     } else {
-      // Show login modal if not logged in
       setIsLoginModalOpen(true);
     }
   };
 
   const handleLogin = (username: string, password: string) => {
-    // This would authenticate with your backend in a real app
     console.log("Login attempted with:", username, password);
-    // For demo, we'll just set isLoggedIn to true
     setIsLoggedIn(true);
     setIsLoginModalOpen(false);
-    // Navigate to dashboard after successful login
     navigate("/dashboard");
   };
 
@@ -71,10 +64,11 @@ const Navbar = () => {
                 size="icon" 
                 onClick={toggleMenu}
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                className="h-8 w-8"
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </Button>
-              <span className="text-xs text-gray-600 mt-0">Menu</span>
+              <span className="text-xs text-gray-600">Menu</span>
             </div>
           </div>
           

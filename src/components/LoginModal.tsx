@@ -1,10 +1,9 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Facebook, Twitter, Linkedin } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -13,49 +12,128 @@ interface LoginModalProps {
 }
 
 const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(username, password);
+    if (activeTab === 'login') {
+      onLogin(username, password);
+    } else {
+      // Handle signup logic
+      console.log("Signup attempted with:", { username, email, firstName, lastName, password });
+      onLogin(username, password); // For demo, treat signup as login
+    }
   };
 
-  const handleSignUpClick = () => {
-    onClose();
-    navigate("/login?tab=signup");
+  const resetForm = () => {
+    setUsername("");
+    setPassword("");
+    setConfirmPassword("");
+    setEmail("");
+    setFirstName("");
+    setLastName("");
+  };
+
+  const handleTabSwitch = (tab: 'login' | 'signup') => {
+    setActiveTab(tab);
+    resetForm();
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-normal mb-6">Login</DialogTitle>
+          <DialogTitle className="text-center text-2xl font-normal mb-6">
+            {activeTab === 'login' ? 'Login' : 'Sign Up'}
+          </DialogTitle>
         </DialogHeader>
+        
+        <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
+          <button
+            onClick={() => handleTabSwitch('login')}
+            className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              activeTab === 'login'
+                ? 'bg-white text-yutime-navy shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Login
+          </button>
+          <button
+            onClick={() => handleTabSwitch('signup')}
+            className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              activeTab === 'signup'
+                ? 'bg-white text-yutime-navy shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Sign Up
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Input
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full py-6"
-            />
-          </div>
-          <div>
+          {activeTab === 'signup' && (
+            <>
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="w-full py-6"
+                />
+                <Input
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="w-full py-6"
+                />
+              </div>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full py-6"
+              />
+            </>
+          )}
+          
+          <Input
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full py-6"
+          />
+          
+          <Input
+            type="password"
+            placeholder="Your password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full py-6"
+          />
+          
+          {activeTab === 'signup' && (
             <Input
               type="password"
-              placeholder="Your password..."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full py-6"
             />
-          </div>
+          )}
+          
           <Button
             type="submit"
             className="w-full py-6 text-lg bg-yutime-blue hover:bg-yutime-blue/90"
           >
-            Login
+            {activeTab === 'login' ? 'Login' : 'Create Account'}
           </Button>
         </form>
         
@@ -75,13 +153,13 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
         
         <div className="text-center border-t border-gray-200 pt-4 mt-4">
           <p>
-            Not a member yet?{" "}
+            {activeTab === 'login' ? "Not a member yet?" : "Already have an account?"}{" "}
             <Button
               variant="link"
               className="p-0 text-yutime-blue font-semibold"
-              onClick={handleSignUpClick}
+              onClick={() => handleTabSwitch(activeTab === 'login' ? 'signup' : 'login')}
             >
-              Sign Up
+              {activeTab === 'login' ? 'Sign Up' : 'Login'}
             </Button>
             .
           </p>

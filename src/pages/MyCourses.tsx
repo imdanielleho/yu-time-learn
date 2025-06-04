@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BookOpen, Clock, Trophy, Calendar } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -8,6 +7,7 @@ const MyCourses = () => {
     {
       id: 1,
       title: "Smartphone Basics for Everyday Use",
+      sessionTitle: "Session 3: Managing Apps and Settings",
       progress: 75,
       totalLessons: 12,
       completedLessons: 9,
@@ -21,6 +21,7 @@ const MyCourses = () => {
     {
       id: 2,
       title: "Gentle Yoga for Better Mobility",
+      sessionTitle: "Session 2: Standing Poses and Balance",
       progress: 40,
       totalLessons: 15,
       completedLessons: 6,
@@ -34,6 +35,7 @@ const MyCourses = () => {
     {
       id: 3,
       title: "Digital Photography Fundamentals",
+      sessionTitle: "Course Completed",
       progress: 100,
       totalLessons: 10,
       completedLessons: 10,
@@ -48,6 +50,7 @@ const MyCourses = () => {
     {
       id: 4,
       title: "Introduction to Social Media",
+      sessionTitle: "Session 1: Getting Started with Facebook",
       progress: 20,
       totalLessons: 8,
       completedLessons: 2,
@@ -109,7 +112,10 @@ const MyCourses = () => {
     return (
       <div key={course.id} className="bg-white rounded-lg p-6 shadow-sm border">
         <div className="flex items-start justify-between mb-4">
-          <h3 className="font-semibold text-yutime-navy text-lg">{course.title}</h3>
+          <div>
+            <h3 className="font-semibold text-yutime-navy text-lg mb-2">{course.title}</h3>
+            <p className="text-sm text-gray-500">{course.sessionTitle}</p>
+          </div>
           {course.progress === 100 && (
             <Trophy className="h-6 w-6 text-yutime-gold" />
           )}
@@ -187,10 +193,10 @@ const MyCourses = () => {
       </div>
 
       <div className="space-y-8">
-        {/* Active/In Progress Courses */}
+        {/* Active Courses */}
         {activeCourses.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold text-yutime-navy mb-6">Active & In Progress</h2>
+            <h2 className="text-2xl font-bold text-yutime-navy mb-6">Active Courses</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {activeCourses.map(renderCourseCard)}
             </div>
