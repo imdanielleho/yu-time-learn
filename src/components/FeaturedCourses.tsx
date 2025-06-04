@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -63,50 +64,51 @@ const courses = [
 
 const FeaturedCourses = () => {
   return (
-    <section id="courses" className="bg-slate-50 py-20 md:py-32">
+    <section id="courses" className="bg-gray-50 section-spacing">
       <div className="container">
-        <div className="mb-12 text-center">
-          <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
+        <div className="text-center space-y-6 mb-20">
+          <h2 className="text-display font-light text-black">
+            Featured courses
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Our most popular courses, designed with your learning goals in mind.
-            Start your learning journey today.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <div key={course.id} className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
-              <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
+            <div key={course.id} className="card-minimal group">
+              <Link to={`/courses/${course.id}`} className="block">
+                <div className="aspect-video overflow-hidden rounded-xl mb-6">
                   <img 
                     src={course.image} 
                     alt={course.title} 
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
                   />
-                  <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
-                    {course.level}
-                  </div>
                 </div>
-                <div className="flex-1 flex flex-col p-6">
-                  <div className="mb-3">
-                    <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
+                
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <span className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                      {course.category}
+                    </span>
+                    <h3 className="text-2xl font-medium text-black">{course.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{course.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-yutime-indigo">{course.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4 flex-1">{course.description}</p>
-                  <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
-                  <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                  
+                  <div className="flex items-center justify-between pt-4">
+                    <div className="flex items-center gap-2 text-sm text-gray-500">
                       <Timer size={16} />
                       <span>{course.totalTime}</span>
                     </div>
                     <Button 
-                      className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
+                      className="btn-secondary text-sm"
                       onClick={(e) => {
                         e.preventDefault();
                         console.log(`Get started for free with course ${course.id}`);
                       }}
                     >
-                      Get started for free
+                      Start free
                     </Button>
                   </div>
                 </div>
