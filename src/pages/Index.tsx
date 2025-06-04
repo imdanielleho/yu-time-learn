@@ -13,9 +13,9 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="pt-20">
+      <main className="flex-1">
         <Hero />
         <ValueProposition />
         <div id="courses">

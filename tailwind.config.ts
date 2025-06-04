@@ -13,13 +13,13 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			padding: '1.5rem',
 			screens: {
 				'sm': '640px',
 				'md': '768px',
 				'lg': '1024px',
-				'xl': '1280px',
-				'2xl': '1400px'
+				'xl': '1140px', // Updated to match the 1140px content area
+				'2xl': '1440px' // Updated to match the 1440px width
 			}
 		},
 		extend: {
@@ -30,15 +30,15 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					indigo: '#000000',
-					gold: '#1D4ED8',
-					blue: '#666666',
-					navy: '#000000',
-					navy_dark: '#000000',
-					yellow: '#1D4ED8',
-					yellow_light: '#F8FAFC',
-					sand: '#F8FAFC',
-					sand_dark: '#F1F5F9',
+					indigo: '#00335D', // Deep indigo
+					gold: '#D8A602',   // Gold 
+					blue: '#2F8C9E',   // Slate blue
+					navy: '#103661',   // Keep original navy for compatibility
+					navy_dark: '#0A2341',
+					yellow: '#F7D054',
+					yellow_light: '#FBEAAC',
+					sand: '#F1F0FB',
+					sand_dark: '#E5E4EB',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -70,31 +70,36 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ["-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif"],
-				heading: ["-apple-system", "BlinkMacSystemFont", "Inter", "sans-serif"]
-			},
-			fontSize: {
-				'hero': ['clamp(3rem, 8vw, 8rem)', { lineHeight: '0.9', letterSpacing: '-0.02em' }],
-				'display': ['clamp(2rem, 5vw, 4rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-			},
-			spacing: {
-				'18': '4.5rem',
-				'88': '22rem',
-				'128': '32rem',
+				sans: ["Inter", "Noto Sans", "sans-serif"], // Updated fonts
+				heading: ["Nunito", "sans-serif"]
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			boxShadow: {
+				'soft': '0 4px 12px rgba(0, 0, 0, 0.05)',
+				'card': '0 8px 16px rgba(0, 0, 0, 0.08)'
+			},
 			keyframes: {
+				"accordion-down": {
+					from: { height: "0" },
+					to: { height: "var(--radix-accordion-content-height)" },
+				},
+				"accordion-up": {
+					from: { height: "var(--radix-accordion-content-height)" },
+					to: { height: "0" },
+				},
 				"fade-in": {
-					"0%": { opacity: "0", transform: "translateY(20px)" },
-					"100%": { opacity: "1", transform: "translateY(0)" }
+					"0%": { opacity: "0" },
+					"100%": { opacity: "1" }
 				}
 			},
 			animation: {
-				"fade-in": "fade-in 0.6s ease-out"
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
+				"fade-in": "fade-in 0.5s ease-out"
 			}
 		}
 	},

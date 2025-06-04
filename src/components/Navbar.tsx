@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Play } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginModal from './LoginModal';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // In a real app, this would come from auth state
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const navigate = useNavigate();
   
@@ -28,17 +29,23 @@ const Navbar = () => {
   };
 
   const handleResumeLearning = () => {
+    // Check if user is logged in
     if (isLoggedIn) {
+      // Redirect to dashboard if logged in
       navigate("/dashboard");
     } else {
+      // Show login modal if not logged in
       setIsLoginModalOpen(true);
     }
   };
 
   const handleLogin = (username: string, password: string) => {
+    // This would authenticate with your backend in a real app
     console.log("Login attempted with:", username, password);
+    // For demo, we'll just set isLoggedIn to true
     setIsLoggedIn(true);
     setIsLoginModalOpen(false);
+    // Navigate to dashboard after successful login
     navigate("/dashboard");
   };
 
@@ -48,56 +55,60 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div className="container flex h-20 items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <span className="text-2xl font-medium text-black">YŪTIME</span>
-          </Link>
+      <header className="sticky top-0 z-40 w-full bg-white shadow-soft">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center space-x-2">
+              <span className="font-heading text-2xl font-bold text-yutime-navy">YŪ<span className="text-yutime-blue">TIME</span></span>
+            </Link>
+          </div>
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button 
+            <Button 
+              variant="ghost" 
+              size="icon" 
               onClick={toggleMenu}
-              className="p-2 text-black hover:bg-gray-100 rounded-lg transition-colors"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            </Button>
           </div>
           
           {/* Desktop navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-4">
             <button 
               onClick={() => handleScrollTo('courses')} 
-              className="text-lg font-normal text-black hover:text-gray-600 transition-colors"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
             >
               Courses
             </button>
             <button 
               onClick={() => handleScrollTo('testimonials')} 
-              className="text-lg font-normal text-black hover:text-gray-600 transition-colors"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
             >
               Testimonials
             </button>
             <button 
               onClick={() => handleScrollTo('faq')} 
-              className="text-lg font-normal text-black hover:text-gray-600 transition-colors"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-8"
             >
               FAQ
             </button>
-            <div className="flex items-center space-x-4 ml-8">
+            <div className="flex items-center space-x-3">
               <button 
                 onClick={handleLoginSignupClick}
-                className="text-lg font-normal text-black hover:text-gray-600 transition-colors"
+                className="btn-primary"
               >
-                Sign in
+                Log In/Sign Up
               </button>
               {isLoggedIn && (
                 <button 
                   onClick={handleResumeLearning}
-                  className="btn-primary"
+                  className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
                 >
-                  Resume Learning
+                  <span>Resume Learning</span>
+                  <Play size={18} />
                 </button>
               )}
             </div>
@@ -111,31 +122,32 @@ const Navbar = () => {
             )}
           >
             <div className="flex flex-col h-full">
-              <div className="flex items-center justify-between h-20 px-6 border-b border-gray-100">
-                <span className="text-2xl font-medium text-black">YŪTIME</span>
-                <button 
+              <div className="flex items-center justify-between h-16 px-6 border-b">
+                <span className="font-heading text-2xl font-bold text-yutime-navy">YŪ<span className="text-yutime-blue">TIME</span></span>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
                   onClick={toggleMenu}
-                  className="p-2 text-black hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X size={24} />
-                </button>
+                </Button>
               </div>
-              <nav className="flex flex-col p-8 space-y-8">
+              <nav className="flex flex-col p-6 space-y-6">
                 <button
                   onClick={() => handleScrollTo('courses')}
-                  className="text-2xl font-normal text-black hover:text-gray-600 text-left"
+                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
                 >
                   Courses
                 </button>
                 <button
                   onClick={() => handleScrollTo('testimonials')}
-                  className="text-2xl font-normal text-black hover:text-gray-600 text-left"
+                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
                 >
                   Testimonials
                 </button>
                 <button
                   onClick={() => handleScrollTo('faq')}
-                  className="text-2xl font-normal text-black hover:text-gray-600 text-left"
+                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue"
                 >
                   FAQ
                 </button>
@@ -144,9 +156,9 @@ const Navbar = () => {
                     toggleMenu();
                     handleLoginSignupClick();
                   }}
-                  className="text-2xl font-normal text-black hover:text-gray-600 text-left"
+                  className="btn-primary w-full mt-4"
                 >
-                  Sign in
+                  Log In/Sign Up
                 </button>
                 {isLoggedIn && (
                   <button 
@@ -154,9 +166,10 @@ const Navbar = () => {
                       handleResumeLearning();
                       toggleMenu();
                     }}
-                    className="btn-primary w-full"
+                    className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
                   >
-                    Resume Learning
+                    <span>Resume Learning</span>
+                    <Play size={18} />
                   </button>
                 )}
               </nav>
@@ -165,6 +178,7 @@ const Navbar = () => {
         </div>
       </header>
       
+      {/* Login Modal */}
       <LoginModal 
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
