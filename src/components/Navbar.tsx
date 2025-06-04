@@ -8,7 +8,7 @@ import LoginModal from './LoginModal';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // In a real app, this would come from auth state
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const navigate = useNavigate();
   
@@ -29,22 +29,28 @@ const Navbar = () => {
   };
 
   const handleResumeLearning = () => {
+    // Check if user is logged in
     if (isLoggedIn) {
+      // Redirect to dashboard if logged in
       navigate("/dashboard");
     } else {
+      // Show login modal if not logged in
       setIsLoginModalOpen(true);
     }
   };
 
   const handleLogin = (username: string, password: string) => {
+    // This would authenticate with your backend in a real app
     console.log("Login attempted with:", username, password);
+    // For demo, we'll just set isLoggedIn to true
     setIsLoggedIn(true);
     setIsLoginModalOpen(false);
+    // Navigate to dashboard after successful login
     navigate("/dashboard");
   };
 
   const handleLoginSignupClick = () => {
-    setIsLoginModalOpen(true);
+    navigate("/login");
   };
 
   return (
@@ -68,7 +74,7 @@ const Navbar = () => {
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </Button>
-              <span className="text-xs text-gray-600 mt-0">Menu</span>
+              <span className="text-xs text-gray-600 mt-1">Menu</span>
             </div>
           </div>
           
@@ -88,7 +94,7 @@ const Navbar = () => {
             </button>
             <button 
               onClick={() => handleScrollTo('faq')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-6"
+              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-12"
             >
               FAQ
             </button>
