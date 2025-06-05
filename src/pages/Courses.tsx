@@ -1,10 +1,20 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Timer } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useIsMobile } from '@/hooks/use-mobile';
+import CourseDetailSidebar from '@/components/CourseDetailSidebar';
 
 const Courses = () => {
+  const isMobile = useIsMobile();
+  const [selectedCourse, setSelectedCourse] = useState<typeof availableCourses[0] | null>(null);
+
   const availableCourses = [
     {
       id: 1,
@@ -16,6 +26,20 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600",
       price: 880,
       description: "Master essential smartphone skills for daily use, from messaging to apps.",
+      longDescription: "This comprehensive course will teach you everything you need to know about using your smartphone effectively. From basic navigation to advanced features, you'll become confident in using your device for daily tasks.",
+      instructor: "Sarah Chen",
+      rating: 4.8,
+      students: 1240,
+      curriculum: [
+        "Getting Started with Your Smartphone",
+        "Making Calls and Sending Messages",
+        "Using the Camera and Photos",
+        "Installing and Managing Apps",
+        "Internet Browsing and Email",
+        "Managing Contacts and Calendar",
+        "Privacy and Security Settings",
+        "Troubleshooting Common Issues"
+      ],
       isPurchased: true
     },
     {
@@ -28,6 +52,24 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600",
       price: 880,
       description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices.",
+      longDescription: "A gentle approach to yoga designed specifically for mature learners. This course focuses on improving flexibility, balance, and overall well-being through safe and accessible movements.",
+      instructor: "Michael Wong",
+      rating: 4.9,
+      students: 890,
+      curriculum: [
+        "Introduction to Gentle Yoga",
+        "Basic Breathing Techniques",
+        "Warm-up and Preparation",
+        "Standing Poses for Balance",
+        "Seated Poses for Flexibility",
+        "Gentle Backbends",
+        "Hip Opening Sequences",
+        "Relaxation and Meditation",
+        "Morning Energy Routine",
+        "Evening Wind-down Sequence",
+        "Managing Joint Pain",
+        "Building a Daily Practice"
+      ],
       isPurchased: true
     },
     {
@@ -68,6 +110,69 @@ const Courses = () => {
     }
   ];
 
+  const handleCourseClick = (course: typeof availableCourses[0]) => {
+    if (isMobile) {
+      // On mobile, navigate to course detail page
+      window.location.href = `/courses/${course.id}`;
+    } else {
+      // On desktop, open sidebar
+      setSelectedCourse(course);
+    }
+  };
+
+  const CourseCard = ({ course }: { course: typeof availableCourses[0] }) => (
+    <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
+      <div 
+        className="block cursor-pointer"
+        onClick={() => handleCourseClick(course)}
+      >
+        <div className="relative h-48 overflow-hidden rounded-t-lg">
+          <img 
+            src={course.image} 
+            alt={course.title} 
+            className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
+          />
+          <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
+            {course.level}
+          </div>
+        </div>
+      </div>
+      
+      <div className="flex-1 flex flex-col p-6">
+        <div className="mb-3">
+          <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+            {course.category}
+          </span>
+        </div>
+        
+        <h3 className="text-xl font-bold mb-3 text-yutime-indigo">{course.title}</h3>
+        <p className="text-gray-600 text-sm mb-4 flex-1">{course.description}</p>
+        
+        <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
+        
+        <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div className="flex items-center gap-1 text-sm text-gray-500">
+            <Timer size={16} />
+            <span>{course.totalTime}</span>
+          </div>
+          <Button 
+            className={`text-white text-sm px-4 py-2 w-full md:w-auto ${
+              course.isPurchased 
+                ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
+                : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCourseClick(course);
+            }}
+          >
+            {course.isPurchased ? 'Continue Learning' : 'Get started for free'}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="p-6">
       <div className="mb-8">
@@ -75,55 +180,34 @@ const Courses = () => {
         <p className="text-gray-600">Discover new skills and expand your knowledge</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {availableCourses.map((course) => (
-          <div key={course.id} className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
-            <Link to={`/courses/${course.id}`} className="block">
-              <div className="relative h-48 overflow-hidden rounded-t-lg">
-                <img 
-                  src={course.image} 
-                  alt={course.title} 
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
-                />
-                <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
-                  {course.level}
-                </div>
-              </div>
-            </Link>
-            
-            <div className="flex-1 flex flex-col p-6">
-              <div className="mb-3">
-                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
-                  {course.category}
-                </span>
-              </div>
-              
-              <h3 className="text-xl font-bold mb-3 text-yutime-indigo">{course.title}</h3>
-              <p className="text-gray-600 text-sm mb-4 flex-1">{course.description}</p>
-              
-              <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
-              
-              <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                <div className="flex items-center gap-1 text-sm text-gray-500">
-                  <Timer size={16} />
-                  <span>{course.totalTime}</span>
-                </div>
-                <Link to={`/courses/${course.id}`} className="w-full md:w-auto">
-                  <Button 
-                    className={`text-white text-sm px-4 py-2 w-full ${
-                      course.isPurchased 
-                        ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
-                        : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
-                    }`}
-                  >
-                    {course.isPurchased ? 'Continue Learning' : 'Get started for free'}
-                  </Button>
-                </Link>
-              </div>
-            </div>
+      {isMobile ? (
+        <Carousel className="w-full max-w-sm mx-auto sm:max-w-none">
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {availableCourses.map((course) => (
+              <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                <CourseCard course={course} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="hidden sm:block">
+            <CarouselPrevious />
+            <CarouselNext />
           </div>
-        ))}
-      </div>
+        </Carousel>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {availableCourses.map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      )}
+
+      {selectedCourse && !isMobile && (
+        <CourseDetailSidebar 
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
+        />
+      )}
     </div>
   );
 };

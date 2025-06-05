@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const CustomerServiceButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/1234567890', '_blank');
@@ -16,7 +18,11 @@ const CustomerServiceButton = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className={`fixed z-50 ${
+      isMobile 
+        ? 'bottom-20 right-6' // Above mobile navigation
+        : 'bottom-6 right-6'   // Normal position for desktop
+    }`}>
       {isExpanded && (
         <div className="mb-3 bg-white rounded-lg shadow-lg p-3 min-w-[200px]">
           <div className="flex justify-between items-center mb-3">
