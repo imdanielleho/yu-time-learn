@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Timer } from 'lucide-react';
 import {
@@ -7,6 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
 import CourseDetailSidebar from '@/components/CourseDetailSidebar';
@@ -14,6 +15,22 @@ import CourseDetailSidebar from '@/components/CourseDetailSidebar';
 const Courses = () => {
   const isMobile = useIsMobile();
   const [selectedCourse, setSelectedCourse] = useState<typeof availableCourses[0] | null>(null);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
   const availableCourses = [
     {
@@ -181,19 +198,35 @@ const Courses = () => {
       </div>
 
       {isMobile ? (
-        <Carousel className="w-full max-w-sm mx-auto sm:max-w-none">
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {availableCourses.map((course) => (
-              <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                <CourseCard course={course} />
-              </CarouselItem>
+        <div className="w-full max-w-sm mx-auto sm:max-w-none">
+          <Carousel className="w-full" setApi={setApi}>
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {availableCourses.map((course) => (
+                <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <CourseCard course={course} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden sm:block">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+          </Carousel>
+          
+          {/* Swipe Indicators */}
+          <div className="flex justify-center space-x-2 mt-6 sm:hidden">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                  index === current - 1 ? 'bg-yutime-blue' : 'bg-gray-300'
+                }`}
+                onClick={() => api?.scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
-          </CarouselContent>
-          <div className="hidden sm:block">
-            <CarouselPrevious />
-            <CarouselNext />
           </div>
-        </Carousel>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {availableCourses.map((course) => (
