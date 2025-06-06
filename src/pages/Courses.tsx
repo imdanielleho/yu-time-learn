@@ -132,7 +132,7 @@ const Courses = () => {
       // On mobile, navigate to course detail page
       window.location.href = `/courses/${course.id}`;
     } else {
-      // On desktop, open sidebar
+      // On desktop, open full-width course details
       setSelectedCourse(course);
     }
   };
@@ -162,8 +162,7 @@ const Courses = () => {
           </span>
         </div>
         
-        <h3 className="text-xl font-bold mb-3 text-yutime-indigo">{course.title}</h3>
-        <p className="text-gray-600 text-sm mb-4 flex-1">{course.description}</p>
+        <h3 className="text-xl font-bold mb-4 text-yutime-indigo">{course.title}</h3>
         
         <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
         

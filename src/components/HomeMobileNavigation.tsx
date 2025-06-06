@@ -20,39 +20,32 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
     }
   };
 
-  const navigateToCourses = () => {
-    window.location.href = '/courses';
-  };
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 safe-area-pb">
-      <div className="flex items-center justify-around px-4 py-3">
-        <Button
-          variant="ghost"
-          className="flex flex-col items-center gap-1 text-xs"
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
+      <div className="grid grid-cols-3 h-16">
+        <button
+          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={() => scrollToSection('hero')}
         >
-          <Home size={20} />
-          <span>Home</span>
-        </Button>
+          <Home className="h-5 w-5" />
+          <span className="text-xs font-medium">Home</span>
+        </button>
         
-        <Button
-          variant="ghost"
-          className="flex flex-col items-center gap-1 text-xs"
-          onClick={navigateToCourses}
+        <button
+          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+          onClick={() => scrollToSection('courses')}
         >
-          <BookOpen size={20} />
-          <span>Courses</span>
-        </Button>
+          <BookOpen className="h-5 w-5" />
+          <span className="text-xs font-medium">Courses</span>
+        </button>
         
-        <Button
-          variant="ghost"
-          className="flex flex-col items-center gap-1 text-xs"
+        <button
+          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={onLoginClick}
         >
-          <LogIn size={20} />
-          <span>Login</span>
-        </Button>
+          <LogIn className="h-5 w-5" />
+          <span className="text-xs font-medium">Login</span>
+        </button>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -106,8 +107,7 @@ const FeaturedCourses = () => {
           <div className="mb-3">
             <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
           </div>
-          <h3 className="text-xl font-bold mb-3 text-yutime-indigo">{course.title}</h3>
-          <p className="text-gray-600 text-sm mb-4 flex-1">{course.description}</p>
+          <h3 className="text-xl font-bold mb-4 text-yutime-indigo">{course.title}</h3>
           <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
           <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-1 text-sm text-gray-500">

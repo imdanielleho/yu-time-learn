@@ -66,7 +66,7 @@ const CustomerServiceButton = () => {
       
       <div className="flex items-center gap-3">
         <div className="bg-white rounded-lg shadow-lg px-3 py-2 text-sm text-gray-700 whitespace-nowrap">
-          Need help? Click to contact me.
+          Contact us.
         </div>
         <Button
           onClick={() => setIsExpanded(!isExpanded)}

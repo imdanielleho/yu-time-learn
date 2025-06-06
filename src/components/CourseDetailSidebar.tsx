@@ -28,7 +28,7 @@ interface CourseDetailSidebarProps {
 
 const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
   return (
-    <div className="fixed inset-y-0 right-0 w-full max-w-2xl bg-white shadow-2xl z-50 overflow-y-auto">
+    <div className="fixed inset-y-0 right-0 w-full bg-white shadow-2xl z-50 overflow-y-auto">
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">Course Details</h1>

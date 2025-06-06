@@ -22,7 +22,7 @@ const ValueProposition = () => {
   ];
 
   return (
-    <section className="bg-white py-20 md:py-32">
+    <section className="bg-white py-12 md:py-32">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {values.map((value, index) => (
