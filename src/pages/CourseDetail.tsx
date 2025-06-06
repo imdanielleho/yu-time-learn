@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Users, Star, Play } from 'lucide-react';
@@ -5,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomerServiceButton from '@/components/CustomerServiceButton';
+import HomeMobileNavigation from '@/components/HomeMobileNavigation';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const courses = [
   {
@@ -67,6 +70,10 @@ const courses = [
 const CourseDetail = () => {
   const { id } = useParams();
   const course = courses.find(c => c.id === parseInt(id || '1'));
+  const isMobile = useIsMobile();
+  
+  // TODO: Replace with actual authentication state
+  const isLoggedIn = false; // This should come from your auth context/state
 
   if (!course) {
     return (
@@ -82,6 +89,12 @@ const CourseDetail = () => {
         </main>
         <Footer />
         <CustomerServiceButton />
+        {!isLoggedIn && (
+          <HomeMobileNavigation onLoginClick={() => {
+            // TODO: Implement login modal or navigation
+            console.log("Login clicked");
+          }} />
+        )}
       </div>
     );
   }
@@ -89,7 +102,7 @@ const CourseDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1" style={{ paddingBottom: isMobile && !isLoggedIn ? '80px' : '0' }}>
         <div className="container py-8">
           <Link 
             to="/" 
@@ -202,6 +215,12 @@ const CourseDetail = () => {
       </main>
       <Footer />
       <CustomerServiceButton />
+      {!isLoggedIn && (
+        <HomeMobileNavigation onLoginClick={() => {
+          // TODO: Implement login modal or navigation
+          console.log("Login clicked");
+        }} />
+      )}
     </div>
   );
 };

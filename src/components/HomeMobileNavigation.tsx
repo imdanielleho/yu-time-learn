@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Home, BookOpen, LogIn } from 'lucide-react';
+import { Home, Book, LogIn } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HomeMobileNavigationProps {
@@ -35,7 +35,7 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={() => scrollToSection('courses')}
         >
-          <BookOpen className="h-5 w-5" />
+          <Book className="h-5 w-5" />
           <span className="text-xs font-medium">Courses</span>
         </button>
         

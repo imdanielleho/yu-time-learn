@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Timer } from 'lucide-react';
 import {
@@ -14,10 +15,14 @@ import CourseDetailSidebar from '@/components/CourseDetailSidebar';
 
 const Courses = () => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState<typeof availableCourses[0] | null>(null);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  
+  // TODO: Replace with actual authentication state
+  const isLoggedIn = true; // This should come from your auth context/state
 
   useEffect(() => {
     if (!api) {
@@ -128,12 +133,12 @@ const Courses = () => {
   ];
 
   const handleCourseClick = (course: typeof availableCourses[0]) => {
-    if (isMobile) {
-      // On mobile, navigate to course detail page
-      window.location.href = `/courses/${course.id}`;
-    } else {
-      // On desktop, open full-width course details
+    if (isLoggedIn && !isMobile) {
+      // For logged-in desktop users, open course details in sidebar
       setSelectedCourse(course);
+    } else {
+      // For mobile or logged-out users, navigate to course detail page
+      navigate(`/courses/${course.id}`);
     }
   };
 
@@ -234,7 +239,7 @@ const Courses = () => {
         </div>
       )}
 
-      {selectedCourse && !isMobile && (
+      {selectedCourse && !isMobile && isLoggedIn && (
         <CourseDetailSidebar 
           course={selectedCourse}
           onClose={() => setSelectedCourse(null)}
