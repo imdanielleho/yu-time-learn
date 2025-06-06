@@ -49,7 +49,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-sm mx-4 sm:mx-auto my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-xs sm:max-w-sm mx-auto px-4 my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-normal mb-6">
             {activeTab === 'login' ? 'Login' : 'Sign Up'}

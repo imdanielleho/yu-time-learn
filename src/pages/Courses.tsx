@@ -134,7 +134,8 @@ const Courses = () => {
 
   const handleCourseClick = (course: typeof availableCourses[0]) => {
     if (isLoggedIn && !isMobile) {
-      // For logged-in desktop users, open course details in sidebar
+      // For logged-in desktop users, update URL and open course details in sidebar
+      navigate(`/courses/${course.id}`, { replace: true });
       setSelectedCourse(course);
     } else {
       // For mobile or logged-out users, navigate to course detail page
