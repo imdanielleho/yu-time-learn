@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Users, Star, Play } from 'lucide-react';
@@ -7,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
+import BottomNavigation from '@/components/BottomNavigation';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const courses = [
@@ -89,12 +89,13 @@ const CourseDetail = () => {
         </main>
         <Footer />
         <CustomerServiceButton />
-        {!isLoggedIn && (
+        {isMobile && !isLoggedIn && (
           <HomeMobileNavigation onLoginClick={() => {
             // TODO: Implement login modal or navigation
             console.log("Login clicked");
           }} />
         )}
+        {isMobile && isLoggedIn && <BottomNavigation />}
       </div>
     );
   }
@@ -102,14 +103,14 @@ const CourseDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1" style={{ paddingBottom: isMobile && !isLoggedIn ? '80px' : '0' }}>
+      <main className="flex-1" style={{ paddingBottom: isMobile ? '80px' : '0' }}>
         <div className="container py-8">
           <Link 
             to="/" 
             className="inline-flex items-center space-x-2 text-yutime-blue hover:text-yutime-blue/80 mb-6"
           >
             <ArrowLeft size={20} />
-            <span>Back to courses</span>
+            <span>Back to Home</span>
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -215,12 +216,13 @@ const CourseDetail = () => {
       </main>
       <Footer />
       <CustomerServiceButton />
-      {!isLoggedIn && (
+      {isMobile && !isLoggedIn && (
         <HomeMobileNavigation onLoginClick={() => {
           // TODO: Implement login modal or navigation
           console.log("Login clicked");
         }} />
       )}
+      {isMobile && isLoggedIn && <BottomNavigation />}
     </div>
   );
 };
