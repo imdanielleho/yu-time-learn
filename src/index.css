@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,35 +7,35 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
-    --foreground: 17 24 39;
+    --background: 220 33% 98%;
+    --foreground: 220 25% 20%;
 
-    --card: 255 255 255;
-    --card-foreground: 17 24 39;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 20%;
 
-    --popover: 255 255 255;
-    --popover-foreground: 17 24 39;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 20%;
 
-    --primary: 59 130 246;
-    --primary-foreground: 255 255 255;
+    --primary: 210 100% 18%; /* Adjusted to match deep indigo */
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 243 244 246;
-    --secondary-foreground: 17 24 39;
+    --secondary: 45 90% 42%; /* Adjusted to match gold */
+    --secondary-foreground: 210 100% 18%;
 
-    --muted: 249 250 251;
-    --muted-foreground: 107 114 128;
+    --muted: 220 10% 94%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 239 246 255;
-    --accent-foreground: 17 24 39;
+    --accent: 190 53% 40%; /* Adjusted to match slate blue */
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 229 231 235;
-    --input: 229 231 235;
-    --ring: 59 130 246;
+    --border: 220 13% 90%;
+    --input: 220 13% 90%;
+    --ring: 210 100% 18%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -49,53 +49,52 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-foreground font-sans;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-semibold tracking-tight;
+    @apply font-heading font-bold;
   }
   
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-4xl md:text-5xl lg:text-6xl tracking-tight;
   }
   
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-3xl md:text-4xl tracking-tight;
   }
   
   h3 {
-    @apply text-xl md:text-2xl;
+    @apply text-xl md:text-2xl tracking-tight;
   }
   
   p {
-    @apply text-base leading-relaxed text-gray-600;
+    @apply text-base md:text-lg leading-relaxed;
   }
 
   .container {
-    @apply max-w-7xl mx-auto px-6;
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .grid-12 {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-6;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply bg-yutime-indigo hover:bg-yutime-indigo/90 text-white py-3 px-6 rounded-lg font-medium text-lg transition-all;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-gray-900 py-3 px-6 rounded-xl font-medium text-base transition-all duration-200 border border-gray-200 shadow-sm hover:shadow-md;
+    @apply bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo py-3 px-6 rounded-lg font-medium text-lg transition-all;
   }
   
   .card {
-    @apply bg-white rounded-2xl p-8 shadow-sm border border-gray-100;
+    @apply bg-white rounded-lg p-6;
   }
   
   .section {
-    @apply py-16 md:py-24;
-  }
-
-  .gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    @apply py-20 md:py-32;
   }
 }
