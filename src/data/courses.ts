@@ -1,3 +1,20 @@
+export interface Course {
+  id: number;
+  title: string;
+  category: string;
+  level: string;
+  lessons: number;
+  totalTime: string;
+  image: string;
+  price: number;
+  description: string;
+  longDescription: string;
+  instructor: string;
+  rating: number;
+  students: number;
+  curriculum: string[];
+  isPurchased: boolean;
+}
 
 export const courses = [
   {
