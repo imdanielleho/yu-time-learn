@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -30,31 +29,22 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					vibrant: '#00A651',     // Primary vibrant green (August Health inspired)
-					emerald: '#006837',     // Deep emerald for contrast
-					white: '#FFFFFF',       // Pure white backgrounds
-					coral: '#FF6B35',       // Warm coral accent
-					'coral-dark': '#E55A2B', // Darker coral for hover
-					'light-green': '#E8F5E8', // Subtle green backgrounds
-					'soft-gray': '#F8F9FA',  // Alternative neutral
-					charcoal: '#2C3E50',    // Professional text
-					yellow: '#FFC107',      // Bright yellow accent
-					cream: '#FEF9EF',       // Soft cream for section breaks
-					// Legacy colors for compatibility
-					sage: '#00A651',        // Map to vibrant
-					forest: '#006837',      // Map to emerald
-					golden: '#FF6B35',      // Map to coral
-					beige: '#FFFFFF',       // Map to white
-					'soft-sage': '#E8F5E8', // Map to light-green
-					// More legacy mappings
-					indigo: '#00A651',
-					gold: '#FF6B35',
-					blue: '#00A651',
-					navy: '#2C3E50',
-					navy_dark: '#2C3E50',
-					yellow_light: '#FEF9EF',
-					sand: '#FFFFFF',
-					sand_dark: '#F8F9FA',
+					sage: '#6B9B76',      // Primary - calming sage green
+					coral: '#FF8B7A',     // Secondary - warm coral
+					lavender: '#B19CD9',  // Accent - gentle lavender
+					sunshine: '#FFD166',  // Supporting - joyful yellow
+					cream: '#FDF6E3',     // Warm background
+					warmGray: '#8B7F72',  // Neutral text
+					softWhite: '#FEFCF8', // Soft white background
+					indigo: '#6B9B76',    // Map to sage for backward compatibility
+					gold: '#FFD166',      // Map to sunshine
+					blue: '#6B9B76',      // Map to sage
+					navy: '#5A6C57',      // Darker sage for contrast
+					navy_dark: '#4A5B47', // Even darker sage
+					yellow: '#FFD166',    // Keep sunshine
+					yellow_light: '#FFF4D6', // Light sunshine
+					sand: '#FDF6E3',      // Map to cream
+					sand_dark: '#F5EDD3', // Darker cream
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -87,16 +77,20 @@ export default {
 			},
 			fontFamily: {
 				sans: ["Inter", "Noto Sans", "sans-serif"],
-				heading: ["Nunito", "sans-serif"]
+				heading: ["Poppins", "Nunito", "sans-serif"]
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				lg: '12px',
+				md: '10px',
+				sm: '6px',
+				xl: '16px',
+				'2xl': '20px'
 			},
 			boxShadow: {
-				'soft': '0 4px 12px rgba(0, 0, 0, 0.05)',
-				'card': '0 8px 16px rgba(0, 0, 0, 0.08)'
+				'soft': '0 4px 20px rgba(107, 155, 118, 0.08)',
+				'card': '0 8px 32px rgba(107, 155, 118, 0.12)',
+				'warm': '0 6px 24px rgba(255, 139, 122, 0.1)',
+				'gentle': '0 2px 12px rgba(177, 156, 217, 0.08)'
 			},
 			keyframes: {
 				"accordion-down": {
@@ -108,14 +102,20 @@ export default {
 					to: { height: "0" },
 				},
 				"fade-in": {
-					"0%": { opacity: "0" },
-					"100%": { opacity: "1" }
+					"0%": { opacity: "0", transform: "translateY(10px)" },
+					"100%": { opacity: "1", transform: "translateY(0)" }
+				},
+				"gentle-scale": {
+					"0%": { transform: "scale(1)" },
+					"50%": { transform: "scale(1.02)" },
+					"100%": { transform: "scale(1)" }
 				}
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
-				"fade-in": "fade-in 0.5s ease-out"
+				"fade-in": "fade-in 0.5s ease-out",
+				"gentle-scale": "gentle-scale 2s ease-in-out infinite"
 			}
 		}
 	},

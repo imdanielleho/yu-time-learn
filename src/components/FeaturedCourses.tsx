@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -90,7 +91,7 @@ const FeaturedCourses = () => {
   }, [api]);
 
   const CourseCard = ({ course }: { course: typeof courses[0] }) => (
-    <div className="bg-white border-2 border-yutime-light-green/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-yutime-vibrant hover:shadow-xl focus-within:ring-2 focus-within:ring-yutime-vibrant/20 transition-all duration-300">
+    <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative h-48 overflow-hidden rounded-t-lg">
           <img 
@@ -98,16 +99,16 @@ const FeaturedCourses = () => {
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          <div className="absolute top-3 right-3 bg-yutime-yellow text-yutime-charcoal px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+          <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
             {course.level}
           </div>
         </div>
         <div className="flex-1 flex flex-col p-6">
           <div className="mb-3">
-            <span className="bg-yutime-light-green text-yutime-emerald px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
+            <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
           </div>
-          <h3 className="text-xl font-bold mb-4 text-yutime-charcoal">{course.title}</h3>
-          <p className="text-yutime-coral text-lg font-bold mb-4">HKD {course.price}</p>
+          <h3 className="text-xl font-bold mb-4 text-yutime-indigo">{course.title}</h3>
+          <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
           <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-1 text-sm text-gray-500">
               <Timer size={16} />
@@ -115,7 +116,7 @@ const FeaturedCourses = () => {
             </div>
             <Link to={`/courses/${course.id}`} className="w-full md:w-auto">
               <Button 
-                className="bg-yutime-vibrant hover:bg-yutime-emerald text-white text-sm px-4 py-2 w-full shadow-lg hover:shadow-xl transition-all"
+                className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full"
               >
                 Get started for free
               </Button>
@@ -127,10 +128,10 @@ const FeaturedCourses = () => {
   );
 
   return (
-    <section id="courses" className="bg-yutime-light-green/30 py-20 md:py-32">
+    <section id="courses" className="bg-slate-50 py-20 md:py-32">
       <div className="container">
         <div className="mb-12 text-center">
-          <h2 className="text-yutime-charcoal mb-4">Featured Courses</h2>
+          <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
           <p className="text-gray-700 max-w-2xl mx-auto">
             Our most popular courses, designed with your learning goals in mind.
             Start your learning journey today.
@@ -159,7 +160,7 @@ const FeaturedCourses = () => {
                 <button
                   key={index}
                   className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                    index === current - 1 ? 'bg-yutime-vibrant' : 'bg-gray-300'
+                    index === current - 1 ? 'bg-yutime-blue' : 'bg-gray-300'
                   }`}
                   onClick={() => api?.scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
