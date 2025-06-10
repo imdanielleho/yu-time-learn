@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -12,7 +13,7 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '1.5rem',
+			padding: '2rem',
 			screens: {
 				'sm': '640px',
 				'md': '768px',
@@ -29,22 +30,28 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					sage: '#6B9B76',      // Primary - calming sage green
-					coral: '#FF8B7A',     // Secondary - warm coral
-					lavender: '#B19CD9',  // Accent - gentle lavender
-					sunshine: '#FFD166',  // Supporting - joyful yellow
-					cream: '#FDF6E3',     // Warm background
-					warmGray: '#8B7F72',  // Neutral text
-					softWhite: '#FEFCF8', // Soft white background
-					indigo: '#6B9B76',    // Map to sage for backward compatibility
-					gold: '#FFD166',      // Map to sunshine
-					blue: '#6B9B76',      // Map to sage
-					navy: '#5A6C57',      // Darker sage for contrast
-					navy_dark: '#4A5B47', // Even darker sage
-					yellow: '#FFD166',    // Keep sunshine
-					yellow_light: '#FFF4D6', // Light sunshine
-					sand: '#FDF6E3',      // Map to cream
-					sand_dark: '#F5EDD3', // Darker cream
+					navy: '#1A365D',          // Deep Navy Blue - Primary
+					slate: '#4A5568',         // Soft Slate - Secondary  
+					gold: '#D69E2E',          // Warm Gold - Accent
+					charcoal: '#2D3748',      // Warm Charcoal - Text
+					coolGray: '#718096',      // Cool Gray - Subtle elements
+					lightGray: '#F7FAFC',     // Light Blue-Gray - Backgrounds
+					white: '#FFFFFF',         // Pure White
+					// Legacy mappings for backward compatibility
+					sage: '#1A365D',          // Map to navy
+					coral: '#D69E2E',         // Map to gold
+					lavender: '#4A5568',      // Map to slate
+					sunshine: '#D69E2E',      // Map to gold
+					cream: '#F7FAFC',         // Map to lightGray
+					warmGray: '#718096',      // Map to coolGray
+					softWhite: '#FFFFFF',     // Map to white
+					indigo: '#1A365D',        // Map to navy
+					blue: '#1A365D',          // Map to navy
+					navy_dark: '#1A202C',     // Even darker navy
+					yellow: '#D69E2E',        // Map to gold
+					yellow_light: '#FAF5FF', // Light gold
+					sand: '#F7FAFC',          // Map to lightGray
+					sand_dark: '#EDF2F7',     // Darker lightGray
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -87,10 +94,10 @@ export default {
 				'2xl': '20px'
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(107, 155, 118, 0.08)',
-				'card': '0 8px 32px rgba(107, 155, 118, 0.12)',
-				'warm': '0 6px 24px rgba(255, 139, 122, 0.1)',
-				'gentle': '0 2px 12px rgba(177, 156, 217, 0.08)'
+				'soft': '0 4px 20px rgba(26, 54, 93, 0.08)',
+				'card': '0 8px 32px rgba(26, 54, 93, 0.12)',
+				'warm': '0 6px 24px rgba(214, 158, 46, 0.1)',
+				'gentle': '0 2px 12px rgba(74, 85, 104, 0.08)'
 			},
 			keyframes: {
 				"accordion-down": {
