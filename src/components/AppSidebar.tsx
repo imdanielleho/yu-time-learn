@@ -49,8 +49,8 @@ const AppSidebar = () => {
   };
 
   return (
-    <Sidebar>
-      <SidebarHeader className="p-4">
+    <Sidebar className="bg-white border-r">
+      <SidebarHeader className="p-4 bg-white border-b">
         <Link to="/dashboard" className="flex items-center space-x-2">
           <span className="font-heading text-xl font-bold text-yutime-navy">
             YŪ<span className="text-yutime-blue">TIME</span>
@@ -58,7 +58,7 @@ const AppSidebar = () => {
         </Link>
       </SidebarHeader>
       
-      <SidebarContent>
+      <SidebarContent className="bg-white">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -92,7 +92,7 @@ const AppSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
       
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-4 bg-white border-t">
         <Button 
           variant="ghost" 
           className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"

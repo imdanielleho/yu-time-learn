@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -116,7 +117,7 @@ const Courses = () => {
             className={`text-white text-sm px-4 py-2 w-full md:w-auto ${
               course.isPurchased 
                 ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
-                : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
+                : 'bg-yutime-sage hover:bg-yutime-sage/90'
             }`}
             onClick={(e) => handleGetStartedClick(e, course)}
           >

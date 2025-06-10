@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MessageCircle, X } from 'lucide-react';
+import { HelpCircle, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -30,8 +30,7 @@ const CustomerServiceButton = () => {
     }`}>
       {isExpanded && (
         <div className="mb-3 bg-white rounded-lg shadow-lg p-3 min-w-[200px]">
-          <div className="flex justify-between items-center mb-3">
-            <span className="font-medium text-sm">Contact Us</span>
+          <div className="flex justify-end items-center mb-3">
             <Button 
               variant="ghost" 
               size="icon"
@@ -47,7 +46,7 @@ const CustomerServiceButton = () => {
               className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-green-50 transition-colors"
             >
               <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                <MessageCircle size={14} className="text-white" />
+                <HelpCircle size={14} className="text-white" />
               </div>
               <span className="text-sm">WhatsApp</span>
             </button>
@@ -56,7 +55,7 @@ const CustomerServiceButton = () => {
               className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-green-50 transition-colors"
             >
               <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                <MessageCircle size={14} className="text-white" />
+                <HelpCircle size={14} className="text-white" />
               </div>
               <span className="text-sm">WeChat</span>
             </button>
@@ -64,17 +63,12 @@ const CustomerServiceButton = () => {
         </div>
       )}
       
-      <div className="flex items-center gap-3">
-        <div className="bg-white rounded-lg shadow-lg px-3 py-2 text-sm text-gray-700 whitespace-nowrap">
-          Contact Us
-        </div>
-        <Button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0"
-        >
-          <MessageCircle size={24} />
-        </Button>
-      </div>
+      <Button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0"
+      >
+        <HelpCircle size={24} />
+      </Button>
     </div>
   );
 };
