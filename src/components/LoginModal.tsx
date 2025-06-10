@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ interface LoginModalProps {
 }
 
 const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,10 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       console.log("Signup attempted with:", { email, firstName, lastName, password });
       onLogin(email, password); // For demo, treat signup as login
     }
+    
+    // Redirect to dashboard after successful login/signup
+    onClose();
+    navigate('/dashboard');
   };
 
   const resetForm = () => {
@@ -50,7 +56,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-center text-xl sm:text-2xl font-normal mb-3 sm:mb-6">
             {activeTab === 'login' ? 'Login' : 'Sign Up'}
@@ -138,12 +144,14 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             />
           )}
           
-          <Button
-            type="submit"
-            className="w-full py-3 sm:py-4 text-base sm:text-lg bg-yutime-blue hover:bg-yutime-blue/90"
-          >
-            {activeTab === 'login' ? 'Login' : 'Create Account'}
-          </Button>
+          <div className={activeTab === 'signup' ? 'pt-4' : ''}>
+            <Button
+              type="submit"
+              className="w-full py-3 sm:py-4 text-base sm:text-lg bg-yutime-blue hover:bg-yutime-blue/90"
+            >
+              {activeTab === 'login' ? 'Login' : 'Create Account'}
+            </Button>
+          </div>
         </form>
         
         <div className="text-center text-gray-500 my-2 text-sm">or use a social network</div>
