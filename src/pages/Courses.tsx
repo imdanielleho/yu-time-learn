@@ -134,7 +134,19 @@ const Courses = () => {
 
   const handleCourseClick = (course: typeof availableCourses[0]) => {
     if (isLoggedIn && !isMobile) {
-      // For logged-in desktop users, update URL and open course details in sidebar
+      // For logged-in desktop users, open course details in sidebar and update URL
+      navigate(`/courses/${course.id}`, { replace: true });
+      setSelectedCourse(course);
+    } else {
+      // For mobile or logged-out users, navigate to course detail page
+      navigate(`/courses/${course.id}`);
+    }
+  };
+
+  const handleGetStartedClick = (e: React.MouseEvent, course: typeof availableCourses[0]) => {
+    e.stopPropagation();
+    if (isLoggedIn && !isMobile) {
+      // For logged-in desktop users, open course details in sidebar
       navigate(`/courses/${course.id}`, { replace: true });
       setSelectedCourse(course);
     } else {
@@ -183,10 +195,7 @@ const Courses = () => {
                 ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
                 : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
             }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCourseClick(course);
-            }}
+            onClick={(e) => handleGetStartedClick(e, course)}
           >
             {course.isPurchased ? 'Continue Learning' : 'Get started for free'}
           </Button>
@@ -243,7 +252,10 @@ const Courses = () => {
       {selectedCourse && !isMobile && isLoggedIn && (
         <CourseDetailSidebar 
           course={selectedCourse}
-          onClose={() => setSelectedCourse(null)}
+          onClose={() => {
+            setSelectedCourse(null);
+            navigate('/courses', { replace: true });
+          }}
         />
       )}
     </div>

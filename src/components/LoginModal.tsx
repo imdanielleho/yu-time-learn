@@ -50,14 +50,14 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8 my-4 sm:my-8 max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-normal mb-4 sm:mb-6">
+          <DialogTitle className="text-center text-xl sm:text-2xl font-normal mb-3 sm:mb-6">
             {activeTab === 'login' ? 'Login' : 'Sign Up'}
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex mb-4 sm:mb-6 bg-gray-100 rounded-lg p-1">
+        <div className="flex mb-3 sm:mb-6 bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => handleTabSwitch('login')}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
@@ -80,20 +80,20 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-4">
           {activeTab === 'signup' && (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <Input
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full py-3 sm:py-4"
+                className="w-full py-2 sm:py-3"
               />
               <Input
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full py-3 sm:py-4"
+                className="w-full py-2 sm:py-3"
               />
             </div>
           )}
@@ -103,16 +103,16 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full py-3 sm:py-4"
+            className="w-full py-2 sm:py-3"
           />
           
-          <div className="space-y-2">
+          <div className="space-y-1 sm:space-y-2">
             <Input
               type="password"
               placeholder={activeTab === 'signup' ? "Create a Password" : "Your password..."}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full py-3 sm:py-4"
+              className="w-full py-2 sm:py-3"
             />
             {activeTab === 'login' && (
               <div className="text-right">
@@ -134,38 +134,38 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
               placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full py-3 sm:py-4"
+              className="w-full py-2 sm:py-3"
             />
           )}
           
           <Button
             type="submit"
-            className="w-full py-4 sm:py-6 text-lg bg-yutime-blue hover:bg-yutime-blue/90"
+            className="w-full py-3 sm:py-4 text-base sm:text-lg bg-yutime-blue hover:bg-yutime-blue/90"
           >
             {activeTab === 'login' ? 'Login' : 'Create Account'}
           </Button>
         </form>
         
-        <div className="text-center text-gray-500 my-2">or use a social network</div>
+        <div className="text-center text-gray-500 my-2 text-sm">or use a social network</div>
         
-        <div className="flex justify-center gap-4 my-2">
-          <Button variant="outline" size="icon" className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0">
-            <Twitter className="h-5 w-5 text-gray-600" />
+        <div className="flex justify-center gap-3 my-2">
+          <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
+            <Twitter className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
           </Button>
-          <Button variant="outline" size="icon" className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0">
-            <Facebook className="h-5 w-5 text-gray-600" />
+          <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
+            <Facebook className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
           </Button>
-          <Button variant="outline" size="icon" className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0">
-            <Linkedin className="h-5 w-5 text-gray-600" />
+          <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
+            <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
           </Button>
         </div>
         
-        <div className="text-center border-t border-gray-200 pt-4 mt-4">
-          <p>
+        <div className="text-center border-t border-gray-200 pt-3 mt-3">
+          <p className="text-sm">
             {activeTab === 'login' ? "Not a member yet?" : "Already have an account?"}{" "}
             <Button
               variant="link"
-              className="p-0 text-yutime-blue font-semibold"
+              className="p-0 text-yutime-blue font-semibold text-sm"
               onClick={() => handleTabSwitch(activeTab === 'login' ? 'signup' : 'login')}
             >
               {activeTab === 'login' ? 'Sign Up' : 'Login'}
