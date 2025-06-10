@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Timer } from 'lucide-react';
 import {
@@ -17,6 +17,7 @@ import { courses, type Course } from '@/data/courses';
 const Courses = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -24,6 +25,17 @@ const Courses = () => {
   
   // TODO: Replace with actual authentication state
   const isLoggedIn = true; // This should come from your auth context/state
+
+  // Check URL params on mount and update selected course
+  useEffect(() => {
+    const selectedCourseId = searchParams.get('selected');
+    if (selectedCourseId) {
+      const course = courses.find(c => c.id === parseInt(selectedCourseId));
+      if (course) {
+        setSelectedCourse(course);
+      }
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (!api) {
@@ -40,8 +52,8 @@ const Courses = () => {
 
   const handleCourseClick = (course: Course) => {
     if (isLoggedIn && !isMobile) {
-      // For logged-in desktop users, open course details in sidebar and update URL
-      navigate(`/courses/${course.id}`, { replace: true });
+      // For logged-in desktop users, open course details in sidebar and update URL params
+      setSearchParams({ selected: course.id.toString() });
       setSelectedCourse(course);
     } else {
       // For mobile or logged-out users, navigate to course detail page
@@ -52,13 +64,18 @@ const Courses = () => {
   const handleGetStartedClick = (e: React.MouseEvent, course: Course) => {
     e.stopPropagation();
     if (isLoggedIn && !isMobile) {
-      // For logged-in desktop users, open course details in sidebar
-      navigate(`/courses/${course.id}`, { replace: true });
+      // For logged-in desktop users, open course details in sidebar and update URL params
+      setSearchParams({ selected: course.id.toString() });
       setSelectedCourse(course);
     } else {
       // For mobile or logged-out users, navigate to course detail page
       navigate(`/courses/${course.id}`);
     }
+  };
+
+  const handleCloseSidebar = () => {
+    setSelectedCourse(null);
+    setSearchParams({});
   };
 
   const CourseCard = ({ course }: { course: Course }) => (
@@ -160,10 +177,7 @@ const Courses = () => {
       {selectedCourse && !isMobile && isLoggedIn && (
         <CourseDetailSidebar 
           course={selectedCourse}
-          onClose={() => {
-            setSelectedCourse(null);
-            navigate('/courses', { replace: true });
-          }}
+          onClose={handleCloseSidebar}
         />
       )}
     </div>
