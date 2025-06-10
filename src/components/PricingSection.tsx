@@ -1,172 +1,174 @@
 
-import React from 'react';
-import { Check, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Check, Star } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import LoginSignupModal from './LoginSignupModal';
 
 const PricingSection = () => {
-  const scrollToCourses = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const coursesSection = document.getElementById('courses');
-    if (coursesSection) {
-      coursesSection.scrollIntoView({ behavior: 'smooth' });
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  
+  // TODO: Replace with actual authentication state
+  const isLoggedIn = false;
+
+  const handleLogin = (email: string, password: string) => {
+    console.log("Login with:", email, password);
+    setIsLoginModalOpen(false);
+    // TODO: Implement actual login logic
+  };
+
+  const handleSignup = (email: string, password: string, name: string) => {
+    console.log("Signup with:", email, password, name);
+    setIsLoginModalOpen(false);
+    // TODO: Implement actual signup logic
+  };
+
+  const handleSelectPlan = (plan: string) => {
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+    } else {
+      console.log(`Selected ${plan} plan`);
+      // TODO: Implement plan selection logic
     }
   };
 
-  return (
-    <section id="pricing" className="section bg-gradient-to-br from-yutime-cream via-yutime-softWhite to-yutime-sand/30">
-      <div className="container">
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Heart size={20} className="text-yutime-coral" />
-            <span className="text-sm font-medium text-yutime-sage tracking-wide uppercase">Choose Your Path</span>
-          </div>
-          <h2 className="text-yutime-sage mb-6">Find Your Perfect Learning Journey</h2>
-          <p className="max-w-2xl mx-auto text-yutime-warmGray leading-relaxed">
-            Whether you're taking your first step or ready to dive deep, 
-            we have a supportive path that fits your pace and goals.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Single Course Option */}
-          <div className="card-warm flex flex-col h-full hover-lift">
-            <div className="p-6 border-b border-yutime-sand_dark">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="text-2xl">🌱</span>
-                <h3 className="text-xl font-semibold text-yutime-sage">First Steps</h3>
-              </div>
-              <div className="flex items-baseline mb-4">
-                <span className="text-3xl font-bold text-yutime-sage">HKD 120</span>
-                <span className="ml-1 text-yutime-warmGray">/course</span>
-              </div>
-              <p className="text-yutime-warmGray">Perfect for exploring a new interest or skill that sparks your curiosity</p>
-            </div>
-            
-            <div className="p-6 flex-grow">
-              <ul className="space-y-4">
-                {["Access to one complete course", "All learning materials included", "Supportive community forum", "Certificate of achievement"].map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <Check size={20} className="text-yutime-sage flex-shrink-0 mr-3 mt-0.5" />
-                    <span className="text-yutime-warmGray">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="p-6 pt-0">
-              <a 
-                href="#courses" 
-                onClick={scrollToCourses}
-                className="btn-secondary w-full text-center block"
-              >
-                Start Exploring
-              </a>
-            </div>
-          </div>
+  const plans = [
+    {
+      name: "Single Course",
+      price: "120",
+      period: "one-time",
+      description: "Perfect for trying out YŪTIME",
+      features: [
+        "Access to 1 course",
+        "Lifetime access",
+        "Community support",
+        "Certificate of completion"
+      ],
+      popular: false,
+      buttonText: "Get Started"
+    },
+    {
+      name: "3-Course Bundle",
+      price: "350", 
+      period: "one-time",
+      description: "Great value for focused learning",
+      features: [
+        "Access to 3 courses",
+        "Lifetime access",
+        "Priority community support",
+        "Certificates of completion",
+        "Monthly group sessions"
+      ],
+      popular: true,
+      buttonText: "Most Popular"
+    },
+    {
+      name: "Full Access",
+      price: "500",
+      period: "one-time", 
+      description: "Complete learning journey",
+      features: [
+        "Access to all courses",
+        "Lifetime access",
+        "1-on-1 mentoring sessions",
+        "Priority support",
+        "All certificates",
+        "Exclusive workshops",
+        "Early access to new courses"
+      ],
+      popular: false,
+      buttonText: "Get Full Access"
+    }
+  ];
 
-          {/* 3-Courses Bundle Option */}
-          <div className="card-warm border-2 border-yutime-coral flex flex-col h-full relative hover-lift transform scale-105">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yutime-coral px-6 py-2 rounded-full text-white font-medium text-sm shadow-warm">
-              🌟 Most Popular
-            </div>
-            
-            <div className="p-6 border-b border-yutime-sand_dark">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="text-2xl">🌿</span>
-                <h3 className="text-xl font-semibold text-yutime-sage">Growth Journey</h3>
-              </div>
-              <div className="flex items-baseline mb-4">
-                <span className="text-3xl font-bold text-yutime-sage">HKD 350</span>
-                <span className="ml-1 text-yutime-warmGray">/bundle</span>
-              </div>
-              <p className="text-yutime-warmGray">Ideal for building confidence across multiple areas of your life</p>
-            </div>
-            
-            <div className="p-6 flex-grow">
-              <ul className="space-y-4">
-                {[
-                  "Choose any 3 courses",
-                  "All materials and resources",
-                  "Priority community support",
-                  "Certificates for all courses",
-                  "Save HKD 10 vs individual courses",
-                  "Personal progress tracking"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <Check size={20} className="text-yutime-coral flex-shrink-0 mr-3 mt-0.5" />
-                    <span className="text-yutime-warmGray">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="p-6 pt-0">
-              <a 
-                href="#courses" 
-                onClick={scrollToCourses}
-                className="btn-primary w-full text-center block"
-              >
-                Begin Your Journey
-              </a>
-            </div>
+  return (
+    <>
+      <section id="pricing" className="section bg-yutime-softWhite">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-yutime-sage">Choose Your Path</h2>
+            <p className="max-w-2xl mx-auto text-yutime-warmGray text-lg leading-relaxed">
+              Select the learning journey that fits your goals and budget. All plans include lifetime access.
+            </p>
           </div>
           
-          {/* Full Bundle Option */}
-          <div className="card-warm border border-yutime-lavender flex flex-col h-full relative hover-lift">
-            <div className="absolute -top-4 right-4 bg-yutime-lavender px-4 py-2 rounded-full text-white font-medium text-sm shadow-gentle">
-              💜 Complete Experience
-            </div>
-            
-            <div className="p-6 border-b border-yutime-sand_dark">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="text-2xl">🌳</span>
-                <h3 className="text-xl font-semibold text-yutime-sage">Full Flourish</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {plans.map((plan, index) => (
+              <div 
+                key={index} 
+                className={`relative bg-white rounded-2xl p-8 shadow-soft transition-all duration-300 hover:shadow-warm border-2 ${
+                  plan.popular ? 'border-yutime-coral scale-105' : 'border-yutime-sand hover:border-yutime-sand_dark'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <div className="bg-yutime-coral text-white px-4 py-2 rounded-full text-sm font-bold flex items-center space-x-1">
+                      <Star size={16} className="fill-current" />
+                      <span>Most Popular</span>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="text-center mb-8">
+                  <h3 className="text-xl font-bold mb-2 text-yutime-sage">{plan.name}</h3>
+                  <div className="mb-2">
+                    <span className="text-4xl font-bold text-yutime-sage">HKD {plan.price}</span>
+                    <span className="text-yutime-warmGray ml-1">/ {plan.period}</span>
+                  </div>
+                  <p className="text-yutime-warmGray">{plan.description}</p>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start space-x-3">
+                      <Check size={20} className="text-yutime-sage mt-0.5 flex-shrink-0" />
+                      <span className="text-yutime-warmGray">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <Button 
+                  onClick={() => handleSelectPlan(plan.name)}
+                  className={`w-full py-3 rounded-xl font-medium text-lg transition-all duration-300 hover-lift ${
+                    plan.popular 
+                      ? 'bg-yutime-coral hover:bg-yutime-coral/90 text-white' 
+                      : 'bg-yutime-sage hover:bg-yutime-sage/90 text-white'
+                  }`}
+                >
+                  {plan.buttonText}
+                </Button>
               </div>
-              <div className="flex items-baseline mb-4">
-                <span className="text-3xl font-bold text-yutime-sage">HKD 500</span>
-                <span className="ml-1 text-yutime-warmGray">/bundle</span>
-              </div>
-              <p className="text-yutime-warmGray">Complete transformation with personalized support and guidance</p>
-            </div>
-            
-            <div className="p-6 flex-grow">
-              <ul className="space-y-4">
-                {[
-                  "Access to all current courses",
-                  "Premium learning materials",
-                  "VIP community access",
-                  "All achievement certificates",
-                  "BONUS: Personal consultation",
-                  "Monthly group check-ins"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <Check size={20} className="text-yutime-lavender flex-shrink-0 mr-3 mt-0.5" />
-                    <span className="text-yutime-warmGray">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="p-6 pt-0">
-              <Link to="/bundle" className="btn-gentle w-full text-center block">
-                Embrace Full Growth
-              </Link>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-yutime-warmGray mb-4">
+              Questions about our plans? <a href="#" className="text-yutime-sage hover:underline font-medium">Contact us</a>
+            </p>
+            <div className="flex flex-wrap justify-center items-center space-x-6 text-sm text-yutime-warmGray">
+              <span className="flex items-center space-x-1">
+                <Check size={16} className="text-yutime-sage" />
+                <span>30-day money-back guarantee</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                <Check size={16} className="text-yutime-sage" />
+                <span>Secure payment</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                <Check size={16} className="text-yutime-sage" />
+                <span>Cancel anytime</span>
+              </span>
             </div>
           </div>
         </div>
-        
-        {/* Encouraging message */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center space-x-3 bg-yutime-sage/5 px-8 py-4 rounded-2xl border border-yutime-sage/20">
-            <span className="text-3xl">✨</span>
-            <div className="text-left">
-              <p className="text-yutime-sage font-medium">Your investment in yourself pays the best returns</p>
-              <p className="text-sm text-yutime-warmGray">30-day happiness guarantee • Cancel anytime</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+
+      <LoginSignupModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onLogin={handleLogin}
+        onSignup={handleSignup}
+      />
+    </>
   );
 };
 

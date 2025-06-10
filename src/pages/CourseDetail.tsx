@@ -44,9 +44,12 @@ const CourseDetail = () => {
   };
 
   const handleVideoPlay = (videoType: string) => {
-    console.log(`Playing ${videoType} video`);
-    // TODO: Implement actual video playback
-    alert(`Playing ${videoType} video - Video functionality coming soon!`);
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+    } else {
+      console.log(`Playing ${videoType} video`);
+      alert(`Playing ${videoType} video - Video functionality coming soon!`);
+    }
   };
 
   if (!course) {
@@ -112,7 +115,7 @@ const CourseDetail = () => {
             <span>Back to Home</span>
           </Link>
 
-          {/* Two-column header layout */}
+          {/* Module 1: Two-column header layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* Left: Video */}
             <div className="relative aspect-video rounded-lg overflow-hidden">
@@ -143,16 +146,16 @@ const CourseDetail = () => {
               
               {/* Instructor with reduced font size */}
               {course.instructor && (
-                <p className="text-lg text-yutime-warmGray">
+                <p className="text-base text-yutime-warmGray">
                   Instructor: <span className="font-medium text-yutime-sage">{course.instructor}</span>
                 </p>
               )}
               
               {/* Course description with reduced font size */}
-              <p className="text-lg text-yutime-warmGray leading-relaxed">{course.longDescription}</p>
+              <p className="text-base text-yutime-warmGray leading-relaxed">{course.longDescription}</p>
 
               {/* Course stats with reduced font size and consistent icons */}
-              <div className="flex flex-wrap items-center gap-6 text-base text-yutime-warmGray">
+              <div className="flex flex-wrap items-center gap-6 text-sm text-yutime-warmGray">
                 <div className="flex items-center space-x-2">
                   <Clock size={16} />
                   <span>{course.totalTime}</span>
@@ -168,142 +171,171 @@ const CourseDetail = () => {
           {/* Pricing card below the two-column layout */}
           <div className="max-w-sm mx-auto lg:mx-0 mb-8">
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-semibold text-yutime-sage mb-4 text-center border-b border-gray-200 pb-4">
+              <h3 className="text-lg font-semibold text-yutime-sage mb-4 text-center border-b border-gray-200 pb-4">
                 Single Course
               </h3>
               
               <div className="text-center mb-6">
-                <div className="text-4xl font-bold text-yutime-blue mb-2">
+                <div className="text-2xl font-bold text-yutime-sage mb-2">
                   HKD 120
                 </div>
-                <div className="text-yutime-warmGray text-lg">One-time payment</div>
+                <div className="text-yutime-warmGray">One-time payment</div>
               </div>
 
               <Button 
                 onClick={handleBuyNow}
-                className="w-full py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg"
+                className="w-full py-3 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-warm"
               >
                 Buy Now
               </Button>
             </div>
           </div>
 
-          <div className="space-y-8">
-            {/* Course Content Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Course Content</h2>
-              <p className="text-yutime-warmGray leading-relaxed text-lg">
-                This comprehensive course is designed to guide you through every step of your learning journey. 
-                Each lesson builds upon the previous one, ensuring you develop strong foundations before advancing.
-              </p>
-            </div>
+          {/* Rest of content in two-column layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left column: Main content */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Course Content Section */}
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Course Content</h2>
+                <p className="text-yutime-warmGray leading-relaxed text-lg">
+                  This comprehensive course is designed to guide you through every step of your learning journey. 
+                  Each lesson builds upon the previous one, ensuring you develop strong foundations before advancing.
+                </p>
+              </div>
 
-            {/* Accordion Sections */}
-            <Accordion type="single" collapsible className="w-full space-y-3">
-              <AccordionItem value="who-is-this-for" className="bg-white rounded-xl border border-gray-200 px-4">
-                <AccordionTrigger className="text-yutime-sage font-medium text-lg">
-                  Who is this course for?
-                </AccordionTrigger>
-                <AccordionContent className="text-yutime-warmGray text-lg leading-relaxed">
-                  This course is perfect for adults 45+ who want to learn at their own pace in a supportive environment. 
-                  No prior experience needed - just bring your curiosity and willingness to learn.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="what-you-learn" className="bg-white rounded-xl border border-gray-200 px-4">
-                <AccordionTrigger className="text-yutime-sage font-medium text-lg">
-                  What you will learn
-                </AccordionTrigger>
-                <AccordionContent className="text-yutime-warmGray text-lg leading-relaxed">
-                  By the end of this course, you'll have gained practical skills and confidence in the subject matter. 
-                  You'll understand key concepts and be able to apply them in real-world situations.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="preparation" className="bg-white rounded-xl border border-gray-200 px-4">
-                <AccordionTrigger className="text-yutime-sage font-medium text-lg">
-                  Preparation before class
-                </AccordionTrigger>
-                <AccordionContent className="text-yutime-warmGray text-lg leading-relaxed">
-                  No special preparation required! Just ensure you have a stable internet connection and a comfortable 
-                  space to learn. We recommend having a notebook handy for taking notes.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-
-            {/* Curriculum */}
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Course Curriculum</h2>
+              {/* Accordion Sections */}
               <Accordion type="single" collapsible className="w-full space-y-3">
-                {curriculum.map((chapter, index) => (
-                  <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
-                    <AccordionTrigger className="text-yutime-sage font-medium text-lg">
-                      <div className="flex justify-between items-center w-full mr-4">
-                        <span>Chapter {chapter.chapter}. {chapter.title}</span>
-                        <span className="text-sm text-yutime-warmGray">{chapter.lessons} lessons | {chapter.duration}</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="space-y-3 pt-2">
-                        {Array.from({ length: chapter.lessons }).map((_, lessonIndex) => (
-                          <div key={lessonIndex} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                            <div className="flex items-start space-x-3">
-                              <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0">
-                                {lessonIndex + 1}
-                              </span>
-                              <span className="text-yutime-warmGray text-lg">Lesson {lessonIndex + 1}: Introduction to {chapter.title}</span>
-                            </div>
-                            <span className="text-sm text-yutime-warmGray">
-                              {Math.floor(parseInt(chapter.duration) / chapter.lessons)} min
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                <AccordionItem value="who-is-this-for" className="bg-white rounded-xl border border-gray-200 px-4">
+                  <AccordionTrigger className="text-yutime-sage font-medium text-lg">
+                    Who is this course for?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-yutime-warmGray text-lg leading-relaxed">
+                    This course is perfect for adults 45+ who want to learn at their own pace in a supportive environment. 
+                    No prior experience needed - just bring your curiosity and willingness to learn.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="what-you-learn" className="bg-white rounded-xl border border-gray-200 px-4">
+                  <AccordionTrigger className="text-yutime-sage font-medium text-lg">
+                    What you will learn
+                  </AccordionTrigger>
+                  <AccordionContent className="text-yutime-warmGray text-lg leading-relaxed">
+                    By the end of this course, you'll have gained practical skills and confidence in the subject matter. 
+                    You'll understand key concepts and be able to apply them in real-world situations.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="preparation" className="bg-white rounded-xl border border-gray-200 px-4">
+                  <AccordionTrigger className="text-yutime-sage font-medium text-lg">
+                    Preparation before class
+                  </AccordionTrigger>
+                  <AccordionContent className="text-yutime-warmGray text-lg leading-relaxed">
+                    No special preparation required! Just ensure you have a stable internet connection and a comfortable 
+                    space to learn. We recommend having a notebook handy for taking notes.
+                  </AccordionContent>
+                </AccordionItem>
               </Accordion>
+
+              {/* Curriculum */}
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Course Curriculum</h2>
+                <Accordion type="single" collapsible className="w-full space-y-3">
+                  {curriculum.map((chapter, index) => (
+                    <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
+                      <AccordionTrigger className="text-yutime-sage font-medium text-lg">
+                        <div className="flex justify-between items-center w-full mr-4">
+                          <span>Chapter {chapter.chapter}. {chapter.title}</span>
+                          <span className="text-sm text-yutime-warmGray">{chapter.lessons} lessons | {chapter.duration}</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-3 pt-2">
+                          {Array.from({ length: chapter.lessons }).map((_, lessonIndex) => (
+                            <div key={lessonIndex} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                              <div className="flex items-start space-x-3">
+                                <span className="bg-yutime-sage text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-medium flex-shrink-0">
+                                  {lessonIndex + 1}
+                                </span>
+                                <span className="text-yutime-warmGray leading-relaxed text-lg">Lesson {lessonIndex + 1}: Introduction to {chapter.title}</span>
+                              </div>
+                              <span className="text-sm text-yutime-warmGray">
+                                {Math.floor(parseInt(chapter.duration) / chapter.lessons)} min
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+
+              {/* Course Preview Section */}
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Free Course Preview</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
+                      <img 
+                        src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=400&h=225"
+                        alt="Introduction Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <Button 
+                          onClick={() => handleVideoPlay('intro')}
+                          className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
+                        >
+                          <Play size={20} />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-lg font-medium text-yutime-sage">Introduction Preview</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
+                      <img 
+                        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=400&h=225"
+                        alt="Sample Lesson"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <Button 
+                          onClick={() => handleVideoPlay('sample')}
+                          className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
+                        >
+                          <Play size={20} />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-lg font-medium text-yutime-sage">Sample Lesson</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Course Preview Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Free Course Preview</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
-                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=400&h=225"
-                      alt="Introduction Preview"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <Button 
-                        onClick={() => handleVideoPlay('intro')}
-                        className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
-                      >
-                        <Play size={20} />
-                      </Button>
+            {/* Right column: Pricing card (moved from above) - duplicate pricing card for right column */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-8">
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-lg font-semibold text-yutime-sage mb-4 text-center border-b border-gray-200 pb-4">
+                    Single Course
+                  </h3>
+                  
+                  <div className="text-center mb-6">
+                    <div className="text-2xl font-bold text-yutime-sage mb-2">
+                      HKD 120
                     </div>
+                    <div className="text-yutime-warmGray">One-time payment</div>
                   </div>
-                  <p className="text-lg font-medium text-yutime-sage">Introduction Preview</p>
-                </div>
-                <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
-                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=400&h=225"
-                      alt="Sample Lesson"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <Button 
-                        onClick={() => handleVideoPlay('sample')}
-                        className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
-                      >
-                        <Play size={20} />
-                      </Button>
-                    </div>
-                  </div>
-                  <p className="text-lg font-medium text-yutime-sage">Sample Lesson</p>
+
+                  <Button 
+                    onClick={handleBuyNow}
+                    className="w-full py-3 text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105 bg-yutime-coral hover:bg-yutime-coral/90 shadow-warm"
+                  >
+                    Buy Now
+                  </Button>
                 </div>
               </div>
             </div>
