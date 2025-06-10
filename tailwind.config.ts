@@ -30,28 +30,40 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					navy: '#1A365D',          // Deep Navy Blue - Primary
-					slate: '#4A5568',         // Soft Slate - Secondary  
-					gold: '#D69E2E',          // Warm Gold - Accent
-					charcoal: '#2D3748',      // Warm Charcoal - Text
-					coolGray: '#718096',      // Cool Gray - Subtle elements
-					lightGray: '#F7FAFC',     // Light Blue-Gray - Backgrounds
-					white: '#FFFFFF',         // Pure White
+					// New warm earthy palette
+					mainBg: '#faf8f5',          // Main background - warm cream
+					forestGreen: 'oklch(0.268 0.059 173.5)', // Earthy green for "about" sections
+					richBrown: '#8b4513',       // Deep chocolate brown for headings
+					warmCharcoal: '#4a403a',    // Softer, warmer dark text
+					lightCream: '#f5f2ed',      // Slightly darker than main bg for cards
+					warmBeige: '#e8e3dc',       // For subtle borders and dividers
+					softBrown: '#a0826d',       // For secondary text and subtle elements
+					accentGold: '#b8860b',      // Warm golden accent for buttons
+					
 					// Legacy mappings for backward compatibility
-					sage: '#1A365D',          // Map to navy
-					coral: '#D69E2E',         // Map to gold
-					lavender: '#4A5568',      // Map to slate
-					sunshine: '#D69E2E',      // Map to gold
-					cream: '#F7FAFC',         // Map to lightGray
-					warmGray: '#718096',      // Map to coolGray
-					softWhite: '#FFFFFF',     // Map to white
-					indigo: '#1A365D',        // Map to navy
-					blue: '#1A365D',          // Map to navy
-					navy_dark: '#1A202C',     // Even darker navy
-					yellow: '#D69E2E',        // Map to gold
-					yellow_light: '#FAF5FF', // Light gold
-					sand: '#F7FAFC',          // Map to lightGray
-					sand_dark: '#EDF2F7',     // Darker lightGray
+					navy: '#8b4513',            // Map to richBrown
+					slate: '#4a403a',           // Map to warmCharcoal
+					gold: '#b8860b',            // Map to accentGold
+					charcoal: '#4a403a',        // Map to warmCharcoal
+					coolGray: '#a0826d',        // Map to softBrown
+					lightGray: '#f5f2ed',       // Map to lightCream
+					white: '#faf8f5',           // Map to mainBg
+					blue: 'oklch(0.268 0.059 173.5)', // Map to forestGreen
+					
+					// Legacy colors for backward compatibility
+					sage: 'oklch(0.268 0.059 173.5)',
+					coral: '#b8860b',
+					lavender: '#4a403a',
+					sunshine: '#b8860b',
+					cream: '#f5f2ed',
+					warmGray: '#a0826d',
+					softWhite: '#faf8f5',
+					indigo: '#8b4513',
+					navy_dark: '#4a403a',
+					yellow: '#b8860b',
+					yellow_light: '#f5f2ed',
+					sand: '#f5f2ed',
+					sand_dark: '#e8e3dc',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -94,10 +106,10 @@ export default {
 				'2xl': '20px'
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(26, 54, 93, 0.08)',
-				'card': '0 8px 32px rgba(26, 54, 93, 0.12)',
-				'warm': '0 6px 24px rgba(214, 158, 46, 0.1)',
-				'gentle': '0 2px 12px rgba(74, 85, 104, 0.08)'
+				'soft': '0 4px 20px rgba(139, 69, 19, 0.08)',
+				'card': '0 8px 32px rgba(139, 69, 19, 0.12)',
+				'warm': '0 6px 24px rgba(184, 134, 11, 0.1)',
+				'gentle': '0 2px 12px rgba(74, 64, 58, 0.08)'
 			},
 			keyframes: {
 				"accordion-down": {

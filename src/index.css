@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* Pure white background */
-    --foreground: 220 13% 18%; /* Charcoal text */
+    --background: 31 24 19; /* Warm cream background */
+    --foreground: 29 23 16; /* Rich brown text */
 
-    --card: 0 0% 100%; /* Pure white cards */
-    --card-foreground: 220 13% 18%;
+    --card: 31 24 19; /* Warm cream cards */
+    --card-foreground: 29 23 16;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 18%;
+    --popover: 31 24 19;
+    --popover-foreground: 29 23 16;
 
-    --primary: 221 39% 18%; /* Deep navy primary */
-    --primary-foreground: 0 0% 100%;
+    --primary: 29 23 16; /* Rich brown primary */
+    --primary-foreground: 31 24 19;
 
-    --secondary: 47 78% 44%; /* Warm gold secondary */
-    --secondary-foreground: 221 39% 18%;
+    --secondary: 42 22 4; /* Accent gold secondary */
+    --secondary-foreground: 31 24 19;
 
-    --muted: 210 40% 96%; /* Light gray muted background */
-    --muted-foreground: 215 16% 47%;
+    --muted: 29 22 18; /* Light cream muted background */
+    --muted-foreground: 21 13 11;
 
-    --accent: 210 11% 31%; /* Soft slate accent */
-    --accent-foreground: 0 0% 100%;
+    --accent: 21 13 11; /* Warm charcoal accent */
+    --accent-foreground: 31 24 19;
 
     --destructive: 0 65% 51%; /* Neutral red */
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 31 24 19;
 
-    --border: 210 40% 92%; /* Light border */
-    --input: 210 40% 92%;
-    --ring: 221 39% 18%;
+    --border: 28 20 14; /* Warm beige border */
+    --input: 28 20 14;
+    --ring: 29 23 16;
 
     --radius: 0.75rem;
   }
@@ -49,12 +49,12 @@
   }
 
   body {
-    @apply bg-yutime-white text-yutime-charcoal font-sans;
+    @apply bg-yutime-mainBg text-yutime-warmCharcoal font-sans;
     line-height: 1.7;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold text-yutime-navy;
+    @apply font-heading font-semibold text-yutime-richBrown;
     letter-spacing: -0.025em;
   }
   
@@ -74,7 +74,7 @@
   }
   
   p {
-    @apply text-base md:text-lg leading-relaxed text-yutime-coolGray;
+    @apply text-base md:text-lg leading-relaxed text-yutime-softBrown;
   }
 
   .container {
@@ -88,23 +88,23 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-navy hover:bg-yutime-navy/90 text-white py-4 px-8 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft;
+    @apply bg-yutime-richBrown hover:bg-yutime-richBrown/90 text-yutime-mainBg py-4 px-8 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft;
   }
   
   .btn-secondary {
-    @apply bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-navy py-4 px-8 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
+    @apply bg-yutime-accentGold hover:bg-yutime-accentGold/90 text-yutime-richBrown py-4 px-8 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
   }
 
   .btn-gentle {
-    @apply bg-yutime-slate hover:bg-yutime-slate/90 text-white py-4 px-8 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-gentle;
+    @apply bg-yutime-warmCharcoal hover:bg-yutime-warmCharcoal/90 text-yutime-mainBg py-4 px-8 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-gentle;
   }
   
   .card {
-    @apply bg-yutime-white rounded-xl p-8 shadow-card transition-all duration-300 hover:shadow-warm border border-yutime-lightGray;
+    @apply bg-yutime-lightCream rounded-xl p-8 shadow-card transition-all duration-300 hover:shadow-warm border border-yutime-warmBeige;
   }
   
   .card-warm {
-    @apply bg-yutime-white rounded-xl p-8 shadow-soft transition-all duration-300 hover:shadow-card border border-yutime-lightGray;
+    @apply bg-yutime-lightCream rounded-xl p-8 shadow-soft transition-all duration-300 hover:shadow-card border border-yutime-warmBeige;
   }
   
   .section {
@@ -112,7 +112,7 @@
   }
 
   .learning-journey {
-    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-yutime-navy/5 to-yutime-slate/5 p-10;
+    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-yutime-richBrown/5 to-yutime-warmCharcoal/5 p-10;
   }
 
   .celebration {
@@ -127,15 +127,15 @@
   }
 
   .gentle-focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-yutime-navy/50 focus:ring-offset-2 focus:ring-offset-yutime-white;
+    @apply focus:outline-none focus:ring-2 focus:ring-yutime-richBrown/50 focus:ring-offset-2 focus:ring-offset-yutime-mainBg;
   }
 
   .warm-gradient {
-    background: linear-gradient(135deg, #1A365D 0%, #D69E2E 50%, #4A5568 100%);
+    background: linear-gradient(135deg, #8b4513 0%, #b8860b 50%, #4a403a 100%);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #1A365D 0%, #2D3748 100%);
+    background: linear-gradient(135deg, #8b4513 0%, #4a403a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

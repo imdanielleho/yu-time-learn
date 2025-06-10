@@ -52,8 +52,8 @@ const AppSidebar = () => {
     <Sidebar>
       <SidebarHeader className="p-4">
         <Link to="/dashboard" className="flex items-center space-x-2">
-          <span className="font-heading text-xl font-bold text-yutime-navy">
-            YŪ<span className="text-yutime-blue">TIME</span>
+          <span className="font-heading text-xl font-bold text-yutime-richBrown">
+            YŪ<span className="text-yutime-forestGreen">TIME</span>
           </span>
         </Link>
       </SidebarHeader>
@@ -71,8 +71,8 @@ const AppSidebar = () => {
                       isActive={isActive}
                       className={`
                         ${isActive 
-                          ? 'bg-yutime-blue text-white hover:bg-yutime-blue/90' 
-                          : 'hover:bg-gray-100'
+                          ? 'bg-yutime-forestGreen text-yutime-mainBg hover:bg-yutime-forestGreen/90' 
+                          : 'hover:bg-yutime-lightCream text-yutime-softBrown hover:text-yutime-richBrown'
                         }
                       `}
                     >

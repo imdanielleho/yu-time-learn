@@ -37,7 +37,7 @@ const BottomNavigation = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 bg-yutime-mainBg border-t border-yutime-warmBeige z-50 md:hidden">
       <div className="grid grid-cols-5 h-16">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.url;
@@ -48,8 +48,8 @@ const BottomNavigation = () => {
               className={cn(
                 "flex flex-col items-center justify-center space-y-1 transition-colors",
                 isActive 
-                  ? "text-yutime-blue bg-yutime-blue/5" 
-                  : "text-gray-600 hover:text-yutime-blue"
+                  ? "text-yutime-forestGreen bg-yutime-forestGreen/5" 
+                  : "text-yutime-softBrown hover:text-yutime-forestGreen"
               )}
             >
               <item.icon className="h-5 w-5" />
