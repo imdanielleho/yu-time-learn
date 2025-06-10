@@ -14,12 +14,12 @@ const Footer = () => {
   };
   
   return (
-    <footer className="bg-yutime-deepBrown text-white py-12">
+    <footer className="bg-yutime-navy_dark text-white py-12">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="font-heading text-2xl font-bold mb-4 inline-block">
-              YŪ<span className="text-yutime-sunshine">TIME</span>
+              YŪ<span className="text-yutime-yellow">TIME</span>
             </Link>
             <p className="mb-4 text-gray-300">
               Learning made simple and accessible for adults 45+. Discover new skills at your own pace.
@@ -29,10 +29,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-300 hover:text-yutime-sunshine transition-colors">Home</Link></li>
-              <li><a href="#courses" onClick={(e) => scrollToSection(e, 'courses')} className="text-gray-300 hover:text-yutime-sunshine transition-colors">Courses</a></li>
-              <li><a href="#faq" onClick={(e) => scrollToSection(e, 'faq')} className="text-gray-300 hover:text-yutime-sunshine transition-colors">FAQ</a></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-yutime-sunshine transition-colors">Contact Us</Link></li>
+              <li><Link to="/" className="text-gray-300 hover:text-yutime-yellow transition-colors">Home</Link></li>
+              <li><a href="#courses" onClick={(e) => scrollToSection(e, 'courses')} className="text-gray-300 hover:text-yutime-yellow transition-colors">Courses</a></li>
+              <li><a href="#faq" onClick={(e) => scrollToSection(e, 'faq')} className="text-gray-300 hover:text-yutime-yellow transition-colors">FAQ</a></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-yutime-yellow transition-colors">Contact Us</Link></li>
             </ul>
           </div>
         </div>

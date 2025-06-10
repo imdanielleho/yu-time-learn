@@ -79,7 +79,7 @@ const Courses = () => {
   };
 
   const CourseCard = ({ course }: { course: Course }) => (
-    <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-yutime-coral/50 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-coral/20 transition-all duration-300">
+    <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
       <div 
         className="block cursor-pointer"
         onClick={() => handleCourseClick(course)}
@@ -90,7 +90,7 @@ const Courses = () => {
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          <div className="absolute top-3 right-3 bg-yutime-sunshine text-yutime-deepBrown px-3 py-1 rounded-full text-sm font-bold">
+          <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
             {course.level}
           </div>
         </div>
@@ -98,14 +98,14 @@ const Courses = () => {
       
       <div className="flex-1 flex flex-col p-6">
         <div className="mb-3">
-          <span className="bg-yutime-lightCoral text-yutime-deepBrown px-3 py-1 rounded-full text-sm font-medium">
+          <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
             {course.category}
           </span>
         </div>
         
-        <h3 className="text-xl font-bold mb-4 text-yutime-coral">{course.title}</h3>
+        <h3 className="text-xl font-bold mb-4 text-yutime-indigo">{course.title}</h3>
         
-        <p className="text-yutime-coral text-lg font-bold mb-4">HKD {course.price}</p>
+        <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
         
         <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
           <div className="flex items-center gap-1 text-sm text-gray-500">
@@ -115,8 +115,8 @@ const Courses = () => {
           <Button 
             className={`text-white text-sm px-4 py-2 w-full md:w-auto ${
               course.isPurchased 
-                ? 'bg-yutime-coral hover:bg-yutime-coral/90' 
-                : 'bg-yutime-richBrown hover:bg-yutime-richBrown/90'
+                ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
+                : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
             }`}
             onClick={(e) => handleGetStartedClick(e, course)}
           >
@@ -140,8 +140,8 @@ const Courses = () => {
   return (
     <div className="p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-yutime-coral mb-2">All Courses</h1>
-        <p className="text-yutime-richBrown">Discover new skills and expand your knowledge</p>
+        <h1 className="text-3xl font-bold text-yutime-navy mb-2">All Courses</h1>
+        <p className="text-gray-600">Discover new skills and expand your knowledge</p>
       </div>
 
       {isMobile ? (
@@ -166,7 +166,7 @@ const Courses = () => {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                  index === current - 1 ? 'bg-yutime-coral' : 'bg-gray-300'
+                  index === current - 1 ? 'bg-yutime-blue' : 'bg-gray-300'
                 }`}
                 onClick={() => api?.scrollTo(index)}
                 aria-label={`Go to slide ${index + 1}`}
