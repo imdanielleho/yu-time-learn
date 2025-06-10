@@ -1,10 +1,16 @@
 
 import React from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Link } from 'react-router-dom';
 
 const Hero = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-gradient-to-br from-yutime-sage/5 to-yutime-coral/5 py-20 md:py-32 overflow-hidden">
       <div className="container max-w-7xl mx-auto px-4">
@@ -22,18 +28,12 @@ const Hero = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/courses">
-                <Button className="bg-yutime-coral hover:bg-yutime-coral/90 text-white px-8 py-4 text-lg rounded-xl shadow-warm hover-lift font-medium">
-                  Explore Courses
-                  <ArrowRight className="ml-2" size={20} />
-                </Button>
-              </Link>
               <Button 
-                variant="outline" 
-                className="border-yutime-sage text-yutime-sage hover:bg-yutime-sage/5 px-8 py-4 text-lg rounded-xl font-medium"
+                onClick={() => scrollToSection('courses')}
+                className="bg-yutime-coral hover:bg-yutime-coral/90 text-white px-8 py-4 text-lg rounded-xl shadow-warm hover-lift font-medium"
               >
-                <Play className="mr-2" size={20} />
-                Watch Preview
+                Explore Courses
+                <ArrowRight className="ml-2" size={20} />
               </Button>
             </div>
             

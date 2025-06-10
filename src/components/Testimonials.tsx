@@ -1,117 +1,102 @@
 
-import React, { useState, useEffect } from 'react';
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import type { CarouselApi } from "@/components/ui/carousel";
+import React from 'react';
+import { Star } from 'lucide-react';
 
 const testimonials = [
   {
     id: 1,
-    name: "Margaret T., 62",
+    name: "Margaret T.",
+    age: "62",
     role: "Retired Teacher",
-    quote: "YŪTIME helped me learn how to use my smartphone better. The instructor was patient and the videos were easy to follow. Now I can video chat with my grandchildren and even share photos! The course materials were well-designed for beginners like me, and I never felt rushed or confused. I'm now taking my second course with them.",
-    avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+    quote: "YŪTIME helped me learn how to use my smartphone better. The instructor was patient and the videos were easy to follow. Now I can video chat with my grandchildren!",
+    avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+    rating: 5
   },
   {
     id: 2,
-    name: "Robert J., 58",
+    name: "Robert J.",
+    age: "58", 
     role: "Small Business Owner",
-    quote: "I took the Digital Marketing course and was able to create a Facebook page for my business. The step-by-step guidance was exactly what I needed. Within a month, I was running simple ads and connecting with customers online. The instructor answered all my questions promptly and even provided additional resources tailored to my specific business needs. This course has truly transformed my business approach.",
-    avatar: "https://randomuser.me/api/portraits/men/54.jpg"
+    quote: "I took the Digital Marketing course and was able to create a Facebook page for my business. The step-by-step guidance was exactly what I needed.",
+    avatar: "https://randomuser.me/api/portraits/men/54.jpg",
+    rating: 5
   },
   {
     id: 3,
-    name: "Susan K., 64",
-    role: "Retired Nurse",
-    quote: "The yoga classes are perfect for my schedule and physical abilities. The instructor demonstrates modifications for all levels, which I really appreciate. After just six weeks, I've noticed significant improvement in my flexibility and overall well-being. The community aspect of the course has also been wonderful - I've connected with other students my age who share similar health goals. I look forward to each session.",
-    avatar: "https://randomuser.me/api/portraits/women/56.jpg"
+    name: "Susan K.",
+    age: "64",
+    role: "Retired Nurse", 
+    quote: "The yoga classes are perfect for my schedule and physical abilities. After just six weeks, I've noticed significant improvement in my flexibility.",
+    avatar: "https://randomuser.me/api/portraits/women/56.jpg",
+    rating: 5
   }
 ];
 
+const communityAvatars = [
+  "https://randomuser.me/api/portraits/women/32.jpg",
+  "https://randomuser.me/api/portraits/men/45.jpg", 
+  "https://randomuser.me/api/portraits/women/68.jpg",
+  "https://randomuser.me/api/portraits/men/52.jpg",
+  "https://randomuser.me/api/portraits/women/44.jpg"
+];
+
 const Testimonials = () => {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
-
   return (
     <section id="testimonials" className="section bg-yutime-indigo text-white">
       <div className="container">
-        <h2 className="text-center mb-12">What Our Learners Say</h2>
+        <h2 className="text-center mb-16 text-3xl md:text-4xl font-bold">Stories of Growth & Success</h2>
         
-        <div className="max-w-4xl mx-auto">
-          <Carousel
-            setApi={setApi}
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent>
-              {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.id}>
-                  <div className="bg-yutime-navy_dark rounded-2xl p-6 md:p-10 shadow-lg">
-                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
-                      <div className="flex-shrink-0 mx-auto md:mx-0">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-yutime-gold">
-                          <img 
-                            src={testimonial.avatar} 
-                            alt={testimonial.name} 
-                            className="w-full h-full object-cover" 
-                          />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <blockquote className="text-lg md:text-xl italic mb-6">
-                          "{testimonial.quote}"
-                        </blockquote>
-                        <div>
-                          <p className="font-bold text-lg">{testimonial.name}</p>
-                          <p className="text-yutime-gold">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            {/* Navigation with Indicators in Center */}
-            <div className="flex justify-center items-center mt-6 gap-4">
-              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
-              
-              {/* Carousel Indicators */}
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      index === current ? 'bg-yutime-gold' : 'bg-white/30'
-                    }`}
-                    onClick={() => api?.scrollTo(index)}
-                  />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="bg-yutime-navy_dark rounded-2xl p-6 shadow-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} size={16} className="text-yutime-gold fill-current" />
                 ))}
               </div>
               
-              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
+              <blockquote className="text-lg italic mb-6 leading-relaxed">
+                "{testimonial.quote}"
+              </blockquote>
+              
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-gold flex-shrink-0">
+                  <img 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+                <div>
+                  <p className="font-bold">{testimonial.name}, {testimonial.age}</p>
+                  <p className="text-yutime-gold text-sm">{testimonial.role}</p>
+                </div>
+              </div>
             </div>
-          </Carousel>
+          ))}
+        </div>
+
+        {/* Community section */}
+        <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
+          <div className="flex justify-center mb-4 -space-x-2">
+            {communityAvatars.map((avatar, index) => (
+              <div key={index} className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                <img 
+                  src={avatar} 
+                  alt={`Community member ${index + 1}`} 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+            ))}
+            <div className="w-12 h-12 rounded-full bg-yutime-gold border-2 border-white flex items-center justify-center">
+              <span className="text-yutime-indigo font-bold text-sm">+</span>
+            </div>
+          </div>
+          
+          <h3 className="text-2xl font-bold mb-2">Join 2,000+ learners</h3>
+          <p className="text-white/80 text-lg">
+            Who are building new skills and confidence every day
+          </p>
         </div>
       </div>
     </section>

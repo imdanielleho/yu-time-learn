@@ -29,7 +29,7 @@ const CustomerServiceButton = () => {
         : 'bottom-6 right-6'     // Normal position for desktop
     }`}>
       {isExpanded && (
-        <div className="mb-3 bg-white rounded-lg shadow-lg p-3 min-w-[200px]">
+        <div className="mb-3 bg-white rounded-xl shadow-lg p-4 min-w-[180px] border border-gray-200">
           <div className="flex justify-end items-center mb-3">
             <Button 
               variant="ghost" 
@@ -43,21 +43,21 @@ const CustomerServiceButton = () => {
           <div className="space-y-2">
             <button
               onClick={handleWhatsAppClick}
-              className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-green-50 transition-colors"
+              className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                <HelpCircle size={14} className="text-white" />
+              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-xs font-bold">W</span>
               </div>
-              <span className="text-sm">WhatsApp</span>
+              <span className="text-sm font-medium">WhatsApp</span>
             </button>
             <button
               onClick={handleWeChatClick}
-              className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-green-50 transition-colors"
+              className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                <HelpCircle size={14} className="text-white" />
+              <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-xs font-bold">微</span>
               </div>
-              <span className="text-sm">WeChat</span>
+              <span className="text-sm font-medium">WeChat</span>
             </button>
           </div>
         </div>
@@ -65,9 +65,9 @@ const CustomerServiceButton = () => {
       
       <Button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0"
+        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-12 h-12 shadow-lg hover:shadow-xl transition-all flex-shrink-0 p-0"
       >
-        <HelpCircle size={24} />
+        <HelpCircle size={20} />
       </Button>
     </div>
   );
