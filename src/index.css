@@ -7,35 +7,35 @@
 
 @layer base {
   :root {
-    --background: 44 24% 97%; /* Warm cream background */
-    --foreground: 26 20% 25%; /* Warm dark text */
+    --background: 42 24% 96%; /* Warm cream background */
+    --foreground: 26 25% 25%; /* Deep brown text */
 
-    --card: 44 36% 99%; /* Soft white cards */
-    --card-foreground: 26 20% 25%;
+    --card: 42 36% 98%; /* Light coral cards */
+    --card-foreground: 26 25% 25%;
 
-    --popover: 44 36% 99%;
-    --popover-foreground: 26 20% 25%;
+    --popover: 42 36% 98%;
+    --popover-foreground: 26 25% 25%;
 
-    --primary: 140 18% 52%; /* Sage green primary */
-    --primary-foreground: 44 36% 98%;
+    --primary: 22 32% 52%; /* Coral primary */
+    --primary-foreground: 42 36% 98%;
 
     --secondary: 45 90% 70%; /* Sunshine secondary */
-    --secondary-foreground: 140 18% 25%;
+    --secondary-foreground: 26 25% 25%;
 
-    --muted: 44 15% 92%; /* Warm muted background */
-    --muted-foreground: 26 10% 45%;
+    --muted: 42 20% 90%; /* Warm muted background */
+    --muted-foreground: 26 15% 45%;
 
-    --accent: 260 20% 65%; /* Lavender accent */
-    --accent-foreground: 44 36% 98%;
+    --accent: 260 20% 65%; /* Keep lavender accent */
+    --accent-foreground: 42 36% 98%;
 
     --destructive: 0 65% 70%; /* Softer red */
-    --destructive-foreground: 44 36% 98%;
+    --destructive-foreground: 42 36% 98%;
 
-    --border: 44 20% 88%; /* Warm border */
-    --input: 44 20% 88%;
-    --ring: 140 18% 52%;
+    --border: 42 25% 85%; /* Warm border */
+    --input: 42 25% 85%;
+    --ring: 22 32% 52%;
 
-    --radius: 0.75rem; /* Softer default radius */
+    --radius: 0.75rem;
   }
 }
 
@@ -49,13 +49,13 @@
   }
 
   body {
-    @apply bg-yutime-cream text-yutime-warmGray font-sans;
-    line-height: 1.7; /* More generous line height */
+    @apply bg-yutime-warmCream text-yutime-deepBrown font-sans;
+    line-height: 1.7;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold text-yutime-sage;
-    letter-spacing: -0.025em; /* Slight tighter spacing for friendliness */
+    @apply font-heading font-semibold text-yutime-coral;
+    letter-spacing: -0.025em;
   }
   
   h1 {
@@ -74,7 +74,7 @@
   }
   
   p {
-    @apply text-base md:text-lg leading-relaxed text-yutime-warmGray;
+    @apply text-base md:text-lg leading-relaxed text-yutime-richBrown;
   }
 
   .container {
@@ -88,11 +88,11 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-sage hover:bg-yutime-sage/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft;
+    @apply bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft;
   }
   
   .btn-secondary {
-    @apply bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
+    @apply bg-yutime-richBrown hover:bg-yutime-richBrown/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
   }
 
   .btn-gentle {
@@ -100,11 +100,11 @@
   }
   
   .card {
-    @apply bg-yutime-softWhite rounded-xl p-6 shadow-card transition-all duration-300 hover:shadow-warm border border-yutime-sand;
+    @apply bg-yutime-softWhite rounded-xl p-6 shadow-card transition-all duration-300 hover:shadow-warm border border-yutime-lightCoral;
   }
   
   .card-warm {
-    @apply bg-gradient-to-br from-yutime-cream to-yutime-softWhite rounded-xl p-6 shadow-soft transition-all duration-300 hover:shadow-card border border-yutime-sand_dark;
+    @apply bg-gradient-to-br from-yutime-warmCream to-yutime-lightCoral rounded-xl p-6 shadow-soft transition-all duration-300 hover:shadow-card border border-yutime-coral/20;
   }
   
   .section {
@@ -112,7 +112,7 @@
   }
 
   .learning-journey {
-    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-yutime-sage/10 to-yutime-lavender/10 p-8;
+    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-yutime-coral/10 to-yutime-lavender/10 p-8;
   }
 
   .celebration {
@@ -127,15 +127,15 @@
   }
 
   .gentle-focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-yutime-sage/50 focus:ring-offset-2 focus:ring-offset-yutime-cream;
+    @apply focus:outline-none focus:ring-2 focus:ring-yutime-coral/50 focus:ring-offset-2 focus:ring-offset-yutime-warmCream;
   }
 
   .warm-gradient {
-    background: linear-gradient(135deg, #6B9B76 0%, #FF8B7A 50%, #B19CD9 100%);
+    background: linear-gradient(135deg, #C4846A 0%, #8B6F47 50%, #B19CD9 100%);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #6B9B76 0%, #5A6C57 100%);
+    background: linear-gradient(135deg, #C4846A 0%, #6B5139 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

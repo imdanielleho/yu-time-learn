@@ -29,13 +29,12 @@ const CustomerServiceButton = () => {
         : 'bottom-6 right-6'     // Normal position for desktop
     }`}>
       {isExpanded && (
-        <div className="mb-3 bg-white rounded-lg shadow-lg p-3 min-w-[200px]">
+        <div className="mb-3 bg-white rounded-lg shadow-lg p-3 min-w-[200px] border border-yutime-coral/20">
           <div className="flex justify-between items-center mb-3">
-            <span className="font-medium text-sm">Contact Us</span>
             <Button 
               variant="ghost" 
               size="icon"
-              className="h-6 w-6"
+              className="h-6 w-6 ml-auto"
               onClick={() => setIsExpanded(false)}
             >
               <X size={14} />
@@ -44,37 +43,32 @@ const CustomerServiceButton = () => {
           <div className="space-y-2">
             <button
               onClick={handleWhatsAppClick}
-              className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-green-50 transition-colors"
+              className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-yutime-coral/5 transition-colors"
             >
-              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <div className="w-6 h-6 bg-yutime-coral rounded-full flex items-center justify-center">
                 <MessageCircle size={14} className="text-white" />
               </div>
-              <span className="text-sm">WhatsApp</span>
+              <span className="text-sm text-yutime-deepBrown">WhatsApp</span>
             </button>
             <button
               onClick={handleWeChatClick}
-              className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-green-50 transition-colors"
+              className="w-full flex items-center space-x-2 p-2 rounded-md hover:bg-yutime-coral/5 transition-colors"
             >
-              <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
+              <div className="w-6 h-6 bg-yutime-richBrown rounded-full flex items-center justify-center">
                 <MessageCircle size={14} className="text-white" />
               </div>
-              <span className="text-sm">WeChat</span>
+              <span className="text-sm text-yutime-deepBrown">WeChat</span>
             </button>
           </div>
         </div>
       )}
       
-      <div className="flex items-center gap-3">
-        <div className="bg-white rounded-lg shadow-lg px-3 py-2 text-sm text-gray-700 whitespace-nowrap">
-          Contact Us
-        </div>
-        <Button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0"
-        >
-          <MessageCircle size={24} />
-        </Button>
-      </div>
+      <Button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="bg-yutime-coral hover:bg-yutime-coral/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0"
+      >
+        <MessageCircle size={24} />
+      </Button>
     </div>
   );
 };

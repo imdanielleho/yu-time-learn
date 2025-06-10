@@ -1,117 +1,109 @@
 
-import React, { useState, useEffect } from 'react';
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import type { CarouselApi } from "@/components/ui/carousel";
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Margaret T., 62",
-    role: "Retired Teacher",
-    quote: "YŪTIME helped me learn how to use my smartphone better. The instructor was patient and the videos were easy to follow. Now I can video chat with my grandchildren and even share photos! The course materials were well-designed for beginners like me, and I never felt rushed or confused. I'm now taking my second course with them.",
-    avatar: "https://randomuser.me/api/portraits/women/65.jpg"
-  },
-  {
-    id: 2,
-    name: "Robert J., 58",
-    role: "Small Business Owner",
-    quote: "I took the Digital Marketing course and was able to create a Facebook page for my business. The step-by-step guidance was exactly what I needed. Within a month, I was running simple ads and connecting with customers online. The instructor answered all my questions promptly and even provided additional resources tailored to my specific business needs. This course has truly transformed my business approach.",
-    avatar: "https://randomuser.me/api/portraits/men/54.jpg"
-  },
-  {
-    id: 3,
-    name: "Susan K., 64",
-    role: "Retired Nurse",
-    quote: "The yoga classes are perfect for my schedule and physical abilities. The instructor demonstrates modifications for all levels, which I really appreciate. After just six weeks, I've noticed significant improvement in my flexibility and overall well-being. The community aspect of the course has also been wonderful - I've connected with other students my age who share similar health goals. I look forward to each session.",
-    avatar: "https://randomuser.me/api/portraits/women/56.jpg"
-  }
-];
+import React from 'react';
+import { Star, Quote } from 'lucide-react';
 
 const Testimonials = () => {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    if (!api) {
-      return;
+  const testimonials = [
+    {
+      name: "Margaret Chen",
+      age: 62,
+      course: "Digital Confidence Basics",
+      quote: "I never thought I could master video calls with my grandchildren. Now I'm the one teaching my friends! The instructors are so patient and encouraging.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    },
+    {
+      name: "Robert Johnson",
+      age: 58,
+      course: "Financial Planning for Retirement",
+      quote: "The peace of mind I gained from understanding my finances is priceless. Clear explanations, no jargon, just practical wisdom I can use.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    },
+    {
+      name: "Linda Park",
+      age: 55,
+      course: "Gentle Yoga & Wellness",
+      quote: "My back pain has improved so much! The gentle approach made all the difference. I actually look forward to my daily practice now.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1388&q=80"
     }
-
-    setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
+  ];
 
   return (
-    <section id="testimonials" className="section bg-yutime-indigo text-white">
-      <div className="container">
-        <h2 className="text-center mb-12">What Our Learners Say</h2>
+    <section className="bg-gradient-to-br from-yutime-richBrown/5 via-yutime-warmCream to-yutime-coral/5 py-16 md:py-24">
+      <div className="container max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-bold text-yutime-coral mb-6">
+            Stories of Growth & Success
+          </h2>
+          <p className="text-lg text-yutime-richBrown max-w-2xl mx-auto leading-relaxed">
+            Hear from learners who've discovered new confidence and joy through their YŪTIME journey.
+          </p>
+        </div>
         
-        <div className="max-w-4xl mx-auto">
-          <Carousel
-            setApi={setApi}
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent>
-              {testimonials.map((testimonial) => (
-                <CarouselItem key={testimonial.id}>
-                  <div className="bg-yutime-navy_dark rounded-2xl p-6 md:p-10 shadow-lg">
-                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
-                      <div className="flex-shrink-0 mx-auto md:mx-0">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-yutime-gold">
-                          <img 
-                            src={testimonial.avatar} 
-                            alt={testimonial.name} 
-                            className="w-full h-full object-cover" 
-                          />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <blockquote className="text-lg md:text-xl italic mb-6">
-                          "{testimonial.quote}"
-                        </blockquote>
-                        <div>
-                          <p className="font-bold text-lg">{testimonial.name}</p>
-                          <p className="text-yutime-gold">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className="group">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-warm hover:shadow-card transition-all duration-300 hover-lift border border-yutime-coral/10">
+                {/* Quote icon */}
+                <div className="flex justify-center mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-yutime-coral to-yutime-richBrown rounded-full flex items-center justify-center">
+                    <Quote size={20} className="text-white" />
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            {/* Navigation with Indicators in Center */}
-            <div className="flex justify-center items-center mt-6 gap-4">
-              <CarouselPrevious className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
-              
-              {/* Carousel Indicators */}
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      index === current ? 'bg-yutime-gold' : 'bg-white/30'
-                    }`}
-                    onClick={() => api?.scrollTo(index)}
-                  />
-                ))}
+                </div>
+                
+                {/* Rating */}
+                <div className="flex justify-center mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-yutime-sunshine text-yutime-sunshine mx-0.5" />
+                  ))}
+                </div>
+                
+                {/* Quote */}
+                <p className="text-yutime-richBrown leading-relaxed text-center mb-8 italic">
+                  "{testimonial.quote}"
+                </p>
+                
+                {/* Author */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-coral/20">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-yutime-coral">{testimonial.name}</h4>
+                    <p className="text-sm text-yutime-richBrown">{testimonial.course}</p>
+                    <p className="text-xs text-yutime-richBrown/70">Age {testimonial.age}</p>
+                  </div>
+                </div>
               </div>
-              
-              <CarouselNext className="relative transform-none translate-y-0 left-0 right-0 bg-yutime-gold hover:bg-yutime-gold/80 text-yutime-indigo" />
             </div>
-          </Carousel>
+          ))}
+        </div>
+        
+        {/* Community highlight */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center space-x-4 bg-white/80 backdrop-blur-sm px-8 py-6 rounded-2xl border border-yutime-coral/20 shadow-soft">
+            <div className="flex -space-x-2">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="text-left">
+              <p className="text-yutime-coral font-semibold">Join 2,000+ learners</p>
+              <p className="text-yutime-richBrown text-sm">Building confidence together</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -29,22 +29,27 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					sage: '#6B9B76',      // Primary - calming sage green
-					coral: '#FF8B7A',     // Secondary - warm coral
-					lavender: '#B19CD9',  // Accent - gentle lavender
-					sunshine: '#FFD166',  // Supporting - joyful yellow
-					cream: '#FDF6E3',     // Warm background
-					warmGray: '#8B7F72',  // Neutral text
-					softWhite: '#FEFCF8', // Soft white background
-					indigo: '#6B9B76',    // Map to sage for backward compatibility
-					gold: '#FFD166',      // Map to sunshine
-					blue: '#6B9B76',      // Map to sage
-					navy: '#5A6C57',      // Darker sage for contrast
-					navy_dark: '#4A5B47', // Even darker sage
+					sage: '#6B9B76',      // Keep for backward compatibility
+					coral: '#C4846A',     // New primary coral
+					warmCream: '#F5F1EC', // Warm cream background
+					richBrown: '#8B6F47', // Rich brown for text/secondary
+					lightCoral: '#E8D5CC', // Light coral for subtle backgrounds
+					deepBrown: '#6B5139',  // Deep brown for dark text
+					lavender: '#B19CD9',  // Keep existing lavender
+					sunshine: '#FFD166',  // Keep existing sunshine
+					cream: '#FDF6E3',     // Original cream
+					warmGray: '#8B7F72',  // Keep existing
+					softWhite: '#FEFCF8', // Keep existing
+					// Legacy mappings for backward compatibility
+					indigo: '#C4846A',    // Map to new coral
+					gold: '#FFD166',      // Keep sunshine
+					blue: '#C4846A',      // Map to coral
+					navy: '#6B5139',      // Map to deep brown
+					navy_dark: '#5A4B35', // Darker brown
 					yellow: '#FFD166',    // Keep sunshine
 					yellow_light: '#FFF4D6', // Light sunshine
-					sand: '#FDF6E3',      // Map to cream
-					sand_dark: '#F5EDD3', // Darker cream
+					sand: '#F5F1EC',      // Map to warm cream
+					sand_dark: '#E8D5CC', // Map to light coral
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -87,9 +92,9 @@ export default {
 				'2xl': '20px'
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(107, 155, 118, 0.08)',
-				'card': '0 8px 32px rgba(107, 155, 118, 0.12)',
-				'warm': '0 6px 24px rgba(255, 139, 122, 0.1)',
+				'soft': '0 4px 20px rgba(196, 132, 106, 0.08)',
+				'card': '0 8px 32px rgba(196, 132, 106, 0.12)',
+				'warm': '0 6px 24px rgba(196, 132, 106, 0.15)',
 				'gentle': '0 2px 12px rgba(177, 156, 217, 0.08)'
 			},
 			keyframes: {
