@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -49,14 +50,14 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-xs sm:max-w-sm mx-auto px-4 my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8 my-4 sm:my-8 max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-normal mb-6">
+          <DialogTitle className="text-center text-2xl font-normal mb-4 sm:mb-6">
             {activeTab === 'login' ? 'Login' : 'Sign Up'}
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
+        <div className="flex mb-4 sm:mb-6 bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => handleTabSwitch('login')}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
@@ -79,20 +80,20 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           {activeTab === 'signup' && (
             <div className="grid grid-cols-2 gap-4">
               <Input
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full py-6"
+                className="w-full py-3 sm:py-4"
               />
               <Input
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full py-6"
+                className="w-full py-3 sm:py-4"
               />
             </div>
           )}
@@ -102,7 +103,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full py-6"
+            className="w-full py-3 sm:py-4"
           />
           
           <div className="space-y-2">
@@ -111,7 +112,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
               placeholder={activeTab === 'signup' ? "Create a Password" : "Your password..."}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full py-6"
+              className="w-full py-3 sm:py-4"
             />
             {activeTab === 'login' && (
               <div className="text-right">
@@ -133,13 +134,13 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
               placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full py-6"
+              className="w-full py-3 sm:py-4"
             />
           )}
           
           <Button
             type="submit"
-            className="w-full py-6 text-lg bg-yutime-blue hover:bg-yutime-blue/90"
+            className="w-full py-4 sm:py-6 text-lg bg-yutime-blue hover:bg-yutime-blue/90"
           >
             {activeTab === 'login' ? 'Login' : 'Create Account'}
           </Button>

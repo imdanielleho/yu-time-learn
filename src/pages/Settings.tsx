@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { AlertTriangle } from "lucide-react";
 
 const Settings = () => {
   const [fullName, setFullName] = useState("John Doe");
@@ -223,13 +223,13 @@ const Settings = () => {
 
       {/* Change Password Modal */}
       <Dialog open={isPasswordModalOpen} onOpenChange={setIsPasswordModalOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
           <DialogHeader>
             <DialogTitle>Change Password</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="currentPassword">Current Password</Label>
+              <Label htmlFor="currentPassword" className="mb-2 block">Current Password</Label>
               <Input
                 id="currentPassword"
                 type="password"
@@ -238,7 +238,7 @@ const Settings = () => {
               />
             </div>
             <div>
-              <Label htmlFor="newPassword">New Password</Label>
+              <Label htmlFor="newPassword" className="mb-2 block">New Password</Label>
               <Input
                 id="newPassword"
                 type="password"
@@ -247,7 +247,7 @@ const Settings = () => {
               />
             </div>
             <div>
-              <Label htmlFor="confirmPassword">Confirm New Password</Label>
+              <Label htmlFor="confirmPassword" className="mb-2 block">Confirm New Password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
@@ -269,25 +269,35 @@ const Settings = () => {
 
       {/* Delete Account Modal */}
       <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
           <DialogHeader>
-            <DialogTitle>Delete Account</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-red-600">
+              <AlertTriangle className="h-5 w-5" />
+              Delete Account
+            </DialogTitle>
           </DialogHeader>
-          <div className="py-4">
-            <p className="text-gray-600 mb-4">
-              Are you sure you want to permanently delete your account? This action cannot be undone.
-            </p>
-            <p className="text-red-600 font-medium">
-              All your course progress and data will be permanently lost.
-            </p>
+          <div className="py-4 space-y-4">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <p className="text-gray-700 mb-2 font-medium">
+                Are you sure you want to permanently delete your account?
+              </p>
+              <p className="text-sm text-gray-600">
+                This action cannot be undone and will result in:
+              </p>
+              <ul className="mt-2 text-sm text-gray-600 list-disc list-inside space-y-1">
+                <li>Permanent loss of all course progress</li>
+                <li>Deletion of personal data and preferences</li>
+                <li>Loss of access to purchased courses</li>
+              </ul>
+            </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteModalOpen(false)}>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={() => setIsDeleteModalOpen(false)} className="flex-1">
               Cancel
             </Button>
             <Button 
               onClick={handleDeleteAccount} 
-              className="bg-red-600 hover:bg-red-700 text-white"
+              className="bg-red-600 hover:bg-red-700 text-white flex-1"
             >
               Delete Account
             </Button>
