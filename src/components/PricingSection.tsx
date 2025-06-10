@@ -23,7 +23,7 @@ const PricingSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Single Course Option */}
           <div className="card border border-gray-200 flex flex-col h-full">
             <div className="p-6 border-b border-gray-100">
@@ -56,10 +56,53 @@ const PricingSection = () => {
               </a>
             </div>
           </div>
-          
-          {/* Full Bundle Option */}
+
+          {/* 3-Courses Bundle Option */}
           <div className="card border-2 border-yutime-gold flex flex-col h-full relative">
             <div className="absolute -top-4 right-4 bg-yutime-gold px-4 py-1 rounded-full text-yutime-indigo font-medium text-sm">
+              Popular Choice
+            </div>
+            
+            <div className="p-6 border-b border-gray-100">
+              <h3 className="text-xl font-bold text-yutime-indigo mb-2">3-Courses Bundle</h3>
+              <div className="flex items-baseline mb-4">
+                <span className="text-3xl font-bold">HKD 2,380</span>
+                <span className="ml-1 text-gray-600">/bundle</span>
+              </div>
+              <p className="text-gray-600">Great value for focused learning in multiple areas</p>
+            </div>
+            
+            <div className="p-6 flex-grow">
+              <ul className="space-y-3">
+                {[
+                  "Access to any 3 courses",
+                  "All course materials and resources",
+                  "Community forum access",
+                  "Certificates for all completed courses",
+                  "Save HKD 260 vs individual courses"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <Check size={20} className="text-green-500 flex-shrink-0 mr-2" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="p-6 pt-0">
+              <a 
+                href="#courses" 
+                onClick={scrollToCourses}
+                className="btn-primary w-full text-center block"
+              >
+                Get 3-Course Bundle
+              </a>
+            </div>
+          </div>
+          
+          {/* Full Bundle Option */}
+          <div className="card border border-gray-200 flex flex-col h-full relative">
+            <div className="absolute -top-4 right-4 bg-yutime-indigo px-4 py-1 rounded-full text-white font-medium text-sm">
               Best Value
             </div>
             
@@ -90,7 +133,7 @@ const PricingSection = () => {
             </div>
             
             <div className="p-6 pt-0">
-              <Link to="/bundle" className="btn-primary w-full text-center block">
+              <Link to="/bundle" className="btn-secondary w-full text-center block">
                 Get Full Bundle
               </Link>
             </div>

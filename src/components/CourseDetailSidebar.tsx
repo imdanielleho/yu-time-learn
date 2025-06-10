@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X, Clock, Users, Star, Play } from 'lucide-react';
+import { ArrowLeft, Clock, Users, Star, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface Course {
@@ -28,40 +28,30 @@ interface CourseDetailSidebarProps {
 
 const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
   return (
-    <div className="p-6 bg-white">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Course Details</h1>
-        <Button variant="ghost" size="icon" onClick={onClose}>
-          <X size={24} />
-        </Button>
-      </div>
+    <div className="p-6">
+      <button 
+        onClick={onClose}
+        className="inline-flex items-center space-x-2 text-yutime-blue hover:text-yutime-blue/80 mb-6"
+      >
+        <ArrowLeft size={20} />
+        <span>Back to Courses</span>
+      </button>
 
-      <div className="space-y-6">
-        {/* Course Image */}
-        <div className="relative h-48 rounded-lg overflow-hidden">
-          <img 
-            src={course.image} 
-            alt={course.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-            <Button className="bg-white/90 hover:bg-white text-yutime-navy rounded-full p-4">
-              <Play size={24} />
-            </Button>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Content */}
+        <div className="lg:col-span-2">
+          <div className="mb-6">
+            <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">
+              {course.category}
+            </span>
           </div>
-        </div>
-
-        {/* Course Info */}
-        <div>
-          <span className="bg-yutime-sand_dark px-3 py-1 rounded-full text-sm font-medium">
-            {course.category}
-          </span>
-          <h2 className="text-2xl font-bold mt-4 mb-2">{course.title}</h2>
-          <p className="text-gray-600 mb-4">
+          
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{course.title}</h1>
+          <p className="text-xl text-gray-600 mb-6">
             {course.longDescription || course.description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600">
+          <div className="flex flex-wrap items-center gap-6 mb-8 text-sm text-gray-600">
             <div className="flex items-center space-x-2">
               <Clock size={16} />
               <span>{course.totalTime}</span>
@@ -79,71 +69,88 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
               </div>
             )}
           </div>
-        </div>
 
-        {/* Pricing */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="text-center mb-4">
-            <div className="text-2xl font-bold text-yutime-blue mb-1">
-              HKD {course.price}
-            </div>
-            <div className="text-gray-600 text-sm">One-time payment</div>
-          </div>
-
-          <div className="space-y-3">
-            <Button className={`w-full py-3 ${
-              course.isPurchased 
-                ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
-                : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
-            } text-white`}>
-              {course.isPurchased ? 'Continue Learning' : 'Enroll Now'}
-            </Button>
-            {!course.isPurchased && (
-              <Button variant="outline" className="w-full py-3">
-                Try Free Preview
+          {/* Course Image */}
+          <div className="relative h-64 md:h-80 rounded-lg overflow-hidden mb-8">
+            <img 
+              src={course.image} 
+              alt={course.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+              <Button className="bg-white/90 hover:bg-white text-yutime-navy rounded-full p-4">
+                <Play size={24} />
               </Button>
-            )}
+            </div>
           </div>
-        </div>
 
-        {/* Course Details */}
-        <div className="space-y-3 text-sm bg-gray-50 rounded-lg p-4">
-          <div className="flex justify-between">
-            <span>Level:</span>
-            <span className="font-medium">{course.level}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Lessons:</span>
-            <span className="font-medium">{course.lessons}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Duration:</span>
-            <span className="font-medium">{course.totalTime}</span>
-          </div>
-          {course.instructor && (
-            <div className="flex justify-between">
-              <span>Instructor:</span>
-              <span className="font-medium">{course.instructor}</span>
+          {/* Curriculum */}
+          {course.curriculum && (
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
+              <div className="space-y-3">
+                {course.curriculum.map((lesson, index) => (
+                  <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                      {index + 1}
+                    </span>
+                    <span>{lesson}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
 
-        {/* Curriculum */}
-        {course.curriculum && (
-          <div>
-            <h3 className="text-lg font-bold mb-4">Course Curriculum</h3>
-            <div className="space-y-2">
-              {course.curriculum.map((lesson, index) => (
-                <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                    {index + 1}
-                  </span>
-                  <span className="text-sm">{lesson}</span>
+        {/* Sidebar */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-8">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <div className="text-center mb-6">
+                <div className="text-3xl font-bold text-yutime-blue mb-2">
+                  HKD {course.price}
                 </div>
-              ))}
+                <div className="text-gray-600">One-time payment</div>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <Button className={`w-full py-3 text-white ${
+                  course.isPurchased 
+                    ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
+                    : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
+                }`}>
+                  {course.isPurchased ? 'Continue Learning' : 'Enroll Now'}
+                </Button>
+                {!course.isPurchased && (
+                  <Button variant="outline" className="w-full py-3">
+                    Try Free Preview
+                  </Button>
+                )}
+              </div>
+
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span>Level:</span>
+                  <span className="font-medium">{course.level}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Lessons:</span>
+                  <span className="font-medium">{course.lessons}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Duration:</span>
+                  <span className="font-medium">{course.totalTime}</span>
+                </div>
+                {course.instructor && (
+                  <div className="flex justify-between">
+                    <span>Instructor:</span>
+                    <span className="font-medium">{course.instructor}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
