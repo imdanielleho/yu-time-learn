@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -13,11 +12,12 @@ import {
 } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
 import CourseDetailSidebar from '@/components/CourseDetailSidebar';
+import { courses, type Course } from '@/data/courses';
 
 const Courses = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
-  const [selectedCourse, setSelectedCourse] = useState<typeof availableCourses[0] | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -38,102 +38,7 @@ const Courses = () => {
     });
   }, [api]);
 
-  const availableCourses = [
-    {
-      id: 1,
-      title: "Smartphone Basics for Everyday Use",
-      category: "Technology",
-      level: "Beginner",
-      lessons: 8,
-      totalTime: "3 hours 20 min",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600",
-      price: 880,
-      description: "Master essential smartphone skills for daily use, from messaging to apps.",
-      longDescription: "This comprehensive course will teach you everything you need to know about using your smartphone effectively. From basic navigation to advanced features, you'll become confident in using your device for daily tasks.",
-      instructor: "Sarah Chen",
-      rating: 4.8,
-      students: 1240,
-      curriculum: [
-        "Getting Started with Your Smartphone",
-        "Making Calls and Sending Messages",
-        "Using the Camera and Photos",
-        "Installing and Managing Apps",
-        "Internet Browsing and Email",
-        "Managing Contacts and Calendar",
-        "Privacy and Security Settings",
-        "Troubleshooting Common Issues"
-      ],
-      isPurchased: true
-    },
-    {
-      id: 2,
-      title: "Gentle Yoga for Better Mobility",
-      category: "Health & Wellness",
-      level: "All Levels",
-      lessons: 12,
-      totalTime: "4 hours 45 min",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600",
-      price: 880,
-      description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices.",
-      longDescription: "A gentle approach to yoga designed specifically for mature learners. This course focuses on improving flexibility, balance, and overall well-being through safe and accessible movements.",
-      instructor: "Michael Wong",
-      rating: 4.9,
-      students: 890,
-      curriculum: [
-        "Introduction to Gentle Yoga",
-        "Basic Breathing Techniques",
-        "Warm-up and Preparation",
-        "Standing Poses for Balance",
-        "Seated Poses for Flexibility",
-        "Gentle Backbends",
-        "Hip Opening Sequences",
-        "Relaxation and Meditation",
-        "Morning Energy Routine",
-        "Evening Wind-down Sequence",
-        "Managing Joint Pain",
-        "Building a Daily Practice"
-      ],
-      isPurchased: true
-    },
-    {
-      id: 3,
-      title: "Digital Photography Fundamentals",
-      category: "Creative Arts",
-      level: "Beginner",
-      lessons: 10,
-      totalTime: "5 hours 15 min",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600",
-      price: 880,
-      description: "Learn to capture beautiful photos using any camera, with simple composition techniques.",
-      isPurchased: false
-    },
-    {
-      id: 4,
-      title: "Managing Personal Finances",
-      category: "Finance",
-      level: "Intermediate",
-      lessons: 6,
-      totalTime: "2 hours 30 min",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600",
-      price: 880,
-      description: "Organize your finances, reduce debt, and plan for a secure retirement.",
-      isPurchased: false
-    },
-    {
-      id: 5,
-      title: "Introduction to Social Media",
-      category: "Technology",
-      level: "Beginner",
-      lessons: 7,
-      totalTime: "3 hours 45 min",
-      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600",
-      price: 880,
-      description: "Connect with family and friends across popular social media platforms safely.",
-      isPurchased: false
-    }
-  ];
-
-  const handleCourseClick = (course: typeof availableCourses[0]) => {
+  const handleCourseClick = (course: Course) => {
     if (isLoggedIn && !isMobile) {
       // For logged-in desktop users, open course details in sidebar and update URL
       navigate(`/courses/${course.id}`, { replace: true });
@@ -144,7 +49,7 @@ const Courses = () => {
     }
   };
 
-  const handleGetStartedClick = (e: React.MouseEvent, course: typeof availableCourses[0]) => {
+  const handleGetStartedClick = (e: React.MouseEvent, course: Course) => {
     e.stopPropagation();
     if (isLoggedIn && !isMobile) {
       // For logged-in desktop users, open course details in sidebar
@@ -156,7 +61,7 @@ const Courses = () => {
     }
   };
 
-  const CourseCard = ({ course }: { course: typeof availableCourses[0] }) => (
+  const CourseCard = ({ course }: { course: Course }) => (
     <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
       <div 
         className="block cursor-pointer"
@@ -217,7 +122,7 @@ const Courses = () => {
           <div className="w-full max-w-sm mx-auto sm:max-w-none">
             <Carousel className="w-full" setApi={setApi}>
               <CarouselContent className="-ml-2 md:-ml-4">
-                {availableCourses.map((course) => (
+                {courses.map((course) => (
                   <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                     <CourseCard course={course} />
                   </CarouselItem>
@@ -245,7 +150,7 @@ const Courses = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {availableCourses.map((course) => (
+            {courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
           </div>

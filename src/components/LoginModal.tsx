@@ -56,14 +56,14 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl sm:text-2xl font-normal mb-3 sm:mb-6">
+          <DialogTitle className="text-center text-xl sm:text-2xl font-normal mb-2 sm:mb-6">
             {activeTab === 'login' ? 'Login' : 'Sign Up'}
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex mb-3 sm:mb-6 bg-gray-100 rounded-lg p-1">
+        <div className="flex mb-2 sm:mb-6 bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => handleTabSwitch('login')}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
@@ -86,9 +86,9 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
           {activeTab === 'signup' && (
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4">
               <Input
                 placeholder="First Name"
                 value={firstName}
@@ -144,7 +144,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             />
           )}
           
-          <div className={activeTab === 'signup' ? 'pt-4' : ''}>
+          <div className={activeTab === 'signup' ? 'pt-6' : 'pt-2'}>
             <Button
               type="submit"
               className="w-full py-3 sm:py-4 text-base sm:text-lg bg-yutime-blue hover:bg-yutime-blue/90"
@@ -154,9 +154,9 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           </div>
         </form>
         
-        <div className="text-center text-gray-500 my-2 text-sm">or use a social network</div>
+        <div className="text-center text-gray-500 my-1 text-sm">or use a social network</div>
         
-        <div className="flex justify-center gap-3 my-2">
+        <div className="flex justify-center gap-3 my-1">
           <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
             <Twitter className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
           </Button>
@@ -168,7 +168,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           </Button>
         </div>
         
-        <div className="text-center border-t border-gray-200 pt-3 mt-3">
+        <div className="text-center border-t border-gray-200 pt-2 mt-2">
           <p className="text-sm">
             {activeTab === 'login' ? "Not a member yet?" : "Already have an account?"}{" "}
             <Button

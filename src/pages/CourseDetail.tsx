@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Users, Star, Play } from 'lucide-react';
@@ -8,64 +9,7 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import BottomNavigation from '@/components/BottomNavigation';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-const courses = [
-  {
-    id: 1,
-    title: "Smartphone Basics for Everyday Use",
-    category: "Technology",
-    level: "Beginner",
-    lessons: 8,
-    totalTime: "3 hours 20 min",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600",
-    price: 880,
-    description: "Master essential smartphone skills for daily use, from messaging to apps.",
-    longDescription: "This comprehensive course will teach you everything you need to know about using your smartphone effectively. From basic navigation to advanced features, you'll become confident in using your device for daily tasks.",
-    instructor: "Sarah Chen",
-    rating: 4.8,
-    students: 1240,
-    curriculum: [
-      "Getting Started with Your Smartphone",
-      "Making Calls and Sending Messages",
-      "Using the Camera and Photos",
-      "Installing and Managing Apps",
-      "Internet Browsing and Email",
-      "Managing Contacts and Calendar",
-      "Privacy and Security Settings",
-      "Troubleshooting Common Issues"
-    ]
-  },
-  {
-    id: 2,
-    title: "Gentle Yoga for Better Mobility",
-    category: "Health & Wellness",
-    level: "All Levels",
-    lessons: 12,
-    totalTime: "4 hours 45 min",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=600",
-    price: 880,
-    description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices.",
-    longDescription: "A gentle approach to yoga designed specifically for mature learners. This course focuses on improving flexibility, balance, and overall well-being through safe and accessible movements.",
-    instructor: "Michael Wong",
-    rating: 4.9,
-    students: 890,
-    curriculum: [
-      "Introduction to Gentle Yoga",
-      "Basic Breathing Techniques",
-      "Warm-up and Preparation",
-      "Standing Poses for Balance",
-      "Seated Poses for Flexibility",
-      "Gentle Backbends",
-      "Hip Opening Sequences",
-      "Relaxation and Meditation",
-      "Morning Energy Routine",
-      "Evening Wind-down Sequence",
-      "Managing Joint Pain",
-      "Building a Daily Practice"
-    ]
-  },
-  // Add other courses here with similar structure...
-];
+import { courses } from '@/data/courses';
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -130,14 +74,18 @@ const CourseDetail = () => {
                   <Clock size={16} />
                   <span>{course.totalTime}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Users size={16} />
-                  <span>{course.students} students</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Star size={16} className="fill-yellow-400 text-yellow-400" />
-                  <span>{course.rating} rating</span>
-                </div>
+                {course.students && (
+                  <div className="flex items-center space-x-2">
+                    <Users size={16} />
+                    <span>{course.students} students</span>
+                  </div>
+                )}
+                {course.rating && (
+                  <div className="flex items-center space-x-2">
+                    <Star size={16} className="fill-yellow-400 text-yellow-400" />
+                    <span>{course.rating} rating</span>
+                  </div>
+                )}
               </div>
 
               {/* Course Image */}
@@ -155,19 +103,21 @@ const CourseDetail = () => {
               </div>
 
               {/* Curriculum */}
-              <div>
-                <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
-                <div className="space-y-3">
-                  {course.curriculum.map((lesson, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                        {index + 1}
-                      </span>
-                      <span>{lesson}</span>
-                    </div>
-                  ))}
+              {course.curriculum && (
+                <div>
+                  <h2 className="text-2xl font-bold mb-6">Course Curriculum</h2>
+                  <div className="space-y-3">
+                    {course.curriculum.map((lesson, index) => (
+                      <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                        <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                          {index + 1}
+                        </span>
+                        <span>{lesson}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -182,12 +132,18 @@ const CourseDetail = () => {
                   </div>
 
                   <div className="space-y-4 mb-6">
-                    <Button className="w-full bg-yutime-indigo hover:bg-yutime-indigo/90 text-white py-3">
-                      Enroll Now
+                    <Button className={`w-full py-3 text-white ${
+                      course.isPurchased 
+                        ? 'bg-yutime-blue hover:bg-yutime-blue/90' 
+                        : 'bg-yutime-indigo hover:bg-yutime-indigo/90'
+                    }`}>
+                      {course.isPurchased ? 'Continue Learning' : 'Enroll Now'}
                     </Button>
-                    <Button variant="outline" className="w-full py-3">
-                      Try Free Preview
-                    </Button>
+                    {!course.isPurchased && (
+                      <Button variant="outline" className="w-full py-3">
+                        Try Free Preview
+                      </Button>
+                    )}
                   </div>
 
                   <div className="space-y-3 text-sm">
@@ -203,10 +159,12 @@ const CourseDetail = () => {
                       <span>Duration:</span>
                       <span className="font-medium">{course.totalTime}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Instructor:</span>
-                      <span className="font-medium">{course.instructor}</span>
-                    </div>
+                    {course.instructor && (
+                      <div className="flex justify-between">
+                        <span>Instructor:</span>
+                        <span className="font-medium">{course.instructor}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
