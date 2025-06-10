@@ -36,7 +36,7 @@ const PricingSection = () => {
                 <h3 className="text-xl font-semibold text-yutime-sage">First Steps</h3>
               </div>
               <div className="flex items-baseline mb-4">
-                <span className="text-3xl font-bold text-yutime-sage">HKD 880</span>
+                <span className="text-3xl font-bold text-yutime-sage">HKD 120</span>
                 <span className="ml-1 text-yutime-warmGray">/course</span>
               </div>
               <p className="text-yutime-warmGray">Perfect for exploring a new interest or skill that sparks your curiosity</p>
@@ -76,7 +76,7 @@ const PricingSection = () => {
                 <h3 className="text-xl font-semibold text-yutime-sage">Growth Journey</h3>
               </div>
               <div className="flex items-baseline mb-4">
-                <span className="text-3xl font-bold text-yutime-sage">HKD 2,380</span>
+                <span className="text-3xl font-bold text-yutime-sage">HKD 350</span>
                 <span className="ml-1 text-yutime-warmGray">/bundle</span>
               </div>
               <p className="text-yutime-warmGray">Ideal for building confidence across multiple areas of your life</p>
@@ -89,7 +89,7 @@ const PricingSection = () => {
                   "All materials and resources",
                   "Priority community support",
                   "Certificates for all courses",
-                  "Save HKD 260 vs individual courses",
+                  "Save HKD 10 vs individual courses",
                   "Personal progress tracking"
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
@@ -123,7 +123,7 @@ const PricingSection = () => {
                 <h3 className="text-xl font-semibold text-yutime-sage">Full Flourish</h3>
               </div>
               <div className="flex items-baseline mb-4">
-                <span className="text-3xl font-bold text-yutime-sage">HKD 2,980</span>
+                <span className="text-3xl font-bold text-yutime-sage">HKD 500</span>
                 <span className="ml-1 text-yutime-warmGray">/bundle</span>
               </div>
               <p className="text-yutime-warmGray">Complete transformation with personalized support and guidance</p>

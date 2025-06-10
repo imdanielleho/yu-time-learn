@@ -6,7 +6,6 @@ const testimonials = [
   {
     id: 1,
     name: "Margaret T.",
-    age: "62",
     role: "Retired Teacher",
     quote: "YŪTIME helped me learn how to use my smartphone better. The instructor was patient and the videos were easy to follow. Now I can video chat with my grandchildren!",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
@@ -15,7 +14,6 @@ const testimonials = [
   {
     id: 2,
     name: "Robert J.",
-    age: "58", 
     role: "Small Business Owner",
     quote: "I took the Digital Marketing course and was able to create a Facebook page for my business. The step-by-step guidance was exactly what I needed.",
     avatar: "https://randomuser.me/api/portraits/men/54.jpg",
@@ -24,7 +22,6 @@ const testimonials = [
   {
     id: 3,
     name: "Susan K.",
-    age: "64",
     role: "Retired Nurse", 
     quote: "The yoga classes are perfect for my schedule and physical abilities. After just six weeks, I've noticed significant improvement in my flexibility.",
     avatar: "https://randomuser.me/api/portraits/women/56.jpg",
@@ -44,7 +41,12 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="section bg-yutime-indigo text-white">
       <div className="container">
-        <h2 className="text-center mb-16 text-3xl md:text-4xl font-bold">Stories of Growth & Success</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Stories of Growth & Success</h2>
+          <p className="max-w-3xl mx-auto text-white/90 text-lg leading-relaxed">
+            Hear from learners who've discovered new confidence and joy through their YŪTIME journey.
+          </p>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {testimonials.map((testimonial) => (
@@ -55,7 +57,7 @@ const Testimonials = () => {
                 ))}
               </div>
               
-              <blockquote className="text-lg italic mb-6 leading-relaxed">
+              <blockquote className="text-lg italic mb-6 leading-relaxed text-white/95">
                 "{testimonial.quote}"
               </blockquote>
               
@@ -68,7 +70,7 @@ const Testimonials = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-bold">{testimonial.name}, {testimonial.age}</p>
+                  <p className="font-bold text-white">{testimonial.name}</p>
                   <p className="text-yutime-gold text-sm">{testimonial.role}</p>
                 </div>
               </div>
@@ -93,8 +95,8 @@ const Testimonials = () => {
             </div>
           </div>
           
-          <h3 className="text-2xl font-bold mb-2">Join 2,000+ learners</h3>
-          <p className="text-white/80 text-lg">
+          <h3 className="text-2xl font-bold mb-2 text-white">Join 2,000+ learners</h3>
+          <p className="text-white/90 text-lg">
             Who are building new skills and confidence every day
           </p>
         </div>
