@@ -30,24 +30,31 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					sage: '#7C9885',     // Primary sage green (August Health inspired)
-					forest: '#4A5D23',   // Deep forest green for emphasis
-					cream: '#FAF7F0',    // Warm cream background
-					brown: '#8B4513',    // Rich brown for text
-					'soft-sage': '#A8C09A', // Lighter sage for backgrounds
-					beige: '#F5F2E8',    // Card backgrounds
-					charcoal: '#2D3436', // Professional dark text
-					golden: '#D4A574',   // Warm gold for accents
+					vibrant: '#00A651',     // Primary vibrant green (August Health inspired)
+					emerald: '#006837',     // Deep emerald for contrast
+					white: '#FFFFFF',       // Pure white backgrounds
+					coral: '#FF6B35',       // Warm coral accent
+					'coral-dark': '#E55A2B', // Darker coral for hover
+					'light-green': '#E8F5E8', // Subtle green backgrounds
+					'soft-gray': '#F8F9FA',  // Alternative neutral
+					charcoal: '#2C3E50',    // Professional text
+					yellow: '#FFC107',      // Bright yellow accent
+					cream: '#FEF9EF',       // Soft cream for section breaks
 					// Legacy colors for compatibility
-					indigo: '#7C9885',   // Map to sage
-					gold: '#D4A574',     // Map to golden
-					blue: '#A8C09A',     // Map to soft-sage
-					navy: '#4A5D23',     // Map to forest
-					navy_dark: '#2D3436', // Map to charcoal
-					yellow: '#D4A574',   // Map to golden
-					yellow_light: '#F5F2E8', // Map to beige
-					sand: '#FAF7F0',     // Map to cream
-					sand_dark: '#F5F2E8', // Map to beige
+					sage: '#00A651',        // Map to vibrant
+					forest: '#006837',      // Map to emerald
+					golden: '#FF6B35',      // Map to coral
+					beige: '#FFFFFF',       // Map to white
+					'soft-sage': '#E8F5E8', // Map to light-green
+					// More legacy mappings
+					indigo: '#00A651',
+					gold: '#FF6B35',
+					blue: '#00A651',
+					navy: '#2C3E50',
+					navy_dark: '#2C3E50',
+					yellow_light: '#FEF9EF',
+					sand: '#FFFFFF',
+					sand_dark: '#F8F9FA',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',

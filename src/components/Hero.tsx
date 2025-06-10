@@ -12,12 +12,12 @@ const Hero = () => {
   };
 
   return (
-    <section className="bg-yutime-cream py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Learn New Skills at <span className="text-yutime-sage">Your Pace</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yutime-charcoal leading-tight">
+              Learn New Skills at <span className="text-yutime-vibrant">Your Pace</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
               Join YŪTIME and discover courses designed for adults 45+ who want to stay mentally active, 
@@ -27,7 +27,7 @@ const Hero = () => {
               <a 
                 href="#pricing" 
                 onClick={scrollToPricing} 
-                className="inline-flex items-center justify-center gap-3 bg-yutime-sage hover:bg-yutime-forest text-white px-8 py-4 rounded-lg font-medium text-lg transition-all group"
+                className="inline-flex items-center justify-center gap-3 bg-yutime-coral hover:bg-yutime-coral-dark text-white px-8 py-4 rounded-lg font-medium text-lg transition-all group shadow-lg hover:shadow-xl"
               >
                 Enroll Now
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -35,7 +35,7 @@ const Hero = () => {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border-4 border-yutime-light-green/30">
               <img 
                 src="https://cdn.elderlifefinancial.com/wp-content/uploads/2023/11/Technology-for-Seniors-To-Stay-in-Touch-With-Family.jpg?strip=all&lossy=1&ssl=1" 
                 alt="Senior adult using laptop at home" 
