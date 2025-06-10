@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 220 33% 98%;
-    --foreground: 220 25% 20%;
+    --background: 50 25% 97%; /* Warm cream #FAF7F0 */
+    --foreground: 140 25% 20%; /* Charcoal green */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 20%;
+    --card: 40 15% 95%; /* Warm beige #F5F2E8 */
+    --card-foreground: 140 25% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 20%;
+    --popover: 40 15% 95%;
+    --popover-foreground: 140 25% 20%;
 
-    --primary: 210 100% 18%; /* Adjusted to match deep indigo */
-    --primary-foreground: 210 40% 98%;
+    --primary: 140 20% 50%; /* Sage green #7C9885 */
+    --primary-foreground: 50 25% 97%;
 
-    --secondary: 45 90% 42%; /* Adjusted to match gold */
-    --secondary-foreground: 210 100% 18%;
+    --secondary: 30 35% 65%; /* Golden accent #D4A574 */
+    --secondary-foreground: 140 50% 15%;
 
-    --muted: 220 10% 94%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 140 15% 85%; /* Soft sage */
+    --muted-foreground: 140 10% 45%;
 
-    --accent: 190 53% 40%; /* Adjusted to match slate blue */
-    --accent-foreground: 210 40% 98%;
+    --accent: 140 25% 65%; /* Soft sage #A8C09A */
+    --accent-foreground: 140 50% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 50 25% 97%;
 
-    --border: 220 13% 90%;
-    --input: 220 13% 90%;
-    --ring: 210 100% 18%;
+    --border: 140 15% 85%;
+    --input: 140 15% 85%;
+    --ring: 140 20% 50%;
 
     --radius: 0.5rem;
   }
@@ -83,15 +83,15 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-indigo hover:bg-yutime-indigo/90 text-white py-3 px-6 rounded-lg font-medium text-lg transition-all;
+    @apply bg-yutime-sage hover:bg-yutime-forest text-white py-3 px-6 rounded-lg font-medium text-lg transition-all;
   }
   
   .btn-secondary {
-    @apply bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo py-3 px-6 rounded-lg font-medium text-lg transition-all;
+    @apply bg-yutime-golden hover:bg-yutime-golden/90 text-yutime-forest py-3 px-6 rounded-lg font-medium text-lg transition-all;
   }
   
   .card {
-    @apply bg-white rounded-lg p-6;
+    @apply bg-yutime-beige rounded-lg p-6;
   }
   
   .section {

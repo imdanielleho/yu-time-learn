@@ -18,8 +18,8 @@ export default {
 				'sm': '640px',
 				'md': '768px',
 				'lg': '1024px',
-				'xl': '1140px', // Updated to match the 1140px content area
-				'2xl': '1440px' // Updated to match the 1440px width
+				'xl': '1140px',
+				'2xl': '1440px'
 			}
 		},
 		extend: {
@@ -30,15 +30,24 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					indigo: '#00335D', // Deep indigo
-					gold: '#D8A602',   // Gold 
-					blue: '#2F8C9E',   // Slate blue
-					navy: '#103661',   // Keep original navy for compatibility
-					navy_dark: '#0A2341',
-					yellow: '#F7D054',
-					yellow_light: '#FBEAAC',
-					sand: '#F1F0FB',
-					sand_dark: '#E5E4EB',
+					sage: '#7C9885',     // Primary sage green (August Health inspired)
+					forest: '#4A5D23',   // Deep forest green for emphasis
+					cream: '#FAF7F0',    // Warm cream background
+					brown: '#8B4513',    // Rich brown for text
+					'soft-sage': '#A8C09A', // Lighter sage for backgrounds
+					beige: '#F5F2E8',    // Card backgrounds
+					charcoal: '#2D3436', // Professional dark text
+					golden: '#D4A574',   // Warm gold for accents
+					// Legacy colors for compatibility
+					indigo: '#7C9885',   // Map to sage
+					gold: '#D4A574',     // Map to golden
+					blue: '#A8C09A',     // Map to soft-sage
+					navy: '#4A5D23',     // Map to forest
+					navy_dark: '#2D3436', // Map to charcoal
+					yellow: '#D4A574',   // Map to golden
+					yellow_light: '#F5F2E8', // Map to beige
+					sand: '#FAF7F0',     // Map to cream
+					sand_dark: '#F5F2E8', // Map to beige
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -70,7 +79,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ["Inter", "Noto Sans", "sans-serif"], // Updated fonts
+				sans: ["Inter", "Noto Sans", "sans-serif"],
 				heading: ["Nunito", "sans-serif"]
 			},
 			borderRadius: {

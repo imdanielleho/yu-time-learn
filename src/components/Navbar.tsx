@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Menu, X, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -48,11 +49,11 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white shadow-soft">
+      <header className="sticky top-0 z-40 w-full bg-yutime-cream shadow-soft">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <span className="font-heading text-2xl font-bold text-yutime-navy">YŪ<span className="text-yutime-blue">TIME</span></span>
+              <span className="font-heading text-2xl font-bold text-yutime-forest">YŪ<span className="text-yutime-sage">TIME</span></span>
             </Link>
           </div>
           
@@ -76,19 +77,19 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center space-x-4">
             <button 
               onClick={() => handleScrollTo('courses')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+              className="text-lg font-medium text-yutime-forest hover:text-yutime-sage transition-colors"
             >
               Courses
             </button>
             <button 
               onClick={() => handleScrollTo('testimonials')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+              className="text-lg font-medium text-yutime-forest hover:text-yutime-sage transition-colors"
             >
               Testimonials
             </button>
             <button 
               onClick={() => handleScrollTo('faq')} 
-              className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-12"
+              className="text-lg font-medium text-yutime-forest hover:text-yutime-sage transition-colors mr-12"
             >
               FAQ
             </button>
@@ -102,7 +103,7 @@ const Navbar = () => {
               {isLoggedIn && (
                 <button 
                   onClick={handleResumeLearning}
-                  className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+                  className="bg-yutime-sage hover:bg-yutime-forest text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
                 >
                   <span>Resume Learning</span>
                   <Play size={18} />
@@ -114,13 +115,13 @@ const Navbar = () => {
           {/* Mobile navigation */}
           <div
             className={cn(
-              "fixed inset-0 z-50 bg-white md:hidden transition-transform duration-300 transform",
+              "fixed inset-0 z-50 bg-yutime-cream md:hidden transition-transform duration-300 transform",
               isMenuOpen ? "translate-x-0" : "translate-x-full"
             )}
           >
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between h-16 px-6 border-b">
-                <span className="font-heading text-2xl font-bold text-yutime-navy">YŪ<span className="text-yutime-blue">TIME</span></span>
+                <span className="font-heading text-2xl font-bold text-yutime-forest">YŪ<span className="text-yutime-sage">TIME</span></span>
                 <Button 
                   variant="ghost" 
                   size="icon" 
@@ -132,19 +133,19 @@ const Navbar = () => {
               <nav className="flex flex-col p-6 space-y-6">
                 <button
                   onClick={() => handleScrollTo('courses')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
+                  className="text-xl font-medium text-yutime-forest hover:text-yutime-sage text-left"
                 >
                   Courses
                 </button>
                 <button
                   onClick={() => handleScrollTo('testimonials')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
+                  className="text-xl font-medium text-yutime-forest hover:text-yutime-sage text-left"
                 >
                   Testimonials
                 </button>
                 <button
                   onClick={() => handleScrollTo('faq')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
+                  className="text-xl font-medium text-yutime-forest hover:text-yutime-sage text-left"
                 >
                   FAQ
                 </button>
@@ -163,7 +164,7 @@ const Navbar = () => {
                       handleResumeLearning();
                       toggleMenu();
                     }}
-                    className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
+                    className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-sage text-white rounded-md"
                   >
                     <span>Resume Learning</span>
                     <Play size={18} />
