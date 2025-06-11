@@ -108,11 +108,11 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
             <div className="flex flex-wrap items-center gap-4 text-sm text-yutime-warmGray">
               <div className="flex items-center space-x-2">
                 <Clock size={16} className="text-yutime-sage" />
-                <span>{course.totalTime}</span>
+                <span className="font-medium">{course.totalTime}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <BookOpen size={16} className="text-yutime-sage" />
-                <span>{course.lessons} lessons</span>
+                <span className="font-medium">{course.lessons} lessons</span>
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
                   <AccordionTrigger className="text-yutime-sage font-medium">
                     <div className="flex justify-between items-center w-full mr-4">
                       <span>Learning Modules ({course.curriculum.length} lessons)</span>
-                      <span className="text-sm text-yutime-warmGray">{course.curriculum.length} lessons | {course.totalTime}</span>
+                      <span className="text-sm text-yutime-warmGray font-medium">{course.curriculum.length} lessons | {course.totalTime}</span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
@@ -198,7 +198,7 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
                             </span>
                             <span className="text-yutime-warmGray leading-relaxed text-lg">{lesson}</span>
                           </div>
-                          <span className="text-sm text-yutime-warmGray">
+                          <span className="text-sm text-yutime-warmGray font-medium">
                             {Math.floor(Math.random() * 15) + 5} min
                           </span>
                         </div>
@@ -254,10 +254,10 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
           </div>
         </div>
 
-        {/* Right Sidebar - Updated pricing card design */}
+        {/* Right Sidebar - Clean white pricing card design */}
         <div className="lg:col-span-1">
           <div className="sticky top-8">
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
               <h3 className="text-lg font-semibold text-yutime-sage mb-4 text-center border-b border-gray-200 pb-4">
                 Single Course
               </h3>

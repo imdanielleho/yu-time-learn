@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -76,8 +77,8 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ["Inter", "Noto Sans", "sans-serif"],
-				heading: ["Poppins", "Nunito", "sans-serif"]
+				sans: ["Inter", "sans-serif"],
+				heading: ["Inter", "sans-serif"]
 			},
 			borderRadius: {
 				lg: '12px',

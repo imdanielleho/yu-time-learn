@@ -48,8 +48,8 @@ const BottomNavigation = () => {
               className={cn(
                 "flex flex-col items-center justify-center space-y-1 transition-colors",
                 isActive 
-                  ? "text-yutime-blue bg-yutime-blue/5" 
-                  : "text-gray-600 hover:text-yutime-blue"
+                  ? "text-yutime-sage bg-yutime-sage/5" 
+                  : "text-gray-600 hover:text-yutime-sage"
               )}
             >
               <item.icon className="h-5 w-5" />

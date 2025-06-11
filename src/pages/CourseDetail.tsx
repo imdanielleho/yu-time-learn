@@ -45,7 +45,7 @@ const CourseDetail = () => {
             block: 'start'
           });
         }
-      }, 100);
+      }, 300);
     }
     
     // TODO: Implement actual login logic
@@ -70,9 +70,9 @@ const CourseDetail = () => {
     if (!isLoggedIn && videoType === 'main') {
       setLoginTrigger('video');
       setIsLoginModalOpen(true);
-    } else if (isLoggedIn || videoType !== 'main') {
+    } else {
+      // Play the video
       console.log(`Playing ${videoType} video`);
-      // TODO: Implement actual video playback
       alert(`Playing ${videoType} video - Video functionality coming soon!`);
     }
   };
@@ -131,7 +131,7 @@ const CourseDetail = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1" style={{ paddingBottom: isMobile ? '80px' : '0' }}>
-        {/* White background section before Module 2 */}
+        {/* White background section for Module 1 */}
         <div className="bg-white">
           <div className="container py-8">
             <Link 
@@ -185,20 +185,17 @@ const CourseDetail = () => {
                 <div className="flex flex-wrap items-center gap-6 text-base text-gray-600">
                   <div className="flex items-center space-x-2">
                     <Clock size={16} className="text-gray-600" />
-                    <span>{course.totalTime}</span>
+                    <span className="font-medium">{course.totalTime}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <BookOpen size={16} className="text-gray-600" />
-                    <span>{course.lessons} lessons</span>
+                    <span className="font-medium">{course.lessons} lessons</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Add spacing below Module 1 */}
-        <div className="h-8"></div>
 
         {/* Grey background section for rest of content */}
         <div className="bg-gray-50">
@@ -258,7 +255,7 @@ const CourseDetail = () => {
                         <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                           <div className={`flex ${isMobile ? 'flex-col items-start' : 'justify-between items-center'} w-full mr-4`}>
                             <span>Chapter {chapter.chapter}. {chapter.title}</span>
-                            <span className={`text-sm text-yutime-warmGray ${isMobile ? 'mt-1' : ''}`}>
+                            <span className={`text-sm text-yutime-warmGray font-medium ${isMobile ? 'mt-1' : ''}`}>
                               {chapter.lessons} lessons | {chapter.duration}
                             </span>
                           </div>
@@ -273,7 +270,7 @@ const CourseDetail = () => {
                                   </span>
                                   <span className="text-yutime-warmGray text-lg">Lesson {lessonIndex + 1}: Introduction to {chapter.title}</span>
                                 </div>
-                                <span className="text-sm text-yutime-warmGray">
+                                <span className="text-sm text-yutime-warmGray font-medium">
                                   {Math.floor(parseInt(chapter.duration) / chapter.lessons)} min
                                 </span>
                               </div>
@@ -329,10 +326,10 @@ const CourseDetail = () => {
                 </div>
               </div>
 
-              {/* Right column: Pricing card (1/3 width) */}
+              {/* Right column: Pricing card (1/3 width) - Clean white background */}
               <div className="lg:col-span-1">
                 <div className="sticky top-8">
-                  <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow-lg p-6 border border-amber-200">
+                  <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
                     <h3 className="text-xl font-bold text-yutime-sage mb-6 text-center">
                       Single Course
                     </h3>
