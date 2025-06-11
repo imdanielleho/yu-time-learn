@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Menu, X, Play } from 'lucide-react';
+import { Menu, X, Play, ShoppingCart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -10,8 +9,12 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // Mock empty cart state
+  const cartItems = []; // This should come from actual cart state
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -64,6 +67,20 @@ const Navbar = () => {
     setIsLoginModalOpen(true);
   };
 
+  const handleCartClick = () => {
+    if (cartItems.length === 0) {
+      setIsCartDropdownOpen(!isCartDropdownOpen);
+    } else {
+      // Navigate to cart page when cart has items
+      console.log("Navigate to cart");
+    }
+  };
+
+  const handleExploreCoursesClick = () => {
+    setIsCartDropdownOpen(false);
+    handleScrollTo('courses');
+  };
+
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-white shadow-soft">
@@ -111,6 +128,33 @@ const Navbar = () => {
               FAQ
             </button>
             <div className="flex items-center space-x-3">
+              {/* Shopping Cart Button with Dropdown */}
+              <div className="relative">
+                <Button
+                  onClick={handleCartClick}
+                  variant="outline"
+                  className="p-2.5 border-yutime-navy text-yutime-navy hover:bg-yutime-navy hover:text-white transition-all"
+                >
+                  <ShoppingCart size={18} />
+                </Button>
+                
+                {/* Empty Cart Dropdown */}
+                {isCartDropdownOpen && cartItems.length === 0 && (
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-50">
+                    <div className="text-center">
+                      <ShoppingCart size={32} className="mx-auto mb-2 text-gray-400" />
+                      <p className="text-gray-600 mb-3">Your cart is empty</p>
+                      <Button
+                        onClick={handleExploreCoursesClick}
+                        className="w-full bg-yutime-blue hover:bg-yutime-blue/90 text-white"
+                      >
+                        Explore Courses
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <button 
                 onClick={handleLoginSignupClick}
                 className="btn-primary"
@@ -166,6 +210,16 @@ const Navbar = () => {
                 >
                   FAQ
                 </button>
+                
+                {/* Mobile Shopping Cart Button */}
+                <button
+                  onClick={handleCartClick}
+                  className="flex items-center space-x-2 text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
+                >
+                  <ShoppingCart size={20} />
+                  <span>Shopping Cart</span>
+                </button>
+                
                 <button 
                   onClick={() => {
                     toggleMenu();
@@ -192,6 +246,14 @@ const Navbar = () => {
           </div>
         </div>
       </header>
+      
+      {/* Overlay to close cart dropdown when clicking outside */}
+      {isCartDropdownOpen && (
+        <div 
+          className="fixed inset-0 z-30" 
+          onClick={() => setIsCartDropdownOpen(false)}
+        />
+      )}
       
       {/* Login Modal */}
       <LoginModal 
