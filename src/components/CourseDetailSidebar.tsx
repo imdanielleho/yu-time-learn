@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { ArrowLeft, Clock, Star, Play, Heart, BookOpen } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import LoginSignupModal from './LoginSignupModal';
+import LoginModal from './LoginModal';
 
 interface Course {
   id: number;
@@ -280,14 +279,15 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
         </div>
       </div>
 
-      <LoginSignupModal
+      <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={handleLogin}
-        onSignup={handleSignup}
       />
     </div>
   );
 };
 
 export default CourseDetailSidebar;
+
+</edits_to_apply>
