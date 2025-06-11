@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ArrowLeft, Clock, Star, Play, Heart, BookOpen } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -289,5 +290,3 @@ const CourseDetailSidebar = ({ course, onClose }: CourseDetailSidebarProps) => {
 };
 
 export default CourseDetailSidebar;
-
-</edits_to_apply>
