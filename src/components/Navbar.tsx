@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Menu, X, Play } from 'lucide-react';
+import { Menu, X, Play, ShoppingCart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -10,8 +10,12 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // Mock cart state (empty initially)
+  const cartItems = [];
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -64,6 +68,15 @@ const Navbar = () => {
     setIsLoginModalOpen(true);
   };
 
+  const handleCartClick = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const handleExploreCourses = () => {
+    setIsCartOpen(false);
+    handleScrollTo('courses');
+  };
+
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-white shadow-soft">
@@ -111,6 +124,46 @@ const Navbar = () => {
               FAQ
             </button>
             <div className="flex items-center space-x-3">
+              {/* Shopping Cart */}
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleCartClick}
+                  className="relative"
+                >
+                  <ShoppingCart size={20} />
+                  {cartItems.length > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-yutime-coral text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {cartItems.length}
+                    </span>
+                  )}
+                </Button>
+                
+                {/* Cart dropdown */}
+                {isCartOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-50">
+                    {cartItems.length === 0 ? (
+                      <div className="text-center py-6">
+                        <ShoppingCart size={40} className="mx-auto mb-3 text-gray-400" />
+                        <p className="text-gray-600 mb-4">Your cart is empty</p>
+                        <Button 
+                          onClick={handleExploreCourses}
+                          className="bg-yutime-blue hover:bg-yutime-blue/90"
+                        >
+                          Explore Courses
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        {/* Cart items would go here */}
+                        <p>Cart items</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              
               <button 
                 onClick={handleLoginSignupClick}
                 className="btn-primary"
@@ -166,6 +219,21 @@ const Navbar = () => {
                 >
                   FAQ
                 </button>
+                
+                {/* Mobile Shopping Cart */}
+                <button
+                  onClick={handleCartClick}
+                  className="flex items-center space-x-2 text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
+                >
+                  <ShoppingCart size={20} />
+                  <span>Shopping Cart</span>
+                  {cartItems.length > 0 && (
+                    <span className="bg-yutime-coral text-white text-xs rounded-full px-2 py-1">
+                      {cartItems.length}
+                    </span>
+                  )}
+                </button>
+                
                 <button 
                   onClick={() => {
                     toggleMenu();
@@ -192,6 +260,14 @@ const Navbar = () => {
           </div>
         </div>
       </header>
+      
+      {/* Backdrop for cart dropdown */}
+      {isCartOpen && (
+        <div 
+          className="fixed inset-0 z-30" 
+          onClick={() => setIsCartOpen(false)}
+        />
+      )}
       
       {/* Login Modal */}
       <LoginModal 
