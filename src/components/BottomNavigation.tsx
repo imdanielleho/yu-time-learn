@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, BookOpen, Book, Settings, LogOut } from 'lucide-react';
+import { Home, BookOpen, Settings, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const BottomNavigation = () => {
@@ -20,11 +20,6 @@ const BottomNavigation = () => {
       icon: BookOpen,
     },
     {
-      title: "Courses",
-      url: "/courses",
-      icon: Book,
-    },
-    {
       title: "Settings",
       url: "/settings",
       icon: Settings,
@@ -38,7 +33,7 @@ const BottomNavigation = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 md:hidden">
-      <div className="grid grid-cols-5 h-16">
+      <div className="grid grid-cols-4 h-16">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.url;
           return (

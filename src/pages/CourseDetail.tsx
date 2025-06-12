@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CustomerServiceButton from '@/components/CustomerServiceButton';
@@ -19,7 +20,8 @@ const CourseDetail = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [loginTrigger, setLoginTrigger] = useState<'general' | 'video'>('general');
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
   
   // TODO: Replace with actual authentication state
   const isLoggedIn = false; // This should come from your auth context/state
@@ -32,28 +34,11 @@ const CourseDetail = () => {
   const handleLogin = (email: string, password: string) => {
     console.log("Login with:", email, password);
     setIsLoginModalOpen(false);
-    
-    // Handle post-login redirect for video triggers
-    if (loginTrigger === 'video') {
-      navigate(`/courses?selected=${id}`);
-      // Scroll to Course Preview section after navigation
-      setTimeout(() => {
-        const previewSection = document.getElementById('course-preview');
-        if (previewSection) {
-          previewSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      }, 300);
-    }
-    
     // TODO: Implement actual login logic
   };
 
   const handleBuyNow = () => {
     if (!isLoggedIn) {
-      setLoginTrigger('general');
       setIsLoginModalOpen(true);
     } else {
       // Handle purchase logic
@@ -66,15 +51,12 @@ const CourseDetail = () => {
     // TODO: Implement add to cart functionality
   };
 
-  const handleVideoPlay = (videoType: string) => {
-    if (!isLoggedIn && videoType === 'main') {
-      setLoginTrigger('video');
-      setIsLoginModalOpen(true);
-    } else {
-      // Play the video
-      console.log(`Playing ${videoType} video`);
-      alert(`Playing ${videoType} video - Video functionality coming soon!`);
-    }
+  const handleVideoPlay = (title: string, videoUrl?: string) => {
+    setCurrentVideo({
+      title,
+      url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
+    });
+    setIsVideoModalOpen(true);
   };
 
   if (!course) {
@@ -153,7 +135,7 @@ const CourseDetail = () => {
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                   <Button 
-                    onClick={() => handleVideoPlay('main')}
+                    onClick={() => handleVideoPlay(course.title)}
                     className="bg-white/90 hover:bg-white text-yutime-navy rounded-full p-4"
                   >
                     <Play size={24} />
@@ -282,10 +264,10 @@ const CourseDetail = () => {
                   </Accordion>
                 </div>
 
-                {/* Course Preview Section */}
+                {/* Course Preview Section - Single Video Only */}
                 <div className="space-y-6" id="course-preview">
                   <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Free Course Preview</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="max-w-md">
                     <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
                       <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
                         <img 
@@ -295,7 +277,7 @@ const CourseDetail = () => {
                         />
                         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                           <Button 
-                            onClick={() => handleVideoPlay('intro')}
+                            onClick={() => handleVideoPlay('Introduction Preview')}
                             className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
                           >
                             <Play size={20} />
@@ -303,24 +285,6 @@ const CourseDetail = () => {
                         </div>
                       </div>
                       <p className="text-lg font-medium text-yutime-sage">Introduction Preview</p>
-                    </div>
-                    <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
-                      <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
-                        <img 
-                          src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=400&h=225"
-                          alt="Sample Lesson"
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                          <Button 
-                            onClick={() => handleVideoPlay('sample')}
-                            className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
-                          >
-                            <Play size={20} />
-                          </Button>
-                        </div>
-                      </div>
-                      <p className="text-lg font-medium text-yutime-sage">Sample Lesson</p>
                     </div>
                   </div>
                 </div>
@@ -375,6 +339,31 @@ const CourseDetail = () => {
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={handleLogin}
       />
+
+      {/* Video Modal */}
+      <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
+        <DialogContent className="sm:max-w-4xl max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
+            <X className="h-6 w-6" />
+          </DialogClose>
+          
+          {currentVideo && (
+            <div className="w-full">
+              <div className="aspect-video">
+                <video
+                  src={currentVideo.url}
+                  className="w-full h-full"
+                  controls
+                  autoPlay
+                />
+              </div>
+              <div className="p-4 bg-black text-white">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
