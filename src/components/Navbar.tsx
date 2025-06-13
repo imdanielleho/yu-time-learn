@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Menu, X, Play, ShoppingCart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -76,6 +77,14 @@ const Navbar = () => {
     }
   };
 
+  const handleCartMouseEnter = () => {
+    setIsCartDropdownOpen(true);
+  };
+
+  const handleCartMouseLeave = () => {
+    setIsCartDropdownOpen(false);
+  };
+
   const handleExploreCoursesClick = () => {
     setIsCartDropdownOpen(false);
     handleScrollTo('courses');
@@ -129,11 +138,15 @@ const Navbar = () => {
             </button>
             <div className="flex items-center space-x-3">
               {/* Shopping Cart Button with Dropdown */}
-              <div className="relative">
+              <div 
+                className="relative"
+                onMouseEnter={handleCartMouseEnter}
+                onMouseLeave={handleCartMouseLeave}
+              >
                 <Button
                   onClick={handleCartClick}
-                  variant="outline"
-                  className="p-2.5 border-yutime-navy text-yutime-navy hover:bg-yutime-navy hover:text-white transition-all"
+                  variant="ghost"
+                  className="p-2.5 bg-white text-yutime-navy hover:bg-gray-50 hover:text-yutime-blue transition-all"
                 >
                   <ShoppingCart size={18} />
                 </Button>

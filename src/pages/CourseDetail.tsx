@@ -112,7 +112,7 @@ const CourseDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1" style={{ paddingBottom: isMobile ? '80px' : '0' }}>
+      <main className="flex-1" style={{ paddingBottom: isMobile ? '20px' : '0' }}>
         {/* White background section for Module 1 */}
         <div className="bg-white">
           <div className="container py-8">
@@ -195,8 +195,8 @@ const CourseDetail = () => {
                   </p>
                 </div>
 
-                {/* Accordion Sections with bold headers */}
-                <Accordion type="single" collapsible className="w-full space-y-3">
+                {/* Accordion Sections with default open states */}
+                <Accordion type="single" collapsible defaultValue="who-is-this-for" className="w-full space-y-3">
                   <AccordionItem value="who-is-this-for" className="bg-white rounded-xl border border-gray-200 px-4">
                     <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                       Who is this course for?
@@ -228,16 +228,16 @@ const CourseDetail = () => {
                   </AccordionItem>
                 </Accordion>
 
-                {/* Curriculum */}
+                {/* Curriculum with default open first chapter */}
                 <div className="space-y-6">
                   <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Course Curriculum</h2>
-                  <Accordion type="single" collapsible className="w-full space-y-3">
+                  <Accordion type="single" collapsible defaultValue="chapter-1" className="w-full space-y-3">
                     {curriculum.map((chapter, index) => (
                       <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
                         <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                           <div className={`flex ${isMobile ? 'flex-col items-start' : 'justify-between items-center'} w-full mr-4`}>
-                            <span>Chapter {chapter.chapter}. {chapter.title}</span>
-                            <span className={`text-sm text-yutime-warmGray font-medium ${isMobile ? 'mt-1' : ''}`}>
+                            <span className={isMobile ? 'text-left' : ''}>Chapter {chapter.chapter}. {chapter.title}</span>
+                            <span className={`text-sm text-yutime-warmGray font-medium ${isMobile ? 'mt-1 self-start' : ''}`}>
                               {chapter.lessons} lessons | {chapter.duration}
                             </span>
                           </div>
@@ -250,7 +250,17 @@ const CourseDetail = () => {
                                   <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0">
                                     {lessonIndex + 1}
                                   </span>
-                                  <span className="text-yutime-warmGray text-lg">Lesson {lessonIndex + 1}: Introduction to {chapter.title}</span>
+                                  <div className="flex items-center space-x-2">
+                                    <span className="text-yutime-warmGray text-lg">Lesson {lessonIndex + 1}: Introduction to {chapter.title}</span>
+                                    {chapter.chapter === 1 && lessonIndex === 0 && (
+                                      <button
+                                        onClick={() => handleVideoPlay(`Lesson 1: Introduction to ${chapter.title}`)}
+                                        className="text-yutime-blue hover:text-yutime-blue/80 text-sm font-medium underline ml-2"
+                                      >
+                                        Free Preview
+                                      </button>
+                                    )}
+                                  </div>
                                 </div>
                                 <span className="text-sm text-yutime-warmGray font-medium">
                                   {Math.floor(parseInt(chapter.duration) / chapter.lessons)} min
@@ -262,31 +272,6 @@ const CourseDetail = () => {
                       </AccordionItem>
                     ))}
                   </Accordion>
-                </div>
-
-                {/* Course Preview Section - Single Video Only */}
-                <div className="space-y-6" id="course-preview">
-                  <h2 className="text-2xl font-bold mb-6 text-yutime-sage">Free Course Preview</h2>
-                  <div className="max-w-md">
-                    <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
-                      <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-3 relative overflow-hidden">
-                        <img 
-                          src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=400&h=225"
-                          alt="Introduction Preview"
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                          <Button 
-                            onClick={() => handleVideoPlay('Introduction Preview')}
-                            className="bg-white/90 hover:bg-white text-yutime-sage rounded-full p-3"
-                          >
-                            <Play size={20} />
-                          </Button>
-                        </div>
-                      </div>
-                      <p className="text-lg font-medium text-yutime-sage">Introduction Preview</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -340,7 +325,7 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
-      {/* Video Modal */}
+      {/* Video Modal with autoplay */}
       <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
         <DialogContent className="sm:max-w-4xl max-h-[90vh] p-0 bg-black">
           <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
