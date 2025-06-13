@@ -3,7 +3,6 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Home, Book, LogIn } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
@@ -11,8 +10,6 @@ interface HomeMobileNavigationProps {
 
 const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
   const isMobile = useIsMobile();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   if (!isMobile) return null;
 
@@ -23,32 +20,12 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
     }
   };
 
-  const handleHomeClick = () => {
-    // If we're on a course detail page, navigate to home
-    if (location.pathname.startsWith('/courses/')) {
-      navigate('/');
-    } else {
-      // If we're on homepage, scroll to hero
-      scrollToSection('hero');
-    }
-  };
-
-  const handleCoursesClick = () => {
-    // If we're on a course detail page, navigate to home with courses section
-    if (location.pathname.startsWith('/courses/')) {
-      navigate('/#courses');
-    } else {
-      // If we're on homepage, scroll to courses
-      scrollToSection('courses');
-    }
-  };
-
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
       <div className="grid grid-cols-3 h-16">
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
-          onClick={handleHomeClick}
+          onClick={() => scrollToSection('hero')}
         >
           <Home className="h-5 w-5" />
           <span className="text-xs font-medium">Home</span>
@@ -56,7 +33,7 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
         
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
-          onClick={handleCoursesClick}
+          onClick={() => scrollToSection('courses')}
         >
           <Book className="h-5 w-5" />
           <span className="text-xs font-medium">Courses</span>
