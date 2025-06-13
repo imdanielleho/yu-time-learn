@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -201,7 +200,7 @@ const CourseDetail = () => {
                     <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                       Who is this course for?
                     </AccordionTrigger>
-                    <AccordionContent className={`text-yutime-warmGray leading-relaxed ${isMobile ? 'text-base' : 'text-lg'}`}>
+                    <AccordionContent className="text-yutime-warmGray leading-relaxed text-base">
                       This course is perfect for adults 45+ who want to learn at their own pace in a supportive environment. 
                       No prior experience needed - just bring your curiosity and willingness to learn.
                     </AccordionContent>
@@ -211,7 +210,7 @@ const CourseDetail = () => {
                     <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                       What you will learn
                     </AccordionTrigger>
-                    <AccordionContent className={`text-yutime-warmGray leading-relaxed ${isMobile ? 'text-base' : 'text-lg'}`}>
+                    <AccordionContent className="text-yutime-warmGray leading-relaxed text-base">
                       By the end of this course, you'll have gained practical skills and confidence in the subject matter. 
                       You'll understand key concepts and be able to apply them in real-world situations.
                     </AccordionContent>
@@ -221,7 +220,7 @@ const CourseDetail = () => {
                     <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                       Preparation before class
                     </AccordionTrigger>
-                    <AccordionContent className={`text-yutime-warmGray leading-relaxed ${isMobile ? 'text-base' : 'text-lg'}`}>
+                    <AccordionContent className="text-yutime-warmGray leading-relaxed text-base">
                       No special preparation required! Just ensure you have a stable internet connection and a comfortable 
                       space to learn. We recommend having a notebook handy for taking notes.
                     </AccordionContent>
@@ -237,7 +236,7 @@ const CourseDetail = () => {
                         <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
                           <div className="flex flex-col items-start w-full mr-4">
                             <span className="text-left">Chapter {chapter.chapter}. {chapter.title}</span>
-                            <span className="text-sm text-yutime-warmGray font-medium mt-1">
+                            <span className="text-sm text-yutime-warmGray font-medium mt-1 lg:text-right">
                               {chapter.lessons} lessons | {chapter.duration}
                             </span>
                           </div>
@@ -246,28 +245,30 @@ const CourseDetail = () => {
                           <div className="space-y-3 pt-2">
                             {Array.from({ length: chapter.lessons }).map((_, lessonIndex) => (
                               <div key={lessonIndex} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <div className="flex items-start space-x-3">
+                                <div className="flex items-start space-x-3 flex-1">
                                   <span className="bg-yutime-indigo text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0">
                                     {lessonIndex + 1}
                                   </span>
-                                  <div className="flex flex-col space-y-1">
-                                    <span className={`text-yutime-warmGray ${isMobile ? 'text-base' : 'text-lg'}`}>
-                                      Lesson {lessonIndex + 1}: Introduction to {chapter.title}
+                                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full space-y-1 lg:space-y-0">
+                                    <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-3 space-y-1 lg:space-y-0">
+                                      <span className="text-yutime-warmGray text-base">
+                                        Lesson {lessonIndex + 1}: Introduction to {chapter.title}
+                                      </span>
+                                      {chapter.chapter === 1 && lessonIndex === 0 && (
+                                        <button
+                                          onClick={() => handleVideoPlay(`Lesson 1: Introduction to ${chapter.title}`)}
+                                          className="flex items-center space-x-1 bg-yutime-blue hover:bg-yutime-blue/90 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start"
+                                        >
+                                          <Play size={14} />
+                                          <span>Free Preview</span>
+                                        </button>
+                                      )}
+                                    </div>
+                                    <span className="text-yutime-warmGray font-medium text-sm lg:text-right">
+                                      {Math.floor(parseInt(chapter.duration) / chapter.lessons)} min
                                     </span>
-                                    {chapter.chapter === 1 && lessonIndex === 0 && (
-                                      <button
-                                        onClick={() => handleVideoPlay(`Lesson 1: Introduction to ${chapter.title}`)}
-                                        className="flex items-center space-x-1 bg-yutime-blue hover:bg-yutime-blue/90 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start"
-                                      >
-                                        <Play size={14} />
-                                        <span>Free Preview</span>
-                                      </button>
-                                    )}
                                   </div>
                                 </div>
-                                <span className={`text-yutime-warmGray font-medium ${isMobile ? 'text-sm' : 'text-sm'}`}>
-                                  {Math.floor(parseInt(chapter.duration) / chapter.lessons)} min
-                                </span>
                               </div>
                             ))}
                           </div>
