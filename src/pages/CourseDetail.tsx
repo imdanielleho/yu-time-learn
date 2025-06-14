@@ -349,7 +349,7 @@ const CourseDetail = () => {
                       <Button 
                         onClick={handleAddToCart}
                         variant="outline"
-                        className="p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all flex-shrink-0"
+                        className="p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all"
                       >
                         <ShoppingCart size={20} />
                       </Button>
