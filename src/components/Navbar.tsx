@@ -5,17 +5,16 @@ import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import LoginModal from './LoginModal';
+import CartDrawer from './CartDrawer';
+import { useCart } from '@/contexts/CartContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  
-  // Mock empty cart state
-  const cartItems = []; // This should come from actual cart state
+  const { openCart, getItemCount } = useCart();
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -69,26 +68,10 @@ const Navbar = () => {
   };
 
   const handleCartClick = () => {
-    if (cartItems.length === 0) {
-      setIsCartDropdownOpen(!isCartDropdownOpen);
-    } else {
-      // Navigate to cart page when cart has items
-      console.log("Navigate to cart");
-    }
+    openCart();
   };
 
-  const handleCartMouseEnter = () => {
-    setIsCartDropdownOpen(true);
-  };
-
-  const handleCartMouseLeave = () => {
-    setIsCartDropdownOpen(false);
-  };
-
-  const handleExploreCoursesClick = () => {
-    setIsCartDropdownOpen(false);
-    handleScrollTo('courses');
-  };
+  const itemCount = getItemCount();
 
   return (
     <>
@@ -137,35 +120,20 @@ const Navbar = () => {
               FAQ
             </button>
             <div className="flex items-center space-x-3">
-              {/* Shopping Cart Button with Dropdown */}
-              <div 
-                className="relative"
-                onMouseEnter={handleCartMouseEnter}
-                onMouseLeave={handleCartMouseLeave}
-              >
+              {/* Shopping Cart Button */}
+              <div className="relative">
                 <Button
                   onClick={handleCartClick}
                   variant="ghost"
-                  className="p-2.5 bg-white text-yutime-navy hover:bg-gray-50 hover:text-yutime-blue transition-all"
+                  className="p-2.5 bg-white text-yutime-navy hover:bg-gray-50 hover:text-yutime-blue transition-all relative"
                 >
                   <ShoppingCart size={18} />
+                  {itemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-yutime-coral text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {itemCount}
+                    </span>
+                  )}
                 </Button>
-                
-                {/* Empty Cart Dropdown */}
-                {isCartDropdownOpen && cartItems.length === 0 && (
-                  <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-50">
-                    <div className="text-center">
-                      <ShoppingCart size={32} className="mx-auto mb-2 text-gray-400" />
-                      <p className="text-gray-600 mb-3">Your cart is empty</p>
-                      <Button
-                        onClick={handleExploreCoursesClick}
-                        className="w-full bg-yutime-blue hover:bg-yutime-blue/90 text-white"
-                      >
-                        Explore Courses
-                      </Button>
-                    </div>
-                  </div>
-                )}
               </div>
               
               <button 
@@ -226,11 +194,19 @@ const Navbar = () => {
                 
                 {/* Mobile Shopping Cart Button */}
                 <button
-                  onClick={handleCartClick}
+                  onClick={() => {
+                    toggleMenu();
+                    handleCartClick();
+                  }}
                   className="flex items-center space-x-2 text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
                 >
                   <ShoppingCart size={20} />
                   <span>Shopping Cart</span>
+                  {itemCount > 0 && (
+                    <span className="bg-yutime-coral text-white text-sm rounded-full h-6 w-6 flex items-center justify-center">
+                      {itemCount}
+                    </span>
+                  )}
                 </button>
                 
                 <button 
@@ -260,20 +236,15 @@ const Navbar = () => {
         </div>
       </header>
       
-      {/* Overlay to close cart dropdown when clicking outside */}
-      {isCartDropdownOpen && (
-        <div 
-          className="fixed inset-0 z-30" 
-          onClick={() => setIsCartDropdownOpen(false)}
-        />
-      )}
-      
       {/* Login Modal */}
       <LoginModal 
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={handleLogin}
       />
+
+      {/* Cart Drawer */}
+      <CartDrawer />
     </>
   );
 };

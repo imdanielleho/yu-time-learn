@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -10,7 +11,10 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import BottomNavigation from '@/components/BottomNavigation';
 import LoginModal from '@/components/LoginModal';
+import BundleModal from '@/components/BundleModal';
+import UpsellModal from '@/components/UpsellModal';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useCart } from '@/contexts/CartContext';
 import { courses } from '@/data/courses';
 
 const CourseDetail = () => {
@@ -19,8 +23,11 @@ const CourseDetail = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
+  const [isUpsellModalOpen, setIsUpsellModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
+  const { addToCart, openCart } = useCart();
   
   // TODO: Replace with actual authentication state
   const isLoggedIn = false; // This should come from your auth context/state
@@ -40,14 +47,33 @@ const CourseDetail = () => {
     if (!isLoggedIn) {
       setIsLoginModalOpen(true);
     } else {
-      // Handle purchase logic
-      console.log("Proceed to purchase");
+      setIsUpsellModalOpen(true);
     }
   };
 
   const handleAddToCart = () => {
-    console.log("Add to cart:", course?.title);
-    // TODO: Implement add to cart functionality
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+    } else if (course) {
+      addToCart({
+        id: course.id,
+        title: course.title,
+        price: course.price,
+        image: course.image,
+        category: course.category
+      });
+      openCart();
+    }
+  };
+
+  const handleUpsellContinue = () => {
+    setIsUpsellModalOpen(false);
+    navigate('/checkout');
+  };
+
+  const handleUpsellBundle = () => {
+    setIsUpsellModalOpen(false);
+    setIsBundleModalOpen(true);
   };
 
   const handleVideoPlay = (title: string, videoUrl?: string) => {
@@ -297,7 +323,7 @@ const CourseDetail = () => {
                         onClick={handleBuyNow}
                         className="flex-1 py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md hover:shadow-lg transition-all"
                       >
-                        Buy Now
+                        Buy This Course – HKD 120
                       </Button>
                       <Button 
                         onClick={handleAddToCart}
@@ -306,6 +332,15 @@ const CourseDetail = () => {
                       >
                         <ShoppingCart size={20} />
                       </Button>
+                    </div>
+
+                    <div className="text-center">
+                      <button 
+                        onClick={() => setIsBundleModalOpen(true)}
+                        className="text-sm text-yutime-blue hover:text-yutime-blue/80 underline"
+                      >
+                        Save with a bundle – Get 3 for HKD 350 or 5 for HKD 500
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -325,6 +360,19 @@ const CourseDetail = () => {
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         onLogin={handleLogin}
+      />
+
+      <BundleModal
+        isOpen={isBundleModalOpen}
+        onClose={() => setIsBundleModalOpen(false)}
+      />
+
+      <UpsellModal
+        isOpen={isUpsellModalOpen}
+        onClose={() => setIsUpsellModalOpen(false)}
+        onBuildBundle={handleUpsellBundle}
+        onContinue={handleUpsellContinue}
+        courseName={course.title}
       />
 
       {/* Video Modal with updated width */}
