@@ -487,13 +487,13 @@ const CourseDetail = () => {
               </div>
               <div className="space-y-3">
                 <Button
-                  onClick={handleInlineUpsellBundle}
+                  onClick={handleUpsellBundle}
                   className="w-full bg-yutime-blue hover:bg-yutime-blue/90 text-white py-3 text-lg font-medium"
                 >
                   Yes, Build My Bundle
                 </Button>
                 <Button
-                  onClick={handleInlineUpsellContinue}
+                  onClick={handleUpsellContinue}
                   variant="outline"
                   className="w-full border-yutime-warmGray text-yutime-warmGray hover:bg-gray-50 py-3"
                 >
