@@ -235,9 +235,9 @@ const CourseDetail = () => {
                     {curriculum.map((chapter, index) => (
                       <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
                         <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
-                          <div className="flex flex-col items-start w-full mr-4">
+                          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between w-full mr-4">
                             <span className="text-left">Chapter {chapter.chapter}. {chapter.title}</span>
-                            <span className="text-sm text-yutime-warmGray font-medium mt-1 text-left lg:text-right lg:ml-auto">
+                            <span className="text-sm text-yutime-warmGray font-medium mt-1 lg:mt-0 text-left lg:text-right">
                               {chapter.lessons} lessons | {chapter.duration}
                             </span>
                           </div>
@@ -328,15 +328,18 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
-      {/* Video Modal with autoplay */}
+      {/* Video Modal with improved styling */}
       <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
-        <DialogContent className="sm:max-w-4xl max-h-[90vh] p-0 bg-black">
+        <DialogContent className="max-w-full sm:max-w-[80vw] max-h-[90vh] p-0 bg-black">
           <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
             <X className="h-6 w-6" />
           </DialogClose>
           
           {currentVideo && (
             <div className="w-full">
+              <div className="p-4 bg-black text-white border-b border-gray-700">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
+              </div>
               <div className="aspect-video">
                 <video
                   src={currentVideo.url}
@@ -344,9 +347,6 @@ const CourseDetail = () => {
                   controls
                   autoPlay
                 />
-              </div>
-              <div className="p-4 bg-black text-white">
-                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
             </div>
           )}
