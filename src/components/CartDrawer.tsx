@@ -18,9 +18,17 @@ const CartDrawer = () => {
     navigate('/checkout');
   };
 
-  const handleAddMoreCourses = () => {
+  const handleAddMoreCourses = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log("Add More Courses CTA clicked");
     closeCart();
-    navigate('/');
+    // Timeout ensures Sheet/Drawer doesn't swallow navigation event
+    setTimeout(() => {
+      navigate('/');
+    }, 200);
   };
 
   const itemCount = getItemCount();
