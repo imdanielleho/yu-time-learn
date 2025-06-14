@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Gift } from "lucide-react";
@@ -39,11 +38,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <div className="flex items-center gap-2 mb-2">
             <Gift className="text-yutime-coral" size={20} />
             <span className="text-sm font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-2 py-0.5 rounded-lg">
-              Save with a Bundle
+              Save with a bundle
             </span>
           </div>
           <div className="text-yutime-sage font-semibold text-lg leading-tight">
-            Get <span className="text-yutime-coral">3 courses for HKD 350</span> or <span className="text-yutime-lavender">5 for HKD 500</span>
+            Save with a bundle – Get <span className="text-yutime-coral">3 for HKD350</span> or <span className="text-yutime-lavender">5 for HKD500</span>
           </div>
           <div className="flex flex-col gap-2">
             <Button

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ArrowLeft, CreditCard, Lock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart } from '@/contexts/CartContext';
 import { useNavigate, Link } from 'react-router-dom';
+import CheckoutUpsell from "@/components/checkout/CheckoutUpsell";
 
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
@@ -20,6 +20,7 @@ const Checkout = () => {
     cvv: '',
     couponCode: ''
   });
+  const [showUpsell, setShowUpsell] = useState(true);
 
   const total = getTotalPrice();
 
@@ -39,6 +40,12 @@ const Checkout = () => {
       clearCart();
       navigate('/success');
     }, 2000);
+  };
+
+  const handleUpsellContinue = () => setShowUpsell(false);
+  const handleBuildBundle = () => {
+    setShowUpsell(false);
+    navigate('/', { state: { openBundle: true } }); // simple: go back home and open bundle modal; can customize
   };
 
   if (items.length === 0) {
@@ -66,128 +73,133 @@ const Checkout = () => {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Checkout Form */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h1 className="text-2xl font-bold text-yutime-sage mb-6">Checkout</h1>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Billing Information */}
-              <div>
-                <h2 className="text-lg font-semibold text-yutime-sage mb-4">Billing Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                    />
+            {showUpsell && items.length === 1 && (
+              <CheckoutUpsell
+                courseTitle={items[0].title}
+                onBuildBundle={handleBuildBundle}
+                onContinue={handleUpsellContinue}
+              />
+            )}
+            {!showUpsell && (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Billing Information */}
+                <div>
+                  <h2 className="text-lg font-semibold text-yutime-sage mb-4">Billing Information</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <Label htmlFor="lastName">Last Name</Label>
+                  <div className="mt-4">
+                    <Label htmlFor="email">Email Address</Label>
                     <Input
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
                       onChange={handleInputChange}
                       required
                     />
                   </div>
                 </div>
-                <div className="mt-4">
-                  <Label htmlFor="email">Email Address</Label>
+
+                {/* Payment Method */}
+                <div>
+                  <h2 className="text-lg font-semibold text-yutime-sage mb-4 flex items-center">
+                    <CreditCard className="mr-2" size={20} />
+                    Payment Method
+                  </h2>
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="cardNumber">Card Number</Label>
+                      <Input
+                        id="cardNumber"
+                        name="cardNumber"
+                        placeholder="1234 5678 9012 3456"
+                        value={formData.cardNumber}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="expiryDate">Expiry Date</Label>
+                        <Input
+                          id="expiryDate"
+                          name="expiryDate"
+                          placeholder="MM/YY"
+                          value={formData.expiryDate}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="cvv">CVV</Label>
+                        <Input
+                          id="cvv"
+                          name="cvv"
+                          placeholder="123"
+                          value={formData.cvv}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Coupon Code */}
+                <div>
+                  <Label htmlFor="couponCode">Coupon Code (Optional)</Label>
                   <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
+                    id="couponCode"
+                    name="couponCode"
+                    placeholder="Enter coupon code"
+                    value={formData.couponCode}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
-              </div>
 
-              {/* Payment Method */}
-              <div>
-                <h2 className="text-lg font-semibold text-yutime-sage mb-4 flex items-center">
-                  <CreditCard className="mr-2" size={20} />
-                  Payment Method
-                </h2>
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="cardNumber">Card Number</Label>
-                    <Input
-                      id="cardNumber"
-                      name="cardNumber"
-                      placeholder="1234 5678 9012 3456"
-                      value={formData.cardNumber}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="expiryDate">Expiry Date</Label>
-                      <Input
-                        id="expiryDate"
-                        name="expiryDate"
-                        placeholder="MM/YY"
-                        value={formData.expiryDate}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="cvv">CVV</Label>
-                      <Input
-                        id="cvv"
-                        name="cvv"
-                        placeholder="123"
-                        value={formData.cvv}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Coupon Code */}
-              <div>
-                <Label htmlFor="couponCode">Coupon Code (Optional)</Label>
-                <Input
-                  id="couponCode"
-                  name="couponCode"
-                  placeholder="Enter coupon code"
-                  value={formData.couponCode}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                disabled={isProcessing}
-                className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-medium flex items-center justify-center"
-              >
-                {isProcessing ? (
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                ) : (
-                  <Lock className="mr-2" size={20} />
-                )}
-                {isProcessing ? 'Processing...' : `Complete Purchase - HKD ${total}`}
-              </Button>
-            </form>
-
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={isProcessing}
+                  className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-medium flex items-center justify-center"
+                >
+                  {isProcessing ? (
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
+                  ) : (
+                    <Lock className="mr-2" size={20} />
+                  )}
+                  {isProcessing ? 'Processing...' : `Complete Purchase - HKD ${total}`}
+                </Button>
+              </form>
+            )}
             <p className="text-sm text-yutime-warmGray text-center mt-4">
               <Lock className="inline mr-1" size={14} />
               Your payment information is secure and encrypted
             </p>
           </div>
 
-          {/* Order Summary */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h2 className="text-xl font-bold text-yutime-sage mb-6">Order Summary</h2>
             

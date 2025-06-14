@@ -19,7 +19,7 @@ import CourseHeader from "@/components/course-detail/CourseHeader";
 import CourseContent from "@/components/course-detail/CourseContent";
 import CourseCurriculum from "@/components/course-detail/CourseCurriculum";
 import CoursePricingCard from "@/components/course-detail/CoursePricingCard";
-import InlineUpsell from "@/components/course-detail/InlineUpsell";
+import { useToast } from "@/hooks/use-toast";
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -28,22 +28,20 @@ const CourseDetail = () => {
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
-  const [isUpsellModalOpen, setIsUpsellModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
   const { addToCart, openCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart">(null);
-  const [showInlineUpsell, setShowInlineUpsell] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { toast } = useToast();
 
-  // TODO: Replace with actual authentication state
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // We'll mock 'login' state for single page demo
-
+  // POST-LOGIN REDIRECTION LOGIC
   useEffect(() => {
-    // POST-LOGIN REDIRECTION LOGIC
     if (isLoggedIn && postLoginAction === "buyNow") {
-      setShowInlineUpsell(true); // open upsell inline in the checkout flow
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
+      // Go directly to checkout
+      navigate('/checkout', { state: { singleCourse: course } });
     } else if (isLoggedIn && postLoginAction === "addToCart" && course) {
       addToCart({
         id: course.id,
@@ -52,21 +50,24 @@ const CourseDetail = () => {
         image: course.image,
         category: course.category
       });
-      // After login, stay on detail, show cart
+      toast({
+        title: "Added to Cart",
+        description: `"${course.title}" was added to your cart.`,
+      });
+      // After login, stay on detail and just open cart
       openCart();
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
     }
-  }, [isLoggedIn, postLoginAction, addToCart, openCart, course, setIsUpsellModalOpen]);
-
-  // Scroll to top when component mounts
+  }, [isLoggedIn, postLoginAction, addToCart, openCart, course, navigate, toast]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
   const handleLogin = (email: string, password: string) => {
     setIsLoggedIn(true);
-    // Don't navigate! Logic is now handled in useEffect above.
+    // DO NOT navigate here (navigation handled above)
   };
 
   const handleBuyNow = () => {
@@ -75,8 +76,8 @@ const CourseDetail = () => {
       setIsLoginModalOpen(true);
       return;
     }
-    // Open checkout & upsell step in "modal"/inline
-    setShowInlineUpsell(true);
+    // Go directly to checkout with "singleCourse" intent
+    navigate('/checkout', { state: { singleCourse: course } });
   };
 
   const handleAddToCart = () => {
@@ -93,19 +94,15 @@ const CourseDetail = () => {
         image: course.image,
         category: course.category
       });
+      toast({
+        title: "Added to Cart",
+        description: `"${course.title}" was added to your cart.`,
+      });
       openCart();
     }
   };
 
-  const handleUpsellContinue = () => {
-    setIsUpsellModalOpen(false);
-    navigate('/checkout');
-  };
-
-  const handleUpsellBundle = () => {
-    setIsUpsellModalOpen(false);
-    setIsBundleModalOpen(true);
-  };
+  const handleOpenBundle = () => setIsBundleModalOpen(true);
 
   const handleVideoPlay = (title: string, videoUrl?: string) => {
     setCurrentVideo({
@@ -137,7 +134,6 @@ const CourseDetail = () => {
     );
   }
 
-  // Curriculum mock (can eventually move out to its own file)
   const curriculum = [
     {
       chapter: 1,
@@ -169,25 +165,19 @@ const CourseDetail = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <CourseHeader
-          course={course}
-          onPlay={handleVideoPlay}
-        />
+        <CourseHeader course={course} onPlay={handleVideoPlay} />
         <div className="bg-gray-50">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8">
               <div className="lg:col-span-2 space-y-8">
                 <CourseContent />
-                <CourseCurriculum
-                  curriculum={curriculum}
-                  onLessonPlay={handleVideoPlay}
-                />
+                <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
               </div>
               <div className="lg:col-span-1">
                 <CoursePricingCard
                   onBuyNow={handleBuyNow}
                   onAddToCart={handleAddToCart}
-                  onOpenBundle={() => setIsBundleModalOpen(true)}
+                  onOpenBundle={handleOpenBundle}
                 />
               </div>
             </div>
@@ -200,7 +190,7 @@ const CourseDetail = () => {
         <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
       )}
       {isMobile && isLoggedIn && <BottomNavigation />}
-      
+
       <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
@@ -212,21 +202,12 @@ const CourseDetail = () => {
         onClose={() => setIsBundleModalOpen(false)}
       />
 
-      <UpsellModal
-        isOpen={isUpsellModalOpen}
-        onClose={() => setIsUpsellModalOpen(false)}
-        onBuildBundle={handleUpsellBundle}
-        onContinue={handleUpsellContinue}
-        courseName={course.title}
-      />
-
       {/* Video Modal with updated width */}
       <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
         <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
           <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
             <X className="h-6 w-6" />
           </DialogClose>
-          
           {currentVideo && (
             <div className="w-full">
               <div className="p-4 bg-white text-black border-b border-gray-200">
@@ -244,16 +225,6 @@ const CourseDetail = () => {
           )}
         </DialogContent>
       </Dialog>
-
-      {/* Inline Upsell */}
-      {showInlineUpsell && (
-        <InlineUpsell
-          courseTitle={course.title}
-          onBuildBundle={handleUpsellBundle}
-          onContinue={handleUpsellContinue}
-          onClose={() => setShowInlineUpsell(false)}
-        />
-      )}
     </div>
   );
 };
