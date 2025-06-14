@@ -21,6 +21,10 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
   const handleHomeClick = () => {
     if (isOnCourseDetailPage) {
       navigate('/');
+      // Small delay to ensure page loads before scrolling to top
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
     } else {
       const element = document.getElementById('hero');
       if (element) {

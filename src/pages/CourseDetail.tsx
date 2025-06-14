@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -235,7 +234,7 @@ const CourseDetail = () => {
                     {curriculum.map((chapter, index) => (
                       <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
                         <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
-                          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between w-full mr-4">
+                          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between w-full mr-4">
                             <span className="text-left">Chapter {chapter.chapter}. {chapter.title}</span>
                             <span className="text-sm text-yutime-warmGray font-medium mt-1 lg:mt-0 text-left lg:text-right">
                               {chapter.lessons} lessons | {chapter.duration}
@@ -337,7 +336,7 @@ const CourseDetail = () => {
           
           {currentVideo && (
             <div className="w-full">
-              <div className="p-4 bg-black text-white border-b border-gray-700">
+              <div className="p-4 bg-white text-black border-b border-gray-200">
                 <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
               <div className="aspect-video">
