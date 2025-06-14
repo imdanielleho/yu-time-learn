@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -31,7 +30,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       onLogin(email, password); // For demo, treat signup as login
     }
     onClose();
-    navigate('/dashboard');
+    // Removed navigate('/dashboard'); // Redirection will be handled by parent (CourseDetail)
   };
 
   const resetForm = () => {
