@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Gift } from "lucide-react";
@@ -16,46 +17,46 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
         <div className="text-4xl font-bold text-yutime-sage mb-2">HKD 120</div>
         <div className="text-yutime-warmGray text-lg">One-time investment in yourself</div>
       </div>
-      <div className="flex gap-2 mb-4">
-        <Button 
+      {/* Responsive layout for CTAs */}
+      <div className="flex flex-col gap-2 mb-4 sm:flex-row">
+        <Button
           onClick={onBuyNow}
-          className="flex-1 min-w-0 py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md hover:shadow-lg transition-all"
+          className="w-full py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-base sm:text-lg shadow-md hover:shadow-lg transition-all"
           data-testid="buynow-btn"
         >
-          Buy This Course – HKD 120
+          <span className="block sm:hidden">Buy Now – HKD 120</span>
+          <span className="hidden sm:block">Buy This Course – HKD 120</span>
         </Button>
-        <Button 
+        <Button
           onClick={onAddToCart}
           variant="outline"
-          className="w-14 min-w-0 p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all flex-shrink-0"
+          className="w-full sm:w-14 min-w-0 p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all flex-shrink-0"
           data-testid="addtocart-btn"
         >
           <ShoppingCart size={20} />
+          <span className="ml-2 text-base sm:hidden">Add to Cart</span>
         </Button>
       </div>
+      {/* Minimal bundle CTA */}
       <div className="mt-6">
-        <div className="rounded-2xl bg-gradient-to-br from-yutime-cream via-yutime-softWhite to-orange-50 p-5 border border-yutime-coral/40 shadow-md flex flex-col gap-3">
+        <div className="rounded-2xl bg-yutime-cream p-4 border border-yutime-coral/40 flex flex-col items-center gap-3 shadow-none">
           <div className="flex items-center gap-2 mb-2">
             <Gift className="text-yutime-coral" size={20} />
             <span className="text-sm font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-2 py-0.5 rounded-lg">
               Save with a bundle
             </span>
           </div>
-          <div className="text-yutime-sage font-semibold text-lg leading-tight">
-            Save with a bundle – Get <span className="text-yutime-coral">3 for HKD350</span> or <span className="text-yutime-lavender">5 for HKD500</span>
+          <div className="text-yutime-sage font-semibold text-base leading-tight text-center">
+            3 Courses for <span className="text-yutime-coral font-bold">HKD 350</span> <br />
+            <span className="text-green-700 text-sm">Save HKD 10</span>
           </div>
-          <div className="flex flex-col gap-2">
-            <Button
-              onClick={onOpenBundle}
-              variant="secondary"
-              className="bg-yutime-coral/90 hover:bg-yutime-coral text-white font-medium py-2 rounded-xl"
-            >
-              Choose a Bundle &amp; Save
-            </Button>
-            <div className="text-xs text-yutime-warmGray text-center mt-1">
-              <span className="font-bold">Most Popular</span> · Save up to HKD 100 vs individual prices!
-            </div>
-          </div>
+          <Button
+            onClick={onOpenBundle}
+            variant="secondary"
+            className="bg-yutime-coral/90 hover:bg-yutime-coral text-white font-medium py-2 rounded-xl text-base w-full"
+          >
+            Choose Bundle &amp; Save
+          </Button>
         </div>
       </div>
     </div>
