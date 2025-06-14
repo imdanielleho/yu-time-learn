@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, CreditCard, Lock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,13 +13,11 @@ const Checkout = () => {
   const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({
+    fullName: '',
     email: '',
-    firstName: '',
-    lastName: '',
     cardNumber: '',
     expiryDate: '',
     cvv: '',
-    couponCode: ''
   });
   const [showUpsell, setShowUpsell] = useState(true);
 
@@ -29,7 +26,6 @@ const Checkout = () => {
   // Use singleCourse if present, otherwise use cart items
   const checkoutItems = singleCourse ? [singleCourse] : items;
   // Calculate total price for checkout items
-  // If singleCourse, use its price
   const total = singleCourse
     ? singleCourse.price
     : getTotalPrice();
@@ -57,7 +53,6 @@ const Checkout = () => {
     navigate('/', { state: { openBundle: true } });
   };
 
-  // Show "cart is empty" only if neither singleCourse nor cart items
   if (checkoutItems.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -72,193 +67,144 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container max-w-4xl py-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center">
+      <div className="w-full max-w-lg px-4 py-8">
         <Link
           to="/"
-          className="inline-flex items-center space-x-2 text-yutime-blue hover:text-yutime-blue/80 mb-8"
+          className="inline-flex items-center text-yutime-blue hover:text-yutime-blue/80 mb-4 text-base"
         >
-          <ArrowLeft size={20} />
-          <span>Back to Courses</span>
+          &larr; Back to Courses
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h1 className="text-2xl font-bold text-yutime-sage mb-6">Checkout</h1>
-            {showUpsell && checkoutItems.length === 1 && (
-              <CheckoutUpsell
-                courseTitle={checkoutItems[0].title}
-                onBuildBundle={handleBuildBundle}
-                onContinue={handleUpsellContinue}
-              />
-            )}
-            {!showUpsell && (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Billing Information */}
-                <div>
-                  <h2 className="text-lg font-semibold text-yutime-sage mb-4">Billing Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input
-                        id="firstName"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input
-                        id="lastName"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
+        {/* Order Summary */}
+        <div className="bg-white rounded-xl shadow p-5 mb-6">
+          <h2 className="text-xl font-bold text-yutime-sage mb-4 text-center">Order Summary</h2>
+          <div className="space-y-3 mb-5">
+            {checkoutItems.map((item: any) => (
+              <div key={item.id} className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-10 h-10 object-cover rounded"
+                />
+                <div className="flex-1">
+                  <h4 className="font-medium text-yutime-sage text-sm">{item.title}</h4>
+                  <p className="text-xs text-yutime-warmGray">{item.category}</p>
                 </div>
-
-                {/* Payment Method */}
-                <div>
-                  <h2 className="text-lg font-semibold text-yutime-sage mb-4 flex items-center">
-                    <CreditCard className="mr-2" size={20} />
-                    Payment Method
-                  </h2>
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="cardNumber">Card Number</Label>
-                      <Input
-                        id="cardNumber"
-                        name="cardNumber"
-                        placeholder="1234 5678 9012 3456"
-                        value={formData.cardNumber}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="expiryDate">Expiry Date</Label>
-                        <Input
-                          id="expiryDate"
-                          name="expiryDate"
-                          placeholder="MM/YY"
-                          value={formData.expiryDate}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="cvv">CVV</Label>
-                        <Input
-                          id="cvv"
-                          name="cvv"
-                          placeholder="123"
-                          value={formData.cvv}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Coupon Code */}
-                <div>
-                  <Label htmlFor="couponCode">Coupon Code (Optional)</Label>
-                  <Input
-                    id="couponCode"
-                    name="couponCode"
-                    placeholder="Enter coupon code"
-                    value={formData.couponCode}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  disabled={isProcessing}
-                  className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-medium flex items-center justify-center"
-                >
-                  {isProcessing ? (
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
-                  ) : (
-                    <Lock className="mr-2" size={20} />
-                  )}
-                  {isProcessing ? 'Processing...' : `Complete Purchase - HKD ${total}`}
-                </Button>
-              </form>
-            )}
-            <p className="text-sm text-yutime-warmGray text-center mt-4">
-              <Lock className="inline mr-1" size={14} />
-              Your payment information is secure and encrypted
-            </p>
+                <span className="font-semibold text-yutime-sage text-sm">HKD {item.price}</span>
+              </div>
+            ))}
           </div>
-
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-xl font-bold text-yutime-sage mb-6">Order Summary</h2>
-
-            <div className="space-y-4 mb-6">
-              {checkoutItems.map((item: any) => (
-                <div key={item.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-12 h-12 object-cover rounded-lg"
-                  />
-                  <div className="flex-1">
-                    <h4 className="font-medium text-yutime-sage text-sm">{item.title}</h4>
-                    <p className="text-xs text-yutime-warmGray">{item.category}</p>
-                  </div>
-                  <span className="font-medium text-yutime-sage">HKD {item.price}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t pt-4 space-y-2">
-              <div className="flex justify-between">
-                <span className="text-yutime-warmGray">Subtotal:</span>
-                <span className="text-yutime-sage">HKD {total}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-yutime-warmGray">Tax:</span>
-                <span className="text-yutime-sage">HKD 0</span>
-              </div>
-              <div className="flex justify-between text-lg font-bold text-yutime-sage pt-2 border-t">
-                <span>Total:</span>
-                <span>HKD {total}</span>
-              </div>
-            </div>
-
-            <div className="mt-6 p-4 bg-yutime-sand_light rounded-lg">
-              <h3 className="font-medium text-yutime-sage mb-2">What's Included:</h3>
-              <ul className="text-sm text-yutime-warmGray space-y-1">
-                <li>• Lifetime access to all course materials</li>
-                <li>• Mobile and desktop compatibility</li>
-                <li>• Certificate of completion</li>
-                <li>• 30-day money-back guarantee</li>
-              </ul>
-            </div>
+          <div className="flex justify-between items-center text-lg font-bold text-yutime-sage pt-2 border-t">
+            <span>Total</span>
+            <span>HKD {total}</span>
+          </div>
+          <div className="mt-4 p-3 bg-yutime-sand_light rounded text-sm text-yutime-sage">
+            <ul className="space-y-1">
+              <li>• Lifetime access to course materials</li>
+              <li>• Certificate of completion</li>
+            </ul>
           </div>
         </div>
+
+        {/* Upsell Offer */}
+        {showUpsell && checkoutItems.length === 1 && (
+          <CheckoutUpsell
+            courseTitle={checkoutItems[0].title}
+            onBuildBundle={handleBuildBundle}
+            onContinue={handleUpsellContinue}
+          />
+        )}
+
+        {/* Minimal Form */}
+        {!showUpsell && (
+          <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow p-5 space-y-5">
+            <h2 className="text-lg font-bold text-yutime-sage mb-2 text-center">Payment Details</h2>
+            <div>
+              <Label htmlFor="fullName" className="mb-1 block text-base">Full Name</Label>
+              <Input
+                id="fullName"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+                className="text-base py-3"
+                autoComplete="name"
+              />
+            </div>
+            <div>
+              <Label htmlFor="email" className="mb-1 block text-base">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="text-base py-3"
+                autoComplete="email"
+              />
+            </div>
+            <div>
+              <Label htmlFor="cardNumber" className="mb-1 block text-base">Card Number</Label>
+              <Input
+                id="cardNumber"
+                name="cardNumber"
+                placeholder="1234 5678 9012 3456"
+                value={formData.cardNumber}
+                onChange={handleInputChange}
+                required
+                className="text-base py-3"
+                inputMode="numeric"
+                autoComplete="cc-number"
+              />
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <Label htmlFor="expiryDate" className="mb-1 block text-base">Expiry</Label>
+                <Input
+                  id="expiryDate"
+                  name="expiryDate"
+                  placeholder="MM/YY"
+                  value={formData.expiryDate}
+                  onChange={handleInputChange}
+                  required
+                  className="text-base py-3"
+                  inputMode="numeric"
+                  autoComplete="cc-exp"
+                />
+              </div>
+              <div className="flex-1">
+                <Label htmlFor="cvv" className="mb-1 block text-base">CVV</Label>
+                <Input
+                  id="cvv"
+                  name="cvv"
+                  placeholder="123"
+                  value={formData.cvv}
+                  onChange={handleInputChange}
+                  required
+                  className="text-base py-3"
+                  inputMode="numeric"
+                  autoComplete="cc-csc"
+                />
+              </div>
+            </div>
+            <Button
+              type="submit"
+              disabled={isProcessing}
+              className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-bold mt-2"
+            >
+              {isProcessing ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
+              ) : null}
+              {isProcessing ? 'Processing...' : `Complete Purchase - HKD ${total}`}
+            </Button>
+          </form>
+        )}
       </div>
     </div>
   );
 };
 
 export default Checkout;
+
