@@ -28,14 +28,16 @@ const CourseDetail = () => {
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
   const { addToCart, openCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart">(null);
+  const [showInlineUpsell, setShowInlineUpsell] = useState(false);
 
   // TODO: Replace with actual authentication state
   const [isLoggedIn, setIsLoggedIn] = useState(false); // We'll mock 'login' state for single page demo
 
   useEffect(() => {
-    // Mock post-login redirection logic
+    // POST-LOGIN REDIRECTION LOGIC
     if (isLoggedIn && postLoginAction === "buyNow") {
-      setIsUpsellModalOpen(true);
+      setShowInlineUpsell(true); // open upsell inline in the checkout flow
+      setIsLoginModalOpen(false);
       setPostLoginAction(null);
     } else if (isLoggedIn && postLoginAction === "addToCart" && course) {
       addToCart({
@@ -45,10 +47,12 @@ const CourseDetail = () => {
         image: course.image,
         category: course.category
       });
+      // After login, stay on detail, show cart
       openCart();
+      setIsLoginModalOpen(false);
       setPostLoginAction(null);
     }
-  }, [isLoggedIn, postLoginAction, addToCart, openCart, course, setIsUpsellModalOpen]); // eslint-disable-line
+  }, [isLoggedIn, postLoginAction, addToCart, openCart, course, setIsUpsellModalOpen]);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -56,26 +60,27 @@ const CourseDetail = () => {
   }, [id]);
 
   const handleLogin = (email: string, password: string) => {
-    // Fake authentication
     setIsLoggedIn(true);
-    setIsLoginModalOpen(false);
-    // Do not call navigate here—post-login logic is now handled in useEffect
+    // Don't navigate! Logic is now handled in useEffect above.
   };
 
   const handleBuyNow = () => {
     if (!isLoggedIn) {
       setPostLoginAction("buyNow");
       setIsLoginModalOpen(true);
-    } else {
-      setIsUpsellModalOpen(true);
+      return;
     }
+    // Open checkout & upsell step in "modal"/inline
+    setShowInlineUpsell(true);
   };
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {
       setPostLoginAction("addToCart");
       setIsLoginModalOpen(true);
-    } else if (course) {
+      return;
+    }
+    if (course) {
       addToCart({
         id: course.id,
         title: course.title,
@@ -343,6 +348,7 @@ const CourseDetail = () => {
                       <Button 
                         onClick={handleBuyNow}
                         className="flex-1 min-w-0 py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md hover:shadow-lg transition-all"
+                        data-testid="buynow-btn"
                       >
                         Buy This Course – HKD 120
                       </Button>
@@ -350,6 +356,7 @@ const CourseDetail = () => {
                         onClick={handleAddToCart}
                         variant="outline"
                         className="w-14 min-w-0 p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all flex-shrink-0"
+                        data-testid="addtocart-btn"
                       >
                         <ShoppingCart size={20} />
                       </Button>
@@ -440,6 +447,63 @@ const CourseDetail = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* ---- INLINE UPSALE MODAL/SECTION (after clicking buy now or logging in for buy now) ---- */}
+      {showInlineUpsell && (
+        <div className="fixed inset-0 z-40 bg-black/40 flex items-center justify-center px-2 py-10">
+          <div className="bg-white rounded-xl p-6 max-w-lg w-full shadow-xl relative">
+            <button
+              onClick={() => setShowInlineUpsell(false)}
+              className="absolute right-4 top-4 rounded-full p-1 hover:bg-gray-100 transition-colors"
+              aria-label="Close"
+            >
+              <X size={20} />
+            </button>
+            <div className="text-center py-4">
+              <h2 className="text-2xl font-bold text-yutime-sage mb-4">
+                Want to save 30%?
+              </h2>
+              <div className="bg-yutime-sand_light rounded-lg p-6 mb-6">
+                <p className="text-yutime-sage mb-4">
+                  You're about to purchase <strong>"{course.title}"</strong> for HKD 120.
+                </p>
+                <p className="text-lg font-semibold text-yutime-coral mb-2">
+                  Add 2 more courses for only HKD 230 more to get a 3-course bundle!
+                </p>
+                <div className="text-sm text-yutime-warmGray">
+                  <div className="flex justify-between">
+                    <span>3 individual courses:</span>
+                    <span className="line-through">HKD 360</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-yutime-sage">
+                    <span>Bundle price:</span>
+                    <span>HKD 350</span>
+                  </div>
+                  <div className="flex justify-between text-green-600 font-medium">
+                    <span>You save:</span>
+                    <span>HKD 10</span>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <Button
+                  onClick={handleInlineUpsellBundle}
+                  className="w-full bg-yutime-blue hover:bg-yutime-blue/90 text-white py-3 text-lg font-medium"
+                >
+                  Yes, Build My Bundle
+                </Button>
+                <Button
+                  onClick={handleInlineUpsellContinue}
+                  variant="outline"
+                  className="w-full border-yutime-warmGray text-yutime-warmGray hover:bg-gray-50 py-3"
+                >
+                  No Thanks, Continue with Single Course
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
