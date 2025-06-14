@@ -1,15 +1,17 @@
+
 import React, { useState } from 'react';
 import { ArrowLeft, CreditCard, Lock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart } from '@/contexts/CartContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import CheckoutUpsell from "@/components/checkout/CheckoutUpsell";
 
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -22,7 +24,15 @@ const Checkout = () => {
   });
   const [showUpsell, setShowUpsell] = useState(true);
 
-  const total = getTotalPrice();
+  // Detect if this checkout is for a single course (Buy Now flow)
+  const singleCourse = location.state?.singleCourse;
+  // Use singleCourse if present, otherwise use cart items
+  const checkoutItems = singleCourse ? [singleCourse] : items;
+  // Calculate total price for checkout items
+  // If singleCourse, use its price
+  const total = singleCourse
+    ? singleCourse.price
+    : getTotalPrice();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -34,8 +44,7 @@ const Checkout = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
-    
-    // Simulate payment processing
+
     setTimeout(() => {
       clearCart();
       navigate('/success');
@@ -45,10 +54,11 @@ const Checkout = () => {
   const handleUpsellContinue = () => setShowUpsell(false);
   const handleBuildBundle = () => {
     setShowUpsell(false);
-    navigate('/', { state: { openBundle: true } }); // simple: go back home and open bundle modal; can customize
+    navigate('/', { state: { openBundle: true } });
   };
 
-  if (items.length === 0) {
+  // Show "cart is empty" only if neither singleCourse nor cart items
+  if (checkoutItems.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
@@ -64,8 +74,8 @@ const Checkout = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container max-w-4xl py-8">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="inline-flex items-center space-x-2 text-yutime-blue hover:text-yutime-blue/80 mb-8"
         >
           <ArrowLeft size={20} />
@@ -75,9 +85,9 @@ const Checkout = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h1 className="text-2xl font-bold text-yutime-sage mb-6">Checkout</h1>
-            {showUpsell && items.length === 1 && (
+            {showUpsell && checkoutItems.length === 1 && (
               <CheckoutUpsell
-                courseTitle={items[0].title}
+                courseTitle={checkoutItems[0].title}
                 onBuildBundle={handleBuildBundle}
                 onContinue={handleUpsellContinue}
               />
@@ -202,12 +212,12 @@ const Checkout = () => {
 
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h2 className="text-xl font-bold text-yutime-sage mb-6">Order Summary</h2>
-            
+
             <div className="space-y-4 mb-6">
-              {items.map(item => (
+              {checkoutItems.map((item: any) => (
                 <div key={item.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <img 
-                    src={item.image} 
+                  <img
+                    src={item.image}
                     alt={item.title}
                     className="w-12 h-12 object-cover rounded-lg"
                   />
