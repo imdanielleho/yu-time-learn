@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star } from 'lucide-react';
 
@@ -42,7 +41,7 @@ const Testimonials = () => {
     <section id="testimonials" className="section bg-yutime-indigo text-white">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Stories of Growth & Success</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Stories of Growth & Success</h2>
           <p className="max-w-3xl mx-auto text-white/90 text-lg leading-relaxed">
             Hear from learners who've discovered new confidence and joy through their YŪTIME journey.
           </p>

@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, BookOpen, Book, Settings, LogOut } from 'lucide-react';
+import { Home, BookOpen, Settings, LogOut } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -30,12 +29,6 @@ const AppSidebar = () => {
       url: "/my-courses",
       icon: BookOpen,
       tourId: "sidebar-nav"
-    },
-    {
-      title: "Courses",
-      url: "/courses",
-      icon: Book,
-      tourId: "courses-nav"
     },
     {
       title: "Settings",
