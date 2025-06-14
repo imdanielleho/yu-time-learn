@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
@@ -28,9 +27,28 @@ const CourseDetail = () => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
   const { addToCart, openCart } = useCart();
-  
+  const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart">(null);
+
   // TODO: Replace with actual authentication state
-  const isLoggedIn = false; // This should come from your auth context/state
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // We'll mock 'login' state for single page demo
+
+  useEffect(() => {
+    // Mock post-login redirection logic
+    if (isLoggedIn && postLoginAction === "buyNow") {
+      setIsUpsellModalOpen(true);
+      setPostLoginAction(null);
+    } else if (isLoggedIn && postLoginAction === "addToCart" && course) {
+      addToCart({
+        id: course.id,
+        title: course.title,
+        price: course.price,
+        image: course.image,
+        category: course.category
+      });
+      openCart();
+      setPostLoginAction(null);
+    }
+  }, [isLoggedIn, postLoginAction, addToCart, openCart, course, setIsUpsellModalOpen]); // eslint-disable-line
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -38,13 +56,15 @@ const CourseDetail = () => {
   }, [id]);
 
   const handleLogin = (email: string, password: string) => {
-    console.log("Login with:", email, password);
+    // Fake authentication
+    setIsLoggedIn(true);
     setIsLoginModalOpen(false);
-    // TODO: Implement actual login logic
+    // Do not call navigate here—post-login logic is now handled in useEffect
   };
 
   const handleBuyNow = () => {
     if (!isLoggedIn) {
+      setPostLoginAction("buyNow");
       setIsLoginModalOpen(true);
     } else {
       setIsUpsellModalOpen(true);
@@ -53,6 +73,7 @@ const CourseDetail = () => {
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {
+      setPostLoginAction("addToCart");
       setIsLoginModalOpen(true);
     } else if (course) {
       addToCart({
@@ -303,7 +324,7 @@ const CourseDetail = () => {
                 </div>
               </div>
 
-              {/* Right column: Pricing card (1/3 width) - Clean white background */}
+              {/* --- Right column: Pricing card (1/3 width) --- */}
               <div className="lg:col-span-1">
                 <div className="sticky top-8">
                   <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
@@ -334,14 +355,34 @@ const CourseDetail = () => {
                       </Button>
                     </div>
 
-                    <div className="text-center">
-                      <button 
-                        onClick={() => setIsBundleModalOpen(true)}
-                        className="text-sm text-yutime-blue hover:text-yutime-blue/80 underline"
-                      >
-                        Save with a bundle – Get 3 for HKD 350 or 5 for HKD 500
-                      </button>
+                    {/* ---- IMPROVED Secondary CTA Card ---- */}
+                    <div className="mt-6">
+                      <div className="rounded-2xl bg-gradient-to-br from-yutime-cream via-yutime-softWhite to-orange-50 p-5 border border-yutime-coral/40 shadow-md flex flex-col gap-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Gift className="text-yutime-coral" size={20} />
+                          <span className="text-sm font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-2 py-0.5 rounded-lg">
+                            Save with a Bundle
+                          </span>
+                        </div>
+                        <div className="text-yutime-sage font-semibold text-lg leading-tight">
+                          Get <span className="text-yutime-coral">3 courses for HKD 350</span> or <span className="text-yutime-lavender">5 for HKD 500</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <Button
+                            onClick={() => setIsBundleModalOpen(true)}
+                            variant="secondary"
+                            className="bg-yutime-coral/90 hover:bg-yutime-coral text-white font-medium py-2 rounded-xl"
+                          >
+                            Choose a Bundle &amp; Save
+                          </Button>
+                          <div className="text-xs text-yutime-warmGray text-center mt-1">
+                            <span className="font-bold">Most Popular</span> · Save up to HKD 100 vs individual prices!
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    {/* ---- END Secondary CTA ---- */}
+
                   </div>
                 </div>
               </div>
