@@ -234,7 +234,7 @@ const CourseDetail = () => {
                     {curriculum.map((chapter, index) => (
                       <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
                         <AccordionTrigger className="text-yutime-sage font-semibold text-lg">
-                          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between w-full mr-4">
+                          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full mr-4">
                             <span className="text-left">Chapter {chapter.chapter}. {chapter.title}</span>
                             <span className="text-sm text-yutime-warmGray font-medium mt-1 lg:mt-0 text-left lg:text-right">
                               {chapter.lessons} lessons | {chapter.duration}
