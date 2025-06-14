@@ -30,8 +30,6 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       console.log("Signup attempted with:", { email, firstName, lastName, password });
       onLogin(email, password); // For demo, treat signup as login
     }
-    
-    // Redirect to dashboard after successful login/signup
     onClose();
     navigate('/dashboard');
   };
@@ -56,7 +54,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-3 sm:px-6 lg:px-8 my-2 sm:my-8 max-h-[80vh] overflow-y-auto bg-white">
         <DialogHeader>
           <DialogTitle className="text-center text-xl sm:text-2xl font-normal mb-2 sm:mb-6">
             {activeTab === 'login' ? 'Login' : 'Sign Up'}
@@ -93,13 +91,13 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full py-2 sm:py-3"
+                className="w-full py-2 sm:py-3 bg-white"
               />
               <Input
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full py-2 sm:py-3"
+                className="w-full py-2 sm:py-3 bg-white"
               />
             </div>
           )}
@@ -109,7 +107,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full py-2 sm:py-3"
+            className="w-full py-2 sm:py-3 bg-white"
           />
           
           <div className="space-y-1 sm:space-y-2">
@@ -118,7 +116,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
               placeholder={activeTab === 'signup' ? "Create a Password" : "Your password..."}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full py-2 sm:py-3"
+              className="w-full py-2 sm:py-3 bg-white"
             />
             {activeTab === 'login' && (
               <div className="text-right">
@@ -140,7 +138,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
               placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full py-2 sm:py-3"
+              className="w-full py-2 sm:py-3 bg-white"
             />
           )}
           

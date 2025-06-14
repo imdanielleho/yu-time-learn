@@ -342,14 +342,14 @@ const CourseDetail = () => {
                     <div className="flex gap-2 mb-4">
                       <Button 
                         onClick={handleBuyNow}
-                        className="flex-1 py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md hover:shadow-lg transition-all"
+                        className="flex-1 min-w-0 py-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md hover:shadow-lg transition-all"
                       >
                         Buy This Course – HKD 120
                       </Button>
                       <Button 
                         onClick={handleAddToCart}
                         variant="outline"
-                        className="p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all"
+                        className="w-14 min-w-0 p-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-all flex-shrink-0"
                       >
                         <ShoppingCart size={20} />
                       </Button>
