@@ -13,43 +13,25 @@ const CheckoutUpsell = ({
   onBuildBundle,
   onContinue,
 }: CheckoutUpsellProps) => (
-  <div className="w-full flex flex-col items-center bg-yutime-sand_light rounded-xl border border-yutime-sage/20 p-6 mb-6 shadow-md">
-    <h3 className="text-xl font-bold text-yutime-sage mb-2 text-center">
-      Want to save 30%?
-    </h3>
-    <p className="text-yutime-sage mb-3">
-      You're about to purchase <strong>"{courseTitle}"</strong> for HKD 120.
-    </p>
-    <div className="text-lg font-semibold text-yutime-coral mb-2 text-center">
-      Add 2 more courses for only HKD 230 more to get a 3-course bundle!
+  <div className="w-full flex flex-col items-center bg-yutime-sand_light rounded-xl border border-yutime-sage/20 p-4 mb-6 shadow-sm max-w-md mx-auto">
+    <h3 className="text-lg font-bold text-yutime-sage mb-1 text-center">Bundle Offer</h3>
+    <div className="text-center text-yutime-coral font-semibold mb-2 text-base">
+      Get <span className="font-bold">3 courses for HKD 350</span>
+      <span className="text-green-700 font-normal ml-1">(Save HKD 10)</span>
     </div>
-    <div className="text-sm text-yutime-warmGray mb-5 space-y-1 w-full max-w-md">
-      <div className="flex justify-between">
-        <span>3 individual courses:</span>
-        <span className="line-through">HKD 360</span>
-      </div>
-      <div className="flex justify-between font-bold text-yutime-sage">
-        <span>Bundle price:</span>
-        <span>HKD 350</span>
-      </div>
-      <div className="flex justify-between text-green-600 font-medium">
-        <span>You save:</span>
-        <span>HKD 10</span>
-      </div>
-    </div>
-    <div className="flex flex-col gap-3 w-full">
+    <div className="flex flex-col gap-2 w-full mt-1">
       <Button
         onClick={onBuildBundle}
-        className="w-full bg-yutime-blue hover:bg-yutime-blue/90 text-white py-3 text-lg font-medium"
+        className="w-full bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2 text-base font-medium"
       >
-        Yes, Build My Bundle
+        Add Bundle
       </Button>
       <Button
         onClick={onContinue}
         variant="outline"
-        className="w-full border-yutime-warmGray text-yutime-warmGray hover:bg-gray-50 py-3"
+        className="w-full border-yutime-warmGray text-yutime-warmGray hover:bg-gray-50 py-2 text-base"
       >
-        No Thanks, Continue with Single Course
+        Continue with Single Course
       </Button>
     </div>
   </div>
