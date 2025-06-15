@@ -127,17 +127,10 @@ const CartDrawer = () => {
           side="right"
           className="max-w-full w-[400px] h-full flex flex-col p-0"
         >
-          <SheetHeader className="border-b p-6 pr-16">
-            <div className="flex items-center justify-between">
-              <SheetTitle className="text-xl font-bold text-yutime-sage">
-                Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
-              </SheetTitle>
-              <SheetClose asChild>
-                <Button variant="ghost" size="icon">
-                  <X size={20} />
-                </Button>
-              </SheetClose>
-            </div>
+          <SheetHeader className="border-b p-6">
+            <SheetTitle className="text-xl font-bold text-yutime-sage">
+              Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
+            </SheetTitle>
           </SheetHeader>
           <div className="flex-1 flex flex-col overflow-y-auto">
             {CartPanelContent}
@@ -152,16 +145,9 @@ const CartDrawer = () => {
     <Drawer open={isCartOpen} onOpenChange={(open) => !open && closeCart()}>
       <DrawerContent className="max-h-[90vh]">
         <DrawerHeader className="border-b">
-          <div className="flex items-center justify-between">
-            <DrawerTitle className="text-xl font-bold text-yutime-sage">
-              Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
-            </DrawerTitle>
-            <DrawerClose asChild>
-              <Button variant="ghost" size="icon">
-                <X size={20} />
-              </Button>
-            </DrawerClose>
-          </div>
+          <DrawerTitle className="text-xl font-bold text-yutime-sage">
+            Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
+          </DrawerTitle>
         </DrawerHeader>
         {CartPanelContent}
       </DrawerContent>

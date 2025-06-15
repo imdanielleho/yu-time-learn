@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -83,14 +82,9 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
         style={{ padding: 0 }}
       >
         <SheetHeader className="border-b px-6 py-4">
-          <div className="flex items-center justify-between">
-            <SheetTitle className="text-lg font-bold text-yutime-sage">Choose Your Bundle</SheetTitle>
-            <SheetClose asChild>
-              <Button variant="ghost" size="icon">
-                <X size={20} />
-              </Button>
-            </SheetClose>
-          </div>
+          <SheetTitle className="text-lg font-bold text-yutime-sage">
+            Choose Your Bundle
+          </SheetTitle>
         </SheetHeader>
         <div className="p-6 flex-1 flex flex-col gap-4 overflow-auto">
           {/* Bundle Type Selector */}
