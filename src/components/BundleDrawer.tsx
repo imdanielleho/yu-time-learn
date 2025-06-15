@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -247,22 +246,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
           </div>
         )}
         
-        {/* Five Course Bundle Upgrade - Now in Footer */}
-        <div className="bg-gradient-to-r from-yutime-coral/10 to-yutime-coral/5 border border-yutime-coral/20 rounded-lg p-3 text-center">
-          <h3 className="font-bold text-sm text-yutime-sage mb-1">
-            Want All 5 Courses?
-          </h3>
-          <p className="text-sm text-yutime-warmGray mb-2">
-            Get everything for HKD 500 and save HKD {FIVE_COURSE_BUNDLE.savings}
-          </p>
-          <Button
-            onClick={handleFiveCourseBundle}
-            className="w-full bg-yutime-coral text-white font-bold py-2 rounded-lg shadow hover:bg-yutime-coral/90 text-sm"
-          >
-            Get All 5 Courses – Best Value!
-          </Button>
-        </div>
-        
         <Button
           onClick={handleProceedToCheckout}
           disabled={selectedCourses.length !== BUNDLE_TYPE.count}
@@ -274,6 +257,20 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             : `Browse Courses to Add ${BUNDLE_TYPE.count - selectedCourses.length} More`
           }
         </Button>
+        
+        {/* Secondary 5-Course CTA - Subtle Text Link */}
+        <div className="text-center py-1">
+          <p className="text-sm text-yutime-warmGray mb-1">
+            Want all 5 courses? Get everything for HKD 500 (save HKD {FIVE_COURSE_BUNDLE.savings})
+          </p>
+          <Button
+            onClick={handleFiveCourseBundle}
+            variant="ghost"
+            className="text-yutime-coral hover:text-yutime-coral/80 hover:bg-yutime-coral/10 font-medium text-sm px-2 py-1 h-auto"
+          >
+            Get All 5 Courses – Best Value!
+          </Button>
+        </div>
         
         <div className="flex gap-2">
           {selectedCourses.length > 0 && (
