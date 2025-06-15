@@ -22,10 +22,10 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
         <div className="flex flex-col sm:flex-row gap-3 mb-8 w-full">
           <Button
             onClick={onBuyNow}
-            className="flex-1 min-w-0 py-4 px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
+            className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
             data-testid="buynow-btn"
           >
-            Buy This Course – HKD 120
+            Buy Now – HKD 120
           </Button>
           <Button
             onClick={onAddToCart}
