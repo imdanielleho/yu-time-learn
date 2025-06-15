@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -114,7 +113,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
           </SheetTitle>
         </SheetHeader>
         <div className="p-4 flex-1 flex flex-col gap-2 overflow-auto">
-          {/* Pricing and savings */}
           <div className="flex flex-col items-center mb-1">
             <div className="font-bold text-xl text-yutime-sage mb-0.5">
               HKD {BUNDLE_TYPE.price}
@@ -126,7 +124,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
           <div className="text-yutime-sage text-sm text-center mb-1">
             Select <strong>{BUNDLE_TYPE.count}</strong> courses:
           </div>
-          {/* Course Selection - updated to show details inline, no info icon */}
           <div className="flex flex-col gap-2">
             {allCourses.map((course) => {
               const selected = isSelected(course.id);
@@ -137,28 +134,19 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                     onClick={() => toggleCourse(course.id)}
                     disabled={disabled}
                     className={
-                      "flex gap-2 px-2 py-3 rounded-lg border text-left w-full bg-white transition-colors duration-100 " +
+                      "flex gap-2 px-2 py-2 rounded-lg border text-left w-full bg-white transition-colors duration-100 " +
                       (selected
                         ? "border-yutime-coral bg-yutime-cream/60 font-bold"
                         : disabled
                         ? "border-gray-100 opacity-40 cursor-not-allowed"
                         : "border-gray-200 hover:border-yutime-coral")
                     }
-                    style={{ minHeight: 70 }}
+                    style={{ minHeight: 50 }}
                   >
-                    {/* Image */}
                     <img src={course.image} alt={course.title} className="w-12 h-12 object-cover rounded-md border flex-shrink-0" />
-                    {/* Details */}
-                    <div className="flex-1 min-w-0 pr-6">
-                      <div className="truncate text-sm font-semibold text-yutime-sage">{course.title}</div>
-                      <div className="text-xs text-yutime-warmGray mt-0.5 truncate">{course.category} · {course.level}</div>
-                      <div className="text-xs text-yutime-sage mt-0.5 truncate">
-                        {course.description.length > 48
-                          ? course.description.slice(0, 48) + "…"
-                          : course.description}
-                      </div>
+                    <div className="flex-1 min-w-0 pr-6 flex items-center">
+                      <span className="truncate text-sm font-semibold text-yutime-sage">{course.title}</span>
                     </div>
-                    {/* Check icon if selected */}
                     {selected && (<Check size={18} className="text-yutime-coral ml-1" />)}
                   </button>
                 </div>
@@ -176,7 +164,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
               Save HKD {FIVE_COURSE_BUNDLE.savings} – Best value!
             </span>
           </div>
-          {/* Selection/progress info, more compact */}
           <div className="bg-yutime-cream border border-yutime-coral/20 rounded-lg px-3 py-1.5 mt-1 flex flex-col items-center">
             <span className="text-yutime-sage text-sm">
               <strong>{selectedCourses.length}/{BUNDLE_TYPE.count}</strong> selected
@@ -186,7 +173,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             </span>
           </div>
         </div>
-        {/* CTA Buttons */}
         <div className="flex flex-col px-4 gap-2 pb-4">
           <Button
             onClick={handleProceedToCheckout}
