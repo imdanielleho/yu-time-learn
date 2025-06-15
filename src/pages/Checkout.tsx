@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -154,13 +153,6 @@ const Checkout = () => {
           <div className="flex justify-between items-center font-bold text-yutime-sage text-lg pt-3 border-t border-gray-100">
             <span>Total</span>
             <span>HKD {currentTotal}</span>
-          </div>
-          {/* Benefits List */}
-          <div className="mt-4 p-3 bg-yutime-sand_light rounded text-sm text-yutime-sage">
-            <ul className="space-y-1">
-              <li>• Lifetime access to course materials</li>
-              <li>• Certificate of completion</li>
-            </ul>
           </div>
         </section>
 
