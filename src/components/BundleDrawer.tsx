@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -134,16 +133,8 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
               Pick 3 for HKD 350 or 5 for HKD 500
             </p>
           </div>
-          {!isMobile && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleCancel}
-              aria-label="Close"
-            >
-              <X size={20} />
-            </Button>
-          )}
+          {/* Removed the duplicate desktop close button here */}
+          {/* The Sheet's built-in close button will be shown automatically for desktop */}
         </div>
 
         {/* Improved Progress Section with Visual Hierarchy */}
