@@ -232,22 +232,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             );
           })}
         </div>
-        
-        {/* Five Course Bundle Upgrade - Condensed */}
-        <div className="bg-gradient-to-r from-yutime-coral/10 to-yutime-coral/5 border border-yutime-coral/20 rounded-lg p-4 text-center">
-          <h3 className="font-bold text-base text-yutime-sage mb-1">
-            Want All 5 Courses?
-          </h3>
-          <p className="text-base text-yutime-warmGray mb-3">
-            Get everything for HKD 500 and save HKD {FIVE_COURSE_BUNDLE.savings}
-          </p>
-          <Button
-            onClick={handleFiveCourseBundle}
-            className="w-full bg-yutime-coral text-white font-bold py-2.5 rounded-lg shadow hover:bg-yutime-coral/90 text-base"
-          >
-            Get All 5 Courses – Best Value!
-          </Button>
-        </div>
       </div>
       
       {/* Sticky Footer - Condensed */}
@@ -262,6 +246,22 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             </p>
           </div>
         )}
+        
+        {/* Five Course Bundle Upgrade - Now in Footer */}
+        <div className="bg-gradient-to-r from-yutime-coral/10 to-yutime-coral/5 border border-yutime-coral/20 rounded-lg p-3 text-center">
+          <h3 className="font-bold text-sm text-yutime-sage mb-1">
+            Want All 5 Courses?
+          </h3>
+          <p className="text-sm text-yutime-warmGray mb-2">
+            Get everything for HKD 500 and save HKD {FIVE_COURSE_BUNDLE.savings}
+          </p>
+          <Button
+            onClick={handleFiveCourseBundle}
+            className="w-full bg-yutime-coral text-white font-bold py-2 rounded-lg shadow hover:bg-yutime-coral/90 text-sm"
+          >
+            Get All 5 Courses – Best Value!
+          </Button>
+        </div>
         
         <Button
           onClick={handleProceedToCheckout}
