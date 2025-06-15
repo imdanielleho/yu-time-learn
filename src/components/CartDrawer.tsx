@@ -1,37 +1,60 @@
-
 import React from 'react';
 import { X, Trash2, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { useCart } from '@/contexts/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const CartDrawer = () => {
   const { items, isCartOpen, closeCart, removeFromCart, getTotalPrice, getItemCount, openBundleDrawer } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const isMobile = useIsMobile();
+
+  const itemCount = getItemCount();
+  const total = getTotalPrice();
+  const bundleThreshold = 3;
+  const coursesNeeded = bundleThreshold - itemCount;
 
   const handleProceedToCheckout = () => {
     closeCart();
     navigate('/checkout');
   };
 
+  // Improved: Route to featured courses section on homepage if cart is empty.
   const handleAddMoreCourses = (e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    console.log("Add More Courses CTA clicked - opening bundle drawer");
-    // Open bundle drawer in add-to-cart mode instead of navigating
-    openBundleDrawer('add-to-cart');
-  };
+    if (items.length === 0) {
+      closeCart();
 
-  const itemCount = getItemCount();
-  const total = getTotalPrice();
-  const bundleThreshold = 3;
-  const coursesNeeded = bundleThreshold - itemCount;
+      // Determine if we're already on the homepage
+      const onHomepage = location.pathname === '/';
+      const scrollToCourses = () => {
+        // Try to scroll to courses after navigation/render
+        const target = document.getElementById('courses');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+
+      if (onHomepage) {
+        // Already on homepage, just scroll
+        setTimeout(scrollToCourses, 120); // Allow drawer to close and layout to be restored
+      } else {
+        // Navigate to homepage with hash, browser will auto-jump, but ensure it's smooth after possible rerender
+        navigate('/#courses');
+      }
+    } else {
+      // Cart has items, open the bundle drawer in add-to-cart mode as before
+      console.log("Add More Courses CTA clicked - opening bundle drawer");
+      openBundleDrawer('add-to-cart');
+    }
+  };
 
   // The cart content as a render prop to avoid duplicated code
   const CartPanelContent = (
