@@ -24,7 +24,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
             className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
             data-testid="buynow-btn"
           >
-            Buy Now – HKD 120
+            Buy Now
           </Button>
           <Button
             onClick={onAddToCart}
