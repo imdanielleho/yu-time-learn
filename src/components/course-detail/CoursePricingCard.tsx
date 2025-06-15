@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Gift } from "lucide-react";
@@ -11,7 +10,7 @@ interface CoursePricingCardProps {
 
 const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricingCardProps) => {
   return (
-    <div className="sticky top-8 max-[991px]:fixed max-[991px]:bottom-0 max-[991px]:left-0 max-[991px]:right-0 max-[991px]:top-auto max-[991px]:z-50">
+    <div className="sticky top-8 max-[991px]:fixed max-[991px]:bottom-16 max-[991px]:left-0 max-[991px]:right-0 max-[991px]:top-auto max-[991px]:z-50">
       <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 max-[991px]:rounded-t-xl max-[991px]:rounded-b-none max-[991px]:p-4 max-[991px]:shadow-2xl max-[991px]:border-t max-[991px]:border-x-0 max-[991px]:border-b-0">
         {/* Desktop version - full content */}
         <div className="max-[991px]:hidden">
