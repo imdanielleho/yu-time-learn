@@ -12,6 +12,11 @@ interface BundleDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   initialSelectedCourseId?: number; // for preselecting from CourseDetail
+  isLoggedIn: boolean; // ADDED: Auth state
+  onLoginRequired?: (
+    action: "proceedBundle" | "fiveCourseBundle",
+    selections: number[]
+  ) => void; // ADDED: Callback for login modal
 }
 
 const BUNDLE_TYPE = { id: "3-course", name: "3-Course Bundle", count: 3, price: 350, savings: 10 };
@@ -22,15 +27,15 @@ const FIVE_COURSE_BUNDLE = {
 const BundleDrawer: React.FC<BundleDrawerProps> = ({
   isOpen,
   onClose,
-  initialSelectedCourseId
+  initialSelectedCourseId,
+  isLoggedIn,
+  onLoginRequired,
 }) => {
   const { addToCart, clearCart } = useCart();
   const navigate = useNavigate();
 
   // Only preselect the referrer course
   const [selectedCourses, setSelectedCourses] = useState<number[]>(initialSelectedCourseId ? [initialSelectedCourseId] : []);
-  // Controls compact style for mobile views
-  // If courses change, you want preselection only when isOpen or refId changes
   useEffect(() => {
     if (isOpen) {
       setSelectedCourses(initialSelectedCourseId ? [initialSelectedCourseId] : []);
@@ -46,8 +51,14 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
     }
   };
 
+  // Modified: If not logged in, request login, otherwise proceed
   const handleProceedToCheckout = () => {
     if (selectedCourses.length === BUNDLE_TYPE.count) {
+      if (!isLoggedIn) {
+        onLoginRequired &&
+          onLoginRequired("proceedBundle", [...selectedCourses]);
+        return;
+      }
       clearCart();
       selectedCourses.forEach((courseId) => {
         const course = allCourses.find((c) => c.id === courseId);
@@ -66,8 +77,13 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
     }
   };
 
-  // "Select 5-Course Bundle" CTA after course cards, short text and compact
+  // For 5-course bundle
   const handleFiveCourseBundle = () => {
+    if (!isLoggedIn) {
+      onLoginRequired &&
+        onLoginRequired("fiveCourseBundle", [...selectedCourses]);
+      return;
+    }
     clearCart();
     allCourses.forEach((course) => {
       addToCart({
@@ -134,7 +150,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                     }
                     style={{ minHeight: 44 }}
                   >
-                    {/* Info icon in top right */}
                     <span className="absolute top-1 right-1 z-10">
                       <CoursePreviewPopover courseId={course.id} />
                     </span>
@@ -146,7 +161,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
               );
             })}
           </div>
-          {/* 5-course bundle CTA: placed right after cards, compact and short */}
           <div className="my-2 w-full flex flex-col items-center">
             <Button
               onClick={handleFiveCourseBundle}

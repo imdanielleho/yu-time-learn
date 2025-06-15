@@ -30,8 +30,9 @@ const CourseDetail = () => {
   const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
-  const { addToCart, openCart } = useCart();
-  const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart">(null);
+  const { addToCart, openCart, clearCart } = useCart();
+  const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart" | "proceedBundle" | "fiveCourseBundle">(null);
+  const [pendingBundleSelections, setPendingBundleSelections] = useState<number[] | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { toast } = useToast();
 
@@ -58,8 +59,61 @@ const CourseDetail = () => {
       openCart();
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
+    } else if (
+      isLoggedIn && postLoginAction === "proceedBundle"
+      && pendingBundleSelections !== null
+    ) {
+      // User logged in to proceed to checkout for 3-course bundle
+      clearCart();
+      pendingBundleSelections.forEach((courseId) => {
+        const c = courses.find((c) => c.id === courseId);
+        if (c) {
+          addToCart({
+            id: c.id,
+            title: c.title,
+            price: c.price,
+            image: c.image,
+            category: c.category,
+          });
+        }
+      });
+      setIsLoginModalOpen(false);
+      setPostLoginAction(null);
+      setIsBundleModalOpen(false); // Close drawer
+      setPendingBundleSelections(null);
+      navigate("/checkout");
+    } else if (
+      isLoggedIn && postLoginAction === "fiveCourseBundle"
+    ) {
+      // User logged in to proceed to checkout for 5-course bundle
+      clearCart();
+      courses.forEach((c) => {
+        addToCart({
+          id: c.id,
+          title: c.title,
+          price: c.price,
+          image: c.image,
+          category: c.category,
+        });
+      });
+      setIsLoginModalOpen(false);
+      setPostLoginAction(null);
+      setIsBundleModalOpen(false); // Close drawer
+      setPendingBundleSelections(null);
+      navigate("/checkout");
     }
-  }, [isLoggedIn, postLoginAction, addToCart, openCart, course, navigate, toast]);
+  }, [
+    isLoggedIn,
+    postLoginAction,
+    addToCart,
+    openCart,
+    course,
+    navigate,
+    toast,
+    clearCart,
+    pendingBundleSelections,
+    courses
+  ]);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -110,6 +164,16 @@ const CourseDetail = () => {
       url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
     });
     setIsVideoModalOpen(true);
+  };
+
+  const handleBundleLoginRequired = (
+    action: "proceedBundle" | "fiveCourseBundle",
+    selections: number[]
+  ) => {
+    setPostLoginAction(action);
+    setPendingBundleSelections(action === "fiveCourseBundle" ? [] : selections);
+    setIsLoginModalOpen(true);
+    // Keep the BundleDrawer open and preserve selections until login completes or cancelled
   };
 
   if (!course) {
@@ -197,11 +261,13 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
-      {/* Pass current course ID if opening bundle from CourseDetail */}
+      {/* Pass login props & handler to BundleDrawer */}
       <BundleDrawer
         isOpen={isBundleModalOpen}
         onClose={() => setIsBundleModalOpen(false)}
         initialSelectedCourseId={course.id}
+        isLoggedIn={isLoggedIn}
+        onLoginRequired={handleBundleLoginRequired}
       />
 
       {/* Video Modal with updated width */}
