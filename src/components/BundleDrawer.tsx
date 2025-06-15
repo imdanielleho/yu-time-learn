@@ -295,7 +295,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
               <Button
                 onClick={clearSelection}
                 variant="ghost"
-                className="flex-1 text-yutime-warmGray hover:text-yutime-sage text-sm py-2 h-10"
+                className="flex-1 text-gray-600 hover:text-yutime-sage text-sm py-2 h-10"
               >
                 Clear Selection
               </Button>
@@ -303,7 +303,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             <Button
               onClick={handleCancel}
               variant="ghost"
-              className="flex-1 text-yutime-warmGray hover:text-yutime-sage text-sm py-2 h-10"
+              className="flex-1 text-gray-600 hover:text-yutime-sage text-sm py-2 h-10"
             >
               {isMobile ? 'Close' : 'Cancel'}
             </Button>
