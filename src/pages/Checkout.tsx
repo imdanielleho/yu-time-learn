@@ -9,7 +9,15 @@ import CheckoutUpsell from "@/components/checkout/CheckoutUpsell";
 import SecureCheckoutHeader from "@/components/checkout/SecureCheckoutHeader";
 import CustomerServiceButton from "@/components/CustomerServiceButton";
 import { Checkbox } from '@/components/ui/checkbox';
-import { ShieldCheck, CreditCard, Lock } from 'lucide-react';
+import { ShieldCheck, CreditCard, Lock, Trash2 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 // List of valid coupons.
 const validCoupons = [
@@ -18,7 +26,7 @@ const validCoupons = [
 ];
 
 const Checkout = () => {
-  const { items, getTotalPrice, clearCart } = useCart();
+  const { items, getTotalPrice, clearCart, removeFromCart } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -35,6 +43,10 @@ const Checkout = () => {
   const [couponApplied, setCouponApplied] = useState(false);
   const [couponError, setCouponError] = useState('');
   const [agreed, setAgreed] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; courseId: number | null }>({
+    open: false,
+    courseId: null
+  });
 
   // Detect if this checkout is for a single course (Buy Now flow)
   const singleCourse = location.state?.singleCourse;
@@ -79,6 +91,38 @@ const Checkout = () => {
       setCouponApplied(false);
       setCouponError('Invalid coupon code.');
     }
+  };
+
+  const handleDeleteCourse = (courseId: number) => {
+    setDeleteDialog({ open: true, courseId });
+  };
+
+  const confirmDeleteCourse = () => {
+    if (deleteDialog.courseId && !singleCourse) {
+      removeFromCart(deleteDialog.courseId);
+      
+      // Reset coupon if bundle status changes
+      const newItemCount = items.length - 1;
+      const wasBundleEligible = bundleItem;
+      const willBeBundleEligible = newItemCount === 3 || newItemCount === 5;
+      
+      if (wasBundleEligible && !willBeBundleEligible && couponApplied) {
+        const appliedCoupon = validCoupons.find(c => 
+          c.code.toLowerCase() === formData.coupon.toLowerCase()
+        );
+        if (appliedCoupon?.bundleOnly) {
+          setCouponApplied(false);
+          setCouponError('');
+          setFormData(prev => ({ ...prev, coupon: '' }));
+        }
+      }
+      
+      // If no items left, redirect to home
+      if (newItemCount === 0) {
+        navigate('/', { state: { message: 'All items removed from cart' } });
+      }
+    }
+    setDeleteDialog({ open: false, courseId: null });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -279,19 +323,21 @@ const Checkout = () => {
                 <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                   <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-semibold text-yutime-sage">Order Summary</h2>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="text-yutime-blue border-yutime-blue/20 hover:bg-yutime-blue/5"
-                      onClick={() => navigate("/")}
-                    >
-                      Edit
-                    </Button>
+                    {!singleCourse && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-yutime-blue border-yutime-blue/20 hover:bg-yutime-blue/5"
+                        onClick={() => navigate("/")}
+                      >
+                        Add More
+                      </Button>
+                    )}
                   </div>
                   
                   <div className="space-y-4 mb-6">
                     {checkoutItems.map((item: any) => (
-                      <div key={item.id} className="flex items-center gap-4 p-3 bg-yutime-sand_light rounded-xl">
+                      <div key={item.id} className="flex items-center gap-4 p-3 bg-yutime-sand_light rounded-xl group">
                         <img
                           src={item.image}
                           alt={item.title}
@@ -301,7 +347,20 @@ const Checkout = () => {
                           <h4 className="font-medium text-yutime-sage text-base mb-1 line-clamp-2">{item.title}</h4>
                           <p className="text-sm text-yutime-warmGray">{item.category}</p>
                         </div>
-                        <span className="font-semibold text-yutime-sage text-lg">HKD {item.price}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="font-semibold text-yutime-sage text-lg">HKD {item.price}</span>
+                          {!singleCourse && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleDeleteCourse(item.id)}
+                              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-red-500 hover:text-red-700 hover:bg-red-50 p-2"
+                              aria-label={`Remove ${item.title} from cart`}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -410,6 +469,32 @@ const Checkout = () => {
           </div>
         )}
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteDialog.open} onOpenChange={(open) => setDeleteDialog({ open, courseId: null })}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Remove Course</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to remove this course from your order? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button 
+              variant="outline" 
+              onClick={() => setDeleteDialog({ open: false, courseId: null })}
+            >
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={confirmDeleteCourse}
+            >
+              Remove Course
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <CustomerServiceButton />
     </div>
