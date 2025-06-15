@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-import { Play, X, Loader2 } from 'lucide-react';
+import { Play, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 
 interface VideoItem {
@@ -21,8 +21,6 @@ interface VideoItem {
 
 const Trending = () => {
   const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
-  const [isVideoLoading, setIsVideoLoading] = useState(false);
-  const [videoError, setVideoError] = useState<string | null>(null);
 
   // Mock data for trending videos
   const trendingVideos: VideoItem[] = [
@@ -31,64 +29,40 @@ const Trending = () => {
       title: "What are RMNs?",
       thumbnail: "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       category: "COMMERCE",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid2",
       title: "Why does Web3 matter?",
       thumbnail: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       category: "WEB3",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid3",
       title: "Three Lenses of AI",
       thumbnail: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       category: "AI",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid4",
       title: "Are metaverse and Web3 the same thing?",
       thumbnail: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       category: "METAVERSE",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     },
     {
       id: "vid5",
       title: "What's the role of Assessments within Learning?",
       thumbnail: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       category: "FUTURE OF WORK",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4" // Example video URL
     }
   ];
 
   const handleVideoClick = (video: VideoItem) => {
     setSelectedVideo(video);
-    setIsVideoLoading(true);
-    setVideoError(null);
-  };
-
-  const handleVideoLoad = () => {
-    setIsVideoLoading(false);
-  };
-
-  const handleVideoError = () => {
-    setIsVideoLoading(false);
-    setVideoError("Unable to load video. Please try again.");
-  };
-
-  const handleRetry = () => {
-    if (selectedVideo) {
-      setVideoError(null);
-      setIsVideoLoading(true);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setSelectedVideo(null);
-    setIsVideoLoading(false);
-    setVideoError(null);
   };
 
   return (
@@ -142,83 +116,31 @@ const Trending = () => {
         </div>
       </div>
 
-      {/* Enhanced Age-Friendly Video Player Dialog */}
-      <Dialog open={!!selectedVideo} onOpenChange={(open) => !open && handleCloseModal()}>
-        <DialogContent className="sm:max-w-4xl max-h-[90vh] p-0 bg-gray-800 rounded-xl overflow-hidden">
-          {/* Enhanced Header with larger typography and better spacing */}
-          <div className="p-6 bg-white border-b border-gray-200">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                {selectedVideo && (
-                  <>
-                    <h3 className="text-2xl font-semibold text-gray-900 leading-tight mb-2">
-                      {selectedVideo.title}
-                    </h3>
-                    <Badge className="bg-yutime-sage text-white text-sm px-3 py-1">
-                      {selectedVideo.category}
-                    </Badge>
-                  </>
-                )}
+      {/* Video Player Dialog */}
+      <Dialog open={!!selectedVideo} onOpenChange={(open) => !open && setSelectedVideo(null)}>
+        <DialogContent className="sm:max-w-lg max-h-[80vh] p-0 bg-black flex items-center justify-center">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
+            <X className="h-6 w-6" />
+          </DialogClose>
+          
+          {selectedVideo && (
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <div className="w-full max-w-lg h-[80vh]" style={{ aspectRatio: '9/16' }}>
+                <video
+                  src={selectedVideo.videoUrl}
+                  className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                />
               </div>
-              
-              {/* Enhanced Close Button - Larger with text label */}
-              <DialogClose className="flex items-center gap-2 rounded-lg bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-700 hover:text-gray-900 transition-colors min-h-[44px]">
-                <X className="h-5 w-5" />
-                <span className="text-sm font-medium">Close Video</span>
-              </DialogClose>
+              <div className="p-4 bg-black text-white w-full max-w-lg">
+                <h3 className="text-xl font-medium">{selectedVideo.title}</h3>
+                <div className="mt-2">
+                  <Badge className="bg-yutime-blue/90">{selectedVideo.category}</Badge>
+                </div>
+              </div>
             </div>
-            
-            {/* Helper text for keyboard users */}
-            <p className="text-sm text-gray-500 mt-3">Press ESC to close</p>
-          </div>
-
-          {/* Video Content Area */}
-          <div className="relative bg-gray-900 flex items-center justify-center min-h-[60vh]">
-            {isVideoLoading && (
-              <div className="flex flex-col items-center gap-4 text-white">
-                <Loader2 className="h-12 w-12 animate-spin" />
-                <p className="text-lg font-medium">Loading video...</p>
-              </div>
-            )}
-
-            {videoError && (
-              <div className="flex flex-col items-center gap-4 text-white p-8 text-center">
-                <div className="bg-red-500/20 rounded-full p-4 mb-2">
-                  <X className="h-8 w-8 text-red-400" />
-                </div>
-                <h4 className="text-xl font-semibold mb-2">Video Error</h4>
-                <p className="text-gray-300 mb-4 text-lg leading-relaxed max-w-md">
-                  {videoError}
-                </p>
-                <button
-                  onClick={handleRetry}
-                  className="bg-yutime-sage hover:bg-yutime-sage/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-colors min-h-[44px]"
-                >
-                  Try Again
-                </button>
-              </div>
-            )}
-
-            {selectedVideo && !isVideoLoading && !videoError && (
-              <div className="w-full">
-                <div className="aspect-video">
-                  <video
-                    src={selectedVideo.videoUrl}
-                    className="w-full h-full object-cover"
-                    controls
-                    autoPlay
-                    onLoadStart={() => setIsVideoLoading(true)}
-                    onLoadedData={handleVideoLoad}
-                    onError={handleVideoError}
-                    style={{
-                      // Enhanced video controls for better accessibility
-                      outline: 'none'
-                    }}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </DialogContent>
       </Dialog>
     </section>
