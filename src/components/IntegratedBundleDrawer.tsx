@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { courses as allCourses } from "@/data/courses";
@@ -98,19 +97,41 @@ const IntegratedBundleDrawer: React.FC = () => {
   };
 
   const handleFiveCourseBundle = () => {
-    clearCart();
-    allCourses.forEach((course) => {
-      addToCart({
-        id: course.id,
-        title: course.title,
-        price: course.price,
-        image: course.image,
-        category: course.category,
-        totalTime: course.totalTime
+    console.log("Get Bundle CTA clicked - navigating to checkout");
+    
+    try {
+      // Clear current cart
+      clearCart();
+      
+      // Add all 5 courses to cart
+      allCourses.forEach((course) => {
+        addToCart({
+          id: course.id,
+          title: course.title,
+          price: course.price,
+          image: course.image,
+          category: course.category,
+          totalTime: course.totalTime
+        });
       });
-    });
-    closeBundleDrawer();
-    navigate("/checkout");
+      
+      // Close bundle drawer
+      closeBundleDrawer();
+      
+      // Navigate to checkout with a slight delay to ensure cart updates are processed
+      setTimeout(() => {
+        console.log("Navigating to checkout page");
+        navigate("/checkout", { replace: true });
+      }, 100);
+      
+    } catch (error) {
+      console.error("Error in handleFiveCourseBundle:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add courses to cart. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleReturnToCart = () => {
