@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Gift } from "lucide-react";
 import BundleDrawer from "@/components/BundleDrawer";
@@ -7,11 +7,10 @@ import BundleDrawer from "@/components/BundleDrawer";
 interface CoursePricingCardProps {
   onBuyNow: () => void;
   onAddToCart: () => void;
+  onOpenBundle: () => void;
 }
 
-const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) => {
-  const [showBundleDrawer, setShowBundleDrawer] = useState(false);
-
+const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricingCardProps) => {
   return (
     <div className="sticky top-8">
       <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
@@ -54,7 +53,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
               <span className="text-green-700 text-sm">Save more with a bigger bundle</span>
             </div>
             <Button
-              onClick={() => setShowBundleDrawer(true)}
+              onClick={onOpenBundle}
               variant="secondary"
               className="bg-yutime-coral/90 hover:bg-yutime-coral text-white font-medium py-2 rounded-xl text-base w-full"
             >
@@ -62,10 +61,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
             </Button>
           </div>
         </div>
-        <BundleDrawer isOpen={showBundleDrawer} onClose={() => setShowBundleDrawer(false)} />
+        {/* The BundleDrawer is now shown by the parent, not here */}
       </div>
     </div>
   );
 };
 
 export default CoursePricingCard;
+
