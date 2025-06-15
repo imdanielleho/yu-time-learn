@@ -29,6 +29,7 @@ const IntegratedBundleDrawerContent: React.FC<IntegratedBundleDrawerContentProps
     <>
       <IntegratedBundleDrawerHeader
         selectedCount={selectedCourses.length}
+        cartItems={cartItems}
         bundleDrawerMode={bundleDrawerMode}
         isMobile={isMobile}
         onCancel={handlers.onCancel}
@@ -37,6 +38,7 @@ const IntegratedBundleDrawerContent: React.FC<IntegratedBundleDrawerContentProps
       
       <BundleDrawerCourseList
         selectedCourses={selectedCourses}
+        cartItems={cartItems}
         onToggleCourse={handlers.onToggleCourse}
       />
       
