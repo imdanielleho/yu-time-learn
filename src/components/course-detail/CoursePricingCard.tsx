@@ -18,11 +18,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <div className="text-4xl font-bold text-yutime-sage mb-2">HKD 120</div>
           <div className="text-yutime-warmGray text-lg">One-time investment in yourself</div>
         </div>
-        {/* Fixed responsive layout for CTAs */}
-        <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:gap-3">
+        {/* Refined responsive layout for CTAs to always fit nicely */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8 w-full">
           <Button
             onClick={onBuyNow}
-            className="w-full py-4 px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md transition-colors min-h-[44px] sm:flex-1"
+            className="flex-1 min-w-0 py-4 px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
             data-testid="buynow-btn"
           >
             Buy This Course – HKD 120
@@ -30,11 +30,12 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="w-full sm:w-[120px] py-4 px-3 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex items-center justify-center min-h-[44px] flex-shrink-0"
+            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[120px] max-w-full py-4 px-0 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex-shrink focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
             data-testid="addtocart-btn"
+            style={{ flexBasis: 0 }}
           >
             <ShoppingCart size={20} />
-            <span className="ml-2 text-sm font-medium">Cart</span>
+            <span className="ml-2 text-sm font-semibold truncate">Cart</span>
           </Button>
         </div>
         {/* Bundle CTA as prominent section */}
