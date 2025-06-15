@@ -9,12 +9,14 @@ interface BundleDrawerHeaderProps {
   selectedCount: number;
   isMobile: boolean;
   onCancel: () => void;
+  onReturnToCart?: () => void; // New prop for cart mode
 }
 
 const BundleDrawerHeader: React.FC<BundleDrawerHeaderProps> = ({
   selectedCount,
   isMobile,
   onCancel,
+  onReturnToCart,
 }) => {
   const progressPercentage = (selectedCount / BUNDLE_TYPE.count) * 100;
 
@@ -25,9 +27,9 @@ const BundleDrawerHeader: React.FC<BundleDrawerHeaderProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            onClick={onCancel}
+            onClick={onReturnToCart || onCancel}
             className="mr-2"
-            aria-label="Go back"
+            aria-label={onReturnToCart ? "Return to cart" : "Go back"}
           >
             <ArrowLeft size={18} />
           </Button>
@@ -40,6 +42,16 @@ const BundleDrawerHeader: React.FC<BundleDrawerHeaderProps> = ({
             Pick 3 for HKD 350 or 5 for HKD 500
           </p>
         </div>
+        {!isMobile && onReturnToCart && (
+          <Button
+            variant="ghost"
+            onClick={onReturnToCart}
+            className="text-sm text-yutime-blue hover:text-yutime-blue/80"
+          >
+            <ArrowLeft size={16} className="mr-1" />
+            Return to Cart
+          </Button>
+        )}
       </div>
 
       <div className="mb-2">

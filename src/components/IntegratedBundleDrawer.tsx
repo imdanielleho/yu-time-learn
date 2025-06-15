@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { courses as allCourses } from "@/data/courses";
@@ -5,8 +6,10 @@ import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
-import IntegratedBundleDrawerContent from "./bundle/IntegratedBundleDrawerContent";
-import { BundleHandlers } from "./bundle/types";
+import BundleDrawerHeader from "./bundle/BundleDrawerHeader";
+import BundleDrawerCourseList from "./bundle/BundleDrawerCourseList";
+import BundleDrawerFooter from "./bundle/BundleDrawerFooter";
+import { BundleHandlers, BUNDLE_TYPE } from "./bundle/types";
 
 const IntegratedBundleDrawer: React.FC = () => {
   const { 
@@ -40,7 +43,7 @@ const IntegratedBundleDrawer: React.FC = () => {
   const toggleCourse = (courseId: number) => {
     if (selectedCourses.includes(courseId)) {
       setSelectedCourses(selectedCourses.filter((id) => id !== courseId));
-    } else if (selectedCourses.length < 5) { // Allow up to 5 selections
+    } else if (selectedCourses.length < BUNDLE_TYPE.count) { // Limit to 3 courses
       setSelectedCourses([...selectedCourses, courseId]);
     }
   };
@@ -74,7 +77,7 @@ const IntegratedBundleDrawer: React.FC = () => {
   };
 
   const handleProceedToCheckout = () => {
-    if (selectedCourses.length === 3) {
+    if (selectedCourses.length === BUNDLE_TYPE.count) {
       clearCart();
       selectedCourses.forEach((courseId) => {
         const course = allCourses.find((c) => c.id === courseId);
@@ -141,14 +144,26 @@ const IntegratedBundleDrawer: React.FC = () => {
           className="h-full max-h-screen w-full flex flex-col p-0 rounded-t-none"
           style={{ zIndex: 60 }} // Higher z-index to appear over cart
         >
-          <IntegratedBundleDrawerContent
-            selectedCourses={selectedCourses}
-            cartItems={cartItems}
-            bundleDrawerMode={bundleDrawerMode}
+          <BundleDrawerHeader
+            selectedCount={selectedCourses.length}
             isMobile={isMobile}
-            handlers={handlers}
-            onReturnToCart={handleReturnToCart}
-            onAddSelectedToCart={handleAddSelectedToCart}
+            onCancel={handleCancel}
+            onReturnToCart={bundleDrawerMode === 'add-to-cart' ? handleReturnToCart : undefined}
+          />
+          
+          <BundleDrawerCourseList
+            selectedCourses={selectedCourses}
+            onToggleCourse={handlers.onToggleCourse}
+          />
+          
+          <BundleDrawerFooter
+            selectedCount={selectedCourses.length}
+            isMobile={isMobile}
+            onProceedToCheckout={handlers.onProceedToCheckout}
+            onFiveCourseBundle={handlers.onFiveCourseBundle}
+            onClearSelection={handlers.onClearSelection}
+            onCancel={handlers.onCancel}
+            onAddSelectedToCart={bundleDrawerMode === 'add-to-cart' ? handleAddSelectedToCart : undefined}
           />
         </SheetContent>
       </Sheet>
@@ -162,14 +177,26 @@ const IntegratedBundleDrawer: React.FC = () => {
         className="max-w-full w-[480px] h-full flex flex-col p-0 shadow-2xl"
         style={{ zIndex: 60 }} // Higher z-index to appear over cart
       >
-        <IntegratedBundleDrawerContent
-          selectedCourses={selectedCourses}
-          cartItems={cartItems}
-          bundleDrawerMode={bundleDrawerMode}
+        <BundleDrawerHeader
+          selectedCount={selectedCourses.length}
           isMobile={isMobile}
-          handlers={handlers}
-          onReturnToCart={handleReturnToCart}
-          onAddSelectedToCart={handleAddSelectedToCart}
+          onCancel={handleCancel}
+          onReturnToCart={bundleDrawerMode === 'add-to-cart' ? handleReturnToCart : undefined}
+        />
+        
+        <BundleDrawerCourseList
+          selectedCourses={selectedCourses}
+          onToggleCourse={handlers.onToggleCourse}
+        />
+        
+        <BundleDrawerFooter
+          selectedCount={selectedCourses.length}
+          isMobile={isMobile}
+          onProceedToCheckout={handlers.onProceedToCheckout}
+          onFiveCourseBundle={handlers.onFiveCourseBundle}
+          onClearSelection={handlers.onClearSelection}
+          onCancel={handlers.onCancel}
+          onAddSelectedToCart={bundleDrawerMode === 'add-to-cart' ? handleAddSelectedToCart : undefined}
         />
       </SheetContent>
     </Sheet>

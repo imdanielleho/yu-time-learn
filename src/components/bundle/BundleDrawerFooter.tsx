@@ -11,6 +11,7 @@ interface BundleDrawerFooterProps {
   onFiveCourseBundle: () => void;
   onClearSelection: () => void;
   onCancel: () => void;
+  onAddSelectedToCart?: () => void; // New prop for cart mode
 }
 
 const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
@@ -20,7 +21,10 @@ const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
   onFiveCourseBundle,
   onClearSelection,
   onCancel,
+  onAddSelectedToCart,
 }) => {
+  const isAddToCartMode = !!onAddSelectedToCart;
+  
   return (
     <div className="border-t bg-white">
       {/* Section 1: Bundle Summary - Clean, prominent display */}
@@ -46,13 +50,13 @@ const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
       {/* Section 2: Primary Action Zone - Make checkout button stand out */}
       <div className="px-4 pt-4">
         <Button
-          onClick={onProceedToCheckout}
+          onClick={isAddToCartMode ? onAddSelectedToCart : onProceedToCheckout}
           disabled={selectedCount !== BUNDLE_TYPE.count}
           className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200"
-          aria-label={selectedCount === BUNDLE_TYPE.count ? 'Proceed to checkout' : `Select ${BUNDLE_TYPE.count - selectedCount} more courses to proceed`}
+          aria-label={selectedCount === BUNDLE_TYPE.count ? (isAddToCartMode ? 'Add selected courses to cart' : 'Proceed to checkout') : `Select ${BUNDLE_TYPE.count - selectedCount} more courses to proceed`}
         >
           {selectedCount === BUNDLE_TYPE.count 
-            ? 'Proceed to Checkout' 
+            ? (isAddToCartMode ? 'Add Selected to Cart' : 'Proceed to Checkout')
             : `Select ${BUNDLE_TYPE.count - selectedCount} More Course${BUNDLE_TYPE.count - selectedCount > 1 ? 's' : ''}`
           }
         </Button>
