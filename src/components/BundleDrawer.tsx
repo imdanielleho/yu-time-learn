@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -269,31 +268,26 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
           </Button>
         </div>
         
-        {/* Section 3: Enhanced Secondary CTA - 5-course bundle with better visibility */}
-        <div className="px-4 py-4">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-yutime-sage/5 to-yutime-coral/5 rounded-xl"></div>
-            <div className="relative bg-white/80 border-2 border-yutime-coral/30 rounded-xl p-4">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <Sparkles size={18} className="text-yutime-coral" />
-                  <span className="font-semibold text-yutime-sage">Best Value Option</span>
-                </div>
-                <span className="bg-yutime-coral text-white text-xs font-bold px-2 py-1 rounded-full">
-                  Save HKD {FIVE_COURSE_BUNDLE.savings}
-                </span>
-              </div>
-              <p className="text-sm text-yutime-warmGray mb-3">
+        {/* Section 3: Condensed Secondary CTA - 5-course bundle */}
+        <div className="px-4 py-3 border-t border-gray-100">
+          <div className="flex items-center justify-between p-3 bg-yutime-cream/40 rounded-lg border border-yutime-coral/30">
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} className="text-yutime-coral" />
+              <span className="text-sm font-medium text-yutime-sage">
                 Get all 5 courses for HKD 500
-              </p>
-              <Button
-                onClick={handleFiveCourseBundle}
-                variant="outline"
-                className="w-full border-2 border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white font-semibold py-3 rounded-xl transition-all duration-200"
-              >
-                Get All 5 Courses – Complete Bundle
-              </Button>
+              </span>
+              <span className="bg-yutime-coral text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                Save HKD {FIVE_COURSE_BUNDLE.savings}
+              </span>
             </div>
+            <Button
+              onClick={handleFiveCourseBundle}
+              size="sm"
+              variant="outline"
+              className="border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white font-medium"
+            >
+              Get Bundle
+            </Button>
           </div>
         </div>
         
