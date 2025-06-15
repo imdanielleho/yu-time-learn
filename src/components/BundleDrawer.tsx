@@ -284,7 +284,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                 </span>
               </div>
               <p className="text-sm text-yutime-warmGray mb-3">
-                Get all 5 courses for HKD 500 instead of HKD 600
+                Get all 5 courses for HKD 500
               </p>
               <Button
                 onClick={handleFiveCourseBundle}
