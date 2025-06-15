@@ -1,17 +1,18 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Loader2 } from "lucide-react";
 import { BUNDLE_TYPE } from "./types";
 
 interface BundleDrawerFooterProps {
   selectedCount: number;
   isMobile: boolean;
   onProceedToCheckout: () => void;
-  onFiveCourseBundle: () => void;
+  onFiveCourseBundle: (event?: React.MouseEvent) => void;
   onClearSelection: () => void;
   onCancel: () => void;
-  onAddSelectedToCart?: () => void; // New prop for cart mode
+  onAddSelectedToCart?: () => void;
+  isProcessingBundle?: boolean;
 }
 
 const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
@@ -22,6 +23,7 @@ const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
   onClearSelection,
   onCancel,
   onAddSelectedToCart,
+  isProcessingBundle = false,
 }) => {
   const isAddToCartMode = !!onAddSelectedToCart;
   
@@ -73,11 +75,19 @@ const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
           </div>
           <Button
             onClick={onFiveCourseBundle}
+            disabled={isProcessingBundle}
             size="sm"
             variant="outline"
-            className="border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:!text-white font-medium"
+            className="border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:!text-white font-medium disabled:opacity-50"
           >
-            Get Bundle
+            {isProcessingBundle ? (
+              <>
+                <Loader2 size={14} className="animate-spin mr-1" />
+                Processing...
+              </>
+            ) : (
+              'Get Bundle'
+            )}
           </Button>
         </div>
       </div>

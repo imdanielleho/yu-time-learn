@@ -25,6 +25,7 @@ const IntegratedBundleDrawer: React.FC = () => {
   const { toast } = useToast();
 
   const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
+  const [isProcessingBundle, setIsProcessingBundle] = useState(false);
   
   useEffect(() => {
     if (isBundleDrawerOpen) {
@@ -96,15 +97,40 @@ const IntegratedBundleDrawer: React.FC = () => {
     }
   };
 
-  const handleFiveCourseBundle = () => {
-    console.log("Get Bundle CTA clicked - navigating to checkout");
+  const handleFiveCourseBundle = async (event?: React.MouseEvent) => {
+    console.log("=== Get Bundle CTA clicked ===");
+    
+    // Prevent any default behavior and stop propagation
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    
+    // Prevent multiple clicks during processing
+    if (isProcessingBundle) {
+      console.log("Already processing bundle, ignoring click");
+      return;
+    }
+    
+    setIsProcessingBundle(true);
     
     try {
+      console.log("Current cart items before clear:", cartItems.length);
+      
+      // Show user feedback immediately
+      toast({
+        title: "Processing Bundle",
+        description: "Adding all 5 courses to your cart...",
+      });
+      
       // Clear current cart
       clearCart();
+      console.log("Cart cleared");
       
       // Add all 5 courses to cart
-      allCourses.forEach((course) => {
+      console.log("Adding", allCourses.length, "courses to cart");
+      allCourses.forEach((course, index) => {
+        console.log(`Adding course ${index + 1}:`, course.title);
         addToCart({
           id: course.id,
           title: course.title,
@@ -115,22 +141,45 @@ const IntegratedBundleDrawer: React.FC = () => {
         });
       });
       
+      console.log("All courses added to cart");
+      
       // Close bundle drawer
       closeBundleDrawer();
+      console.log("Bundle drawer closed");
       
-      // Navigate to checkout with a slight delay to ensure cart updates are processed
+      // Navigate to checkout with enhanced timing and fallback
       setTimeout(() => {
-        console.log("Navigating to checkout page");
-        navigate("/checkout", { replace: true });
-      }, 100);
+        console.log("=== Attempting navigation to checkout ===");
+        try {
+          navigate("/checkout", { replace: true });
+          console.log("Navigation call completed");
+        } catch (navError) {
+          console.error("Navigation failed, trying fallback:", navError);
+          // Fallback navigation method
+          window.location.href = "/checkout";
+        }
+      }, 200); // Increased delay to ensure state updates
+      
+      // Additional success feedback
+      setTimeout(() => {
+        toast({
+          title: "Bundle Added!",
+          description: "All 5 courses have been added to your cart.",
+        });
+      }, 300);
       
     } catch (error) {
-      console.error("Error in handleFiveCourseBundle:", error);
+      console.error("=== Error in handleFiveCourseBundle ===", error);
       toast({
         title: "Error",
         description: "Failed to add courses to cart. Please try again.",
         variant: "destructive"
       });
+    } finally {
+      // Reset processing state after a delay
+      setTimeout(() => {
+        setIsProcessingBundle(false);
+      }, 1000);
     }
   };
 
@@ -185,6 +234,7 @@ const IntegratedBundleDrawer: React.FC = () => {
             onClearSelection={handlers.onClearSelection}
             onCancel={handlers.onCancel}
             onAddSelectedToCart={bundleDrawerMode === 'add-to-cart' ? handleAddSelectedToCart : undefined}
+            isProcessingBundle={isProcessingBundle}
           />
         </SheetContent>
       </Sheet>
@@ -218,6 +268,7 @@ const IntegratedBundleDrawer: React.FC = () => {
           onClearSelection={handlers.onClearSelection}
           onCancel={handlers.onCancel}
           onAddSelectedToCart={bundleDrawerMode === 'add-to-cart' ? handleAddSelectedToCart : undefined}
+          isProcessingBundle={isProcessingBundle}
         />
       </SheetContent>
     </Sheet>
