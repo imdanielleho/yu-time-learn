@@ -10,7 +10,7 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import BottomNavigation from '@/components/BottomNavigation';
 import LoginModal from '@/components/LoginModal';
-import BundleModal from '@/components/BundleModal';
+import BundleDrawer from '@/components/BundleDrawer';
 import UpsellModal from '@/components/UpsellModal';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useCart } from '@/contexts/CartContext';
@@ -197,7 +197,7 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
-      <BundleModal
+      <BundleDrawer
         isOpen={isBundleModalOpen}
         onClose={() => setIsBundleModalOpen(false)}
       />
