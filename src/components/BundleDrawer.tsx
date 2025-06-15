@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -84,7 +85,11 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
         <SheetHeader className="border-b px-6 py-4">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-lg font-bold text-yutime-sage">Choose Your Bundle</SheetTitle>
-            {/* Removed duplicated close button here; SheetContent already includes a close button */}
+            <SheetClose asChild>
+              <Button variant="ghost" size="icon">
+                <X size={20} />
+              </Button>
+            </SheetClose>
           </div>
         </SheetHeader>
         <div className="p-6 flex-1 flex flex-col gap-4 overflow-auto">

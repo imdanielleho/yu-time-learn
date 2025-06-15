@@ -132,6 +132,11 @@ const CartDrawer = () => {
               <SheetTitle className="text-xl font-bold text-yutime-sage">
                 Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
               </SheetTitle>
+              <SheetClose asChild>
+                <Button variant="ghost" size="icon">
+                  <X size={20} />
+                </Button>
+              </SheetClose>
             </div>
           </SheetHeader>
           <div className="flex-1 flex flex-col overflow-y-auto">
