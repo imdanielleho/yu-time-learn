@@ -11,7 +11,7 @@ interface VideoModalProps {
 
 const VideoModal = ({ isOpen, onOpenChange, currentVideo }: VideoModalProps) => (
   <Dialog open={isOpen} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+    <DialogContent className="max-w-[95vw] sm:max-w-[85vw] lg:max-w-4xl max-h-[90vh] p-0 bg-black">
       <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
         <X className="h-6 w-6" />
       </DialogClose>
