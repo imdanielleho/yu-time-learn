@@ -42,13 +42,12 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <div className="rounded-2xl bg-yutime-cream p-6 border border-yutime-coral/40 flex flex-col items-center gap-4">
             <div className="flex items-center gap-3 mb-2">
               <Gift className="text-yutime-coral" size={24} />
-              <span className="text-sm font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-3 py-1 rounded-lg">
+              <span className="text-base font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-3 py-1 rounded-lg">
                 Save with a bundle
               </span>
             </div>
             <div className="text-yutime-sage font-semibold text-base leading-relaxed text-center">
-              3 or 5 Courses for <span className="text-yutime-coral font-bold">HKD 350–500</span> <br />
-              <span className="text-yutime-sage text-sm">Save more with a bigger bundle</span>
+              Pick 3 for <span className="text-yutime-coral font-bold">HKD350</span> or 5 for <span className="text-yutime-coral font-bold">HKD500</span>
             </div>
             <Button
               onClick={onOpenBundle}
