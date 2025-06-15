@@ -18,11 +18,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <div className="text-4xl font-bold text-yutime-sage mb-2">HKD 120</div>
           <div className="text-yutime-warmGray text-lg">One-time investment in yourself</div>
         </div>
-        {/* Responsive layout for CTAs */}
-        <div className="flex flex-col gap-4 mb-8 sm:flex-row">
+        {/* Fixed responsive layout for CTAs */}
+        <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:gap-3">
           <Button
             onClick={onBuyNow}
-            className="w-full py-4 px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md transition-colors min-h-[44px]"
+            className="w-full py-4 px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-lg shadow-md transition-colors min-h-[44px] sm:flex-1"
             data-testid="buynow-btn"
           >
             Buy This Course – HKD 120
@@ -30,11 +30,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="w-full sm:w-auto flex-shrink-0 py-4 px-4 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex items-center justify-center min-h-[44px]"
+            className="w-full sm:w-[120px] py-4 px-3 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex items-center justify-center min-h-[44px] flex-shrink-0"
             data-testid="addtocart-btn"
           >
-            <ShoppingCart size={24} />
-            <span className="ml-2 text-base">Add to Cart</span>
+            <ShoppingCart size={20} />
+            <span className="ml-2 text-sm font-medium">Cart</span>
           </Button>
         </div>
         {/* Bundle CTA as prominent section */}
