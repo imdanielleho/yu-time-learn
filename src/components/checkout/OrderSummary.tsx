@@ -53,14 +53,9 @@ const OrderSummary = ({
       
       <div className="space-y-4 mb-6">
         {checkoutItems.map((item: CheckoutItem) => (
-          <div key={item.id} className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-200 ${
+          <div key={item.id} className={`flex items-center justify-between p-3 rounded-xl transition-all duration-200 ${
             showDeleteButtons ? "bg-red-50 border border-red-100" : "bg-yutime-sand_light"
           }`}>
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-16 h-16 object-cover rounded-lg border border-yutime-sand"
-            />
             <div className="flex-1 min-w-0">
               <h4 className="font-medium text-yutime-sage text-base mb-1 line-clamp-2">{item.title}</h4>
               <p className="text-sm text-yutime-warmGray">{item.category}</p>
