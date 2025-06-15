@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -281,7 +282,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
               onClick={handleFiveCourseBundle}
               size="sm"
               variant="outline"
-              className="border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white font-medium"
+              className="border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:!text-white font-medium"
             >
               Get Bundle
             </Button>
