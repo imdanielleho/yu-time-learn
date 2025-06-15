@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
@@ -30,6 +31,8 @@ const CourseDetail = () => {
   const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
+  const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [videoError, setVideoError] = useState<string | null>(null);
   const { addToCart, openCart, clearCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart" | "proceedBundle" | "fiveCourseBundle">(null);
   const [pendingBundleSelections, setPendingBundleSelections] = useState<number[] | null>(null);
@@ -164,6 +167,31 @@ const CourseDetail = () => {
       url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
     });
     setIsVideoModalOpen(true);
+    setIsVideoLoading(true);
+    setVideoError(null);
+  };
+
+  const handleVideoLoad = () => {
+    setIsVideoLoading(false);
+  };
+
+  const handleVideoError = () => {
+    setIsVideoLoading(false);
+    setVideoError("Unable to load video. Please try again.");
+  };
+
+  const handleRetry = () => {
+    if (currentVideo) {
+      setVideoError(null);
+      setIsVideoLoading(true);
+    }
+  };
+
+  const handleCloseVideoModal = () => {
+    setIsVideoModalOpen(false);
+    setCurrentVideo(null);
+    setIsVideoLoading(false);
+    setVideoError(null);
   };
 
   const handleBundleLoginRequired = (
@@ -270,27 +298,78 @@ const CourseDetail = () => {
         onLoginRequired={handleBundleLoginRequired}
       />
 
-      {/* Video Modal with updated width */}
-      <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
-        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
-          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
-            <X className="h-6 w-6" />
-          </DialogClose>
-          {currentVideo && (
-            <div className="w-full">
-              <div className="p-4 bg-white text-black border-b border-gray-200">
-                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
+      {/* Enhanced Age-Friendly Video Modal */}
+      <Dialog open={isVideoModalOpen} onOpenChange={(open) => !open && handleCloseVideoModal()}>
+        <DialogContent className="max-w-full sm:max-w-4xl max-h-[90vh] p-0 bg-gray-800 rounded-xl overflow-hidden">
+          {/* Enhanced Header with larger typography and better spacing */}
+          <div className="p-6 bg-white border-b border-gray-200">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
+                {currentVideo && (
+                  <h3 className="text-2xl font-semibold text-gray-900 leading-tight">
+                    {currentVideo.title}
+                  </h3>
+                )}
               </div>
-              <div className="aspect-video">
-                <video
-                  src={currentVideo.url}
-                  className="w-full h-full"
-                  controls
-                  autoPlay
-                />
-              </div>
+              
+              {/* Enhanced Close Button - Larger with text label */}
+              <DialogClose className="flex items-center gap-2 rounded-lg bg-gray-100 hover:bg-gray-200 px-4 py-2 text-gray-700 hover:text-gray-900 transition-colors min-h-[44px]">
+                <X className="h-5 w-5" />
+                <span className="text-sm font-medium">Close Video</span>
+              </DialogClose>
             </div>
-          )}
+            
+            {/* Helper text for keyboard users */}
+            <p className="text-sm text-gray-500 mt-3">Press ESC to close</p>
+          </div>
+
+          {/* Video Content Area */}
+          <div className="relative bg-gray-900 flex items-center justify-center min-h-[60vh]">
+            {isVideoLoading && (
+              <div className="flex flex-col items-center gap-4 text-white">
+                <Loader2 className="h-12 w-12 animate-spin" />
+                <p className="text-lg font-medium">Loading video...</p>
+              </div>
+            )}
+
+            {videoError && (
+              <div className="flex flex-col items-center gap-4 text-white p-8 text-center">
+                <div className="bg-red-500/20 rounded-full p-4 mb-2">
+                  <X className="h-8 w-8 text-red-400" />
+                </div>
+                <h4 className="text-xl font-semibold mb-2">Video Error</h4>
+                <p className="text-gray-300 mb-4 text-lg leading-relaxed max-w-md">
+                  {videoError}
+                </p>
+                <button
+                  onClick={handleRetry}
+                  className="bg-yutime-sage hover:bg-yutime-sage/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-colors min-h-[44px]"
+                >
+                  Try Again
+                </button>
+              </div>
+            )}
+
+            {currentVideo && !isVideoLoading && !videoError && (
+              <div className="w-full">
+                <div className="aspect-video">
+                  <video
+                    src={currentVideo.url}
+                    className="w-full h-full object-cover"
+                    controls
+                    autoPlay
+                    onLoadStart={() => setIsVideoLoading(true)}
+                    onLoadedData={handleVideoLoad}
+                    onError={handleVideoError}
+                    style={{
+                      // Enhanced video controls for better accessibility
+                      outline: 'none'
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
     </div>
