@@ -9,15 +9,7 @@ import CheckoutUpsell from "@/components/checkout/CheckoutUpsell";
 import SecureCheckoutHeader from "@/components/checkout/SecureCheckoutHeader";
 import CustomerServiceButton from "@/components/CustomerServiceButton";
 import { Checkbox } from '@/components/ui/checkbox';
-import { ShieldCheck, CreditCard, Lock, Trash2 } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { ShieldCheck, CreditCard, Lock } from 'lucide-react';
 
 // List of valid coupons.
 const validCoupons = [
@@ -26,12 +18,10 @@ const validCoupons = [
 ];
 
 const Checkout = () => {
-  const { items, getTotalPrice, clearCart, removeFromCart } = useCart();
+  const { items, getTotalPrice, clearCart } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [courseToDelete, setCourseToDelete] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -91,39 +81,6 @@ const Checkout = () => {
     }
   };
 
-  const handleDeleteCourse = (courseId: number) => {
-    setCourseToDelete(courseId);
-    setDeleteDialogOpen(true);
-  };
-
-  const confirmDeleteCourse = () => {
-    if (courseToDelete !== null) {
-      removeFromCart(courseToDelete);
-      
-      // Reset coupon if bundle status changes
-      if (couponApplied) {
-        const newItemCount = items.length - 1;
-        const stillBundle = newItemCount === 3 || newItemCount === 5;
-        const currentCoupon = validCoupons.find(c =>
-          c.code.toLowerCase() === formData.coupon.toLowerCase()
-        );
-        
-        if (currentCoupon?.bundleOnly && !stillBundle) {
-          setCouponApplied(false);
-          setCouponError('Coupon no longer valid - bundle requirement not met');
-        }
-      }
-      
-      // If no items left, redirect to home
-      if (items.length <= 1) {
-        navigate('/', { state: { message: 'All items removed from checkout' } });
-      }
-    }
-    
-    setDeleteDialogOpen(false);
-    setCourseToDelete(null);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
@@ -181,29 +138,29 @@ const Checkout = () => {
             {/* Left Side - Form */}
             <div className="lg:col-span-3 space-y-6">
               {/* Contact Information */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft p-6 border border-yutime-sand/50">
+              <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-gradient-to-r from-yutime-sage to-yutime-sage/80 rounded-full flex items-center justify-center shadow-sm">
-                    <span className="text-white font-semibold text-sm">1</span>
+                  <div className="w-8 h-8 bg-yutime-sage/10 rounded-full flex items-center justify-center">
+                    <span className="text-yutime-sage font-semibold">1</span>
                   </div>
                   <h2 className="text-xl font-semibold text-yutime-sage">Contact Information</h2>
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="fullName" className="mb-2 block text-base text-yutime-sage font-medium">Full Name</Label>
+                    <Label htmlFor="fullName" className="mb-2 block text-base text-yutime-sage">Full Name</Label>
                     <Input
                       id="fullName"
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
                       required
-                      className="text-base py-3 border-yutime-sand/40 focus:border-yutime-sage focus:ring-yutime-sage/20 transition-all duration-200"
+                      className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
                       autoComplete="name"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="email" className="mb-2 block text-base text-yutime-sage font-medium">Email Address</Label>
+                    <Label htmlFor="email" className="mb-2 block text-base text-yutime-sage">Email Address</Label>
                     <Input
                       id="email"
                       name="email"
@@ -211,7 +168,7 @@ const Checkout = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="text-base py-3 border-yutime-sand/40 focus:border-yutime-sage focus:ring-yutime-sage/20 transition-all duration-200"
+                      className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
                       autoComplete="email"
                     />
                   </div>
@@ -219,21 +176,21 @@ const Checkout = () => {
               </div>
 
               {/* Payment Information */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft p-6 border border-yutime-sand/50">
+              <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-gradient-to-r from-yutime-sage to-yutime-sage/80 rounded-full flex items-center justify-center shadow-sm">
-                    <span className="text-white font-semibold text-sm">2</span>
+                  <div className="w-8 h-8 bg-yutime-sage/10 rounded-full flex items-center justify-center">
+                    <span className="text-yutime-sage font-semibold">2</span>
                   </div>
                   <h2 className="text-xl font-semibold text-yutime-sage">Payment Details</h2>
                   <div className="flex items-center gap-2 ml-auto">
                     <Lock className="w-4 h-4 text-green-600" />
-                    <span className="text-sm text-yutime-warmGray font-medium">SSL Secured</span>
+                    <span className="text-sm text-yutime-warmGray">Secured by SSL</span>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="cardNumber" className="mb-2 block text-base text-yutime-sage font-medium">Card Number</Label>
+                    <Label htmlFor="cardNumber" className="mb-2 block text-base text-yutime-sage">Card Number</Label>
                     <div className="relative">
                       <Input
                         id="cardNumber"
@@ -242,7 +199,7 @@ const Checkout = () => {
                         value={formData.cardNumber}
                         onChange={handleInputChange}
                         required
-                        className="text-base py-3 pl-12 border-yutime-sand/40 focus:border-yutime-sage focus:ring-yutime-sage/20 transition-all duration-200"
+                        className="text-base py-3 pl-12 border-yutime-sand focus:border-yutime-sage"
                         inputMode="numeric"
                         autoComplete="cc-number"
                       />
@@ -252,7 +209,7 @@ const Checkout = () => {
                   
                   <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="expiryDate" className="mb-2 block text-base text-yutime-sage font-medium">Expiry</Label>
+                      <Label htmlFor="expiryDate" className="mb-2 block text-base text-yutime-sage">Expiry</Label>
                       <Input
                         id="expiryDate"
                         name="expiryDate"
@@ -260,13 +217,13 @@ const Checkout = () => {
                         value={formData.expiryDate}
                         onChange={handleInputChange}
                         required
-                        className="text-base py-3 border-yutime-sand/40 focus:border-yutime-sage focus:ring-yutime-sage/20 transition-all duration-200"
+                        className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
                         inputMode="numeric"
                         autoComplete="cc-exp"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="cvv" className="mb-2 block text-base text-yutime-sage font-medium">CVV</Label>
+                      <Label htmlFor="cvv" className="mb-2 block text-base text-yutime-sage">CVV</Label>
                       <Input
                         id="cvv"
                         name="cvv"
@@ -274,13 +231,13 @@ const Checkout = () => {
                         value={formData.cvv}
                         onChange={handleInputChange}
                         required
-                        className="text-base py-3 border-yutime-sand/40 focus:border-yutime-sage focus:ring-yutime-sage/20 transition-all duration-200"
+                        className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
                         inputMode="numeric"
                         autoComplete="cc-csc"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="postalCode" className="mb-2 block text-base text-yutime-sage font-medium">Postal Code</Label>
+                      <Label htmlFor="postalCode" className="mb-2 block text-base text-yutime-sage">Postal Code</Label>
                       <Input
                         id="postalCode"
                         name="postalCode"
@@ -288,7 +245,7 @@ const Checkout = () => {
                         value={formData.postalCode}
                         onChange={handleInputChange}
                         required
-                        className="text-base py-3 border-yutime-sand/40 focus:border-yutime-sage focus:ring-yutime-sage/20 transition-all duration-200"
+                        className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
                         autoComplete="postal-code"
                       />
                     </div>
@@ -297,13 +254,13 @@ const Checkout = () => {
               </div>
 
               {/* Terms Agreement */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-soft p-6 border border-yutime-sand/50">
+              <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                 <div className="flex items-start gap-3">
                   <Checkbox
                     id="agree"
                     checked={agreed}
                     onCheckedChange={checked => setAgreed(Boolean(checked))}
-                    className="mt-1 border-yutime-sage/40 data-[state=checked]:bg-yutime-sage data-[state=checked]:border-yutime-sage"
+                    className="mt-1"
                     required
                   />
                   <div className="flex-1">
@@ -319,70 +276,62 @@ const Checkout = () => {
             <div className="lg:col-span-2">
               <div className="sticky top-8 space-y-6">
                 {/* Order Summary */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-soft p-6 border border-yutime-sand/50">
+                <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                   <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-semibold text-yutime-sage">Order Summary</h2>
-                    <div className="px-3 py-1 bg-yutime-sage/10 rounded-full">
-                      <span className="text-sm font-medium text-yutime-sage">{checkoutItems.length} {checkoutItems.length === 1 ? 'Course' : 'Courses'}</span>
-                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-yutime-blue border-yutime-blue/20 hover:bg-yutime-blue/5"
+                      onClick={() => navigate("/")}
+                    >
+                      Edit
+                    </Button>
                   </div>
                   
                   <div className="space-y-4 mb-6">
                     {checkoutItems.map((item: any) => (
-                      <div key={item.id} className="group relative flex items-center gap-4 p-4 bg-gradient-to-r from-yutime-sand_light/50 to-yutime-sand_light/30 rounded-xl border border-yutime-sand/30 hover:shadow-sm transition-all duration-200">
+                      <div key={item.id} className="flex items-center gap-4 p-3 bg-yutime-sand_light rounded-xl">
                         <img
                           src={item.image}
                           alt={item.title}
-                          className="w-16 h-16 object-cover rounded-lg border border-yutime-sand/50 shadow-sm"
+                          className="w-16 h-16 object-cover rounded-lg border border-yutime-sand"
                         />
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium text-yutime-sage text-base mb-1 line-clamp-2">{item.title}</h4>
                           <p className="text-sm text-yutime-warmGray">{item.category}</p>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <span className="font-semibold text-yutime-sage text-lg">HKD {item.price}</span>
-                          {!singleCourse && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleDeleteCourse(item.id)}
-                              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-red-500 hover:text-red-600 hover:bg-red-50 p-2"
-                              title="Remove course"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          )}
-                        </div>
+                        <span className="font-semibold text-yutime-sage text-lg">HKD {item.price}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Pricing Breakdown */}
-                  <div className="space-y-3 py-4 border-t border-yutime-sand/50">
+                  <div className="space-y-3 py-4 border-t border-yutime-sand">
                     <div className="flex justify-between items-center text-base">
-                      <span className="text-yutime-warmGray font-medium">Subtotal</span>
-                      <span className="text-yutime-sage font-semibold">HKD {currentTotal}</span>
+                      <span className="text-yutime-warmGray">Subtotal</span>
+                      <span className="text-yutime-sage">HKD {currentTotal}</span>
                     </div>
                     {couponApplied && discount > 0 && (
                       <div className="flex justify-between items-center text-base">
-                        <span className="text-green-600 font-medium">Discount ({formData.coupon})</span>
-                        <span className="text-green-600 font-semibold">-HKD {discount}</span>
+                        <span className="text-green-600">Discount ({formData.coupon})</span>
+                        <span className="text-green-600">-HKD {discount}</span>
                       </div>
                     )}
-                    <div className="flex justify-between items-center font-bold text-xl text-yutime-sage pt-3 border-t border-yutime-sand/50">
+                    <div className="flex justify-between items-center font-bold text-xl text-yutime-sage pt-2 border-t border-yutime-sand">
                       <span>Total</span>
-                      <span className="bg-yutime-sage/10 px-3 py-1 rounded-lg">HKD {total}</span>
+                      <span>HKD {total}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Coupon Section */}
-                <div className="bg-gradient-to-br from-yutime-sunshine/15 via-yutime-coral/10 to-yutime-sunshine/10 backdrop-blur-sm rounded-2xl p-6 border border-yutime-sunshine/30 shadow-soft">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-gradient-to-r from-yutime-sunshine to-yutime-coral rounded-full flex items-center justify-center shadow-sm">
+                <div className="bg-gradient-to-r from-yutime-sunshine/10 to-yutime-coral/10 rounded-2xl p-6 border border-yutime-sunshine/20">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 bg-yutime-sunshine rounded-full flex items-center justify-center">
                       <span className="text-white text-sm font-bold">%</span>
                     </div>
-                    <h3 className="font-semibold text-yutime-sage text-lg">Save More</h3>
+                    <h3 className="font-semibold text-yutime-sage">Have a coupon code?</h3>
                   </div>
                   
                   <form onSubmit={handleCoupon} className="space-y-3">
@@ -392,27 +341,24 @@ const Checkout = () => {
                         placeholder="Enter coupon code"
                         value={formData.coupon}
                         onChange={handleInputChange}
-                        className="flex-1 border-yutime-sunshine/40 focus:border-yutime-sunshine focus:ring-yutime-sunshine/20 transition-all duration-200"
+                        className="flex-1 border-yutime-sunshine/30 focus:border-yutime-sunshine"
                         disabled={couponApplied}
                       />
                       <Button
                         type="submit"
                         variant={couponApplied ? "secondary" : "default"}
                         disabled={couponApplied || !formData.coupon}
-                        className={couponApplied ? 
-                          "bg-green-100 text-green-700 hover:bg-green-200 shadow-sm" : 
-                          "bg-gradient-to-r from-yutime-sunshine to-yutime-coral hover:from-yutime-sunshine/90 hover:to-yutime-coral/90 text-white shadow-sm"
-                        }
+                        className={couponApplied ? "bg-green-100 text-green-700" : "bg-yutime-sunshine hover:bg-yutime-sunshine/90"}
                       >
                         {couponApplied ? "Applied" : "Apply"}
                       </Button>
                     </div>
                     
                     {couponError && (
-                      <div className="text-red-600 text-sm font-medium bg-red-50 p-2 rounded-lg">{couponError}</div>
+                      <div className="text-red-600 text-sm">{couponError}</div>
                     )}
                     {couponApplied && (
-                      <div className="text-green-700 text-sm font-medium bg-green-50 p-3 rounded-lg">
+                      <div className="text-green-700 text-sm font-medium">
                         🎉 Coupon applied successfully! You saved HKD {discount}
                       </div>
                     )}
@@ -420,15 +366,15 @@ const Checkout = () => {
                 </div>
 
                 {/* Security Badges */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-yutime-sand/50">
+                <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                   <div className="flex items-center justify-center gap-6 text-sm text-yutime-warmGray">
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="w-5 h-5 text-green-600" />
-                      <span className="font-medium">SSL Secured</span>
+                      <span>SSL Secured</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Lock className="w-5 h-5 text-green-600" />
-                      <span className="font-medium">Safe Payment</span>
+                      <span>Safe Payment</span>
                     </div>
                   </div>
                 </div>
@@ -447,7 +393,7 @@ const Checkout = () => {
                       !formData.postalCode ||
                       !agreed
                     }
-                    className="w-full bg-gradient-to-r from-yutime-coral to-yutime-coral/90 hover:from-yutime-coral/90 hover:to-yutime-coral/80 text-white py-6 text-xl font-bold rounded-2xl shadow-warm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] disabled:hover:scale-100"
+                    className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-6 text-xl font-bold rounded-2xl shadow-warm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
                   >
                     {isProcessing ? (
                       <div className="flex items-center justify-center gap-3">
@@ -455,10 +401,7 @@ const Checkout = () => {
                         Processing...
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center gap-2">
-                        <Lock className="w-5 h-5" />
-                        <span>Complete Purchase – HKD {total}</span>
-                      </div>
+                      `Complete Purchase – HKD ${total}`
                     )}
                   </Button>
                 </form>
@@ -467,33 +410,6 @@ const Checkout = () => {
           </div>
         )}
       </div>
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-yutime-sage">Remove Course</DialogTitle>
-            <DialogDescription className="text-yutime-warmGray">
-              Are you sure you want to remove this course from your order? This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setDeleteDialogOpen(false)}
-              className="border-yutime-sand text-yutime-sage hover:bg-yutime-sand/20"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={confirmDeleteCourse}
-              className="bg-red-500 hover:bg-red-600 text-white"
-            >
-              Remove Course
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       <CustomerServiceButton />
     </div>
