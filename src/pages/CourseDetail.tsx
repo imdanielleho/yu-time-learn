@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift, Loader2, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
@@ -30,8 +30,6 @@ const CourseDetail = () => {
   const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
-  const [hasVideoError, setHasVideoError] = useState(false);
   const { addToCart, openCart, clearCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart" | "proceedBundle" | "fiveCourseBundle">(null);
   const [pendingBundleSelections, setPendingBundleSelections] = useState<number[] | null>(null);
@@ -166,28 +164,6 @@ const CourseDetail = () => {
       url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
     });
     setIsVideoModalOpen(true);
-    setIsVideoLoading(true);
-    setHasVideoError(false);
-  };
-
-  const handleVideoLoad = () => {
-    setIsVideoLoading(false);
-  };
-
-  const handleVideoError = () => {
-    setIsVideoLoading(false);
-    setHasVideoError(true);
-  };
-
-  const handleRetryVideo = () => {
-    setHasVideoError(false);
-    setIsVideoLoading(true);
-  };
-
-  const handleCloseVideoModal = () => {
-    setIsVideoModalOpen(false);
-    setIsVideoLoading(true);
-    setHasVideoError(false);
   };
 
   const handleBundleLoginRequired = (
@@ -294,88 +270,24 @@ const CourseDetail = () => {
         onLoginRequired={handleBundleLoginRequired}
       />
 
-      {/* Modern Video Modal */}
-      <Dialog open={isVideoModalOpen} onOpenChange={(open) => !open && handleCloseVideoModal()}>
-        <DialogContent className="sm:max-w-4xl max-h-[95vh] p-0 bg-white/95 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl overflow-hidden animate-scale-in">
-          {/* Enhanced Close Button */}
-          <DialogClose 
-            className="absolute right-6 top-6 z-20 rounded-full bg-black/20 backdrop-blur-sm p-3 text-white hover:bg-black/40 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yutime-sage focus:ring-offset-2"
-            aria-label="Close video modal"
-          >
+      {/* Video Modal with updated width */}
+      <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
+        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
             <X className="h-6 w-6" />
           </DialogClose>
-          
           {currentVideo && (
             <div className="w-full">
-              {/* Enhanced Header with Gradient */}
-              <div className="bg-gradient-to-r from-yutime-sage/10 to-yutime-blue/10 backdrop-blur-sm p-8 border-b border-white/10">
-                <div className="flex items-start justify-between pr-16">
-                  <div className="space-y-3">
-                    <h3 className="text-3xl font-semibold text-yutime-navy leading-tight">{currentVideo.title}</h3>
-                    <div className="flex items-center gap-2 text-sm text-yutime-warmGray">
-                      <span>{course.title}</span>
-                      <span>•</span>
-                      <span>YuTime Learning</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="p-4 bg-white text-black border-b border-gray-200">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
-
-              {/* Video Container with Loading and Error States */}
-              <div className="relative bg-black rounded-b-2xl overflow-hidden">
-                <div className="aspect-video relative">
-                  {/* Loading State */}
-                  {isVideoLoading && !hasVideoError && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-yutime-sage/20 to-yutime-blue/20 backdrop-blur-sm">
-                      <Loader2 className="h-12 w-12 text-yutime-sage animate-spin mb-4" />
-                      <p className="text-white text-lg font-medium">Loading video...</p>
-                    </div>
-                  )}
-
-                  {/* Error State */}
-                  {hasVideoError && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-red-500/20 to-red-600/20 backdrop-blur-sm text-white">
-                      <div className="text-center space-y-4 p-8">
-                        <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <X className="h-8 w-8 text-red-400" />
-                        </div>
-                        <h4 className="text-xl font-semibold">Unable to load video</h4>
-                        <p className="text-gray-300 max-w-md">There was a problem loading this video. Please check your connection and try again.</p>
-                        <button
-                          onClick={handleRetryVideo}
-                          className="inline-flex items-center gap-2 bg-yutime-sage hover:bg-yutime-sage/90 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105"
-                        >
-                          <RotateCcw className="h-4 w-4" />
-                          Try Again
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Video Player */}
-                  <video
-                    src={currentVideo.url}
-                    className="w-full h-full object-cover"
-                    controls
-                    autoPlay
-                    onLoadStart={handleVideoLoad}
-                    onError={handleVideoError}
-                    onCanPlay={handleVideoLoad}
-                    style={{ display: (isVideoLoading || hasVideoError) ? 'none' : 'block' }}
-                  />
-                </div>
-
-                {/* Video Info Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-                  <div className="text-white">
-                    <h4 className="text-lg font-medium mb-2">{currentVideo.title}</h4>
-                    <div className="flex items-center gap-4 text-sm text-gray-300">
-                      <span>Course: {course.title}</span>
-                      <span>•</span>
-                      <span>YuTime Learning</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="aspect-video">
+                <video
+                  src={currentVideo.url}
+                  className="w-full h-full"
+                  controls
+                  autoPlay
+                />
               </div>
             </div>
           )}
