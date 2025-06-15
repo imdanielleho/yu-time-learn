@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { X, Trash2, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -65,6 +64,8 @@ const CartDrawer = () => {
                     <h4 className="font-semibold text-base text-yutime-sage leading-snug mb-1 line-clamp-2">{item.title}</h4>
                     <div className="flex flex-wrap items-center gap-1 text-sm text-yutime-warmGray mb-1">
                       <span>{item.category}</span>
+                      <span>•</span>
+                      <span>{item.totalTime}</span>
                     </div>
                     <p className="font-bold text-base text-yutime-sage">HKD {item.price}</p>
                   </div>

@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface CartItem {
@@ -7,6 +6,7 @@ export interface CartItem {
   price: number;
   image: string;
   category: string;
+  totalTime: string;
 }
 
 export interface Bundle {

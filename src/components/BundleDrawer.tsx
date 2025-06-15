@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { courses as allCourses } from "@/data/courses";
@@ -54,6 +53,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             price: course.price,
             image: course.image,
             category: course.category,
+            totalTime: course.totalTime
           });
         }
       });
@@ -76,6 +76,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         price: course.price,
         image: course.image,
         category: course.category,
+        totalTime: course.totalTime
       });
     });
     onClose();

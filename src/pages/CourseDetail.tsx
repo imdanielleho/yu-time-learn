@@ -49,7 +49,8 @@ const CourseDetail = () => {
         title: course.title,
         price: course.price,
         image: course.image,
-        category: course.category
+        category: course.category,
+        totalTime: course.totalTime
       });
       toast({
         title: "Added to Cart",
@@ -74,6 +75,7 @@ const CourseDetail = () => {
             price: c.price,
             image: c.image,
             category: c.category,
+            totalTime: c.totalTime
           });
         }
       });
@@ -94,6 +96,7 @@ const CourseDetail = () => {
           price: c.price,
           image: c.image,
           category: c.category,
+          totalTime: c.totalTime
         });
       });
       setIsLoginModalOpen(false);
@@ -146,7 +149,8 @@ const CourseDetail = () => {
         title: course.title,
         price: course.price,
         image: course.image,
-        category: course.category
+        category: course.category,
+        totalTime: course.totalTime
       });
       toast({
         title: "Added to Cart",
