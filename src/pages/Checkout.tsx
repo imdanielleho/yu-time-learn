@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -397,40 +396,38 @@ const Checkout = () => {
                 </div>
 
                 {/* Coupon Section */}
-                <div className="bg-gradient-to-r from-yutime-sunshine/10 to-yutime-coral/10 rounded-2xl p-6 border border-yutime-sunshine/20">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-6 h-6 bg-yutime-sunshine rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-bold">%</span>
-                    </div>
-                    <h3 className="font-semibold text-yutime-sage">Have a coupon code?</h3>
+                <div className="bg-white rounded-xl p-4 border border-yutime-sand/50">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-sm font-medium text-yutime-warmGray">Have a coupon code?</span>
                   </div>
                   
-                  <form onSubmit={handleCoupon} className="space-y-3">
+                  <form onSubmit={handleCoupon} className="space-y-2">
                     <div className="flex gap-2">
                       <Input
                         name="coupon"
-                        placeholder="Enter coupon code"
+                        placeholder="Enter code"
                         value={formData.coupon}
                         onChange={handleInputChange}
-                        className="flex-1 border-yutime-sunshine/30 focus:border-yutime-sunshine"
+                        className="flex-1 text-sm border-yutime-sand focus:border-yutime-sage"
                         disabled={couponApplied}
                       />
                       <Button
                         type="submit"
-                        variant={couponApplied ? "secondary" : "default"}
+                        variant={couponApplied ? "secondary" : "outline"}
+                        size="sm"
                         disabled={couponApplied || !formData.coupon}
-                        className={couponApplied ? "bg-green-100 text-green-700" : "bg-yutime-sunshine hover:bg-yutime-sunshine/90"}
+                        className={`${couponApplied ? "bg-green-50 text-green-700 border-green-200" : "border-yutime-sage/30 text-yutime-sage hover:bg-yutime-sage/5"} text-sm`}
                       >
                         {couponApplied ? "Applied" : "Apply"}
                       </Button>
                     </div>
                     
                     {couponError && (
-                      <div className="text-red-600 text-sm">{couponError}</div>
+                      <div className="text-red-600 text-xs">{couponError}</div>
                     )}
                     {couponApplied && (
-                      <div className="text-green-700 text-sm font-medium">
-                        🎉 Coupon applied successfully! You saved HKD {discount}
+                      <div className="text-green-700 text-xs">
+                        Coupon applied! You saved HKD {discount}
                       </div>
                     )}
                   </form>
