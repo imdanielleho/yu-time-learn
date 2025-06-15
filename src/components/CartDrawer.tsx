@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { X, Trash2, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -134,7 +133,7 @@ const CartDrawer = () => {
                 Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
               </SheetTitle>
               <SheetClose asChild>
-                <Button variant="ghost" size="icon" className="absolute right-5 top-6">
+                <Button variant="ghost" size="icon">
                   <X size={20} />
                 </Button>
               </SheetClose>
