@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { HelpCircle, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -8,14 +7,9 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const CustomerServiceButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
-  const location = useLocation();
   
   // TODO: Replace with actual authentication state
   const isLoggedIn = false; // This should come from your auth context/state
-
-  // Hide on course detail pages for screens below 992px
-  const isOnCourseDetailPage = location.pathname.startsWith('/courses/');
-  const shouldHide = isOnCourseDetailPage && window.innerWidth < 992;
 
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/1234567890', '_blank');
@@ -25,11 +19,6 @@ const CustomerServiceButton = () => {
     // In a real app, this would open WeChat or show QR code
     alert('WeChat contact: your-wechat-id');
   };
-
-  // Don't render if should be hidden
-  if (shouldHide) {
-    return null;
-  }
 
   return (
     <div className={`fixed z-50 ${
