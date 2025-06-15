@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { courses as allCourses } from "@/data/courses";
@@ -26,11 +25,17 @@ const IntegratedBundleDrawer: React.FC = () => {
   const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
   
   useEffect(() => {
-    if (isBundleDrawerOpen && bundleDrawerMode === 'add-to-cart') {
-      // Don't preselect anything when adding to cart
-      setSelectedCourses([]);
+    if (isBundleDrawerOpen) {
+      if (bundleDrawerMode === 'add-to-cart') {
+        // Pre-select courses that are already in the cart
+        const cartCourseIds = cartItems.map(item => item.id);
+        setSelectedCourses(cartCourseIds);
+      } else {
+        // Standalone mode - don't preselect anything
+        setSelectedCourses([]);
+      }
     }
-  }, [isBundleDrawerOpen, bundleDrawerMode]);
+  }, [isBundleDrawerOpen, bundleDrawerMode, cartItems]);
 
   const toggleCourse = (courseId: number) => {
     if (selectedCourses.includes(courseId)) {
