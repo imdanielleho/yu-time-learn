@@ -43,6 +43,7 @@ const Checkout = () => {
   const [couponApplied, setCouponApplied] = useState(false);
   const [couponError, setCouponError] = useState('');
   const [agreed, setAgreed] = useState(false);
+  const [showDeleteButtons, setShowDeleteButtons] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; courseId: number | null }>({
     open: false,
     courseId: null
@@ -93,6 +94,10 @@ const Checkout = () => {
     }
   };
 
+  const handleEditToggle = () => {
+    setShowDeleteButtons(!showDeleteButtons);
+  };
+
   const handleDeleteCourse = (courseId: number) => {
     setDeleteDialog({ open: true, courseId });
   };
@@ -123,6 +128,7 @@ const Checkout = () => {
       }
     }
     setDeleteDialog({ open: false, courseId: null });
+    setShowDeleteButtons(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -323,21 +329,27 @@ const Checkout = () => {
                 <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
                   <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-semibold text-yutime-sage">Order Summary</h2>
-                    {!singleCourse && (
+                    {!singleCourse && checkoutItems.length > 1 && (
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-yutime-blue border-yutime-blue/20 hover:bg-yutime-blue/5"
-                        onClick={() => navigate("/")}
+                        className={`transition-all duration-200 ${
+                          showDeleteButtons 
+                            ? "bg-yutime-sage text-white border-yutime-sage hover:bg-yutime-sage/90" 
+                            : "text-yutime-blue border-yutime-blue/20 hover:bg-yutime-blue/5"
+                        }`}
+                        onClick={handleEditToggle}
                       >
-                        Add More
+                        {showDeleteButtons ? "Done" : "Edit"}
                       </Button>
                     )}
                   </div>
                   
                   <div className="space-y-4 mb-6">
                     {checkoutItems.map((item: any) => (
-                      <div key={item.id} className="flex items-center gap-4 p-3 bg-yutime-sand_light rounded-xl group">
+                      <div key={item.id} className={`flex items-center gap-4 p-3 rounded-xl transition-all duration-200 ${
+                        showDeleteButtons ? "bg-red-50 border border-red-100" : "bg-yutime-sand_light"
+                      }`}>
                         <img
                           src={item.image}
                           alt={item.title}
@@ -349,12 +361,12 @@ const Checkout = () => {
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="font-semibold text-yutime-sage text-lg">HKD {item.price}</span>
-                          {!singleCourse && (
+                          {!singleCourse && showDeleteButtons && (
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => handleDeleteCourse(item.id)}
-                              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-red-500 hover:text-red-700 hover:bg-red-50 p-2"
+                              className="text-red-500 hover:text-red-700 hover:bg-red-100 p-2 transition-all duration-200"
                               aria-label={`Remove ${item.title} from cart`}
                             >
                               <Trash2 className="w-4 h-4" />
