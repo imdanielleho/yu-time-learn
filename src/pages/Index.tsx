@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -13,6 +12,7 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import LoginModal from '@/components/LoginModal';
 import { useIsMobile } from '@/hooks/use-mobile';
+import AllCoursesBundleCTA from "@/components/AllCoursesBundleCTA";
 
 const Index = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -35,6 +35,8 @@ const Index = () => {
         <div id="courses">
           <FeaturedCourses />
         </div>
+        {/* Add All 5 Courses Bundle CTA */}
+        <AllCoursesBundleCTA />
         <LearningProcess />
         <div id="pricing">
           <PricingSection />
