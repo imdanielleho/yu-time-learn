@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -107,24 +108,24 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         side="right"
         className="max-w-full w-[400px] p-0 flex flex-col shadow-2xl"
       >
-        <SheetHeader className="border-b px-4 py-3">
-          <SheetTitle className="text-base font-bold text-yutime-sage">
+        <SheetHeader className="border-b px-5 py-6">
+          <SheetTitle className="text-2xl font-bold text-yutime-sage">
             Choose Your 3-Course Bundle
           </SheetTitle>
         </SheetHeader>
-        <div className="p-4 flex-1 flex flex-col gap-2 overflow-auto">
-          <div className="flex flex-col items-center mb-1">
-            <div className="font-bold text-xl text-yutime-sage mb-0.5">
+        <div className="p-5 flex-1 flex flex-col gap-6 overflow-auto">
+          <div className="flex flex-col items-center">
+            <div className="font-bold text-3xl text-yutime-sage mb-2">
               HKD {BUNDLE_TYPE.price}
             </div>
-            <div className="text-xs font-semibold text-yutime-coral">
+            <div className="text-lg font-semibold text-yutime-coral">
               Save HKD {BUNDLE_TYPE.savings}
             </div>
           </div>
-          <div className="text-yutime-sage text-sm text-center mb-1">
+          <div className="text-yutime-sage text-lg text-center">
             Select <strong>{BUNDLE_TYPE.count}</strong> courses:
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
             {allCourses.map((course) => {
               const selected = isSelected(course.id);
               const disabled = !selected && selectionFull;
@@ -134,58 +135,57 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                     onClick={() => toggleCourse(course.id)}
                     disabled={disabled}
                     className={
-                      "flex gap-2 px-2 py-2 rounded-lg border text-left w-full bg-white transition-colors duration-100 " +
+                      "flex gap-4 px-4 py-4 rounded-lg border text-left w-full bg-white transition-colors duration-100 min-h-[72px] " +
                       (selected
-                        ? "border-yutime-coral bg-yutime-cream/60 font-bold"
+                        ? "border-yutime-coral bg-yutime-cream/60 font-semibold"
                         : disabled
                         ? "border-gray-100 opacity-40 cursor-not-allowed"
                         : "border-gray-200 hover:border-yutime-coral")
                     }
-                    style={{ minHeight: 54 }}
                   >
-                    <img src={course.image} alt={course.title} className="w-12 h-12 object-cover rounded-md border flex-shrink-0" />
-                    <div className="flex-1 min-w-0 pr-6">
-                      <div className="truncate text-sm font-semibold text-yutime-sage">{course.title}</div>
-                      <div className="text-xs text-yutime-warmGray mt-0.5 truncate">{course.category}</div>
+                    <img src={course.image} alt={course.title} className="w-16 h-16 object-cover rounded-lg border flex-shrink-0" />
+                    <div className="flex-1 min-w-0 pr-8">
+                      <div className="truncate text-lg font-semibold text-yutime-sage">{course.title}</div>
+                      <div className="text-base text-yutime-warmGray mt-1 truncate">{course.category}</div>
                     </div>
-                    {selected && (<Check size={18} className="text-yutime-coral ml-1" />)}
+                    {selected && (<Check size={24} className="text-yutime-coral absolute top-4 right-4" />)}
                   </button>
                 </div>
               );
             })}
           </div>
-          <div className="my-2 w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center">
             <Button
               onClick={handleFiveCourseBundle}
-              className="w-full bg-yutime-coral text-white font-bold py-3 rounded-lg shadow hover:bg-yutime-coral/90 text-base"
+              className="w-full bg-yutime-coral text-white font-bold py-4 rounded-lg shadow hover:bg-yutime-coral/90 text-lg h-12"
             >
               All 5 Courses – HKD 500
             </Button>
-            <span className="text-xs text-yutime-coral mt-1">
+            <span className="text-base text-yutime-coral mt-2">
               Save HKD {FIVE_COURSE_BUNDLE.savings} – Best value!
             </span>
           </div>
-          <div className="bg-yutime-cream border border-yutime-coral/20 rounded-lg px-3 py-1.5 mt-1 flex flex-col items-center">
-            <span className="text-yutime-sage text-sm">
+          <div className="bg-yutime-cream border border-yutime-coral/20 rounded-lg px-5 py-4 flex flex-col items-center">
+            <span className="text-yutime-sage text-lg">
               <strong>{selectedCourses.length}/{BUNDLE_TYPE.count}</strong> selected
             </span>
-            <span className="text-yutime-coral text-base font-bold mt-0.5">
+            <span className="text-yutime-coral text-2xl font-bold mt-1">
               HKD {BUNDLE_TYPE.price}
             </span>
           </div>
         </div>
-        <div className="flex flex-col px-4 gap-2 pb-4">
+        <div className="flex flex-col px-5 gap-4 pb-5">
           <Button
             onClick={handleProceedToCheckout}
             disabled={selectedCourses.length !== BUNDLE_TYPE.count}
-            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-bold rounded-lg"
+            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-bold rounded-lg h-12"
           >
             Proceed to checkout
           </Button>
           <Button
             onClick={handleCancel}
             variant="outline"
-            className="w-full border-yutime-sage text-yutime-sage text-base"
+            className="w-full border-yutime-sage text-yutime-sage text-lg font-medium rounded-lg h-12"
           >
             Cancel
           </Button>
