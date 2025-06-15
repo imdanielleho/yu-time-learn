@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -189,8 +188,20 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
           </div>
         )}
         
-        {/* Enhanced Course Cards with Better Readability */}
-        <div className="space-y-3 mb-6">
+        {/* Responsive Grid of Courses */}
+        <div
+          className="
+            grid gap-4 mb-6
+            grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-3
+            lg:grid-cols-5
+          "
+          style={{
+            maxHeight: 'unset',
+            overflowY: 'visible',
+          }}
+        >
           {allCourses.map((course) => {
             const selected = isSelected(course.id);
             const disabled = !selected && selectionFull;
@@ -200,7 +211,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                 onClick={() => toggleCourse(course.id)}
                 disabled={disabled}
                 className={
-                  "flex gap-4 p-4 rounded-lg border text-left w-full transition-all duration-200 min-h-[80px] " +
+                  "flex flex-col gap-2 p-4 rounded-lg border text-left w-full transition-all duration-200 min-h-[80px] h-full " +
                   (selected
                     ? "border-yutime-coral bg-yutime-cream/60 shadow-sm"
                     : disabled
@@ -209,25 +220,24 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                 }
                 aria-pressed={selected}
                 aria-label={`${selected ? 'Remove' : 'Add'} ${course.title} ${disabled ? '(maximum reached)' : ''}`}
+                style={{ height: '100%' }}
               >
                 <img 
                   src={course.image} 
                   alt={course.title} 
-                  className="w-16 h-16 object-cover rounded-lg border flex-shrink-0" 
+                  className="w-full aspect-[16/9] object-cover rounded-lg border mb-2" 
                 />
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-lg text-yutime-sage mb-2 leading-snug line-clamp-2">
-                    {course.title}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-1 text-sm text-yutime-warmGray">
-                    <span>{course.category}</span>
-                    <span>•</span>
-                    <span>{course.level}</span>
-                    <span>•</span>
-                    <span>{course.totalTime}</span>
-                  </div>
+                <h3 className="font-semibold text-lg text-yutime-sage mb-1 leading-snug line-clamp-2">
+                  {course.title}
+                </h3>
+                <div className="flex flex-wrap items-center gap-1 text-sm text-yutime-warmGray">
+                  <span>{course.category}</span>
+                  <span>•</span>
+                  <span>{course.level}</span>
+                  <span>•</span>
+                  <span>{course.totalTime}</span>
                 </div>
-                <div className="flex items-center">
+                <div className="flex justify-end mt-auto">
                   {selected ? (
                     <div className="w-6 h-6 bg-yutime-coral rounded-full flex items-center justify-center">
                       <Check size={16} className="text-white" />
