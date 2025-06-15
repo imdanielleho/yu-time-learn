@@ -9,6 +9,13 @@ import SecureCheckoutHeader from "@/components/checkout/SecureCheckoutHeader";
 import CustomerServiceButton from "@/components/CustomerServiceButton";
 import { Checkbox } from '@/components/ui/checkbox';
 
+// List of valid coupons.
+// Adjust or extend as needed.
+const validCoupons = [
+  { code: "BUNDLE50", amount: 50, bundleOnly: true },
+  { code: "WELCOME10", amount: 10 },
+];
+
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
   const navigate = useNavigate();
