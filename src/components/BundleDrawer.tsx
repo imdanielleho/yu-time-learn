@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { courses as allCourses } from "@/data/courses";
-import { Check, ArrowLeft, X, CheckCircle } from "lucide-react";
+import { Check, ArrowLeft, X, CheckCircle, Sparkles } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -133,8 +134,6 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
               Pick 3 for HKD 350 or 5 for HKD 500
             </p>
           </div>
-          {/* Removed the duplicate desktop close button here */}
-          {/* The Sheet's built-in close button will be shown automatically for desktop */}
         </div>
 
         {/* Improved Progress Section condensed */}
@@ -161,7 +160,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
       </div>
       
       {/* Course Selection Area - Condensed */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto px-3 pt-3">
         {/* Empty State */}
         {selectedCourses.length === 0 && (
           <div className="text-center py-4 mb-4">
@@ -181,7 +180,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         )}
         
         {/* Course Cards - Condensed */}
-        <div className="space-y-2 mb-4">
+        <div className="space-y-2 mb-6">
           {allCourses.map((course) => {
             const selected = isSelected(course.id);
             const disabled = !selected && selectionFull;
@@ -233,62 +232,91 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         </div>
       </div>
       
-      {/* Sticky Footer - Condensed */}
-      <div className="border-t bg-white p-3 space-y-2">
+      {/* Enhanced Footer with Clear Visual Hierarchy */}
+      <div className="border-t bg-white">
+        {/* Section 1: Bundle Summary - Clean, prominent display */}
         {selectedCourses.length > 0 && (
-          <div className="text-center mb-2">
-            <p className="text-base font-bold text-yutime-sage">
-              {selectedCourses.length} Courses Selected – HKD {BUNDLE_TYPE.price}
-            </p>
-            <p className="text-sm font-medium" style={{ color: '#FF8B7A' }}>
-              Save HKD {BUNDLE_TYPE.savings}
-            </p>
+          <div className="px-4 py-4 bg-yutime-cream/30 border-b border-yutime-sage/10">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-lg font-bold text-yutime-sage">
+                  {selectedCourses.length} Course{selectedCourses.length > 1 ? 's' : ''} Selected
+                </p>
+                <p className="text-sm text-yutime-warmGray">
+                  {selectedCourses.length === BUNDLE_TYPE.count ? 'Bundle ready for checkout' : `${BUNDLE_TYPE.count - selectedCourses.length} more needed`}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-xl font-bold text-yutime-sage">HKD {BUNDLE_TYPE.price}</p>
+                <p className="text-sm font-medium text-yutime-coral">Save HKD {BUNDLE_TYPE.savings}</p>
+              </div>
+            </div>
           </div>
         )}
         
-        <Button
-          onClick={handleProceedToCheckout}
-          disabled={selectedCourses.length !== BUNDLE_TYPE.count}
-          className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-bold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          aria-label={selectedCourses.length === BUNDLE_TYPE.count ? 'Proceed to checkout' : `Select ${BUNDLE_TYPE.count - selectedCourses.length} more courses to proceed`}
-        >
-          {selectedCourses.length === BUNDLE_TYPE.count 
-            ? 'Proceed to Checkout' 
-            : `Browse Courses to Add ${BUNDLE_TYPE.count - selectedCourses.length} More`
-          }
-        </Button>
-        
-        {/* Secondary 5-Course CTA - Subtle Text Link */}
-        <div className="text-center py-1">
-          <p className="text-sm text-yutime-warmGray mb-1">
-            Want all 5 courses? Get everything for HKD 500 (save HKD {FIVE_COURSE_BUNDLE.savings})
-          </p>
+        {/* Section 2: Primary Action Zone - Make checkout button stand out */}
+        <div className="px-4 pt-4">
           <Button
-            onClick={handleFiveCourseBundle}
-            variant="ghost"
-            className="text-yutime-coral hover:text-yutime-coral/80 hover:bg-yutime-coral/10 font-medium text-sm px-2 py-1 h-auto"
+            onClick={handleProceedToCheckout}
+            disabled={selectedCourses.length !== BUNDLE_TYPE.count}
+            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-200"
+            aria-label={selectedCourses.length === BUNDLE_TYPE.count ? 'Proceed to checkout' : `Select ${BUNDLE_TYPE.count - selectedCourses.length} more courses to proceed`}
           >
-            Get All 5 Courses – Best Value!
+            {selectedCourses.length === BUNDLE_TYPE.count 
+              ? 'Proceed to Checkout' 
+              : `Select ${BUNDLE_TYPE.count - selectedCourses.length} More Course${BUNDLE_TYPE.count - selectedCourses.length > 1 ? 's' : ''}`
+            }
           </Button>
         </div>
         
-        <div className="flex gap-2">
-          {selectedCourses.length > 0 && (
+        {/* Section 3: Enhanced Secondary CTA - 5-course bundle with better visibility */}
+        <div className="px-4 py-4">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-yutime-sage/5 to-yutime-coral/5 rounded-xl"></div>
+            <div className="relative bg-white/80 border-2 border-yutime-coral/30 rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles size={18} className="text-yutime-coral" />
+                  <span className="font-semibold text-yutime-sage">Best Value Option</span>
+                </div>
+                <span className="bg-yutime-coral text-white text-xs font-bold px-2 py-1 rounded-full">
+                  Save HKD {FIVE_COURSE_BUNDLE.savings}
+                </span>
+              </div>
+              <p className="text-sm text-yutime-warmGray mb-3">
+                Get all 5 courses for HKD 500 instead of HKD 600
+              </p>
+              <Button
+                onClick={handleFiveCourseBundle}
+                variant="outline"
+                className="w-full border-2 border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white font-semibold py-3 rounded-xl transition-all duration-200"
+              >
+                Get All 5 Courses – Complete Bundle
+              </Button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Section 4: Utility Actions - Clear/Cancel buttons in a subtle row */}
+        <div className="px-4 pb-4">
+          <div className="flex gap-3 pt-2">
+            {selectedCourses.length > 0 && (
+              <Button
+                onClick={clearSelection}
+                variant="ghost"
+                className="flex-1 text-yutime-warmGray hover:text-yutime-sage text-sm py-2 h-10"
+              >
+                Clear Selection
+              </Button>
+            )}
             <Button
-              onClick={clearSelection}
+              onClick={handleCancel}
               variant="ghost"
-              className="flex-1 text-yutime-warmGray text-sm py-2"
+              className="flex-1 text-yutime-warmGray hover:text-yutime-sage text-sm py-2 h-10"
             >
-              Clear Courses
+              {isMobile ? 'Close' : 'Cancel'}
             </Button>
-          )}
-          <Button
-            onClick={handleCancel}
-            variant="outline"
-            className="flex-1 border-yutime-sage text-yutime-sage text-sm py-2"
-          >
-            {isMobile ? 'Close Drawer' : 'Cancel & Exit'}
-          </Button>
+          </div>
         </div>
       </div>
     </>
