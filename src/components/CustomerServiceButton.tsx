@@ -1,24 +1,15 @@
+
 import React, { useState } from 'react';
 import { HelpCircle, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useLocation } from 'react-router-dom';
 
 const CustomerServiceButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
-  const location = useLocation();
   
   // TODO: Replace with actual authentication state
   const isLoggedIn = false; // This should come from your auth context/state
-
-  // Check if we're on a course detail page - if so, don't render this component
-  const isCourseDetailPage = location.pathname.startsWith('/courses/');
-  
-  // Don't render on course detail pages since chat is now integrated into the pricing card
-  if (isCourseDetailPage) {
-    return null;
-  }
 
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/1234567890', '_blank');
@@ -29,18 +20,14 @@ const CustomerServiceButton = () => {
     alert('WeChat contact: your-wechat-id');
   };
 
-  // Calculate bottom position based on context
-  const getBottomPosition = () => {
-    if (isMobile) {
-      // Normal mobile position for non-course pages
-      return isLoggedIn ? 'bottom-24' : 'bottom-20';
-    }
-    // Desktop position
-    return 'bottom-6';
-  };
-
   return (
-    <div className={`fixed z-50 right-6 ${getBottomPosition()}`}>
+    <div className={`fixed z-50 ${
+      isMobile 
+        ? isLoggedIn 
+          ? 'bottom-24 right-6' // Above mobile navigation when logged in
+          : 'bottom-20 right-6'  // Normal position when not logged in
+        : 'bottom-6 right-6'     // Normal position for desktop
+    }`}>
       {isExpanded && (
         <div className="mb-3 bg-white rounded-xl shadow-lg p-4 min-w-[180px] border border-gray-200">
           <div className="flex justify-end items-center mb-3">

@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import BottomNavigation from '@/components/BottomNavigation';
 import LoginModal from '@/components/LoginModal';
@@ -188,6 +189,7 @@ const CourseDetail = () => {
           </div>
         </main>
         <Footer />
+        <CustomerServiceButton />
         {isMobile && !isLoggedIn && (
           <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
         )}
@@ -247,6 +249,7 @@ const CourseDetail = () => {
         </div>
       </main>
       <Footer />
+      <CustomerServiceButton />
       {isMobile && !isLoggedIn && (
         <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
       )}
