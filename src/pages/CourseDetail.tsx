@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift, Loader2 } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
@@ -31,8 +30,6 @@ const CourseDetail = () => {
   const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
-  const [isVideoLoading, setIsVideoLoading] = useState(false);
-  const [videoError, setVideoError] = useState(false);
   const { addToCart, openCart, clearCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart" | "proceedBundle" | "fiveCourseBundle">(null);
   const [pendingBundleSelections, setPendingBundleSelections] = useState<number[] | null>(null);
@@ -44,6 +41,7 @@ const CourseDetail = () => {
     if (isLoggedIn && postLoginAction === "buyNow") {
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
+      // Go directly to checkout
       navigate('/checkout', { state: { singleCourse: course } });
     } else if (isLoggedIn && postLoginAction === "addToCart" && course) {
       addToCart({
@@ -57,6 +55,7 @@ const CourseDetail = () => {
         title: "Added to Cart",
         description: `"${course.title}" was added to your cart.`,
       });
+      // After login, stay on detail and just open cart
       openCart();
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
@@ -64,6 +63,7 @@ const CourseDetail = () => {
       isLoggedIn && postLoginAction === "proceedBundle"
       && pendingBundleSelections !== null
     ) {
+      // User logged in to proceed to checkout for 3-course bundle
       clearCart();
       pendingBundleSelections.forEach((courseId) => {
         const c = courses.find((c) => c.id === courseId);
@@ -79,12 +79,13 @@ const CourseDetail = () => {
       });
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
-      setIsBundleModalOpen(false);
+      setIsBundleModalOpen(false); // Close drawer
       setPendingBundleSelections(null);
       navigate("/checkout");
     } else if (
       isLoggedIn && postLoginAction === "fiveCourseBundle"
     ) {
+      // User logged in to proceed to checkout for 5-course bundle
       clearCart();
       courses.forEach((c) => {
         addToCart({
@@ -97,7 +98,7 @@ const CourseDetail = () => {
       });
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
-      setIsBundleModalOpen(false);
+      setIsBundleModalOpen(false); // Close drawer
       setPendingBundleSelections(null);
       navigate("/checkout");
     }
@@ -120,6 +121,7 @@ const CourseDetail = () => {
 
   const handleLogin = (email: string, password: string) => {
     setIsLoggedIn(true);
+    // DO NOT navigate here (navigation handled above)
   };
 
   const handleBuyNow = () => {
@@ -128,6 +130,7 @@ const CourseDetail = () => {
       setIsLoginModalOpen(true);
       return;
     }
+    // Go directly to checkout with "singleCourse" intent
     navigate('/checkout', { state: { singleCourse: course } });
   };
 
@@ -161,29 +164,6 @@ const CourseDetail = () => {
       url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
     });
     setIsVideoModalOpen(true);
-    setIsVideoLoading(true);
-    setVideoError(false);
-  };
-
-  const handleVideoLoad = () => {
-    setIsVideoLoading(false);
-  };
-
-  const handleVideoError = () => {
-    setIsVideoLoading(false);
-    setVideoError(true);
-  };
-
-  const handleRetryVideo = () => {
-    setVideoError(false);
-    setIsVideoLoading(true);
-  };
-
-  const handleCloseVideoModal = () => {
-    setIsVideoModalOpen(false);
-    setCurrentVideo(null);
-    setIsVideoLoading(false);
-    setVideoError(false);
   };
 
   const handleBundleLoginRequired = (
@@ -193,6 +173,7 @@ const CourseDetail = () => {
     setPostLoginAction(action);
     setPendingBundleSelections(action === "fiveCourseBundle" ? [] : selections);
     setIsLoginModalOpen(true);
+    // Keep the BundleDrawer open and preserve selections until login completes or cancelled
   };
 
   if (!course) {
@@ -280,6 +261,7 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
+      {/* Pass login props & handler to BundleDrawer */}
       <BundleDrawer
         isOpen={isBundleModalOpen}
         onClose={() => setIsBundleModalOpen(false)}
@@ -288,72 +270,27 @@ const CourseDetail = () => {
         onLoginRequired={handleBundleLoginRequired}
       />
 
-      {/* Age-Friendly Video Modal */}
-      <Dialog open={isVideoModalOpen} onOpenChange={handleCloseVideoModal}>
-        <DialogContent className="max-w-full sm:max-w-4xl max-h-[90vh] p-0 bg-gray-800 rounded-xl border-0">
-          {/* Enhanced Header */}
-          <div className="bg-white p-6 border-b border-gray-200 rounded-t-xl">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1 min-w-0">
-                <h3 className="text-2xl font-semibold text-yutime-sage leading-tight mb-2">
-                  {currentVideo?.title}
-                </h3>
-                <p className="text-sm text-gray-600">Press ESC to close video</p>
+      {/* Video Modal with updated width */}
+      <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
+        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
+            <X className="h-6 w-6" />
+          </DialogClose>
+          {currentVideo && (
+            <div className="w-full">
+              <div className="p-4 bg-white text-black border-b border-gray-200">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
-              
-              {/* Large, Accessible Close Button */}
-              <DialogClose className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-lg transition-colors duration-200 min-w-[120px] justify-center">
-                <X className="h-5 w-5" />
-                <span className="font-medium">Close Video</span>
-              </DialogClose>
-            </div>
-          </div>
-          
-          {/* Video Content Area */}
-          <div className="relative bg-gray-900">
-            {currentVideo && (
-              <div className="aspect-video relative">
-                {/* Loading State */}
-                {isVideoLoading && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900 z-10">
-                    <Loader2 className="h-12 w-12 text-white animate-spin mb-4" />
-                    <p className="text-white text-lg font-medium">Loading video...</p>
-                    <p className="text-gray-300 text-sm mt-1">Please wait a moment</p>
-                  </div>
-                )}
-                
-                {/* Error State */}
-                {videoError && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900 z-10 p-8">
-                    <div className="text-center">
-                      <X className="h-16 w-16 text-red-400 mx-auto mb-4" />
-                      <h4 className="text-xl font-semibold text-white mb-2">Video couldn't load</h4>
-                      <p className="text-gray-300 mb-6 text-lg">There was a problem loading this video. Please try again.</p>
-                      <button
-                        onClick={handleRetryVideo}
-                        className="bg-yutime-sage hover:bg-yutime-sage/90 text-white px-8 py-3 rounded-lg font-medium text-lg transition-colors duration-200"
-                      >
-                        Try Again
-                      </button>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Video Player */}
+              <div className="aspect-video">
                 <video
                   src={currentVideo.url}
-                  className="w-full h-full object-contain bg-black"
+                  className="w-full h-full"
                   controls
                   autoPlay
-                  onLoadedData={handleVideoLoad}
-                  onError={handleVideoError}
-                  style={{
-                    outline: 'none'
-                  }}
                 />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>
