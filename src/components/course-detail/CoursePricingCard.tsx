@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Gift } from "lucide-react";
@@ -11,7 +10,7 @@ interface CoursePricingCardProps {
 
 const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricingCardProps) => {
   return (
-    <div className="sticky top-8 max-[991px]:fixed max-[991px]:bottom-0 max-[991px]:left-0 max-[991px]:right-0 max-[991px]:top-auto max-[991px]:z-50">
+    <div className="sticky top-8 max-[991px]:fixed max-[991px]:bottom-0 max-[991px]:left-0 max-[991px]:right-0 max-[991px]:top-auto max-[991px]:z-40">
       <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 max-[991px]:rounded-t-xl max-[991px]:rounded-b-none max-[991px]:p-4 max-[991px]:shadow-2xl max-[991px]:border-t max-[991px]:border-x-0 max-[991px]:border-b-0">
         {/* Desktop version - full content */}
         <div className="max-[991px]:hidden">
@@ -73,7 +72,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
                 onClick={onAddToCart}
                 variant="outline"
                 size="sm"
-                className="flex items-center justify-center p-2 rounded-lg border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors"
+                className="flex items-center justify-center p-2 rounded-lg border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors relative z-10"
                 data-testid="addtocart-btn-mobile"
               >
                 <ShoppingCart size={16} />
@@ -81,7 +80,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
               <Button
                 onClick={onBuyNow}
                 size="sm"
-                className="px-4 py-2 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-lg font-medium text-sm transition-colors"
+                className="px-4 py-2 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-lg font-medium text-sm transition-colors relative z-10"
                 data-testid="buynow-btn-mobile"
               >
                 Buy Now
@@ -90,7 +89,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
                 onClick={onOpenBundle}
                 variant="outline"
                 size="sm"
-                className="px-3 py-2 rounded-lg border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors text-xs font-medium"
+                className="px-3 py-2 rounded-lg border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors text-xs font-medium relative z-10 touch-manipulation"
               >
                 Bundle
               </Button>
