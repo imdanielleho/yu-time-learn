@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Gift } from "lucide-react";
@@ -43,11 +42,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart, onOpenBundle }: CoursePricin
           <div className="rounded-2xl bg-yutime-cream p-6 border border-yutime-coral/40 flex flex-col items-center gap-4">
             <div className="flex items-center gap-3 mb-2">
               <Gift className="text-yutime-coral" size={24} />
-              <span className="text-base font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-3 py-1 rounded-lg">
+              <span className="text-sm font-semibold text-yutime-coral uppercase tracking-wide bg-yutime-coral/10 px-3 py-1 rounded-lg">
                 Save with a bundle
               </span>
             </div>
-            <div className="text-yutime-sage font-semibold text-base leading-relaxed text-center">
+            <div className="text-yutime-sage font-semibold text-lg leading-relaxed text-center">
               Pick 3 for <span className="text-yutime-coral font-bold">HKD350</span> or 5 for <span className="text-yutime-coral font-bold">HKD500</span>
             </div>
             <Button
