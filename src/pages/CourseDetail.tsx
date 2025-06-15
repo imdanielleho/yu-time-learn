@@ -197,9 +197,11 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
+      {/* Pass current course ID if opening bundle from CourseDetail */}
       <BundleDrawer
         isOpen={isBundleModalOpen}
         onClose={() => setIsBundleModalOpen(false)}
+        initialSelectedCourseId={course.id}
       />
 
       {/* Video Modal with updated width */}
