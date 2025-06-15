@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -165,7 +166,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         {/* Empty State */}
         {selectedCourses.length === 0 && (
           <div className="text-center py-4 mb-4">
-            <p className="text-sm text-yutime-warmGray">
+            <p className="text-base text-yutime-warmGray">
               Start building your bundle by selecting a course below.
             </p>
           </div>
@@ -174,7 +175,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         {/* Max Reached State */}
         {selectedCourses.length === BUNDLE_TYPE.count && (
           <div className="bg-yutime-cream border border-yutime-coral/20 rounded-lg p-3 mb-4 text-center">
-            <p className="text-sm font-medium text-yutime-sage">
+            <p className="text-base font-medium text-yutime-sage">
               Perfect! You've selected {BUNDLE_TYPE.count} courses. Ready to check out?
             </p>
           </div>
@@ -207,13 +208,11 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                   className="w-12 h-12 object-cover rounded-lg border flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-[15px] text-yutime-sage leading-snug mb-1 line-clamp-2">
+                  <h3 className="font-semibold text-base text-yutime-sage leading-snug mb-1 line-clamp-2">
                     {course.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-1 text-xs text-yutime-warmGray">
+                  <div className="flex flex-wrap items-center gap-1 text-sm text-yutime-warmGray">
                     <span>{course.category}</span>
-                    <span>•</span>
-                    <span>{course.level}</span>
                     <span>•</span>
                     <span>{course.totalTime}</span>
                   </div>
@@ -239,7 +238,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
           <h3 className="font-bold text-base text-yutime-sage mb-1">
             Want All 5 Courses?
           </h3>
-          <p className="text-sm text-yutime-warmGray mb-3">
+          <p className="text-base text-yutime-warmGray mb-3">
             Get everything for HKD 500 and save HKD {FIVE_COURSE_BUNDLE.savings}
           </p>
           <Button
