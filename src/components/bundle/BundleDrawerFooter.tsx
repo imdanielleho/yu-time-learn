@@ -85,7 +85,7 @@ const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
             <Button
               onClick={onClearSelection}
               variant="ghost"
-              className="flex-1 text-gray-600 hover:text-gray-900 text-sm py-2 h-10"
+              className="flex-1 text-gray-600 hover:bg-yutime-sage hover:text-white text-sm py-2 h-10 transition-all duration-200"
             >
               Clear Selection
             </Button>
@@ -93,7 +93,7 @@ const BundleDrawerFooter: React.FC<BundleDrawerFooterProps> = ({
           <Button
             onClick={onCancel}
             variant="ghost"
-            className="flex-1 text-gray-600 hover:text-gray-900 text-sm py-2 h-10"
+            className="flex-1 text-gray-600 hover:bg-yutime-sage hover:text-white text-sm py-2 h-10 transition-all duration-200"
           >
             {isMobile ? 'Close' : 'Cancel'}
           </Button>
