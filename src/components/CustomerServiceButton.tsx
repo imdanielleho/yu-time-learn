@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { HelpCircle, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -13,8 +12,13 @@ const CustomerServiceButton = () => {
   // TODO: Replace with actual authentication state
   const isLoggedIn = false; // This should come from your auth context/state
 
-  // Check if we're on a course detail page
+  // Check if we're on a course detail page - if so, don't render this component
   const isCourseDetailPage = location.pathname.startsWith('/courses/');
+  
+  // Don't render on course detail pages since chat is now integrated into the pricing card
+  if (isCourseDetailPage) {
+    return null;
+  }
 
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/1234567890', '_blank');
@@ -28,11 +32,7 @@ const CustomerServiceButton = () => {
   // Calculate bottom position based on context
   const getBottomPosition = () => {
     if (isMobile) {
-      if (isCourseDetailPage) {
-        // On course detail pages, position above the sticky pricing card
-        return isLoggedIn ? 'bottom-32' : 'bottom-28';
-      }
-      // Normal mobile position
+      // Normal mobile position for non-course pages
       return isLoggedIn ? 'bottom-24' : 'bottom-20';
     }
     // Desktop position
