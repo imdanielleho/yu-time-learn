@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,6 +54,9 @@ const Checkout = () => {
     if (match) discount = match.amount;
   }
   const total = Math.max(0, currentTotal - discount);
+
+  // Determine if we should show the form
+  const shouldShowForm = checkoutItems.length > 1 || !showUpsell;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -160,7 +164,7 @@ const Checkout = () => {
           </div>
         </section>
 
-        {/* Upsell Offer */}
+        {/* Upsell Offer - only show for single course purchases */}
         {showUpsell && checkoutItems.length === 1 && (
           <CheckoutUpsell
             courseTitle={checkoutItems[0].title}
@@ -169,8 +173,8 @@ const Checkout = () => {
           />
         )}
 
-        {/* Main Form */}
-        {!showUpsell && (
+        {/* Main Form - show for bundles immediately, or after upsell is dismissed */}
+        {shouldShowForm && (
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow p-5 space-y-5 border border-gray-100">
             {/* Buyer Information */}
             <section>
