@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from "react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { courses as allCourses } from "@/data/courses";
 import CoursePreviewPopover from "./CoursePreviewPopover";
-import { Check } from "lucide-react";
+import { X, Check } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 
@@ -13,32 +12,41 @@ interface BundleDrawerProps {
   onClose: () => void;
 }
 
-// Only 3-course bundle available
-const BUNDLE_TYPE = { id: "3-course", name: "3-Course Bundle", count: 3, price: 350, savings: 10 };
+const BUNDLE_TYPES = [
+  { id: "3-course", name: "3-Course Bundle", count: 3, price: 350, savings: 10 },
+  { id: "5-course", name: "5-Course Bundle", count: 5, price: 500, savings: 100 },
+];
 
 const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
   const { addToCart, clearCart } = useCart();
   const navigate = useNavigate();
 
-  const [selectedCourses, setSelectedCourses] = useState<number[]>(allCourses.slice(0, 3).map((c) => c.id));
+  const [selectedBundle, setSelectedBundle] = useState(BUNDLE_TYPES[0]);
+  const [selectedCourses, setSelectedCourses] = useState<number[]>(BUNDLE_TYPES[0].count === 3
+    ? allCourses.slice(0, 3).map((c) => c.id)
+    : allCourses.slice(0, 5).map((c) => c.id));
 
-  // Reset selection when the drawer opens
+  // Reset selected courses when bundle type changes
   useEffect(() => {
-    if (isOpen) {
-      setSelectedCourses(allCourses.slice(0, 3).map((c) => c.id));
-    }
-  }, [isOpen]);
+    setSelectedCourses(
+      allCourses
+        .filter((c) => !selectedCourses.includes(c.id))
+        .slice(0, selectedBundle.count)
+        .map((c) => c.id)
+    );
+  // eslint-disable-next-line
+  }, [selectedBundle]);
 
   const toggleCourse = (courseId: number) => {
     if (selectedCourses.includes(courseId)) {
       setSelectedCourses(selectedCourses.filter((id) => id !== courseId));
-    } else if (selectedCourses.length < BUNDLE_TYPE.count) {
+    } else if (selectedCourses.length < selectedBundle.count) {
       setSelectedCourses([...selectedCourses, courseId]);
     }
   };
 
   const handleProceedToCheckout = () => {
-    if (selectedCourses.length === BUNDLE_TYPE.count) {
+    if (selectedCourses.length === selectedBundle.count) {
       clearCart();
       selectedCourses.forEach((courseId) => {
         const course = allCourses.find((c) => c.id === courseId);
@@ -58,7 +66,11 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
   };
 
   const handleCancel = () => {
-    setSelectedCourses(allCourses.slice(0, 3).map((c) => c.id));
+    // Discard bundle selection
+    setSelectedBundle(BUNDLE_TYPES[0]);
+    setSelectedCourses(BUNDLE_TYPES[0].count === 3
+      ? allCourses.slice(0, 3).map((c) => c.id)
+      : allCourses.slice(0, 5).map((c) => c.id));
     onClose();
   };
 
@@ -71,27 +83,46 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
       >
         <SheetHeader className="border-b px-6 py-4">
           <SheetTitle className="text-lg font-bold text-yutime-sage">
-            Choose Your 3-Course Bundle
+            Choose Your Bundle
           </SheetTitle>
         </SheetHeader>
         <div className="p-6 flex-1 flex flex-col gap-4 overflow-auto">
+          {/* Bundle Type Selector */}
+          <div className="flex gap-3 mb-4 justify-center">
+            {BUNDLE_TYPES.map((bt) => (
+              <button
+                key={bt.id}
+                type="button"
+                onClick={() => setSelectedBundle(bt)}
+                className={
+                  "px-4 py-2 font-semibold rounded-lg border text-base " +
+                  (selectedBundle.id === bt.id
+                    ? "border-yutime-coral bg-yutime-coral/10 text-yutime-coral"
+                    : "border-gray-200 bg-white text-yutime-sage hover:border-yutime-coral/40")
+                }
+                style={{ minWidth: 120 }}
+              >
+                {bt.name}
+              </button>
+            ))}
+          </div>
           {/* Pricing and savings */}
           <div className="flex flex-col items-center mb-2">
             <div className="font-bold text-2xl text-yutime-sage mb-1">
-              HKD {BUNDLE_TYPE.price}
+              HKD {selectedBundle.price}
             </div>
             <div className="text-sm font-semibold text-yutime-coral">
-              Save HKD {BUNDLE_TYPE.savings}
+              Save HKD {selectedBundle.savings}
             </div>
           </div>
           <div className="text-yutime-sage text-base text-center mb-1">
-            Select <strong>{BUNDLE_TYPE.count}</strong> courses:
+            Select <strong>{selectedBundle.count}</strong> courses:
           </div>
           {/* Course Selection */}
           <div className="flex flex-col gap-3">
             {allCourses.map((course) => {
               const isSelected = selectedCourses.includes(course.id);
-              const disabled = !isSelected && selectedCourses.length >= BUNDLE_TYPE.count;
+              const disabled = !isSelected && selectedCourses.length >= selectedBundle.count;
               return (
                 <div className="relative" key={course.id}>
                   <button
@@ -124,10 +155,10 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
           {/* Selection/progress info */}
           <div className="bg-yutime-cream border border-yutime-coral/20 rounded-lg px-4 py-2 mt-2 flex flex-col items-center">
             <span className="text-yutime-sage text-base">
-              <strong>{selectedCourses.length}/{BUNDLE_TYPE.count}</strong> selected
+              <strong>{selectedCourses.length}/{selectedBundle.count}</strong> selected
             </span>
             <span className="text-yutime-coral text-lg font-bold mt-1">
-              HKD {BUNDLE_TYPE.price}
+              HKD {selectedBundle.price}
             </span>
           </div>
         </div>
@@ -135,7 +166,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({ isOpen, onClose }) => {
         <div className="flex flex-col px-6 gap-3 pb-6">
           <Button
             onClick={handleProceedToCheckout}
-            disabled={selectedCourses.length !== BUNDLE_TYPE.count}
+            disabled={selectedCourses.length !== selectedBundle.count}
             className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 text-lg font-bold rounded-xl"
           >
             Proceed to checkout
