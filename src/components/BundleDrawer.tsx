@@ -274,10 +274,7 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
             <div className="flex items-center gap-2">
               <Sparkles size={16} className="text-yutime-coral" />
               <span className="text-sm font-medium text-yutime-sage">
-                Get all 5 courses for HKD 500
-              </span>
-              <span className="bg-yutime-coral text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                Save HKD {FIVE_COURSE_BUNDLE.savings}
+                Get all 5 courses for HKD 500 — you save HKD 100!
               </span>
             </div>
             <Button
