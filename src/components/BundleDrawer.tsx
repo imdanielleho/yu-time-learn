@@ -233,64 +233,51 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
         </div>
       </div>
       
-      {/* Sticky Footer - Improved UX */}
-      <div className="border-t bg-white px-0 pt-2 pb-0 space-y-0">
-        {/* === 1. Bundle Summary Section === */}
+      {/* Sticky Footer - Condensed */}
+      <div className="border-t bg-white p-3 space-y-2">
         {selectedCourses.length > 0 && (
-          <div className="px-4 pt-3 pb-2 text-center border-b border-yutime-sand/70 mb-0">
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="text-base font-semibold text-yutime-sage">
-                {selectedCourses.length} Courses Selected
-              </span>
-              <span className="text-xl font-bold text-yutime-coral tracking-tight">
-                HKD {BUNDLE_TYPE.price}
-              </span>
-            </div>
-            <span className="text-xs font-medium text-yutime-coral/80 block mt-1">
+          <div className="text-center mb-2">
+            <p className="text-base font-bold text-yutime-sage">
+              {selectedCourses.length} Courses Selected – HKD {BUNDLE_TYPE.price}
+            </p>
+            <p className="text-sm font-medium" style={{ color: '#FF8B7A' }}>
               Save HKD {BUNDLE_TYPE.savings}
-            </span>
+            </p>
           </div>
         )}
-
-        {/* === 2. Main CTA === */}
-        <div className="px-4 pt-4">
-          <Button
-            onClick={handleProceedToCheckout}
-            disabled={selectedCourses.length !== BUNDLE_TYPE.count}
-            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-bold rounded-lg disabled:opacity-40 disabled:cursor-not-allowed shadow-none ring-2 ring-yutime-coral/10"
-            aria-label={selectedCourses.length === BUNDLE_TYPE.count
-              ? 'Proceed to checkout'
-              : `Select ${BUNDLE_TYPE.count - selectedCourses.length} more courses to proceed`
-            }
-          >
-            {selectedCourses.length === BUNDLE_TYPE.count 
-              ? 'Proceed to Checkout' 
-              : `Add ${BUNDLE_TYPE.count - selectedCourses.length} More to Bundle`
-            }
-          </Button>
-        </div>
         
-        {/* === 3. Secondary 5-Course CTA === */}
-        <div className="text-center px-4 pt-3">
+        <Button
+          onClick={handleProceedToCheckout}
+          disabled={selectedCourses.length !== BUNDLE_TYPE.count}
+          className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-bold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label={selectedCourses.length === BUNDLE_TYPE.count ? 'Proceed to checkout' : `Select ${BUNDLE_TYPE.count - selectedCourses.length} more courses to proceed`}
+        >
+          {selectedCourses.length === BUNDLE_TYPE.count 
+            ? 'Proceed to Checkout' 
+            : `Browse Courses to Add ${BUNDLE_TYPE.count - selectedCourses.length} More`
+          }
+        </Button>
+        
+        {/* Secondary 5-Course CTA - Subtle Text Link */}
+        <div className="text-center py-1">
           <p className="text-sm text-yutime-warmGray mb-1">
-            Want all 5 courses? <span className="font-semibold text-yutime-coral">Get everything for HKD 500</span> <span className="hidden sm:inline">(save HKD {FIVE_COURSE_BUNDLE.savings})</span>
+            Want all 5 courses? Get everything for HKD 500 (save HKD {FIVE_COURSE_BUNDLE.savings})
           </p>
           <Button
             onClick={handleFiveCourseBundle}
             variant="ghost"
-            className="inline px-2 py-1 h-auto text-yutime-coral font-medium text-sm hover:text-yutime-coral/80 hover:bg-yutime-coral/10 transition focus-visible:ring-1 focus-visible:ring-yutime-coral rounded"
+            className="text-yutime-coral hover:text-yutime-coral/80 hover:bg-yutime-coral/10 font-medium text-sm px-2 py-1 h-auto"
           >
             Get All 5 Courses – Best Value!
           </Button>
         </div>
         
-        {/* === 4. Tertiary Actions Row === */}
-        <div className={`flex gap-2 px-4 py-3 mt-0 border-t border-yutime-sand/80 ${selectedCourses.length ? "mt-2" : "mt-0"} bg-white`}>
+        <div className="flex gap-2">
           {selectedCourses.length > 0 && (
             <Button
               onClick={clearSelection}
               variant="ghost"
-              className="flex-1 text-yutime-warmGray text-sm py-2 hover:text-yutime-coral"
+              className="flex-1 text-yutime-warmGray text-sm py-2"
             >
               Clear Courses
             </Button>
