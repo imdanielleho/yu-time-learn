@@ -2,8 +2,10 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Home, Book, LogIn } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useCart } from '@/contexts/CartContext';
 
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
@@ -13,6 +15,7 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
+  const { openCart, getItemCount } = useCart();
 
   if (!isMobile) return null;
 
@@ -21,7 +24,6 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
   const handleHomeClick = () => {
     if (isOnCourseDetailPage) {
       navigate('/');
-      // Small delay to ensure page loads before scrolling to top
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 100);
@@ -36,7 +38,6 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
   const handleCoursesClick = () => {
     if (isOnCourseDetailPage) {
       navigate('/');
-      // Small delay to ensure page loads before scrolling
       setTimeout(() => {
         const element = document.getElementById('courses');
         if (element) {
@@ -51,9 +52,15 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
     }
   };
 
+  const handleCartClick = () => {
+    openCart();
+  };
+
+  const itemCount = getItemCount();
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
-      <div className="grid grid-cols-3 h-16">
+      <div className="grid grid-cols-4 h-16">
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={handleHomeClick}
@@ -61,7 +68,7 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
           <Home className="h-5 w-5" />
           <span className="text-xs font-medium">Home</span>
         </button>
-        
+
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={handleCoursesClick}
@@ -69,7 +76,20 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
           <Book className="h-5 w-5" />
           <span className="text-xs font-medium">Courses</span>
         </button>
-        
+
+        <button
+          className="relative flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+          onClick={handleCartClick}
+        >
+          <ShoppingCart className="h-5 w-5" />
+          {itemCount > 0 && (
+            <span className="absolute -top-1 right-3 bg-yutime-coral text-white text-xs rounded-full h-5 w-5 flex items-center justify-center px-1 leading-none">
+              {itemCount}
+            </span>
+          )}
+          <span className="text-xs font-medium">Cart</span>
+        </button>
+
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={onLoginClick}

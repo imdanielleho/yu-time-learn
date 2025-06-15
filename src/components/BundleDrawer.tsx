@@ -141,11 +141,12 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
                         ? "border-gray-100 opacity-40 cursor-not-allowed"
                         : "border-gray-200 hover:border-yutime-coral")
                     }
-                    style={{ minHeight: 50 }}
+                    style={{ minHeight: 54 }}
                   >
                     <img src={course.image} alt={course.title} className="w-12 h-12 object-cover rounded-md border flex-shrink-0" />
-                    <div className="flex-1 min-w-0 pr-6 flex items-center">
-                      <span className="truncate text-sm font-semibold text-yutime-sage">{course.title}</span>
+                    <div className="flex-1 min-w-0 pr-6">
+                      <div className="truncate text-sm font-semibold text-yutime-sage">{course.title}</div>
+                      <div className="text-xs text-yutime-warmGray mt-0.5 truncate">{course.category}</div>
                     </div>
                     {selected && (<Check size={18} className="text-yutime-coral ml-1" />)}
                   </button>

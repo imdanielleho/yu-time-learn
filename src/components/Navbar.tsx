@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Menu, X, Play, ShoppingCart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -174,12 +173,6 @@ const Navbar = () => {
               </div>
               <nav className="flex flex-col p-6 space-y-6">
                 <button
-                  onClick={() => handleScrollTo('courses')}
-                  className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
-                >
-                  Courses
-                </button>
-                <button
                   onClick={() => handleScrollTo('testimonials')}
                   className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
                 >
@@ -191,45 +184,6 @@ const Navbar = () => {
                 >
                   FAQ
                 </button>
-                
-                {/* Mobile Shopping Cart Button */}
-                <button
-                  onClick={() => {
-                    toggleMenu();
-                    handleCartClick();
-                  }}
-                  className="flex items-center space-x-2 text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
-                >
-                  <ShoppingCart size={20} />
-                  <span>Shopping Cart</span>
-                  {itemCount > 0 && (
-                    <span className="bg-yutime-coral text-white text-sm rounded-full h-6 w-6 flex items-center justify-center">
-                      {itemCount}
-                    </span>
-                  )}
-                </button>
-                
-                <button 
-                  onClick={() => {
-                    toggleMenu();
-                    handleLoginSignupClick();
-                  }}
-                  className="btn-primary w-full mt-4"
-                >
-                  Log In/Sign Up
-                </button>
-                {isLoggedIn && (
-                  <button 
-                    onClick={() => {
-                      handleResumeLearning();
-                      toggleMenu();
-                    }}
-                    className="flex items-center justify-center space-x-2 w-full p-2 bg-yutime-blue text-white rounded-md"
-                  >
-                    <span>Resume Learning</span>
-                    <Play size={18} />
-                  </button>
-                )}
               </nav>
             </div>
           </div>
