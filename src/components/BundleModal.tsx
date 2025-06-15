@@ -46,7 +46,8 @@ const BundleModal = ({ isOpen, onClose }: BundleModalProps) => {
             title: course.title,
             price: course.price,
             image: course.image,
-            category: course.category
+            category: course.category,
+            totalTime: course.totalTime
           });
         }
       });
