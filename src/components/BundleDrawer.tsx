@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -34,11 +33,11 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
   const navigate = useNavigate();
 
   const [selectedCourses, setSelectedCourses] = useState<number[]>(initialSelectedCourseId ? [initialSelectedCourseId] : []);
-  
   useEffect(() => {
     if (isOpen) {
       setSelectedCourses(initialSelectedCourseId ? [initialSelectedCourseId] : []);
     }
+    // eslint-disable-next-line
   }, [isOpen, initialSelectedCourseId]);
 
   const toggleCourse = (courseId: number) => {
@@ -106,114 +105,87 @@ const BundleDrawer: React.FC<BundleDrawerProps> = ({
     <Sheet open={isOpen} onOpenChange={(open) => !open && handleCancel()}>
       <SheetContent
         side="right"
-        className="max-w-full w-[420px] p-0 flex flex-col shadow-2xl"
+        className="max-w-full w-[400px] p-0 flex flex-col shadow-2xl"
       >
-        <SheetHeader className="border-b-2 border-gray-200 px-6 py-5">
-          <SheetTitle className="text-2xl font-bold text-yutime-sage">
+        <SheetHeader className="border-b px-4 py-3">
+          <SheetTitle className="text-base font-bold text-yutime-sage">
             Choose Your 3-Course Bundle
           </SheetTitle>
         </SheetHeader>
-        
-        <div className="p-6 flex-1 flex flex-col gap-6 overflow-auto">
-          {/* Pricing Header */}
-          <div className="text-center bg-yutime-cream rounded-xl p-6 border-2 border-yutime-coral/30">
-            <div className="text-3xl font-bold text-yutime-sage mb-2">
+        <div className="p-4 flex-1 flex flex-col gap-2 overflow-auto">
+          <div className="flex flex-col items-center mb-1">
+            <div className="font-bold text-xl text-yutime-sage mb-0.5">
               HKD {BUNDLE_TYPE.price}
             </div>
-            <div className="text-lg font-semibold text-green-600 mb-2">
+            <div className="text-xs font-semibold text-yutime-coral">
               Save HKD {BUNDLE_TYPE.savings}
             </div>
-            <div className="text-yutime-sage text-base">
-              Select <span className="font-bold text-yutime-coral">{BUNDLE_TYPE.count}</span> courses below:
-            </div>
           </div>
-          
-          {/* Course Selection */}
-          <div className="space-y-4">
+          <div className="text-yutime-sage text-sm text-center mb-1">
+            Select <strong>{BUNDLE_TYPE.count}</strong> courses:
+          </div>
+          <div className="flex flex-col gap-2">
             {allCourses.map((course) => {
               const selected = isSelected(course.id);
               const disabled = !selected && selectionFull;
               return (
-                <button
-                  key={course.id}
-                  onClick={() => toggleCourse(course.id)}
-                  disabled={disabled}
-                  className={`
-                    flex items-center gap-4 p-4 rounded-xl border-2 text-left w-full transition-all duration-200 min-h-[80px]
-                    ${selected
-                      ? "border-yutime-coral bg-yutime-cream/80 shadow-md"
-                      : disabled
-                      ? "border-gray-200 bg-gray-50 opacity-50 cursor-not-allowed"
-                      : "border-gray-200 bg-white hover:border-yutime-coral hover:shadow-sm"
+                <div className="relative" key={course.id}>
+                  <button
+                    onClick={() => toggleCourse(course.id)}
+                    disabled={disabled}
+                    className={
+                      "flex gap-2 px-2 py-2 rounded-lg border text-left w-full bg-white transition-colors duration-100 " +
+                      (selected
+                        ? "border-yutime-coral bg-yutime-cream/60 font-bold"
+                        : disabled
+                        ? "border-gray-100 opacity-40 cursor-not-allowed"
+                        : "border-gray-200 hover:border-yutime-coral")
                     }
-                  `}
-                >
-                  <img 
-                    src={course.image} 
-                    alt={course.title} 
-                    className="w-16 h-16 object-cover rounded-lg border flex-shrink-0" 
-                  />
-                  <div className="flex-1 min-w-0 pr-4">
-                    <div className="font-semibold text-yutime-sage text-base leading-relaxed mb-1">
-                      {course.title}
+                    style={{ minHeight: 54 }}
+                  >
+                    <img src={course.image} alt={course.title} className="w-12 h-12 object-cover rounded-md border flex-shrink-0" />
+                    <div className="flex-1 min-w-0 pr-6">
+                      <div className="truncate text-sm font-semibold text-yutime-sage">{course.title}</div>
+                      <div className="text-xs text-yutime-warmGray mt-0.5 truncate">{course.category}</div>
                     </div>
-                    <div className="text-yutime-warmGray text-base">
-                      {course.category}
-                    </div>
-                  </div>
-                  {selected && (
-                    <div className="flex-shrink-0 w-6 h-6 bg-yutime-coral rounded-full flex items-center justify-center">
-                      <Check size={16} className="text-white" />
-                    </div>
-                  )}
-                </button>
+                    {selected && (<Check size={18} className="text-yutime-coral ml-1" />)}
+                  </button>
+                </div>
               );
             })}
           </div>
-
-          {/* Five Course Bundle Option */}
-          <div className="bg-gradient-to-r from-yutime-coral/10 to-yutime-sunshine/10 rounded-xl p-6 border-2 border-yutime-coral/40">
-            <div className="text-center mb-4">
-              <h3 className="text-xl font-bold text-yutime-sage mb-2">Best Value!</h3>
-              <p className="text-base text-yutime-warmGray mb-4">Get all courses and save even more</p>
-            </div>
+          <div className="my-2 w-full flex flex-col items-center">
             <Button
               onClick={handleFiveCourseBundle}
-              className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white font-bold min-h-[56px] rounded-xl text-lg shadow-md"
+              className="w-full bg-yutime-coral text-white font-bold py-3 rounded-lg shadow hover:bg-yutime-coral/90 text-base"
             >
-              All 5 Courses – HKD {FIVE_COURSE_BUNDLE.price}
+              All 5 Courses – HKD 500
             </Button>
-            <p className="text-center text-green-600 font-semibold text-base mt-3">
-              Save HKD {FIVE_COURSE_BUNDLE.savings}
-            </p>
+            <span className="text-xs text-yutime-coral mt-1">
+              Save HKD {FIVE_COURSE_BUNDLE.savings} – Best value!
+            </span>
           </div>
-
-          {/* Selection Summary */}
-          <div className="bg-yutime-cream border-2 border-yutime-coral/30 rounded-xl p-5">
-            <div className="text-center">
-              <p className="text-yutime-sage text-lg font-semibold mb-2">
-                <span className="text-yutime-coral">{selectedCourses.length}</span> of {BUNDLE_TYPE.count} selected
-              </p>
-              <p className="text-yutime-coral text-2xl font-bold">
-                HKD {BUNDLE_TYPE.price}
-              </p>
-            </div>
+          <div className="bg-yutime-cream border border-yutime-coral/20 rounded-lg px-3 py-1.5 mt-1 flex flex-col items-center">
+            <span className="text-yutime-sage text-sm">
+              <strong>{selectedCourses.length}/{BUNDLE_TYPE.count}</strong> selected
+            </span>
+            <span className="text-yutime-coral text-base font-bold mt-0.5">
+              HKD {BUNDLE_TYPE.price}
+            </span>
           </div>
         </div>
-
-        {/* Footer Actions */}
-        <div className="border-t-2 border-gray-200 p-6 space-y-4 bg-white">
+        <div className="flex flex-col px-4 gap-2 pb-4">
           <Button
             onClick={handleProceedToCheckout}
             disabled={selectedCourses.length !== BUNDLE_TYPE.count}
-            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 disabled:opacity-50 disabled:cursor-not-allowed text-white min-h-[56px] text-lg font-bold rounded-xl shadow-md"
+            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-bold rounded-lg"
           >
-            Proceed to Checkout
+            Proceed to checkout
           </Button>
           <Button
             onClick={handleCancel}
             variant="outline"
-            className="w-full border-2 border-yutime-sage text-yutime-sage hover:bg-yutime-sage hover:text-white min-h-[48px] text-base font-medium rounded-xl"
+            className="w-full border-yutime-sage text-yutime-sage text-base"
           >
             Cancel
           </Button>
