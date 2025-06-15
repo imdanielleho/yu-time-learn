@@ -228,7 +228,7 @@ const CourseDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 max-[991px]:pb-20">
         <CourseHeader course={course} onPlay={handleVideoPlay} />
         <div className="bg-gray-50">
           <div className="container">
