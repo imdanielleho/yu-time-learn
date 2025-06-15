@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift, Loader2 } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
@@ -30,8 +30,6 @@ const CourseDetail = () => {
   const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
-  const [isVideoLoading, setIsVideoLoading] = useState(false);
-  const [videoError, setVideoError] = useState(false);
   const { addToCart, openCart, clearCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart" | "proceedBundle" | "fiveCourseBundle">(null);
   const [pendingBundleSelections, setPendingBundleSelections] = useState<number[] | null>(null);
@@ -166,29 +164,6 @@ const CourseDetail = () => {
       url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
     });
     setIsVideoModalOpen(true);
-    setIsVideoLoading(true);
-    setVideoError(false);
-  };
-
-  const handleVideoLoad = () => {
-    setIsVideoLoading(false);
-  };
-
-  const handleVideoError = () => {
-    setIsVideoLoading(false);
-    setVideoError(true);
-  };
-
-  const handleRetryVideo = () => {
-    setVideoError(false);
-    setIsVideoLoading(true);
-  };
-
-  const handleCloseVideoModal = () => {
-    setIsVideoModalOpen(false);
-    setCurrentVideo(null);
-    setIsVideoLoading(false);
-    setVideoError(false);
   };
 
   const handleBundleLoginRequired = (
@@ -223,7 +198,6 @@ const CourseDetail = () => {
     );
   }
 
-  // ... keep existing code (curriculum definition)
   const curriculum = [
     {
       chapter: 1,
@@ -296,71 +270,24 @@ const CourseDetail = () => {
         onLoginRequired={handleBundleLoginRequired}
       />
 
-      {/* Age-Friendly Video Modal */}
-      <Dialog open={isVideoModalOpen} onOpenChange={(open) => !open && handleCloseVideoModal()}>
-        <DialogContent className="max-w-full sm:max-w-[75vw] max-h-[90vh] p-0 bg-gray-800 rounded-xl">
-          {/* Enhanced Close Button */}
-          <DialogClose className="absolute right-6 top-6 z-10 rounded-full bg-white/20 hover:bg-white/30 p-3 text-white transition-all duration-200 flex items-center gap-3 min-h-[48px]">
-            <X className="h-8 w-8" />
-            <span className="text-lg font-semibold hidden sm:block">Close Video</span>
+      {/* Video Modal with updated width */}
+      <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
+        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
+            <X className="h-6 w-6" />
           </DialogClose>
-
-          {/* ESC Key Hint */}
-          <div className="absolute left-6 top-6 z-10 bg-black/40 rounded-lg px-4 py-2">
-            <span className="text-white text-sm font-medium">Press ESC to close</span>
-          </div>
-
           {currentVideo && (
             <div className="w-full">
-              {/* Video Header */}
-              <div className="p-6 bg-gray-700 text-white border-b border-gray-600">
-                <h3 className="text-2xl font-bold leading-relaxed">{currentVideo.title}</h3>
+              <div className="p-4 bg-white text-black border-b border-gray-200">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
-
-              {/* Video Container */}
-              <div className="aspect-video relative bg-gray-900">
-                {/* Loading State */}
-                {isVideoLoading && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <Loader2 className="h-12 w-12 animate-spin text-white mb-4" />
-                    <p className="text-white text-xl font-semibold">Loading video...</p>
-                    <p className="text-gray-300 text-lg mt-2">Please wait a moment</p>
-                  </div>
-                )}
-
-                {/* Error State */}
-                {videoError && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                    <div className="text-center">
-                      <X className="h-16 w-16 text-red-400 mx-auto mb-4" />
-                      <h4 className="text-2xl font-bold text-white mb-4">Video couldn't load</h4>
-                      <p className="text-gray-300 text-lg mb-6 leading-relaxed max-w-md">
-                        We're having trouble playing this video. Please check your internet connection and try again.
-                      </p>
-                      <button
-                        onClick={handleRetryVideo}
-                        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors min-h-[48px]"
-                      >
-                        Try Again
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Video Player */}
-                {!videoError && (
-                  <video
-                    src={currentVideo.url}
-                    className="w-full h-full"
-                    controls
-                    autoPlay
-                    onLoadedData={handleVideoLoad}
-                    onError={handleVideoError}
-                    style={{
-                      outline: 'none',
-                    }}
-                  />
-                )}
+              <div className="aspect-video">
+                <video
+                  src={currentVideo.url}
+                  className="w-full h-full"
+                  controls
+                  autoPlay
+                />
               </div>
             </div>
           )}
