@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface CartItem {
@@ -21,11 +22,15 @@ interface CartContextType {
   items: CartItem[];
   bundles: Bundle[];
   isCartOpen: boolean;
+  isBundleDrawerOpen: boolean;
+  bundleDrawerMode: 'standalone' | 'add-to-cart';
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
+  openBundleDrawer: (mode?: 'standalone' | 'add-to-cart') => void;
+  closeBundleDrawer: () => void;
   getTotalPrice: () => number;
   getItemCount: () => number;
 }
@@ -52,6 +57,8 @@ export const bundles: Bundle[] = [
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isBundleDrawerOpen, setIsBundleDrawerOpen] = useState(false);
+  const [bundleDrawerMode, setBundleDrawerMode] = useState<'standalone' | 'add-to-cart'>('standalone');
 
   const addToCart = (item: CartItem) => {
     setItems(prev => {
@@ -74,6 +81,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
+  const openBundleDrawer = (mode: 'standalone' | 'add-to-cart' = 'standalone') => {
+    setBundleDrawerMode(mode);
+    setIsBundleDrawerOpen(true);
+  };
+
+  const closeBundleDrawer = () => {
+    setIsBundleDrawerOpen(false);
+  };
+
   const getTotalPrice = () => {
     return items.reduce((total, item) => total + item.price, 0);
   };
@@ -85,11 +101,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       items,
       bundles,
       isCartOpen,
+      isBundleDrawerOpen,
+      bundleDrawerMode,
       addToCart,
       removeFromCart,
       clearCart,
       openCart,
       closeCart,
+      openBundleDrawer,
+      closeBundleDrawer,
       getTotalPrice,
       getItemCount
     }}>

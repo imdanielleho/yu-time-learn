@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { X, Trash2, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const CartDrawer = () => {
-  const { items, isCartOpen, closeCart, removeFromCart, getTotalPrice, getItemCount } = useCart();
+  const { items, isCartOpen, closeCart, removeFromCart, getTotalPrice, getItemCount, openBundleDrawer } = useCart();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
@@ -22,12 +23,9 @@ const CartDrawer = () => {
       e.preventDefault();
       e.stopPropagation();
     }
-    console.log("Add More Courses CTA clicked");
-    closeCart();
-    // Timeout ensures Sheet/Drawer doesn't swallow navigation event
-    setTimeout(() => {
-      navigate('/');
-    }, 200);
+    console.log("Add More Courses CTA clicked - opening bundle drawer");
+    // Open bundle drawer in add-to-cart mode instead of navigating
+    openBundleDrawer('add-to-cart');
   };
 
   const itemCount = getItemCount();

@@ -1,0 +1,174 @@
+
+import React, { useState, useEffect } from "react";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { courses as allCourses } from "@/data/courses";
+import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useToast } from "@/hooks/use-toast";
+import IntegratedBundleDrawerContent from "./bundle/IntegratedBundleDrawerContent";
+import { BundleHandlers } from "./bundle/types";
+
+const IntegratedBundleDrawer: React.FC = () => {
+  const { 
+    items: cartItems, 
+    isBundleDrawerOpen, 
+    bundleDrawerMode, 
+    closeBundleDrawer, 
+    addToCart, 
+    clearCart,
+    openCart
+  } = useCart();
+  const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const { toast } = useToast();
+
+  const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
+  
+  useEffect(() => {
+    if (isBundleDrawerOpen && bundleDrawerMode === 'add-to-cart') {
+      // Don't preselect anything when adding to cart
+      setSelectedCourses([]);
+    }
+  }, [isBundleDrawerOpen, bundleDrawerMode]);
+
+  const toggleCourse = (courseId: number) => {
+    if (selectedCourses.includes(courseId)) {
+      setSelectedCourses(selectedCourses.filter((id) => id !== courseId));
+    } else if (selectedCourses.length < 5) { // Allow up to 5 selections
+      setSelectedCourses([...selectedCourses, courseId]);
+    }
+  };
+
+  const handleAddSelectedToCart = () => {
+    selectedCourses.forEach((courseId) => {
+      const course = allCourses.find((c) => c.id === courseId);
+      const alreadyInCart = cartItems.some(item => item.id === courseId);
+      
+      if (course && !alreadyInCart) {
+        addToCart({
+          id: course.id,
+          title: course.title,
+          price: course.price,
+          image: course.image,
+          category: course.category,
+          totalTime: course.totalTime
+        });
+      }
+    });
+    
+    if (selectedCourses.length > 0) {
+      toast({
+        title: "Courses Added",
+        description: `${selectedCourses.length} course${selectedCourses.length > 1 ? 's' : ''} added to your cart.`,
+      });
+    }
+    
+    closeBundleDrawer();
+    openCart();
+  };
+
+  const handleProceedToCheckout = () => {
+    if (selectedCourses.length === 3) {
+      clearCart();
+      selectedCourses.forEach((courseId) => {
+        const course = allCourses.find((c) => c.id === courseId);
+        if (course) {
+          addToCart({
+            id: course.id,
+            title: course.title,
+            price: course.price,
+            image: course.image,
+            category: course.category,
+            totalTime: course.totalTime
+          });
+        }
+      });
+      closeBundleDrawer();
+      navigate("/checkout");
+    }
+  };
+
+  const handleFiveCourseBundle = () => {
+    clearCart();
+    allCourses.forEach((course) => {
+      addToCart({
+        id: course.id,
+        title: course.title,
+        price: course.price,
+        image: course.image,
+        category: course.category,
+        totalTime: course.totalTime
+      });
+    });
+    closeBundleDrawer();
+    navigate("/checkout");
+  };
+
+  const handleReturnToCart = () => {
+    closeBundleDrawer();
+    openCart();
+  };
+
+  const handleCancel = () => {
+    setSelectedCourses([]);
+    closeBundleDrawer();
+  };
+
+  const clearSelection = () => {
+    setSelectedCourses([]);
+  };
+
+  const handlers: BundleHandlers = {
+    onProceedToCheckout: handleProceedToCheckout,
+    onFiveCourseBundle: handleFiveCourseBundle,
+    onCancel: handleCancel,
+    onClearSelection: clearSelection,
+    onToggleCourse: toggleCourse,
+  };
+
+  // Mobile: Full-screen modal behavior
+  if (isMobile) {
+    return (
+      <Sheet open={isBundleDrawerOpen} onOpenChange={(open) => !open && handleCancel()}>
+        <SheetContent
+          side="bottom"
+          className="h-full max-h-screen w-full flex flex-col p-0 rounded-t-none"
+          style={{ zIndex: 60 }} // Higher z-index to appear over cart
+        >
+          <IntegratedBundleDrawerContent
+            selectedCourses={selectedCourses}
+            cartItems={cartItems}
+            bundleDrawerMode={bundleDrawerMode}
+            isMobile={isMobile}
+            handlers={handlers}
+            onReturnToCart={handleReturnToCart}
+            onAddSelectedToCart={handleAddSelectedToCart}
+          />
+        </SheetContent>
+      </Sheet>
+    );
+  }
+
+  return (
+    <Sheet open={isBundleDrawerOpen} onOpenChange={(open) => !open && handleCancel()}>
+      <SheetContent
+        side="right"
+        className="max-w-full w-[480px] h-full flex flex-col p-0 shadow-2xl"
+        style={{ zIndex: 60 }} // Higher z-index to appear over cart
+      >
+        <IntegratedBundleDrawerContent
+          selectedCourses={selectedCourses}
+          cartItems={cartItems}
+          bundleDrawerMode={bundleDrawerMode}
+          isMobile={isMobile}
+          handlers={handlers}
+          onReturnToCart={handleReturnToCart}
+          onAddSelectedToCart={handleAddSelectedToCart}
+        />
+      </SheetContent>
+    </Sheet>
+  );
+};
+
+export default IntegratedBundleDrawer;
