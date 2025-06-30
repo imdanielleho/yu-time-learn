@@ -112,6 +112,13 @@ const CartDrawer = () => {
       {items.length > 0 && (
         <div className="border-t border-yutime-sage/10 p-4 space-y-3">
           <Button 
+            onClick={handleBrowseCourses}
+            variant="outline"
+            className="w-full border-yutime-sage text-yutime-sage hover:bg-yutime-sage hover:text-white py-3 text-base font-medium rounded-lg transition-all duration-200"
+          >
+            Browse More Courses
+          </Button>
+          <Button 
             onClick={handleProceedToCheckout}
             className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
           >
