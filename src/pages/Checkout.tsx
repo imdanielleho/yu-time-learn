@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
@@ -8,10 +7,10 @@ import PaymentDetails from "@/components/checkout/PaymentDetails";
 import TermsAgreement from "@/components/checkout/TermsAgreement";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import CouponSection from "@/components/checkout/CouponSection";
-import SecurityBadges from "@/components/checkout/SecurityBadges";
 import CheckoutButton from "@/components/checkout/CheckoutButton";
 import DeleteCourseDialog from "@/components/checkout/DeleteCourseDialog";
 import CustomerServiceButton from "@/components/CustomerServiceButton";
+import StepIndicator from "@/components/StepIndicator";
 import { validateCoupon, calculateTotal } from "@/components/checkout/utils";
 import { FormData, DeleteDialog } from "@/components/checkout/types";
 
@@ -115,7 +114,15 @@ const Checkout = () => {
 
     setTimeout(() => {
       clearCart();
-      navigate('/success');
+      navigate('/success', { 
+        state: { 
+          orderSummary: {
+            items: checkoutItems,
+            total: total,
+            discount: discount
+          }
+        }
+      });
     }, 2000);
   };
 
@@ -137,6 +144,9 @@ const Checkout = () => {
       <SecureCheckoutHeader />
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
+        {/* Step Indicator */}
+        <StepIndicator currentStep={2} totalSteps={3} stepLabel="Checkout" />
+
         {/* Main Title */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-yutime-sage mb-2">Complete Your Purchase</h1>
@@ -187,8 +197,6 @@ const Checkout = () => {
                 couponError={couponError}
                 discount={discount}
               />
-
-              <SecurityBadges />
 
               <CheckoutButton
                 isProcessing={isProcessing}
