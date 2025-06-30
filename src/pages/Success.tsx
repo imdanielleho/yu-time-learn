@@ -36,22 +36,30 @@ const Success = () => {
         {orderSummary && (
           <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand mb-8">
             <h2 className="text-2xl font-bold text-yutime-sage mb-4">Order Summary</h2>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {orderSummary.items.map((item: any, index: number) => (
-                <div key={index} className="flex justify-between items-center py-2 border-b border-yutime-sand last:border-b-0">
-                  <span className="font-medium text-yutime-sage">{item.title}</span>
-                  <span className="text-yutime-warmGray">${item.price}</span>
+                <div key={index} className="flex items-center gap-4 py-3 border-b border-yutime-sand last:border-b-0">
+                  <img 
+                    src={item.image || "/placeholder.svg"} 
+                    alt={item.title}
+                    className="w-16 h-16 rounded-lg object-cover"
+                  />
+                  <div className="flex-1">
+                    <h4 className="font-medium text-yutime-sage text-base mb-1">{item.title}</h4>
+                    <p className="text-sm text-yutime-warmGray">{item.category}</p>
+                  </div>
+                  <span className="text-yutime-warmGray font-medium">HKD {item.price}</span>
                 </div>
               ))}
               {orderSummary.discount > 0 && (
                 <div className="flex justify-between items-center py-2 text-green-600">
                   <span className="font-medium">Discount</span>
-                  <span>-${orderSummary.discount}</span>
+                  <span>-HKD {orderSummary.discount}</span>
                 </div>
               )}
               <div className="flex justify-between items-center pt-4 border-t border-yutime-sand">
                 <span className="text-xl font-bold text-yutime-sage">Total</span>
-                <span className="text-xl font-bold text-yutime-coral">${orderSummary.total}</span>
+                <span className="text-xl font-bold text-yutime-coral">HKD {orderSummary.total}</span>
               </div>
             </div>
           </div>
