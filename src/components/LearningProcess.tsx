@@ -33,16 +33,8 @@ const LearningProcess = () => {
   };
 
   return (
-    <section className="relative bg-yutime-indigo py-20 md:py-32 overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent"></div>
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-white/20 rounded-full"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 border border-white/20 rounded-full"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-white/20 rounded-full"></div>
-      </div>
-      
-      <div className="container max-w-7xl mx-auto px-4 relative">
+    <section className="bg-yutime-indigo py-20 md:py-32">
+      <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">How YŪTIME Works</h2>
           <p className="max-w-2xl mx-auto text-white/80 text-xl leading-relaxed">
@@ -56,7 +48,7 @@ const LearningProcess = () => {
               <div key={index} className="text-center">
                 <div className="relative mb-8">
                   {/* Main icon container */}
-                  <div className="w-24 h-24 bg-yutime-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-warm relative transform hover:scale-105 transition-transform duration-300">
+                  <div className="w-24 h-24 bg-yutime-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-warm relative">
                     {step.icon}
                     {/* Step number in small circle at top-right */}
                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-yutime-indigo rounded-full flex items-center justify-center border-2 border-white shadow-lg">
@@ -71,7 +63,7 @@ const LearningProcess = () => {
           </div>
           
           {/* Ready to begin section */}
-          <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm border border-white/20">
+          <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
             <div className="flex justify-center mb-4">
               <Sparkles size={40} className="text-yutime-gold" />
             </div>
