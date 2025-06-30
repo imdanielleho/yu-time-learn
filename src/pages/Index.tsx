@@ -5,7 +5,6 @@ import Hero from '@/components/Hero';
 import ValueProposition from '@/components/ValueProposition';
 import FeaturedCourses from '@/components/FeaturedCourses';
 import LearningProcess from '@/components/LearningProcess';
-import PricingSection from '@/components/PricingSection';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
@@ -36,9 +35,6 @@ const Index = () => {
           <FeaturedCourses />
         </div>
         <LearningProcess />
-        <div id="pricing">
-          <PricingSection />
-        </div>
         <div id="testimonials">
           <Testimonials />
         </div>

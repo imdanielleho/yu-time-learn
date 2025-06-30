@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Star } from 'lucide-react';
 
@@ -38,25 +39,25 @@ const communityAvatars = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="section bg-yutime-indigo text-white">
+    <section id="testimonials" className="section bg-gradient-to-br from-yutime-cream via-yutime-softWhite to-yutime-sand/30">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Stories of Growth & Success</h2>
-          <p className="max-w-3xl mx-auto text-white/90 text-lg leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-yutime-sage">Stories of Growth & Success</h2>
+          <p className="max-w-3xl mx-auto text-yutime-warmGray text-lg leading-relaxed">
             Hear from learners who've discovered new confidence and joy through their YŪTIME journey.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-yutime-navy_dark rounded-2xl p-6 shadow-lg">
+            <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-card">
               <div className="flex items-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} size={16} className="text-yutime-gold fill-current" />
                 ))}
               </div>
               
-              <blockquote className="text-lg italic mb-6 leading-relaxed text-white/95">
+              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray">
                 "{testimonial.quote}"
               </blockquote>
               
@@ -69,7 +70,7 @@ const Testimonials = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-bold text-white">{testimonial.name}</p>
+                  <p className="font-bold text-yutime-sage">{testimonial.name}</p>
                   <p className="text-yutime-gold text-sm">{testimonial.role}</p>
                 </div>
               </div>
@@ -78,10 +79,10 @@ const Testimonials = () => {
         </div>
 
         {/* Community section */}
-        <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
+        <div className="text-center bg-yutime-sage/5 rounded-2xl p-8 backdrop-blur-sm border border-yutime-sage/10">
           <div className="flex justify-center mb-4 -space-x-2">
             {communityAvatars.map((avatar, index) => (
-              <div key={index} className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+              <div key={index} className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-sage">
                 <img 
                   src={avatar} 
                   alt={`Community member ${index + 1}`} 
@@ -89,13 +90,13 @@ const Testimonials = () => {
                 />
               </div>
             ))}
-            <div className="w-12 h-12 rounded-full bg-yutime-gold border-2 border-white flex items-center justify-center">
-              <span className="text-yutime-indigo font-bold text-sm">+</span>
+            <div className="w-12 h-12 rounded-full bg-yutime-gold border-2 border-yutime-sage flex items-center justify-center">
+              <span className="text-yutime-sage font-bold text-sm">+</span>
             </div>
           </div>
           
-          <h3 className="text-2xl font-bold mb-2 text-white">Join 2,000+ learners</h3>
-          <p className="text-white/90 text-lg">
+          <h3 className="text-2xl font-bold mb-2 text-yutime-sage">Join 2,000+ learners</h3>
+          <p className="text-yutime-warmGray text-lg">
             Who are building new skills and confidence every day
           </p>
         </div>
