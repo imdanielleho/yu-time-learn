@@ -10,7 +10,7 @@ interface CoursePricingCardProps {
 
 const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) => {
   return (
-    <div className="sticky top-8">
+    <div className="fixed bottom-20 left-4 right-4 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
       <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
         <h3 className="text-2xl font-bold text-yutime-sage mb-6 text-center">Course Price</h3>
         <div className="text-center mb-8">

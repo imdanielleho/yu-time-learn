@@ -172,7 +172,7 @@ const CourseDetail = () => {
         <CourseHeader course={course} onPlay={handleVideoPlay} />
         <div className="bg-gray-50">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-32 lg:pb-8">
               <div className="lg:col-span-2 space-y-8">
                 <CourseContent />
                 <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
