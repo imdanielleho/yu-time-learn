@@ -29,7 +29,7 @@ const CustomerServiceButton = () => {
         : 'bottom-6 right-6'     // Normal position for desktop
     }`}>
       {isExpanded && (
-        <div className="mb-3 bg-white rounded-xl shadow-lg p-4 min-w-[180px] border border-gray-200">
+        <div className="absolute bottom-[56px] right-0 bg-white rounded-xl shadow-lg p-4 min-w-[180px] border border-gray-200">
           <div className="flex justify-end items-center mb-3">
             <Button 
               variant="ghost" 

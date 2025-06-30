@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -129,7 +128,7 @@ const CourseDetail = () => {
           </div>
         </main>
         <Footer />
-        <CustomerServiceButton />
+        {!isMobile && <CustomerServiceButton />}
         {isMobile && !isLoggedIn && (
           <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
         )}
@@ -188,7 +187,7 @@ const CourseDetail = () => {
         </div>
       </main>
       <Footer />
-      <CustomerServiceButton />
+      {!isMobile && <CustomerServiceButton />}
       {isMobile && !isLoggedIn && (
         <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
       )}
