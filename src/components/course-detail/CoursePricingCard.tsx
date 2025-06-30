@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
@@ -10,8 +9,36 @@ interface CoursePricingCardProps {
 
 const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) => {
   return (
-    <div className="fixed bottom-20 left-4 right-4 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
-      <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+    <div className="fixed bottom-16 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
+      {/* Mobile compact bar */}
+      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col">
+            <div className="text-lg font-bold text-yutime-sage">HKD 120</div>
+            <div className="text-xs text-yutime-warmGray">One-time payment</div>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              onClick={onBuyNow}
+              className="py-2 px-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-lg font-medium text-sm shadow-sm transition-colors min-h-[40px]"
+              data-testid="buynow-btn"
+            >
+              Buy Now
+            </Button>
+            <Button
+              onClick={onAddToCart}
+              variant="outline"
+              className="flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors"
+              data-testid="addtocart-btn"
+            >
+              <ShoppingCart size={16} />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop card - keep existing design */}
+      <div className="hidden lg:block bg-white rounded-xl shadow-lg p-8 border border-gray-200">
         <h3 className="text-2xl font-bold text-yutime-sage mb-6 text-center">Course Price</h3>
         <div className="text-center mb-8">
           <div className="text-4xl font-bold text-yutime-sage mb-2">HKD 120</div>
