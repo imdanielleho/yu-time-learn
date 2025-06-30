@@ -29,17 +29,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[120px] max-w-full py-4 px-0 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex-shrink focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
+            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
             data-testid="addtocart-btn"
-            style={{ flexBasis: 0 }}
           >
             <ShoppingCart size={20} />
-            <span className="ml-2 text-sm font-semibold truncate">Add to Cart</span>
           </Button>
-        </div>
-
-        <div className="text-center text-sm text-yutime-warmGray">
-          30-day money-back guarantee
         </div>
       </div>
     </div>
