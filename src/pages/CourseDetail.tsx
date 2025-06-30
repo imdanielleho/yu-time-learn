@@ -52,7 +52,10 @@ const CourseDetail = () => {
         title: "Added to Cart",
         description: `"${course.title}" was added to your cart.`,
       });
-      openCart();
+      // Add delay before opening cart to prevent z-index conflicts
+      setTimeout(() => {
+        openCart();
+      }, 500);
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
     }
@@ -103,7 +106,10 @@ const CourseDetail = () => {
         title: "Added to Cart",
         description: `"${course.title}" was added to your cart.`,
       });
-      openCart();
+      // Add delay before opening cart to prevent z-index conflicts
+      setTimeout(() => {
+        openCart();
+      }, 500);
     }
   };
 
