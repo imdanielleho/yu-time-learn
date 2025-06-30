@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import CheckoutUpsell from "@/components/checkout/CheckoutUpsell";
 import SecureCheckoutHeader from "@/components/checkout/SecureCheckoutHeader";
 import ContactInformation from "@/components/checkout/ContactInformation";
 import PaymentDetails from "@/components/checkout/PaymentDetails";
@@ -30,7 +29,6 @@ const Checkout = () => {
     postalCode: '',
     coupon: ''
   });
-  const [showUpsell, setShowUpsell] = useState(true);
   const [couponApplied, setCouponApplied] = useState(false);
   const [couponError, setCouponError] = useState('');
   const [agreed, setAgreed] = useState(false);
@@ -52,8 +50,6 @@ const Checkout = () => {
     discount = validation.discount;
   }
   const total = calculateTotal(currentTotal, discount);
-
-  const shouldShowForm = checkoutItems.length > 1 || !showUpsell;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -123,12 +119,6 @@ const Checkout = () => {
     }, 2000);
   };
 
-  const handleUpsellContinue = () => setShowUpsell(false);
-  const handleBuildBundle = () => {
-    setShowUpsell(false);
-    navigate('/', { state: { openBundle: true } });
-  };
-
   if (checkoutItems.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -153,76 +143,63 @@ const Checkout = () => {
           <p className="text-yutime-warmGray">Secure checkout with instant access</p>
         </div>
 
-        {/* Upsell Offer - only show for single course purchases */}
-        {showUpsell && checkoutItems.length === 1 && (
-          <div className="mb-8 flex justify-center">
-            <CheckoutUpsell
-              courseTitle={checkoutItems[0].title}
-              onBuildBundle={handleBuildBundle}
-              onContinue={handleUpsellContinue}
+        {/* Main Checkout Layout */}
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Left Side - Form */}
+          <div className="lg:col-span-3 space-y-6">
+            <ContactInformation 
+              formData={formData}
+              onInputChange={handleInputChange}
+            />
+
+            <PaymentDetails 
+              formData={formData}
+              onInputChange={handleInputChange}
+            />
+
+            <TermsAgreement 
+              agreed={agreed}
+              onAgreedChange={setAgreed}
             />
           </div>
-        )}
 
-        {/* Main Checkout Layout */}
-        {shouldShowForm && (
-          <div className="grid lg:grid-cols-5 gap-8">
-            {/* Left Side - Form */}
-            <div className="lg:col-span-3 space-y-6">
-              <ContactInformation 
-                formData={formData}
-                onInputChange={handleInputChange}
+          {/* Right Side - Order Summary */}
+          <div className="lg:col-span-2">
+            <div className="sticky top-8 space-y-6">
+              <OrderSummary
+                items={items}
+                showDeleteButtons={showDeleteButtons}
+                onEditToggle={handleEditToggle}
+                onDeleteCourse={handleDeleteCourse}
+                singleCourse={singleCourse}
+                currentTotal={currentTotal}
+                discount={discount}
+                total={total}
+                couponApplied={couponApplied}
+                couponCode={formData.coupon}
               />
 
-              <PaymentDetails 
+              <CouponSection
                 formData={formData}
                 onInputChange={handleInputChange}
+                onCouponSubmit={handleCoupon}
+                couponApplied={couponApplied}
+                couponError={couponError}
+                discount={discount}
               />
 
-              <TermsAgreement 
+              <SecurityBadges />
+
+              <CheckoutButton
+                isProcessing={isProcessing}
+                formData={formData}
                 agreed={agreed}
-                onAgreedChange={setAgreed}
+                total={total}
+                onSubmit={handleSubmit}
               />
-            </div>
-
-            {/* Right Side - Order Summary */}
-            <div className="lg:col-span-2">
-              <div className="sticky top-8 space-y-6">
-                <OrderSummary
-                  items={items}
-                  showDeleteButtons={showDeleteButtons}
-                  onEditToggle={handleEditToggle}
-                  onDeleteCourse={handleDeleteCourse}
-                  singleCourse={singleCourse}
-                  currentTotal={currentTotal}
-                  discount={discount}
-                  total={total}
-                  couponApplied={couponApplied}
-                  couponCode={formData.coupon}
-                />
-
-                <CouponSection
-                  formData={formData}
-                  onInputChange={handleInputChange}
-                  onCouponSubmit={handleCoupon}
-                  couponApplied={couponApplied}
-                  couponError={couponError}
-                  discount={discount}
-                />
-
-                <SecurityBadges />
-
-                <CheckoutButton
-                  isProcessing={isProcessing}
-                  formData={formData}
-                  agreed={agreed}
-                  total={total}
-                  onSubmit={handleSubmit}
-                />
-              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
 
       <DeleteCourseDialog

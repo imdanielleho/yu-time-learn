@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { X, Trash2, Plus } from 'lucide-react';
+import { X, Trash2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
@@ -8,51 +9,42 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const CartDrawer = () => {
-  const { items, isCartOpen, closeCart, removeFromCart, getTotalPrice, getItemCount, openBundleDrawer } = useCart();
+  const { items, isCartOpen, closeCart, removeFromCart, getTotalPrice, getItemCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
 
   const itemCount = getItemCount();
   const total = getTotalPrice();
-  const bundleThreshold = 3;
-  const coursesNeeded = bundleThreshold - itemCount;
 
   const handleProceedToCheckout = () => {
     closeCart();
     navigate('/checkout');
   };
 
-  // Improved: Route to featured courses section on homepage if cart is empty.
-  const handleAddMoreCourses = (e?: React.MouseEvent) => {
+  const handleBrowseCourses = (e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (items.length === 0) {
-      closeCart();
+    closeCart();
 
-      // Determine if we're already on the homepage
-      const onHomepage = location.pathname === '/';
-      const scrollToCourses = () => {
-        // Try to scroll to courses after navigation/render
-        const target = document.getElementById('courses');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      };
-
-      if (onHomepage) {
-        // Already on homepage, just scroll
-        setTimeout(scrollToCourses, 120); // Allow drawer to close and layout to be restored
-      } else {
-        // Navigate to homepage with hash, browser will auto-jump, but ensure it's smooth after possible rerender
-        navigate('/#courses');
+    // Determine if we're already on the homepage
+    const onHomepage = location.pathname === '/';
+    const scrollToCourses = () => {
+      // Try to scroll to courses after navigation/render
+      const target = document.getElementById('courses');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    };
+
+    if (onHomepage) {
+      // Already on homepage, just scroll
+      setTimeout(scrollToCourses, 120); // Allow drawer to close and layout to be restored
     } else {
-      // Cart has items, open the bundle drawer in add-to-cart mode as before
-      console.log("Add More Courses CTA clicked - opening bundle drawer");
-      openBundleDrawer('add-to-cart');
+      // Navigate to homepage with hash, browser will auto-jump, but ensure it's smooth after possible rerender
+      navigate('/#courses');
     }
   };
 
@@ -63,13 +55,13 @@ const CartDrawer = () => {
         {items.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-yutime-warmGray mb-6 text-base">Your cart is empty</p>
-            <Button onClick={handleAddMoreCourses} className="bg-yutime-blue hover:bg-yutime-blue/90 py-3 text-base">
+            <Button onClick={handleBrowseCourses} className="bg-yutime-blue hover:bg-yutime-blue/90 py-3 text-base">
               Browse Courses
             </Button>
           </div>
         ) : (
           <>
-            {/* Cart Items - Updated to match Bundle drawer design */}
+            {/* Cart Items */}
             <div className="space-y-2 mb-6">
               {items.map((item) => (
                 <div 
@@ -105,19 +97,7 @@ const CartDrawer = () => {
               ))}
             </div>
 
-            {/* Bundle Nudge - Updated styling to match design system */}
-            {itemCount < bundleThreshold && (
-              <div className="bg-yutime-cream/40 border border-yutime-coral/30 rounded-lg p-4 mb-6">
-                <p className="text-yutime-sage font-semibold mb-2 text-base">
-                  💡 Bundle & Save!
-                </p>
-                <p className="text-yutime-warmGray text-sm">
-                  Add {coursesNeeded} more {coursesNeeded === 1 ? 'course' : 'courses'} for HKD 350 and save HKD 10!
-                </p>
-              </div>
-            )}
-
-            {/* Total - Enhanced styling */}
+            {/* Total */}
             <div className="border-t border-yutime-sage/10 pt-4 mb-6">
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-yutime-sage">Total:</span>
@@ -128,7 +108,7 @@ const CartDrawer = () => {
         )}
       </div>
       
-      {/* Footer Actions - Enhanced styling */}
+      {/* Footer Actions */}
       {items.length > 0 && (
         <div className="border-t border-yutime-sage/10 p-4 space-y-3">
           <Button 
@@ -136,14 +116,6 @@ const CartDrawer = () => {
             className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Proceed to Checkout
-          </Button>
-          <Button 
-            onClick={handleAddMoreCourses}
-            variant="outline"
-            className="w-full border-yutime-blue text-yutime-blue hover:bg-yutime-blue hover:text-white py-3 text-base transition-all duration-200"
-          >
-            <Plus size={20} className="mr-2" />
-            Add More Courses
           </Button>
         </div>
       )}

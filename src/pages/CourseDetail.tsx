@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X, Gift } from 'lucide-react';
+import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
@@ -10,8 +11,6 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import BottomNavigation from '@/components/BottomNavigation';
 import LoginModal from '@/components/LoginModal';
-import BundleDrawer from '@/components/BundleDrawer';
-import UpsellModal from '@/components/UpsellModal';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useCart } from '@/contexts/CartContext';
 import { courses } from '@/data/courses';
@@ -27,12 +26,10 @@ const CourseDetail = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isBundleModalOpen, setIsBundleModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
-  const { addToCart, openCart, clearCart } = useCart();
-  const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart" | "proceedBundle" | "fiveCourseBundle">(null);
-  const [pendingBundleSelections, setPendingBundleSelections] = useState<number[] | null>(null);
+  const { addToCart, openCart } = useCart();
+  const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart">(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { toast } = useToast();
 
@@ -56,54 +53,9 @@ const CourseDetail = () => {
         title: "Added to Cart",
         description: `"${course.title}" was added to your cart.`,
       });
-      // After login, stay on detail and just open cart
       openCart();
       setIsLoginModalOpen(false);
       setPostLoginAction(null);
-    } else if (
-      isLoggedIn && postLoginAction === "proceedBundle"
-      && pendingBundleSelections !== null
-    ) {
-      // User logged in to proceed to checkout for 3-course bundle
-      clearCart();
-      pendingBundleSelections.forEach((courseId) => {
-        const c = courses.find((c) => c.id === courseId);
-        if (c) {
-          addToCart({
-            id: c.id,
-            title: c.title,
-            price: c.price,
-            image: c.image,
-            category: c.category,
-            totalTime: c.totalTime
-          });
-        }
-      });
-      setIsLoginModalOpen(false);
-      setPostLoginAction(null);
-      setIsBundleModalOpen(false); // Close drawer
-      setPendingBundleSelections(null);
-      navigate("/checkout");
-    } else if (
-      isLoggedIn && postLoginAction === "fiveCourseBundle"
-    ) {
-      // User logged in to proceed to checkout for 5-course bundle
-      clearCart();
-      courses.forEach((c) => {
-        addToCart({
-          id: c.id,
-          title: c.title,
-          price: c.price,
-          image: c.image,
-          category: c.category,
-          totalTime: c.totalTime
-        });
-      });
-      setIsLoginModalOpen(false);
-      setPostLoginAction(null);
-      setIsBundleModalOpen(false); // Close drawer
-      setPendingBundleSelections(null);
-      navigate("/checkout");
     }
   }, [
     isLoggedIn,
@@ -112,10 +64,7 @@ const CourseDetail = () => {
     openCart,
     course,
     navigate,
-    toast,
-    clearCart,
-    pendingBundleSelections,
-    courses
+    toast
   ]);
   
   useEffect(() => {
@@ -124,7 +73,6 @@ const CourseDetail = () => {
 
   const handleLogin = (email: string, password: string) => {
     setIsLoggedIn(true);
-    // DO NOT navigate here (navigation handled above)
   };
 
   const handleBuyNow = () => {
@@ -160,24 +108,12 @@ const CourseDetail = () => {
     }
   };
 
-  const handleOpenBundle = () => setIsBundleModalOpen(true);
-
   const handleVideoPlay = (title: string, videoUrl?: string) => {
     setCurrentVideo({
       title,
       url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
     });
     setIsVideoModalOpen(true);
-  };
-
-  const handleBundleLoginRequired = (
-    action: "proceedBundle" | "fiveCourseBundle",
-    selections: number[]
-  ) => {
-    setPostLoginAction(action);
-    setPendingBundleSelections(action === "fiveCourseBundle" ? [] : selections);
-    setIsLoginModalOpen(true);
-    // Keep the BundleDrawer open and preserve selections until login completes or cancelled
   };
 
   if (!course) {
@@ -245,7 +181,6 @@ const CourseDetail = () => {
                 <CoursePricingCard
                   onBuyNow={handleBuyNow}
                   onAddToCart={handleAddToCart}
-                  onOpenBundle={handleOpenBundle}
                 />
               </div>
             </div>
@@ -265,16 +200,7 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
-      {/* Pass login props & handler to BundleDrawer */}
-      <BundleDrawer
-        isOpen={isBundleModalOpen}
-        onClose={() => setIsBundleModalOpen(false)}
-        initialSelectedCourseId={course.id}
-        isLoggedIn={isLoggedIn}
-        onLoginRequired={handleBundleLoginRequired}
-      />
-
-      {/* Video Modal with updated width */}
+      {/* Video Modal */}
       <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
         <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
           <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">

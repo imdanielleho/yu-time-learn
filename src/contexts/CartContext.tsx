@@ -10,55 +10,23 @@ export interface CartItem {
   totalTime: string;
 }
 
-export interface Bundle {
-  id: string;
-  name: string;
-  courseCount: number;
-  price: number;
-  savings: number;
-}
-
 interface CartContextType {
   items: CartItem[];
-  bundles: Bundle[];
   isCartOpen: boolean;
-  isBundleDrawerOpen: boolean;
-  bundleDrawerMode: 'standalone' | 'add-to-cart';
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
-  openBundleDrawer: (mode?: 'standalone' | 'add-to-cart') => void;
-  closeBundleDrawer: () => void;
   getTotalPrice: () => number;
   getItemCount: () => number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const bundles: Bundle[] = [
-  {
-    id: '3-course',
-    name: '3-Course Bundle',
-    courseCount: 3,
-    price: 350,
-    savings: 10
-  },
-  {
-    id: '5-course',
-    name: '5-Course Bundle',
-    courseCount: 5,
-    price: 500,
-    savings: 100
-  }
-];
-
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isBundleDrawerOpen, setIsBundleDrawerOpen] = useState(false);
-  const [bundleDrawerMode, setBundleDrawerMode] = useState<'standalone' | 'add-to-cart'>('standalone');
 
   const addToCart = (item: CartItem) => {
     setItems(prev => {
@@ -81,15 +49,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
-  const openBundleDrawer = (mode: 'standalone' | 'add-to-cart' = 'standalone') => {
-    setBundleDrawerMode(mode);
-    setIsBundleDrawerOpen(true);
-  };
-
-  const closeBundleDrawer = () => {
-    setIsBundleDrawerOpen(false);
-  };
-
   const getTotalPrice = () => {
     return items.reduce((total, item) => total + item.price, 0);
   };
@@ -99,17 +58,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   return (
     <CartContext.Provider value={{
       items,
-      bundles,
       isCartOpen,
-      isBundleDrawerOpen,
-      bundleDrawerMode,
       addToCart,
       removeFromCart,
       clearCart,
       openCart,
       closeCart,
-      openBundleDrawer,
-      closeBundleDrawer,
       getTotalPrice,
       getItemCount
     }}>

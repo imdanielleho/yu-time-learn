@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import CartDrawer from "./components/CartDrawer";
-import IntegratedBundleDrawer from "./components/IntegratedBundleDrawer";
 import Index from "./pages/Index";
 import CourseDetail from "./pages/CourseDetail";
 import Checkout from "./pages/Checkout";
@@ -41,9 +40,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           
-          {/* Global Cart and Bundle Drawers */}
+          {/* Global Cart Drawer */}
           <CartDrawer />
-          <IntegratedBundleDrawer />
         </BrowserRouter>
       </TooltipProvider>
     </CartProvider>

@@ -2,7 +2,6 @@
 import { CouponCode } from './types';
 
 export const validCoupons: CouponCode[] = [
-  { code: "BUNDLE50", amount: 50, bundleOnly: true },
   { code: "WELCOME10", amount: 10 },
 ];
 
@@ -12,8 +11,7 @@ export const validateCoupon = (
 ): { isValid: boolean; discount: number } => {
   const entered = couponCode.trim();
   const match = validCoupons.find(c =>
-    c.code.toLowerCase() === entered.toLowerCase() &&
-    (!c.bundleOnly || isBundleEligible)
+    c.code.toLowerCase() === entered.toLowerCase()
   );
   
   return {
