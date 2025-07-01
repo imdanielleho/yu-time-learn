@@ -77,7 +77,7 @@ const Success = () => {
         </div>
 
         <div className="text-center">
-          <p className="text-sm text-yutime-warmGray">
+          <p className="text-sm md:text-base text-yutime-warmGray">
             A confirmation email has been sent to your inbox with your purchase details.
           </p>
         </div>
