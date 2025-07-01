@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { CheckCircle, Play, ArrowLeft, HelpCircle } from 'lucide-react';
+import { CheckCircle, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import StepIndicator from "@/components/StepIndicator";
 import CustomerServiceButton from "@/components/CustomerServiceButton";
 
@@ -23,11 +23,11 @@ const Success = () => {
 
         {/* Success Message */}
         <div className="text-center mb-8">
-          <CheckCircle className="mx-auto text-green-500 mb-6" size={80} />
+          <CheckCircle className="mx-auto text-green-500 mb-6" size={48} />
           <h1 className="text-3xl font-bold text-yutime-sage mb-4">
             Thank you for your purchase!
           </h1>
-          <p className="text-xl text-yutime-warmGray">
+          <p className="text-yutime-warmGray">
             Your courses have been added to your account and you can start learning immediately.
           </p>
         </div>
@@ -66,7 +66,7 @@ const Success = () => {
         )}
 
         {/* Start Learning Button */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
           <Button
             onClick={handleStartLearning}
             className="bg-yutime-coral hover:bg-yutime-coral/90 text-white px-8 py-4 text-lg font-medium flex items-center mx-auto"
@@ -76,34 +76,7 @@ const Success = () => {
           </Button>
         </div>
 
-        {/* Help or Return Options */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl shadow-soft p-4 border border-yutime-sand text-center">
-            <HelpCircle className="mx-auto text-yutime-blue mb-3" size={24} />
-            <h3 className="font-medium text-yutime-sage mb-2 text-base">Need Help?</h3>
-            <p className="text-sm text-yutime-warmGray mb-3">
-              Our support team is here to help you get started.
-            </p>
-            <Button variant="outline" size="sm" className="border-yutime-blue text-yutime-blue hover:bg-yutime-blue hover:text-white">
-              Contact Support
-            </Button>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-soft p-4 border border-yutime-sand text-center">
-            <ArrowLeft className="mx-auto text-yutime-sage mb-3" size={24} />
-            <h3 className="font-medium text-yutime-sage mb-2 text-base">Browse More Courses</h3>
-            <p className="text-sm text-yutime-warmGray mb-3">
-              Explore our full course catalog to continue learning.
-            </p>
-            <Link to="/">
-              <Button variant="outline" size="sm" className="border-yutime-sage text-yutime-sage hover:bg-yutime-sage hover:text-white">
-                View All Courses
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        <div className="text-center mt-8">
+        <div className="text-center">
           <p className="text-sm text-yutime-warmGray">
             A confirmation email has been sent to your inbox with your purchase details.
           </p>
