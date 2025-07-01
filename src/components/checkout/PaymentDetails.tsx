@@ -2,7 +2,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CreditCard, Lock } from 'lucide-react';
+import { CreditCard } from 'lucide-react';
 import { FormData } from './types';
 
 interface PaymentDetailsProps {
@@ -18,10 +18,6 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
           <span className="text-yutime-sage font-semibold">2</span>
         </div>
         <h2 className="text-xl font-semibold text-yutime-sage">Payment Details</h2>
-        <div className="flex items-center gap-2 ml-auto">
-          <Lock className="w-4 h-4 text-green-600" />
-          <span className="text-sm text-yutime-warmGray">Secured by SSL</span>
-        </div>
       </div>
 
       <div className="space-y-4">

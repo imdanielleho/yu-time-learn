@@ -24,7 +24,7 @@ const Success = () => {
         {/* Success Message */}
         <div className="text-center mb-8">
           <CheckCircle className="mx-auto text-green-500 mb-6" size={80} />
-          <h1 className="text-4xl font-bold text-yutime-sage mb-4">
+          <h1 className="text-3xl font-bold text-yutime-sage mb-4">
             Thank you for your purchase!
           </h1>
           <p className="text-xl text-yutime-warmGray">
@@ -78,25 +78,25 @@ const Success = () => {
 
         {/* Help or Return Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand text-center">
-            <HelpCircle className="mx-auto text-yutime-blue mb-4" size={48} />
-            <h3 className="font-semibold text-yutime-sage mb-2">Need Help?</h3>
-            <p className="text-sm text-yutime-warmGray mb-4">
+          <div className="bg-white rounded-2xl shadow-soft p-4 border border-yutime-sand text-center">
+            <HelpCircle className="mx-auto text-yutime-blue mb-3" size={24} />
+            <h3 className="font-medium text-yutime-sage mb-2 text-base">Need Help?</h3>
+            <p className="text-sm text-yutime-warmGray mb-3">
               Our support team is here to help you get started.
             </p>
-            <Button variant="outline" className="border-yutime-blue text-yutime-blue hover:bg-yutime-blue hover:text-white">
+            <Button variant="outline" size="sm" className="border-yutime-blue text-yutime-blue hover:bg-yutime-blue hover:text-white">
               Contact Support
             </Button>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand text-center">
-            <ArrowLeft className="mx-auto text-yutime-sage mb-4" size={48} />
-            <h3 className="font-semibold text-yutime-sage mb-2">Browse More Courses</h3>
-            <p className="text-sm text-yutime-warmGray mb-4">
+          <div className="bg-white rounded-2xl shadow-soft p-4 border border-yutime-sand text-center">
+            <ArrowLeft className="mx-auto text-yutime-sage mb-3" size={24} />
+            <h3 className="font-medium text-yutime-sage mb-2 text-base">Browse More Courses</h3>
+            <p className="text-sm text-yutime-warmGray mb-3">
               Explore our full course catalog to continue learning.
             </p>
             <Link to="/">
-              <Button variant="outline" className="border-yutime-sage text-yutime-sage hover:bg-yutime-sage hover:text-white">
+              <Button variant="outline" size="sm" className="border-yutime-sage text-yutime-sage hover:bg-yutime-sage hover:text-white">
                 View All Courses
               </Button>
             </Link>
