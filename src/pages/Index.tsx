@@ -12,15 +12,30 @@ import CustomerServiceButton from '@/components/CustomerServiceButton';
 import HomeMobileNavigation from '@/components/HomeMobileNavigation';
 import LoginModal from '@/components/LoginModal';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { login, logout, isLoggedIn, hasPurchasedCourses } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = (email: string, password: string) => {
-    console.log("Login with:", email, password);
+    login(email, password);
     setIsLoginModalOpen(false);
-    // TODO: Implement actual login logic
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const handleResumeLearning = () => {
+    if (!hasPurchasedCourses) {
+      navigate("/no-courses");
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -44,7 +59,11 @@ const Index = () => {
       </main>
       <Footer />
       <CustomerServiceButton />
-      <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
+      <HomeMobileNavigation 
+        onLoginClick={() => setIsLoginModalOpen(true)}
+        onLogoutClick={handleLogout}
+        onResumeLearningClick={handleResumeLearning}
+      />
       
       <LoginModal
         isOpen={isLoginModalOpen}

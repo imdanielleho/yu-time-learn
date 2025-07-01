@@ -2,6 +2,7 @@
 import React from 'react';
 import { Play, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ProfileDropdown from './ProfileDropdown';
 
 interface DesktopNavigationProps {
   handleScrollTo: (id: string) => void;
@@ -55,20 +56,26 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
           )}
         </Button>
       </div>
-      <button 
-        onClick={handleLoginSignupClick}
-        className="btn-primary"
-      >
-        Log In/Sign Up
-      </button>
-      {isLoggedIn && (
+      
+      {/* Login/Profile Section */}
+      {!isLoggedIn ? (
         <button 
-          onClick={handleResumeLearning}
-          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+          onClick={handleLoginSignupClick}
+          className="btn-primary"
         >
-          <span>Resume Learning</span>
-          <Play size={18} />
+          Log In/Sign Up
         </button>
+      ) : (
+        <>
+          <ProfileDropdown />
+          <button 
+            onClick={handleResumeLearning}
+            className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+          >
+            <span>Resume Learning</span>
+            <Play size={18} />
+          </button>
+        </>
       )}
     </div>
   </nav>

@@ -2,14 +2,15 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 const useNavbarState = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { openCart, getItemCount } = useCart();
+  const { isLoggedIn, hasPurchasedCourses, login, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen((open) => !open);
@@ -40,16 +41,20 @@ const useNavbarState = () => {
   };
 
   const handleResumeLearning = () => {
-    if (isLoggedIn) {
-      navigate("/dashboard");
-    } else {
+    if (!isLoggedIn) {
       setIsLoginModalOpen(true);
+      return;
+    }
+
+    if (!hasPurchasedCourses) {
+      navigate("/no-courses");
+    } else {
+      navigate("/dashboard");
     }
   };
 
   const handleLogin = (username: string, password: string) => {
-    console.log("Login attempted with:", username, password);
-    setIsLoggedIn(true);
+    login(username, password);
     setIsLoginModalOpen(false);
     navigate("/dashboard");
   };
@@ -62,6 +67,11 @@ const useNavbarState = () => {
     openCart();
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   const itemCount = getItemCount();
 
   return {
@@ -69,6 +79,9 @@ const useNavbarState = () => {
       isMenuOpen,
       toggleMenu,
       handleScrollTo,
+      isLoggedIn,
+      handleLogout,
+      handleResumeLearning,
     },
     desktop: {
       handleScrollTo,

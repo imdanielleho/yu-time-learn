@@ -1,21 +1,25 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Home, Book, LogIn } from 'lucide-react';
+import { Home, Book, LogIn, LogOut, Play } from 'lucide-react';
 import { ShoppingCart } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
+  onLogoutClick?: () => void;
+  onResumeLearningClick?: () => void;
 }
 
-const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
+const HomeMobileNavigation = ({ onLoginClick, onLogoutClick, onResumeLearningClick }: HomeMobileNavigationProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
   const { openCart, getItemCount } = useCart();
+  const { isLoggedIn } = useAuth();
 
   if (!isMobile) return null;
 
@@ -60,7 +64,7 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
-      <div className="grid grid-cols-4 h-16">
+      <div className={`grid h-16 ${isLoggedIn ? 'grid-cols-5' : 'grid-cols-4'}`}>
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={handleHomeClick}
@@ -90,13 +94,33 @@ const HomeMobileNavigation = ({ onLoginClick }: HomeMobileNavigationProps) => {
           <span className="text-xs font-medium">Cart</span>
         </button>
 
-        <button
-          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
-          onClick={onLoginClick}
-        >
-          <LogIn className="h-5 w-5" />
-          <span className="text-xs font-medium">Login</span>
-        </button>
+        {!isLoggedIn ? (
+          <button
+            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+            onClick={onLoginClick}
+          >
+            <LogIn className="h-5 w-5" />
+            <span className="text-xs font-medium">Login</span>
+          </button>
+        ) : (
+          <>
+            <button
+              className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-red-600 transition-colors"
+              onClick={onLogoutClick}
+            >
+              <LogOut className="h-5 w-5" />
+              <span className="text-xs font-medium">Logout</span>
+            </button>
+            
+            <button
+              className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+              onClick={onResumeLearningClick}
+            >
+              <Play className="h-5 w-5" />
+              <span className="text-xs font-medium">Resume</span>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
