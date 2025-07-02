@@ -45,14 +45,14 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
     </div>
 
     {/* Action Links - Right Side */}
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center space-x-3 h-10">
       {isLoggedIn && (
         <button 
           onClick={handleResumeLearning}
-          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white h-10 px-4 py-2 rounded-md font-medium text-base transition-all shadow-sm hover:shadow flex items-center"
         >
+          <Play size={16} className="mr-2" />
           <span>Resume Learning</span>
-          <Play size={18} />
         </button>
       )}
       
@@ -61,7 +61,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
         <Button
           onClick={handleCartClick}
           variant="ghost"
-          className="p-2.5 bg-white text-yutime-navy hover:bg-gray-50 hover:text-yutime-blue transition-all relative"
+          className="h-10 w-10 p-2 bg-white text-yutime-navy hover:bg-gray-50 hover:text-yutime-blue transition-all relative"
         >
           <ShoppingCart size={18} />
           {itemCount > 0 && (
