@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -61,7 +60,6 @@ const Index = () => {
       <CustomerServiceButton />
       <HomeMobileNavigation 
         onLoginClick={() => setIsLoginModalOpen(true)}
-        onLogoutClick={handleLogout}
         onResumeLearningClick={handleResumeLearning}
       />
       

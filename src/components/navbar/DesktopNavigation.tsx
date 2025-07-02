@@ -21,26 +21,41 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
   isLoggedIn,
   handleResumeLearning,
 }) => (
-  <nav className="hidden md:flex items-center space-x-4">
-    <button 
-      onClick={() => handleScrollTo('courses')} 
-      className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
-    >
-      Courses
-    </button>
-    <button 
-      onClick={() => handleScrollTo('testimonials')} 
-      className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
-    >
-      Testimonials
-    </button>
-    <button 
-      onClick={() => handleScrollTo('faq')} 
-      className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors mr-12"
-    >
-      FAQ
-    </button>
+  <nav className="hidden md:flex items-center justify-between flex-1 ml-8">
+    {/* Informational Links - Left Side */}
+    <div className="flex items-center space-x-6">
+      <button 
+        onClick={() => handleScrollTo('courses')} 
+        className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+      >
+        Courses
+      </button>
+      <button 
+        onClick={() => handleScrollTo('testimonials')} 
+        className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+      >
+        Testimonials
+      </button>
+      <button 
+        onClick={() => handleScrollTo('faq')} 
+        className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors"
+      >
+        FAQ
+      </button>
+    </div>
+
+    {/* Action Links - Right Side */}
     <div className="flex items-center space-x-3">
+      {isLoggedIn && (
+        <button 
+          onClick={handleResumeLearning}
+          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
+        >
+          <span>Resume Learning</span>
+          <Play size={18} />
+        </button>
+      )}
+      
       {/* Shopping Cart Button */}
       <div className="relative">
         <Button
@@ -66,16 +81,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
           Log In/Sign Up
         </button>
       ) : (
-        <>
-          <ProfileDropdown />
-          <button 
-            onClick={handleResumeLearning}
-            className="bg-yutime-blue hover:bg-yutime-blue/90 text-white py-2.5 px-5 rounded-md font-medium text-lg transition-all shadow-sm hover:shadow flex items-center space-x-2"
-          >
-            <span>Resume Learning</span>
-            <Play size={18} />
-          </button>
-        </>
+        <ProfileDropdown />
       )}
     </div>
   </nav>
