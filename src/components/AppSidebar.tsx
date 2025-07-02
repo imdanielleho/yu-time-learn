@@ -44,7 +44,7 @@ const AppSidebar = () => {
   return (
     <Sidebar className="bg-white border-r">
       <SidebarHeader className="p-4 bg-white border-b">
-        <Link to="/dashboard" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <span className="font-heading text-xl font-bold text-yutime-navy">
             YŪ<span className="text-yutime-blue">TIME</span>
           </span>
