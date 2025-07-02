@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { User, Settings, DoorOpen } from 'lucide-react';
+import { User, Settings, LogOut } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -32,7 +32,7 @@ const ProfileDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage src={user.avatar} alt={user.name} />
             <AvatarFallback className="bg-yutime-blue text-white">
@@ -56,7 +56,7 @@ const ProfileDropdown = () => {
           <span>Settings</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-          <DoorOpen className="mr-2 h-4 w-4" />
+          <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

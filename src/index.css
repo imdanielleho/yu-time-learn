@@ -88,7 +88,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-sage hover:bg-yutime-sage/90 text-white h-10 px-4 py-2 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-105 shadow-soft;
+    @apply bg-yutime-sage hover:bg-yutime-sage/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft;
   }
   
   .btn-secondary {
