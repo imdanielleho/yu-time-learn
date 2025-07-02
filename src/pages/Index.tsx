@@ -61,6 +61,7 @@ const Index = () => {
       <CustomerServiceButton />
       <HomeMobileNavigation 
         onLoginClick={() => setIsLoginModalOpen(true)}
+        onLogoutClick={handleLogout}
         onResumeLearningClick={handleResumeLearning}
       />
       
