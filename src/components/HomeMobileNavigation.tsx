@@ -1,20 +1,20 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Home, Book, LogIn, LogOut, Play } from 'lucide-react';
+import { Home, Book, LogIn, Play } from 'lucide-react';
 import { ShoppingCart } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
+import MobileMoreMenu from './navbar/MobileMoreMenu';
 
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
-  onLogoutClick?: () => void;
   onResumeLearningClick?: () => void;
 }
 
-const HomeMobileNavigation = ({ onLoginClick, onLogoutClick, onResumeLearningClick }: HomeMobileNavigationProps) => {
+const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobileNavigationProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const HomeMobileNavigation = ({ onLoginClick, onLogoutClick, onResumeLearningCli
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
-      <div className={`grid h-16 ${isLoggedIn ? 'grid-cols-5' : 'grid-cols-4'}`}>
+      <div className="grid grid-cols-5 h-16">
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={handleHomeClick}
@@ -80,6 +80,23 @@ const HomeMobileNavigation = ({ onLoginClick, onLogoutClick, onResumeLearningCli
           <Book className="h-5 w-5" />
           <span className="text-xs font-medium">Courses</span>
         </button>
+
+        {isLoggedIn && (
+          <button
+            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+            onClick={onResumeLearningClick}
+          >
+            <Play className="h-5 w-5" />
+            <span className="text-xs font-medium">Resume</span>
+          </button>
+        )}
+
+        {!isLoggedIn && (
+          <div className="flex flex-col items-center justify-center space-y-1">
+            <div className="h-5 w-5"></div>
+            <span className="text-xs font-medium text-transparent">-</span>
+          </div>
+        )}
 
         <button
           className="relative flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
@@ -103,23 +120,7 @@ const HomeMobileNavigation = ({ onLoginClick, onLogoutClick, onResumeLearningCli
             <span className="text-xs font-medium">Login</span>
           </button>
         ) : (
-          <>
-            <button
-              className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-red-600 transition-colors"
-              onClick={onLogoutClick}
-            >
-              <LogOut className="h-5 w-5" />
-              <span className="text-xs font-medium">Logout</span>
-            </button>
-            
-            <button
-              className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
-              onClick={onResumeLearningClick}
-            >
-              <Play className="h-5 w-5" />
-              <span className="text-xs font-medium">Resume</span>
-            </button>
-          </>
+          <MobileMoreMenu />
         )}
       </div>
     </div>

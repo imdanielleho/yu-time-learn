@@ -1,10 +1,8 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { X, Settings } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -17,14 +15,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   toggleMenu,
   handleScrollTo,
 }) => {
-  const { isLoggedIn, user } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSettingsClick = () => {
-    toggleMenu();
-    navigate('/settings');
-  };
-
   return (
     <div
       className={cn(
@@ -46,23 +36,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           </Button>
         </div>
         <nav className="flex flex-col p-6 space-y-6">
-          {isLoggedIn && user && (
-            <>
-              <div className="pb-4 border-b border-gray-200">
-                <p className="text-lg font-medium text-yutime-navy">
-                  Hello, {user.name}
-                </p>
-                <p className="text-sm text-yutime-warmGray">{user.email}</p>
-              </div>
-              <button
-                onClick={handleSettingsClick}
-                className="flex items-center text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
-              >
-                <Settings className="mr-3" size={20} />
-                Settings
-              </button>
-            </>
-          )}
           <button
             onClick={() => handleScrollTo('testimonials')}
             className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
