@@ -23,6 +23,7 @@ const Navbar = () => {
             handleLoginSignupClick={navbar.desktop.handleLoginSignupClick}
             isLoggedIn={navbar.desktop.isLoggedIn}
             handleResumeLearning={navbar.desktop.handleResumeLearning}
+            currentPath={navbar.desktop.currentPath}
           />
           <MobileMenu
             isMenuOpen={navbar.mobile.isMenuOpen}

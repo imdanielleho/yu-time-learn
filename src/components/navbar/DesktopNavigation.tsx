@@ -11,6 +11,7 @@ interface DesktopNavigationProps {
   handleLoginSignupClick: () => void;
   isLoggedIn: boolean;
   handleResumeLearning: () => void;
+  currentPath: string;
 }
 
 const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
@@ -20,6 +21,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
   handleLoginSignupClick,
   isLoggedIn,
   handleResumeLearning,
+  currentPath,
 }) => (
   <nav className="hidden md:flex items-center justify-between flex-1 ml-8">
     {/* Informational Links - Left Side */}
@@ -46,7 +48,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
 
     {/* Action Links - Right Side */}
     <div className="flex items-center space-x-3 h-10">
-      {isLoggedIn && (
+      {isLoggedIn && currentPath !== '/no-courses' && (
         <button 
           onClick={handleResumeLearning}
           className="bg-yutime-blue hover:bg-yutime-blue/90 text-white h-10 px-4 py-2 rounded-md font-medium text-base transition-all shadow-sm hover:shadow flex items-center"

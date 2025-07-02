@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -61,6 +62,7 @@ const Index = () => {
       <HomeMobileNavigation 
         onLoginClick={() => setIsLoginModalOpen(true)}
         onResumeLearningClick={handleResumeLearning}
+        shouldShowResume={true}
       />
       
       <LoginModal

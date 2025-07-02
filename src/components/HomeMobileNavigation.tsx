@@ -12,9 +12,10 @@ import MobileMoreMenu from '@/components/navbar/MobileMoreMenu';
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
   onResumeLearningClick?: () => void;
+  shouldShowResume?: boolean;
 }
 
-const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobileNavigationProps) => {
+const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick, shouldShowResume = true }: HomeMobileNavigationProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,9 +25,10 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
   if (!isMobile) return null;
 
   const isOnCourseDetailPage = location.pathname.startsWith('/courses/');
+  const isOnNoCoursesPage = location.pathname === '/no-courses';
 
   const handleHomeClick = () => {
-    if (isOnCourseDetailPage) {
+    if (isOnCourseDetailPage || isOnNoCoursesPage) {
       navigate('/');
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -40,7 +42,7 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
   };
 
   const handleCoursesClick = () => {
-    if (isOnCourseDetailPage) {
+    if (isOnCourseDetailPage || isOnNoCoursesPage) {
       navigate('/');
       setTimeout(() => {
         const element = document.getElementById('courses');
@@ -61,10 +63,11 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
   };
 
   const itemCount = getItemCount();
+  const showResumeButton = isLoggedIn && shouldShowResume;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
-      <div className={`h-16 ${isLoggedIn ? 'grid grid-cols-5' : 'grid grid-cols-4'}`}>
+      <div className={`h-16 ${showResumeButton ? 'grid grid-cols-5' : 'grid grid-cols-4'}`}>
         <button
           className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
           onClick={handleHomeClick}
@@ -81,7 +84,7 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
           <span className="text-xs font-medium">Courses</span>
         </button>
 
-        {isLoggedIn && (
+        {showResumeButton && (
           <button
             className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
             onClick={onResumeLearningClick}

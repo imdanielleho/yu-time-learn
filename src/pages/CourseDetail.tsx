@@ -136,7 +136,10 @@ const CourseDetail = () => {
         <Footer />
         {!isMobile && <CustomerServiceButton />}
         {isMobile && !isLoggedIn && (
-          <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
+          <HomeMobileNavigation 
+            onLoginClick={() => setIsLoginModalOpen(true)} 
+            shouldShowResume={true}
+          />
         )}
         {isMobile && isLoggedIn && <BottomNavigation />}
       </div>
@@ -195,7 +198,10 @@ const CourseDetail = () => {
       <Footer />
       {!isMobile && <CustomerServiceButton />}
       {isMobile && !isLoggedIn && (
-        <HomeMobileNavigation onLoginClick={() => setIsLoginModalOpen(true)} />
+        <HomeMobileNavigation 
+          onLoginClick={() => setIsLoginModalOpen(true)} 
+          shouldShowResume={true}
+        />
       )}
       {isMobile && isLoggedIn && <BottomNavigation />}
 

@@ -90,6 +90,7 @@ const useNavbarState = () => {
       handleLoginSignupClick,
       isLoggedIn,
       handleResumeLearning,
+      currentPath: location.pathname,
     },
     loginModal: {
       isOpen: isLoginModalOpen,
