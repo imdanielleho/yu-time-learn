@@ -23,25 +23,33 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
 
   if (!isMobile) return null;
 
-  const isOnCourseDetailPage = location.pathname.startsWith('/courses/');
-  const isOnNoCoursesPage = location.pathname === '/no-courses';
-
   const handleHomeClick = () => {
-    if (isOnCourseDetailPage || isOnNoCoursesPage) {
+    if (location.pathname === '/') {
+      // Already on home page, scroll to hero section
+      const element = document.getElementById('hero');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page first
       navigate('/');
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 100);
-    } else {
-      const element = document.getElementById('hero');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   };
 
   const handleCoursesClick = () => {
-    if (isOnCourseDetailPage || isOnNoCoursesPage) {
+    if (location.pathname === '/') {
+      // Already on home page, scroll to courses section
+      const element = document.getElementById('courses');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page first, then scroll to courses
       navigate('/');
       setTimeout(() => {
         const element = document.getElementById('courses');
@@ -49,11 +57,6 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
-    } else {
-      const element = document.getElementById('courses');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   };
 
