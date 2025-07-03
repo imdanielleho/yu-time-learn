@@ -14,6 +14,7 @@ import Success from "./pages/Success";
 import Dashboard from "./pages/Dashboard";
 import MyCourses from "./pages/MyCourses";
 import Settings from "./pages/Settings";
+import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 import NoCourses from "./components/NoCourses";
 import AppLayout from "./components/AppLayout";
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/success" element={<Success />} />
               <Route path="/no-courses" element={<NoCourses />} />
+              <Route path="/account" element={<Account />} />
               
               {/* Authenticated routes with app layout */}
               <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />

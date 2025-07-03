@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
 const ProfileDropdown = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,8 +23,12 @@ const ProfileDropdown = () => {
     navigate('/');
   };
 
-  const handleSettings = () => {
-    navigate('/settings');
+  const handleAccountSettings = () => {
+    if (hasPurchasedCourses) {
+      navigate('/settings');
+    } else {
+      navigate('/account');
+    }
   };
 
   if (!user) return null;
@@ -51,10 +55,12 @@ const ProfileDropdown = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleSettings} className="cursor-pointer">
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-        </DropdownMenuItem>
+        {!hasPurchasedCourses && (
+          <DropdownMenuItem onClick={handleAccountSettings} className="cursor-pointer">
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Account</span>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>

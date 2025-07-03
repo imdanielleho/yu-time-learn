@@ -1,113 +1,15 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { AlertTriangle } from "lucide-react";
+import ProfileForm from '@/components/shared/ProfileForm';
+import PasswordModal from '@/components/shared/PasswordModal';
+import DeleteAccountModal from '@/components/shared/DeleteAccountModal';
 
 const Settings = () => {
-  const [fullName, setFullName] = useState("John Doe");
-  const [email, setEmail] = useState("john.doe@email.com");
-  const [isLoading, setIsLoading] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: ""
-  });
-  const { toast } = useToast();
-
-  const handleSaveProfile = async () => {
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Here you would normally update the user data via API
-      console.log("Saving profile:", { fullName, email });
-      
-      toast({
-        title: "Profile Updated",
-        description: "Your profile has been saved successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to save profile. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleChangePassword = async () => {
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      toast({
-        title: "Error",
-        description: "New passwords do not match.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (passwordData.newPassword.length < 6) {
-      toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log("Changing password for user");
-      
-      toast({
-        title: "Password Changed",
-        description: "Your password has been updated successfully.",
-      });
-      
-      setIsPasswordModalOpen(false);
-      setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to change password. Please try again.",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleDeleteAccount = async () => {
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log("Deleting user account");
-      
-      toast({
-        title: "Account Deleted",
-        description: "Your account has been permanently deleted.",
-        variant: "destructive"
-      });
-      
-      setIsDeleteModalOpen(false);
-      // In a real app, you would redirect to login or home page
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to delete account. Please try again.",
-        variant: "destructive"
-      });
-    }
-  };
 
   return (
     <div className="p-6 max-w-4xl">
@@ -117,38 +19,8 @@ const Settings = () => {
       </div>
 
       <div className="space-y-8">
-        {/* Profile Settings */}
-        <div className="bg-white rounded-lg p-6 shadow-sm border">
-          <h2 className="text-xl font-semibold text-yutime-navy mb-4">Profile Settings</h2>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="fullName">Full Name</Label>
-              <Input 
-                id="fullName" 
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="mt-1" 
-              />
-            </div>
-            <div>
-              <Label htmlFor="email">Email Address</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1" 
-              />
-            </div>
-            <Button 
-              onClick={handleSaveProfile}
-              disabled={isLoading}
-              className="bg-yutime-blue hover:bg-yutime-blue/90"
-            >
-              {isLoading ? "Saving..." : "Save Profile"}
-            </Button>
-          </div>
-        </div>
+        {/* Profile Settings - using shared component */}
+        <ProfileForm />
 
         {/* Notification Settings */}
         <div className="bg-white rounded-lg p-6 shadow-sm border">
@@ -199,7 +71,7 @@ const Settings = () => {
           </div>
         </div>
 
-        {/* Account Actions */}
+        {/* Account Actions - using shared modals */}
         <div className="bg-white rounded-lg p-6 shadow-sm border">
           <h2 className="text-xl font-semibold text-yutime-navy mb-4">Account</h2>
           <div className="flex gap-2">
@@ -221,89 +93,16 @@ const Settings = () => {
         </div>
       </div>
 
-      {/* Change Password Modal */}
-      <Dialog open={isPasswordModalOpen} onOpenChange={setIsPasswordModalOpen}>
-        <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-          <DialogHeader>
-            <DialogTitle>Change Password</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="currentPassword" className="mb-2 block">Current Password</Label>
-              <Input
-                id="currentPassword"
-                type="password"
-                value={passwordData.currentPassword}
-                onChange={(e) => setPasswordData(prev => ({ ...prev, currentPassword: e.target.value }))}
-              />
-            </div>
-            <div>
-              <Label htmlFor="newPassword" className="mb-2 block">New Password</Label>
-              <Input
-                id="newPassword"
-                type="password"
-                value={passwordData.newPassword}
-                onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
-              />
-            </div>
-            <div>
-              <Label htmlFor="confirmPassword" className="mb-2 block">Confirm New Password</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                value={passwordData.confirmPassword}
-                onChange={(e) => setPasswordData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsPasswordModalOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={handleChangePassword} className="bg-yutime-blue hover:bg-yutime-blue/90">
-              Change Password
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Shared Modals */}
+      <PasswordModal 
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+      />
 
-      {/* Delete Account Modal */}
-      <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
-        <DialogContent className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-red-600">
-              <AlertTriangle className="h-5 w-5" />
-              Delete Account
-            </DialogTitle>
-          </DialogHeader>
-          <div className="py-4 space-y-4">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <p className="text-gray-700 mb-2 font-medium">
-                Are you sure you want to permanently delete your account?
-              </p>
-              <p className="text-sm text-gray-600">
-                This action cannot be undone and will result in:
-              </p>
-              <ul className="mt-2 text-sm text-gray-600 list-disc list-inside space-y-1">
-                <li>Permanent loss of all course progress</li>
-                <li>Deletion of personal data and preferences</li>
-                <li>Loss of access to purchased courses</li>
-              </ul>
-            </div>
-          </div>
-          <DialogFooter className="gap-2">
-            <Button variant="outline" onClick={() => setIsDeleteModalOpen(false)} className="flex-1">
-              Cancel
-            </Button>
-            <Button 
-              onClick={handleDeleteAccount} 
-              className="bg-red-600 hover:bg-red-700 text-white flex-1"
-            >
-              Delete Account
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <DeleteAccountModal 
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+      />
     </div>
   );
 };

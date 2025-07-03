@@ -11,11 +11,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
 const MobileMoreMenu = () => {
-  const { logout } = useAuth();
+  const { logout, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
 
-  const handleSettings = () => {
-    navigate('/settings');
+  const handleAccountSettings = () => {
+    if (hasPurchasedCourses) {
+      navigate('/settings');
+    } else {
+      navigate('/account');
+    }
   };
 
   const handleLogout = () => {
@@ -37,10 +41,12 @@ const MobileMoreMenu = () => {
         side="top"
         sideOffset={8}
       >
-        <DropdownMenuItem onClick={handleSettings} className="cursor-pointer">
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-        </DropdownMenuItem>
+        {!hasPurchasedCourses && (
+          <DropdownMenuItem onClick={handleAccountSettings} className="cursor-pointer">
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Account</span>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-red-600">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Logout</span>
