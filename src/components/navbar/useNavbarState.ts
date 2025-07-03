@@ -46,11 +46,8 @@ const useNavbarState = () => {
       return;
     }
 
-    if (!hasPurchasedCourses) {
-      navigate("/no-courses");
-    } else {
-      navigate("/dashboard");
-    }
+    // Since the button only shows when user has courses, go directly to dashboard
+    navigate("/dashboard");
   };
 
   const handleLogin = (username: string, password: string) => {
@@ -89,6 +86,7 @@ const useNavbarState = () => {
       itemCount,
       handleLoginSignupClick,
       isLoggedIn,
+      hasPurchasedCourses,
       handleResumeLearning,
       currentPath: location.pathname,
     },

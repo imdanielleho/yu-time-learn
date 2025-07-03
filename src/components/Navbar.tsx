@@ -22,6 +22,7 @@ const Navbar = () => {
             itemCount={navbar.desktop.itemCount}
             handleLoginSignupClick={navbar.desktop.handleLoginSignupClick}
             isLoggedIn={navbar.desktop.isLoggedIn}
+            hasPurchasedCourses={navbar.desktop.hasPurchasedCourses}
             handleResumeLearning={navbar.desktop.handleResumeLearning}
             currentPath={navbar.desktop.currentPath}
           />

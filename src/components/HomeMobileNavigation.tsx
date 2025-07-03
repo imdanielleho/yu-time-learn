@@ -12,15 +12,14 @@ import MobileMoreMenu from '@/components/navbar/MobileMoreMenu';
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
   onResumeLearningClick?: () => void;
-  shouldShowResume?: boolean;
 }
 
-const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick, shouldShowResume = true }: HomeMobileNavigationProps) => {
+const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobileNavigationProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
   const navigate = useNavigate();
   const { openCart, getItemCount } = useCart();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, hasPurchasedCourses } = useAuth();
 
   if (!isMobile) return null;
 
@@ -63,7 +62,7 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick, shouldShowR
   };
 
   const itemCount = getItemCount();
-  const showResumeButton = isLoggedIn && shouldShowResume;
+  const showResumeButton = isLoggedIn && hasPurchasedCourses;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">

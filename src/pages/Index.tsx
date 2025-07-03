@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 const Index = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const isMobile = useIsMobile();
-  const { login, logout, isLoggedIn, hasPurchasedCourses } = useAuth();
+  const { login, logout, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = (email: string, password: string) => {
@@ -31,11 +31,8 @@ const Index = () => {
   };
 
   const handleResumeLearning = () => {
-    if (!hasPurchasedCourses) {
-      navigate("/no-courses");
-    } else {
-      navigate("/dashboard");
-    }
+    // Since the button only shows when user has courses, go directly to dashboard
+    navigate("/dashboard");
   };
 
   return (
@@ -62,7 +59,6 @@ const Index = () => {
       <HomeMobileNavigation 
         onLoginClick={() => setIsLoginModalOpen(true)}
         onResumeLearningClick={handleResumeLearning}
-        shouldShowResume={true}
       />
       
       <LoginModal
