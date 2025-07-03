@@ -66,7 +66,6 @@ const NoCourses = () => {
       <HomeMobileNavigation 
         onLoginClick={handleLoginClick}
         onResumeLearningClick={handleResumeLearningClick}
-        shouldShowResume={false}
       />
       
       <LoginModal 

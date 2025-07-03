@@ -138,7 +138,6 @@ const CourseDetail = () => {
         {isMobile && !isLoggedIn && (
           <HomeMobileNavigation 
             onLoginClick={() => setIsLoginModalOpen(true)} 
-            shouldShowResume={true}
           />
         )}
         {isMobile && isLoggedIn && <BottomNavigation />}
@@ -200,7 +199,6 @@ const CourseDetail = () => {
       {isMobile && !isLoggedIn && (
         <HomeMobileNavigation 
           onLoginClick={() => setIsLoginModalOpen(true)} 
-          shouldShowResume={true}
         />
       )}
       {isMobile && isLoggedIn && <BottomNavigation />}
