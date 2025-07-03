@@ -33,15 +33,6 @@ const FeaturedCourses = () => {
     });
   }, [api]);
 
-  const handleGetStartedClick = (courseId: number) => {
-    // Scroll to top when navigating to course detail page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Small delay to ensure smooth scroll completes
-    setTimeout(() => {
-      window.location.href = `/courses/${courseId}`;
-    }, 100);
-  };
-
   const CourseCard = ({ course }: { course: typeof courses[0] }) => (
     <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
@@ -67,10 +58,6 @@ const FeaturedCourses = () => {
               <span>{course.totalTime}</span>
             </div>
             <Button 
-              onClick={(e) => {
-                e.preventDefault();
-                handleGetStartedClick(course.id);
-              }}
               className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
             >
               Get started for free
