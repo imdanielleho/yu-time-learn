@@ -42,11 +42,11 @@ const Testimonials = () => {
                 </div>
               </div>
               
-              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray text-center px-[2px]">
+              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray text-center px-[4px]">
                 "{testimonial.quote}"
               </blockquote>
               
-              <div className="flex items-center space-x-3 px-[2px]">
+              <div className="flex items-center space-x-3 px-[6px]">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-gold flex-shrink-0">
                   <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
                 </div>
