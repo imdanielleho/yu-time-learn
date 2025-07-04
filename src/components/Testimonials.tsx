@@ -59,7 +59,7 @@ const Testimonials = () => {
         </div>
 
         {/* Community section */}
-        <div className="max-w-lg mx-auto rounded-2xl p-6 backdrop-blur-sm border border-yutime-sand_dark/10 shadow-soft bg-white">
+        <div className="max-w-md mx-auto rounded-2xl p-6 backdrop-blur-sm border border-yutime-sand_dark/10 shadow-soft bg-white">
           <div className="flex items-center gap-4">
             {/* Avatar section */}
             <div className="flex -space-x-2">
