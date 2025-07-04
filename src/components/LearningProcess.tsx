@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, Clock, Sparkles } from 'lucide-react';
+import { Users, BookOpen, Award } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const LearningProcess = () => {
@@ -13,13 +13,13 @@ const LearningProcess = () => {
     },
     {
       number: "2", 
-      icon: <Clock size={40} className="text-yutime-gold" />,
+      icon: <BookOpen size={40} className="text-yutime-gold" />,
       title: "Learn at Your Pace",
       description: "Take your time to absorb each lesson. Our flexible schedule means you can learn when it's convenient for you, without any pressure."
     },
     {
       number: "3",
-      icon: <Sparkles size={40} className="text-yutime-gold" />,
+      icon: <Award size={40} className="text-yutime-gold" />,
       title: "Celebrate Achievements",
       description: "Every small step forward is a victory worth celebrating. Track your progress and feel proud of how far you've come on your learning journey."
     }
@@ -62,10 +62,10 @@ const LearningProcess = () => {
             ))}
           </div>
           
-          {/* Ready to begin section */}
-          <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
+          {/* Ready to begin section - reduced width */}
+          <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm max-w-2xl mx-auto">
             <div className="flex justify-center mb-4">
-              <Sparkles size={40} className="text-yutime-gold" />
+              <Award size={40} className="text-yutime-gold" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-4">Ready to begin?</h3>
             <p className="text-white/80 mb-6 text-lg">
