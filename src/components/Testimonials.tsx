@@ -36,7 +36,7 @@ const Testimonials = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-warm py-[27px]">
               <div className="flex flex-col items-center mb-6">
-                <Quote size={20} className="text-yutime-sage mb-4 rounded-full" />
+                <Quote size={20} className="text-yutime-sage mb-5 rounded-full" />
                 <div className="flex items-center">
                   {[...Array(testimonial.rating)].map((_, i) => <Star key={i} size={16} className="text-yutime-gold fill-current" />)}
                 </div>
