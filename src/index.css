@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* Pure white */
-    --foreground: 0 0% 15%; /* Very dark gray for text */
+    --background: 44 24% 97%; /* Warm cream background */
+    --foreground: 26 20% 25%; /* Warm dark text */
 
-    --card: 0 0% 100%; /* Pure white cards */
-    --card-foreground: 0 0% 15%;
+    --card: 44 36% 99%; /* Soft white cards */
+    --card-foreground: 26 20% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 15%;
+    --popover: 44 36% 99%;
+    --popover-foreground: 26 20% 25%;
 
-    --primary: 210 51% 35%; /* Professional blue */
-    --primary-foreground: 0 0% 98%;
+    --primary: 140 18% 52%; /* Sage green primary */
+    --primary-foreground: 44 36% 98%;
 
-    --secondary: 8 70% 62%; /* Warm coral */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 45 90% 70%; /* Sunshine secondary */
+    --secondary-foreground: 140 18% 25%;
 
-    --muted: 210 10% 97%; /* Very light background */
-    --muted-foreground: 0 0% 45%;
+    --muted: 44 15% 92%; /* Warm muted background */
+    --muted-foreground: 26 10% 45%;
 
-    --accent: 250 45% 60%; /* Soft purple */
-    --accent-foreground: 0 0% 98%;
+    --accent: 260 20% 65%; /* Lavender accent */
+    --accent-foreground: 44 36% 98%;
 
-    --destructive: 0 65% 58%; /* Professional red */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 65% 70%; /* Softer red */
+    --destructive-foreground: 44 36% 98%;
 
-    --border: 0 0% 90%; /* Light border */
-    --input: 0 0% 90%;
-    --ring: 210 51% 35%;
+    --border: 44 20% 88%; /* Warm border */
+    --input: 44 20% 88%;
+    --ring: 140 18% 52%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* Softer default radius */
   }
 }
 
@@ -46,20 +45,16 @@
   
   html {
     @apply scroll-smooth;
-    font-feature-settings: 'cv11', 'ss01';
-    font-variation-settings: 'opsz' 32;
   }
 
   body {
-    @apply bg-yutime-background text-yutime-neutral-700 font-sans;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
+    @apply bg-yutime-cream text-yutime-warmGray font-sans;
+    line-height: 1.7; /* More generous line height */
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading text-yutime-neutral-900;
-    letter-spacing: -0.025em;
-    font-feature-settings: 'ss01', 'cv11';
+    @apply font-heading font-semibold text-yutime-sage;
+    letter-spacing: -0.025em; /* Slight tighter spacing for friendliness */
   }
   
   h1 {
@@ -78,70 +73,70 @@
   }
   
   p {
-    @apply text-base md:text-lg leading-relaxed text-yutime-neutral-600;
+    @apply text-base md:text-lg leading-relaxed text-yutime-warmGray;
   }
 
   .container {
-    @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .grid-12 {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-6;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-primary hover:bg-yutime-primary-dark text-white h-12 px-8 rounded-lg font-medium text-base transition-all duration-200 transform hover:scale-[1.02] shadow-soft hover:shadow-card flex items-center justify-center;
+    @apply bg-yutime-sage hover:bg-yutime-sage/90 text-white h-10 px-6 rounded-md font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft flex items-center justify-center;
   }
   
   .btn-secondary {
-    @apply bg-yutime-secondary hover:bg-yutime-secondary-dark text-white h-12 px-8 rounded-lg font-medium text-base transition-all duration-200 transform hover:scale-[1.02] shadow-soft hover:shadow-warm;
+    @apply bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
   }
 
-  .btn-accent {
-    @apply bg-yutime-accent hover:bg-yutime-accent-light text-white h-12 px-8 rounded-lg font-medium text-base transition-all duration-200 transform hover:scale-[1.02] shadow-soft hover:shadow-gentle;
+  .btn-gentle {
+    @apply bg-yutime-lavender hover:bg-yutime-lavender/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-gentle;
   }
   
   .card {
-    @apply bg-yutime-background rounded-xl border border-yutime-neutral-200 shadow-soft transition-all duration-200 hover:shadow-card hover:border-yutime-neutral-300;
+    @apply bg-yutime-softWhite rounded-xl p-6 shadow-card transition-all duration-300 hover:shadow-warm border border-yutime-sand;
   }
   
-  .card-elevated {
-    @apply bg-yutime-background rounded-2xl border border-yutime-neutral-100 shadow-card transition-all duration-300 hover:shadow-lg hover:border-yutime-neutral-200;
+  .card-warm {
+    @apply bg-gradient-to-br from-yutime-cream to-yutime-softWhite rounded-xl p-6 shadow-soft transition-all duration-300 hover:shadow-card border border-yutime-sand_dark;
   }
   
   .section {
-    @apply py-16 md:py-20 lg:py-24;
+    @apply py-16 md:py-24 lg:py-32;
   }
 
-  .section-large {
-    @apply py-20 md:py-28 lg:py-32;
+  .learning-journey {
+    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-yutime-sage/10 to-yutime-lavender/10 p-8;
+  }
+
+  .celebration {
+    @apply animate-gentle-scale;
   }
 }
 
+/* Custom animations for micro-interactions */
 @layer utilities {
   .hover-lift {
-    @apply transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-card;
+    @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-warm;
   }
 
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-yutime-primary focus:ring-offset-2 focus:ring-offset-yutime-background;
+  .gentle-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-yutime-sage/50 focus:ring-offset-2 focus:ring-offset-yutime-cream;
   }
 
-  .gradient-primary {
-    background: linear-gradient(135deg, #2D5A87 0%, #4A7BA7 100%);
-  }
-
-  .gradient-secondary {
-    background: linear-gradient(135deg, #E8725C 0%, #F4A394 100%);
+  .warm-gradient {
+    background: linear-gradient(135deg, #6B9B76 0%, #FF8B7A 50%, #B19CD9 100%);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #2D5A87 0%, #1E3A5F 100%);
+    background: linear-gradient(135deg, #6B9B76 0%, #5A6C57 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }
-
-  .backdrop-blur-subtle {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
   }
 }
