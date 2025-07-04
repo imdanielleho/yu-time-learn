@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
-
 const testimonials = [{
   id: 1,
   name: "Margaret T.",
@@ -24,83 +22,63 @@ const testimonials = [{
   avatar: "https://randomuser.me/api/portraits/women/56.jpg",
   rating: 5
 }];
-
-const communityAvatars = [
-  "https://randomuser.me/api/portraits/women/32.jpg",
-  "https://randomuser.me/api/portraits/men/45.jpg",
-  "https://randomuser.me/api/portraits/women/68.jpg"
-];
-
+const communityAvatars = ["https://randomuser.me/api/portraits/women/32.jpg", "https://randomuser.me/api/portraits/men/45.jpg", "https://randomuser.me/api/portraits/women/68.jpg"];
 const Testimonials = () => {
-  return (
-    <section id="testimonials" className="section bg-yutime-cream">
+  return <section id="testimonials" className="section bg-gradient-to-br from-yutime-cream via-yutime-softWhite to-yutime-sand/30">
       <div className="container">
         <div className="text-center mb-16">
-          <span className="text-sm font-medium text-yutime-sage/70 uppercase tracking-wider mb-4 block">
-            Success Stories
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-yutime-sage">
-            Stories of <span className="script-font text-yutime-coral font-normal">Growth & Success</span>
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-yutime-sage">Stories of Growth & Success</h2>
           <p className="max-w-3xl mx-auto text-yutime-warmGray text-lg leading-relaxed">
             Hear from learners who've discovered new confidence and joy through their YŪTIME journey.
           </p>
         </div>
         
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {testimonials.map(testimonial => (
-            <div key={testimonial.id} className="bg-yutime-softWhite rounded-3xl p-8 shadow-elegant hover-lift">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+          {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-warm py-[27px]">
               <div className="flex flex-col items-center mb-6">
-                <Quote size={24} className="text-yutime-sage/30 mb-4" />
+                <Quote size={20} className="text-yutime-sage mb-5 rounded-full" />
                 <div className="flex items-center">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} className="text-yutime-sunshine fill-current" />
-                  ))}
+                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} size={16} className="text-yutime-gold fill-current" />)}
                 </div>
               </div>
               
-              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray text-center">
+              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray text-center px-[4px]">
                 "{testimonial.quote}"
               </blockquote>
               
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-sage/20 flex-shrink-0">
+              <div className="flex items-center space-x-3 px-[6px]">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-gold flex-shrink-0">
                   <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <p className="font-semibold text-yutime-sage">{testimonial.name}</p>
+                  <p className="font-bold text-yutime-sage">{testimonial.name}</p>
                   <p className="text-sm text-yutime-warmGray">{testimonial.role}</p>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Community section */}
-        <div className="max-w-md mx-auto rounded-3xl p-8 shadow-soft bg-yutime-softWhite border border-yutime-sand">
-          <div className="flex items-center gap-6">
+        <div className="max-w-md mx-auto rounded-2xl p-6 backdrop-blur-sm border border-yutime-sand_dark/10 shadow-soft bg-white">
+          <div className="flex items-center gap-4">
             {/* Avatar section */}
             <div className="flex -space-x-2">
-              {communityAvatars.map((avatar, index) => (
-                <div key={index} className="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+              {communityAvatars.map((avatar, index) => <div key={index} className="w-12 h-12 rounded-full overflow-hidden border-0 ">
                   <img src={avatar} alt={`Community member ${index + 1}`} className="w-full h-full object-cover" />
-                </div>
-              ))}
-              <div className="w-12 h-12 rounded-full bg-yutime-sage border-2 border-white flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">+</span>
+                </div>)}
+              <div className="w-12 h-12 rounded-full bg-yutime-gold border-0 flex items-center justify-center">
+                <span className="text-yutime-sage font-bold text-sm">+</span>
               </div>
             </div>
             
             {/* Text section */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 text-yutime-sage">Join 2,000+ learners</h3>
+              <h3 className="text-xl font-bold mb-2 text-yutime-sage">Join 2,000+ learners</h3>
               <p className="text-yutime-warmGray text-base">building new skills together</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Testimonials;

@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 42 26% 97%; /* Warm cream background */
-    --foreground: 0 0% 42%; /* Sophisticated gray text */
+    --background: 44 24% 97%; /* Warm cream background */
+    --foreground: 26 20% 25%; /* Warm dark text */
 
-    --card: 60 50% 99%; /* Soft white cards */
-    --card-foreground: 0 0% 42%;
+    --card: 44 36% 99%; /* Soft white cards */
+    --card-foreground: 26 20% 25%;
 
-    --popover: 60 50% 99%;
-    --popover-foreground: 0 0% 42%;
+    --popover: 44 36% 99%;
+    --popover-foreground: 26 20% 25%;
 
-    --primary: 120 15% 48%; /* Sage green primary */
-    --primary-foreground: 60 50% 98%;
+    --primary: 140 18% 52%; /* Sage green primary */
+    --primary-foreground: 44 36% 98%;
 
-    --secondary: 42 40% 88%; /* Soft cream secondary */
-    --secondary-foreground: 120 15% 25%;
+    --secondary: 45 90% 70%; /* Sunshine secondary */
+    --secondary-foreground: 140 18% 25%;
 
-    --muted: 42 30% 95%; /* Warm muted background */
-    --muted-foreground: 0 0% 45%;
+    --muted: 44 15% 92%; /* Warm muted background */
+    --muted-foreground: 26 10% 45%;
 
-    --accent: 20 35% 75%; /* Soft coral accent */
-    --accent-foreground: 60 50% 98%;
+    --accent: 260 20% 65%; /* Lavender accent */
+    --accent-foreground: 44 36% 98%;
 
-    --destructive: 0 50% 70%; /* Softer red */
-    --destructive-foreground: 60 50% 98%;
+    --destructive: 0 65% 70%; /* Softer red */
+    --destructive-foreground: 44 36% 98%;
 
-    --border: 42 25% 90%; /* Warm border */
-    --input: 42 25% 90%;
-    --ring: 120 15% 48%;
+    --border: 44 20% 88%; /* Warm border */
+    --input: 44 20% 88%;
+    --ring: 140 18% 52%;
 
-    --radius: 0.75rem;
+    --radius: 0.75rem; /* Softer default radius */
   }
 }
 
@@ -50,12 +49,12 @@
 
   body {
     @apply bg-yutime-cream text-yutime-warmGray font-sans;
-    line-height: 1.7;
+    line-height: 1.7; /* More generous line height */
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-semibold text-yutime-sage;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.025em; /* Slight tighter spacing for friendliness */
   }
   
   h1 {
@@ -81,56 +80,61 @@
     @apply max-w-7xl mx-auto px-4;
   }
 
-  .script-font {
-    @apply font-script;
+  .grid-12 {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-6;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-yutime-sage hover:bg-yutime-sage/90 text-white h-12 px-8 rounded-3xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft flex items-center justify-center;
+    @apply bg-yutime-sage hover:bg-yutime-sage/90 text-white h-10 px-6 rounded-md font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-soft flex items-center justify-center;
   }
   
   .btn-secondary {
-    @apply bg-yutime-coral hover:bg-yutime-coral/90 text-white py-4 px-8 rounded-3xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
+    @apply bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-warm;
   }
 
   .btn-gentle {
-    @apply bg-yutime-lavender hover:bg-yutime-lavender/90 text-yutime-sage py-4 px-8 rounded-3xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-gentle;
+    @apply bg-yutime-lavender hover:bg-yutime-lavender/90 text-white py-3 px-6 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-gentle;
   }
   
   .card {
-    @apply bg-yutime-softWhite rounded-3xl p-8 shadow-elegant transition-all duration-300 hover:shadow-card border border-yutime-sand/50;
+    @apply bg-yutime-softWhite rounded-xl p-6 shadow-card transition-all duration-300 hover:shadow-warm border border-yutime-sand;
   }
   
   .card-warm {
-    @apply bg-gradient-to-br from-yutime-cream to-yutime-softWhite rounded-3xl p-8 shadow-soft transition-all duration-300 hover:shadow-elegant border border-yutime-sand;
+    @apply bg-gradient-to-br from-yutime-cream to-yutime-softWhite rounded-xl p-6 shadow-soft transition-all duration-300 hover:shadow-card border border-yutime-sand_dark;
   }
   
   .section {
-    @apply py-20 md:py-28 lg:py-36;
+    @apply py-16 md:py-24 lg:py-32;
   }
 
-  .pill-button {
-    @apply inline-flex items-center px-6 py-3 rounded-full border-2 border-yutime-sage text-yutime-sage font-medium transition-all duration-300 hover:bg-yutime-sage hover:text-white;
+  .learning-journey {
+    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-yutime-sage/10 to-yutime-lavender/10 p-8;
+  }
+
+  .celebration {
+    @apply animate-gentle-scale;
   }
 }
 
+/* Custom animations for micro-interactions */
 @layer utilities {
   .hover-lift {
-    @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-elegant;
+    @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-warm;
   }
 
   .gentle-focus {
     @apply focus:outline-none focus:ring-2 focus:ring-yutime-sage/50 focus:ring-offset-2 focus:ring-offset-yutime-cream;
   }
 
-  .elegant-gradient {
-    background: linear-gradient(135deg, #6B8E6B 0%, #E8A598 50%, #F4E4C1 100%);
+  .warm-gradient {
+    background: linear-gradient(135deg, #6B9B76 0%, #FF8B7A 50%, #B19CD9 100%);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #6B8E6B 0%, #4A5D4A 100%);
+    background: linear-gradient(135deg, #6B9B76 0%, #5A6C57 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
