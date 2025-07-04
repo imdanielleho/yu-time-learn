@@ -69,7 +69,7 @@ const FeaturedCourses = () => {
   );
 
   return (
-    <section id="courses" className="bg-gradient-to-br from-yutime-sage/5 to-yutime-coral/5 py-20 md:py-32">
+    <section id="courses" className="bg-white py-20 md:py-32">
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
