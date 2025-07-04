@@ -7,19 +7,19 @@ const LearningProcess = () => {
   const steps = [
     {
       number: "1",
-      icon: <Users size={40} className="text-yutime-gold stroke-2" />,
+      icon: <Users size={40} className="text-yutime-gold" />,
       title: "Join Our Community",
       description: "Become part of a supportive learning community where everyone encourages each other's growth and celebrates every achievement together."
     },
     {
       number: "2", 
-      icon: <Clock size={40} className="text-yutime-gold stroke-2" />,
+      icon: <Clock size={40} className="text-yutime-gold" />,
       title: "Learn at Your Pace",
       description: "Take your time to absorb each lesson. Our flexible schedule means you can learn when it's convenient for you, without any pressure."
     },
     {
       number: "3",
-      icon: <Sparkles size={40} className="text-yutime-gold stroke-2" />,
+      icon: <Sparkles size={40} className="text-yutime-gold" />,
       title: "Celebrate Achievements",
       description: "Every small step forward is a victory worth celebrating. Track your progress and feel proud of how far you've come on your learning journey."
     }
@@ -48,10 +48,8 @@ const LearningProcess = () => {
               <div key={index} className="text-center">
                 <div className="relative mb-8">
                   {/* Main icon container */}
-                  <div className="w-24 h-24 bg-yutime-gold/90 rounded-full flex items-center justify-center mx-auto mb-6 shadow-warm relative">
-                    <div className="text-yutime-indigo">
-                      {step.icon}
-                    </div>
+                  <div className="w-24 h-24 bg-yutime-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-warm relative">
+                    {step.icon}
                     {/* Step number in small circle at top-right */}
                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-yutime-indigo rounded-full flex items-center justify-center border-2 border-white shadow-lg">
                       <span className="text-white text-sm font-bold">{step.number}</span>
@@ -67,7 +65,7 @@ const LearningProcess = () => {
           {/* Ready to begin section */}
           <div className="text-center bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
             <div className="flex justify-center mb-4">
-              <Sparkles size={40} className="text-yutime-gold stroke-2" />
+              <Sparkles size={40} className="text-yutime-gold" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-4">Ready to begin?</h3>
             <p className="text-white/80 mb-6 text-lg">
