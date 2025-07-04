@@ -33,8 +33,8 @@ const Testimonials = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-card">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-warm">
               <div className="flex flex-col items-center mb-4">
                 <Quote size={20} className="text-yutime-sage mb-4 rounded-full" />
                 <div className="flex items-center">
@@ -59,8 +59,8 @@ const Testimonials = () => {
         </div>
 
         {/* Community section */}
-        <div className="max-w-2xl mx-auto bg-yutime-sage/5 rounded-2xl p-8 backdrop-blur-sm border border-yutime-sage/10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-xl mx-auto bg-yutime-sage/5 rounded-2xl p-6 backdrop-blur-sm border border-yutime-sage/10 shadow-soft">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             {/* Avatar section - left column */}
             <div className="flex justify-center md:justify-start">
               <div className="flex -space-x-2">
@@ -75,8 +75,8 @@ const Testimonials = () => {
             
             {/* Text section - right column */}
             <div className="text-center md:text-left">
-              <h3 className="text-2xl font-bold mb-2 text-yutime-sage">Join 2,000+ learners</h3>
-              <p className="text-yutime-warmGray text-lg">building new skills and confidence together</p>
+              <h3 className="text-xl font-bold mb-2 text-yutime-sage">Join 2,000+ learners</h3>
+              <p className="text-yutime-warmGray text-base">building new skills and confidence together</p>
             </div>
           </div>
         </div>
