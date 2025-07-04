@@ -30,22 +30,36 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					sage: '#6B9B76',      // Primary - calming sage green
-					coral: '#FF8B7A',     // Secondary - warm coral
-					lavender: '#B19CD9',  // Accent - gentle lavender
-					sunshine: '#FFD166',  // Supporting - joyful yellow
-					cream: '#FDF6E3',     // Warm background
-					warmGray: '#8B7F72',  // Neutral text
-					softWhite: '#FEFCF8', // Soft white background
-					indigo: '#6B9B76',    // Map to sage for backward compatibility
-					gold: '#FFD166',      // Map to sunshine
-					blue: '#6B9B76',      // Map to sage
-					navy: '#5A6C57',      // Darker sage for contrast
-					navy_dark: '#4A5B47', // Even darker sage
-					yellow: '#FFD166',    // Keep sunshine
-					yellow_light: '#FFF4D6', // Light sunshine
-					sand: '#FDF6E3',      // Map to cream
-					sand_dark: '#F5EDD3', // Darker cream
+					// New elegant color palette
+					primary: '#3C3A5B',        // Soft Midnight Indigo
+					accent: '#FF805C',         // Warm Apricot Coral  
+					highlight: '#F8D57E',      // Golden Sand
+					surface: '#FFF8F5',        // Porcelain Blush
+					secondary: '#BAC7A7',      // Olive Mist
+					body: '#2B2A33',           // Charcoal Ink
+					
+					// Supporting shades
+					plum: '#9E8BAF',           // Soft Plum
+					terracotta: '#D96F66',     // Terracotta Rose
+					cloud: '#E6E3E0',          // Cloud Gray
+					
+					// Legacy mappings for backward compatibility
+					sage: '#3C3A5B',           // Map to primary
+					coral: '#FF805C',          // Map to accent
+					sunshine: '#F8D57E',       // Map to highlight
+					cream: '#FFF8F5',          // Map to surface
+					warmGray: '#2B2A33',       // Map to body
+					softWhite: '#FFF8F5',      // Map to surface
+					indigo: '#3C3A5B',         // Map to primary
+					gold: '#F8D57E',           // Map to highlight
+					blue: '#3C3A5B',           // Map to primary
+					navy: '#3C3A5B',           // Map to primary
+					navy_dark: '#2B2A33',      // Map to body
+					yellow: '#F8D57E',         // Map to highlight
+					yellow_light: '#FFF8F5',   // Map to surface
+					sand: '#E6E3E0',           // Map to cloud
+					sand_dark: '#BAC7A7',      // Map to secondary
+					lavender: '#9E8BAF',       // Map to plum
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -88,10 +102,10 @@ export default {
 				'2xl': '20px'
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(107, 155, 118, 0.08)',
-				'card': '0 8px 32px rgba(107, 155, 118, 0.12)',
-				'warm': '0 6px 24px rgba(255, 139, 122, 0.1)',
-				'gentle': '0 2px 12px rgba(177, 156, 217, 0.08)'
+				'soft': '0 4px 20px rgba(60, 58, 91, 0.08)',
+				'card': '0 8px 32px rgba(60, 58, 91, 0.12)',
+				'warm': '0 6px 24px rgba(255, 128, 92, 0.1)',
+				'gentle': '0 2px 12px rgba(158, 139, 175, 0.08)'
 			},
 			keyframes: {
 				"accordion-down": {
