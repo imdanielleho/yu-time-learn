@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 const testimonials = [{
@@ -43,7 +42,7 @@ const Testimonials = () => {
                 </div>
               </div>
               
-              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray text-center ">
+              <blockquote className="text-lg italic mb-6 leading-relaxed text-yutime-warmGray text-center px-[2px]">
                 "{testimonial.quote}"
               </blockquote>
               
