@@ -68,10 +68,10 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
   const showResumeButton = isLoggedIn && hasPurchasedCourses;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-yutime-gray-200 z-40">
       <div className={`h-16 ${showResumeButton ? 'grid grid-cols-5' : 'grid grid-cols-4'}`}>
         <button
-          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+          className="flex flex-col items-center justify-center space-y-1 text-yutime-gray-500 hover:text-yutime-primary transition-colors"
           onClick={handleHomeClick}
         >
           <Home className="h-5 w-5" />
@@ -79,7 +79,7 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
         </button>
 
         <button
-          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+          className="flex flex-col items-center justify-center space-y-1 text-yutime-gray-500 hover:text-yutime-primary transition-colors"
           onClick={handleCoursesClick}
         >
           <Book className="h-5 w-5" />
@@ -88,7 +88,7 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
 
         {showResumeButton && (
           <button
-            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+            className="flex flex-col items-center justify-center space-y-1 text-yutime-gray-500 hover:text-yutime-primary transition-colors"
             onClick={onResumeLearningClick}
           >
             <Play className="h-5 w-5" />
@@ -97,12 +97,12 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
         )}
 
         <button
-          className="relative flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+          className="relative flex flex-col items-center justify-center space-y-1 text-yutime-gray-500 hover:text-yutime-primary transition-colors"
           onClick={handleCartClick}
         >
           <ShoppingCart className="h-5 w-5" />
           {itemCount > 0 && (
-            <span className="absolute -top-1 right-3 bg-yutime-coral text-white text-xs rounded-full h-5 w-5 flex items-center justify-center px-1 leading-none">
+            <span className="absolute -top-1 right-3 bg-yutime-accent text-yutime-gray-800 text-xs rounded-full h-5 w-5 flex items-center justify-center px-1 leading-none">
               {itemCount}
             </span>
           )}
@@ -111,7 +111,7 @@ const HomeMobileNavigation = ({ onLoginClick, onResumeLearningClick }: HomeMobil
 
         {!isLoggedIn ? (
           <button
-            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors"
+            className="flex flex-col items-center justify-center space-y-1 text-yutime-gray-500 hover:text-yutime-primary transition-colors"
             onClick={onLoginClick}
           >
             <LogIn className="h-5 w-5" />
