@@ -1,7 +1,6 @@
 import React from 'react';
 import { Users, BookOpen, Award } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-
 const LearningProcess = () => {
   const steps = [{
     number: "1",
@@ -19,7 +18,6 @@ const LearningProcess = () => {
     title: "Celebrate Achievements",
     description: "Every small step forward is a victory worth celebrating. Track your progress and feel proud of how far you've come on your learning journey."
   }];
-  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -28,7 +26,6 @@ const LearningProcess = () => {
       });
     }
   };
-
   return <section className="bg-yutime-indigo py-20 md:py-32">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
@@ -57,7 +54,7 @@ const LearningProcess = () => {
           </div>
           
           {/* Ready to begin section - horizontal layout */}
-          <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm max-w-2xl mx-auto">
+          <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm max-w-xl mx-auto">
             <div className="flex items-center gap-6">
               {/* Icon on the left */}
               <div className="flex-shrink-0">
@@ -80,5 +77,4 @@ const LearningProcess = () => {
       </div>
     </section>;
 };
-
 export default LearningProcess;
