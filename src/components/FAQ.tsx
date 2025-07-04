@@ -32,26 +32,35 @@ const faqItems = [
 
 const FAQ = () => {
   return (
-    <section id="faq" className="section bg-white">
-      <div className="container max-w-3xl mx-auto">
-        <h2 className="text-center text-yutime-navy mb-10">Frequently Asked Questions</h2>
+    <section id="faq" className="section bg-yutime-softWhite">
+      <div className="container max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-sm font-medium text-yutime-sage/70 uppercase tracking-wider mb-4 block">
+            Common Questions
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-yutime-sage mb-6">
+            Frequently Asked <span className="script-font text-yutime-coral font-normal">Questions</span>
+          </h2>
+        </div>
         
-        <Accordion type="single" collapsible className="w-full">
-          {faqItems.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200">
-              <AccordionTrigger className="text-lg font-medium py-5 text-left">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-700 pb-5">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div className="bg-yutime-cream rounded-3xl p-8 shadow-soft border border-yutime-sand">
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-yutime-sand/50 last:border-b-0">
+                <AccordionTrigger className="text-lg font-semibold py-6 text-left text-yutime-sage hover:text-yutime-sage/80">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-yutime-warmGray pb-6 leading-relaxed">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         
-        <div className="mt-10 text-center">
-          <p className="text-gray-700">
-            Have another question? <a href="/contact" className="text-yutime-blue hover:underline font-medium">Contact our support team</a>
+        <div className="mt-12 text-center">
+          <p className="text-yutime-warmGray text-lg">
+            Have another question? <a href="/contact" className="text-yutime-sage hover:underline font-medium">Contact our support team</a>
           </p>
         </div>
       </div>

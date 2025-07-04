@@ -30,22 +30,23 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					sage: '#6B9B76',      // Primary - calming sage green
-					coral: '#FF8B7A',     // Secondary - warm coral
-					lavender: '#B19CD9',  // Accent - gentle lavender
-					sunshine: '#FFD166',  // Supporting - joyful yellow
-					cream: '#FDF6E3',     // Warm background
-					warmGray: '#8B7F72',  // Neutral text
-					softWhite: '#FEFCF8', // Soft white background
-					indigo: '#6B9B76',    // Map to sage for backward compatibility
-					gold: '#FFD166',      // Map to sunshine
-					blue: '#6B9B76',      // Map to sage
-					navy: '#5A6C57',      // Darker sage for contrast
-					navy_dark: '#4A5B47', // Even darker sage
-					yellow: '#FFD166',    // Keep sunshine
-					yellow_light: '#FFF4D6', // Light sunshine
-					sand: '#FDF6E3',      // Map to cream
-					sand_dark: '#F5EDD3', // Darker cream
+					// Updated sophisticated color palette
+					sage: '#6B8E6B',        // Muted sage green - primary
+					coral: '#E8A598',       // Soft terracotta coral - accent
+					lavender: '#E6E0E9',    // Very light lavender - subtle backgrounds
+					sunshine: '#F4E4C1',    // Soft cream yellow - highlights
+					cream: '#FAF7F2',       // Warm cream - main background
+					warmGray: '#6B6B6B',    // Sophisticated gray - text
+					softWhite: '#FEFEFE',   // Pure soft white
+					indigo: '#6B8E6B',      // Map to sage
+					gold: '#D4B896',        // Muted gold
+					blue: '#6B8E6B',        // Map to sage
+					navy: '#4A5D4A',        // Darker sage for contrast
+					navy_dark: '#3A4D3A',   // Even darker sage
+					yellow: '#F4E4C1',      // Soft cream yellow
+					yellow_light: '#FAF8F0', // Very light cream
+					sand: '#F5F1E8',        // Light sand
+					sand_dark: '#EDE7DA',   // Darker sand
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -78,20 +79,23 @@ export default {
 			},
 			fontFamily: {
 				sans: ["Inter", "sans-serif"],
-				heading: ["Inter", "sans-serif"]
+				heading: ["Inter", "sans-serif"],
+				script: ["Dancing Script", "cursive"] // Add elegant script font
 			},
 			borderRadius: {
 				lg: '12px',
 				md: '10px',
 				sm: '6px',
 				xl: '16px',
-				'2xl': '20px'
+				'2xl': '24px',
+				'3xl': '32px'
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(107, 155, 118, 0.08)',
-				'card': '0 8px 32px rgba(107, 155, 118, 0.12)',
-				'warm': '0 6px 24px rgba(255, 139, 122, 0.1)',
-				'gentle': '0 2px 12px rgba(177, 156, 217, 0.08)'
+				'soft': '0 2px 20px rgba(107, 142, 107, 0.08)',
+				'card': '0 4px 32px rgba(107, 142, 107, 0.12)',
+				'warm': '0 4px 24px rgba(232, 165, 152, 0.15)',
+				'gentle': '0 2px 12px rgba(230, 224, 233, 0.2)',
+				'elegant': '0 8px 40px rgba(107, 142, 107, 0.06)'
 			},
 			keyframes: {
 				"accordion-down": {
