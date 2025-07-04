@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { HelpCircle, X } from 'lucide-react';
+import { MessageCircleQuestion, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -67,7 +67,7 @@ const CustomerServiceButton = () => {
         onClick={() => setIsExpanded(!isExpanded)}
         className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0 p-0"
       >
-        <HelpCircle size={24} />
+        <MessageCircleQuestion size={24} />
       </Button>
     </div>
   );
