@@ -12,16 +12,16 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-yutime-primary/5 to-yutime-accent/5 py-20 md:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-yutime-sage/5 to-yutime-coral/5 py-20 md:py-32 overflow-hidden">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yutime-primary leading-tight font-heading">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yutime-sage leading-tight font-heading">
                 Learning Made
-                <span className="block text-yutime-accent">Simple & Joyful</span>
+                <span className="block text-yutime-coral">Simple & Joyful</span>
               </h1>
-              <p className="text-lg md:text-xl text-yutime-body leading-relaxed max-w-lg">
+              <p className="text-lg md:text-xl text-yutime-warmGray leading-relaxed max-w-lg">
                 Discover new skills at your own pace with courses designed specifically for adults 45+. 
                 No pressure, just gentle guidance and celebration of every step forward.
               </p>
@@ -30,14 +30,14 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 onClick={() => scrollToSection('courses')}
-                className="bg-yutime-accent hover:bg-yutime-accent/90 text-white px-8 py-4 text-lg rounded-xl shadow-warm hover-lift font-medium"
+                className="bg-yutime-coral hover:bg-yutime-coral/90 text-white px-8 py-4 text-lg rounded-xl shadow-warm hover-lift font-medium"
               >
                 Explore Courses
                 <ArrowRight className="ml-2" size={20} />
               </Button>
             </div>
             
-            <div className="flex items-center space-x-6 text-sm text-yutime-body">
+            <div className="flex items-center space-x-6 text-sm text-yutime-warmGray">
               <div className="flex items-center space-x-2">
                 <span className="text-2xl">🌟</span>
                 <span>Self-paced learning</span>
@@ -56,7 +56,7 @@ const Hero = () => {
                 alt="Computer classes for seniors - learning together"
                 className="w-full h-auto rounded-2xl shadow-warm hover-lift"
               />
-              <div className="absolute -bottom-6 -left-6 bg-yutime-highlight text-yutime-primary px-6 py-3 rounded-2xl shadow-soft font-medium">
+              <div className="absolute -bottom-6 -left-6 bg-yutime-sunshine text-yutime-sage px-6 py-3 rounded-2xl shadow-soft font-medium">
                 <div className="flex items-center space-x-2">
                   <span className="text-2xl">✨</span>
                   <span>Start your journey today!</span>
@@ -65,15 +65,15 @@ const Hero = () => {
             </div>
             
             {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-yutime-plum/20 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yutime-accent/10 rounded-full blur-2xl"></div>
+            <div className="absolute -top-4 -right-4 w-20 h-20 bg-yutime-lavender/20 rounded-full blur-xl"></div>
+            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yutime-coral/10 rounded-full blur-2xl"></div>
           </div>
         </div>
       </div>
       
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yutime-highlight/10 to-transparent rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-yutime-primary/10 to-transparent rounded-full blur-2xl"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yutime-sunshine/10 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-yutime-sage/10 to-transparent rounded-full blur-2xl"></div>
     </section>
   );
 };
