@@ -9,7 +9,7 @@ interface TermsAgreementProps {
 
 const TermsAgreement = ({ agreed, onAgreedChange }: TermsAgreementProps) => {
   return (
-    <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
+    <div className="bg-white rounded-2xl shadow-elegant p-6 border border-yutime-stoneDark">
       <div className="flex items-start gap-3">
         <Checkbox
           id="agree"
@@ -19,8 +19,8 @@ const TermsAgreement = ({ agreed, onAgreedChange }: TermsAgreementProps) => {
           required
         />
         <div className="flex-1">
-          <label htmlFor="agree" className="text-yutime-sage text-base select-none cursor-pointer leading-relaxed">
-            I agree to the <a href="#" className="text-yutime-blue hover:underline font-medium">Terms of Service</a> and <a href="#" className="text-yutime-blue hover:underline font-medium">Privacy Policy</a>
+          <label htmlFor="agree" className="text-yutime-navy text-base select-none cursor-pointer leading-relaxed">
+            I agree to the <a href="#" className="text-yutime-bronze hover:underline font-medium">Terms of Service</a> and <a href="#" className="text-yutime-bronze hover:underline font-medium">Privacy Policy</a>
           </label>
         </div>
       </div>
