@@ -47,7 +47,7 @@ const Testimonials = () => {
               </blockquote>
               
               <div className="flex items-center space-x-3 px-[6px]">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-gold flex-shrink-0">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-sand_dark flex-shrink-0">
                   <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
                 </div>
                 <div>
@@ -59,7 +59,7 @@ const Testimonials = () => {
         </div>
 
         {/* Community section */}
-        <div className="max-w-xl mx-auto bg-yutime-sage/5 rounded-2xl p-6 backdrop-blur-sm border border-yutime-sage/10 shadow-soft">
+        <div className="max-w-md mx-auto rounded-2xl p-6 backdrop-blur-sm border border-yutime-sand_dark/10 shadow-soft bg-white">
           <div className="flex items-center gap-4">
             {/* Avatar section */}
             <div className="flex -space-x-2">
@@ -74,7 +74,7 @@ const Testimonials = () => {
             {/* Text section */}
             <div>
               <h3 className="text-xl font-bold mb-2 text-yutime-sage">Join 2,000+ learners</h3>
-              <p className="text-yutime-warmGray text-base">building new skills and confidence together</p>
+              <p className="text-yutime-warmGray text-base">building new skills together</p>
             </div>
           </div>
         </div>
