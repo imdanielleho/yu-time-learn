@@ -33,7 +33,7 @@ const Testimonials = () => {
           </p>
         </div>
         
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
           {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-warm">
               <div className="flex flex-col items-center mb-4">
                 <Quote size={20} className="text-yutime-sage mb-4 rounded-full" />
