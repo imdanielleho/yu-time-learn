@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MessageCircleQuestion, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -65,9 +64,9 @@ const CustomerServiceButton = () => {
       
       <Button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0 p-0 [&_svg]:!w-8 [&_svg]:!h-8"
+        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0 p-0 [&_svg]:!w-6 [&_svg]:!h-6"
       >
-        <MessageCircleQuestion size={32} />
+        <MessageCircleQuestion size={24} />
       </Button>
     </div>
   );
