@@ -2,6 +2,7 @@
 import React from 'react';
 import { Users, BookOpen, Award } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+
 const LearningProcess = () => {
   const steps = [{
     number: "1",
@@ -19,6 +20,7 @@ const LearningProcess = () => {
     title: "Celebrate Achievements",
     description: "Every small step forward is a victory worth celebrating. Track your progress and feel proud of how far you've come on your learning journey."
   }];
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -27,7 +29,9 @@ const LearningProcess = () => {
       });
     }
   };
-  return <section className="bg-yutime-indigo py-20 md:py-32">
+
+  return (
+    <section className="bg-yutime-indigo py-20 md:py-32">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">How YŪTIME Works</h2>
@@ -37,8 +41,9 @@ const LearningProcess = () => {
         </div>
         
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            {steps.map((step, index) => <div key={index} className="text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+            {steps.map((step, index) => (
+              <div key={index} className="text-center">
                 <div className="relative mb-8">
                   {/* Main icon container */}
                   <div className="w-20 h-20 bg-yutime-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-warm relative">
@@ -51,31 +56,38 @@ const LearningProcess = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-white">{step.title}</h3>
                 <p className="text-white/80 leading-relaxed">{step.description}</p>
-              </div>)}
+              </div>
+            ))}
           </div>
           
-          {/* Ready to begin section - horizontal layout */}
-          <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm max-w-xl mx-auto">
-            <div className="flex items-center gap-6">
-              {/* Icon on the left */}
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-yutime-gold rounded-full flex items-center justify-center">
-                  <Award size={32} className="text-yutime-indigo" />
-                </div>
+          {/* Redesigned ready to begin section */}
+          <div className="text-center relative animate-fade-in">
+            <div className="max-w-lg mx-auto">
+              <div className="flex items-center justify-center mb-4">
+                <span className="text-4xl">✨</span>
               </div>
-              
-              {/* Text content on the right */}
-              <div className="flex-1 text-left">
-                <h3 className="text-2xl font-bold text-white mb-1">Ready to begin?</h3>
-                <p className="text-white/80 mb-4 text-lg">Your journey starts with a single step</p>
-                <Button onClick={() => scrollToSection('courses')} className="bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo px-8 py-3 text-lg rounded-xl font-bold shadow-warm hover-lift">
-                  Start Learning Today
-                </Button>
-              </div>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Your Learning Journey Awaits
+              </h3>
+              <p className="text-white/90 text-lg mb-8 leading-relaxed">
+                Take the first step towards discovering new skills and connecting with a community that celebrates every achievement. 🌟
+              </p>
+              <Button 
+                onClick={() => scrollToSection('courses')} 
+                className="bg-yutime-coral hover:bg-yutime-coral/90 text-white px-10 py-4 text-lg rounded-xl font-semibold shadow-warm hover-lift transform transition-all duration-300 hover:scale-105"
+              >
+                Begin Your Journey
+              </Button>
             </div>
+            
+            {/* Subtle decorative elements */}
+            <div className="absolute -top-8 -left-8 w-16 h-16 bg-yutime-sunshine/20 rounded-full blur-xl opacity-60"></div>
+            <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-yutime-coral/20 rounded-full blur-2xl opacity-40"></div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default LearningProcess;
