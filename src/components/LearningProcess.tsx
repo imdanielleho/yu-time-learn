@@ -1,20 +1,21 @@
+
 import React from 'react';
 import { Users, BookOpen, Award } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 const LearningProcess = () => {
   const steps = [{
     number: "1",
-    icon: <Users size={40} className="text-white " />,
+    icon: <Users size={32} className="text-white " />,
     title: "Join Our Community",
     description: "Become part of a supportive learning community where everyone encourages each other's growth and celebrates every achievement together."
   }, {
     number: "2",
-    icon: <BookOpen size={40} className="text-white " />,
+    icon: <BookOpen size={32} className="text-white " />,
     title: "Learn at Your Pace",
     description: "Take your time to absorb each lesson. Our flexible schedule means you can learn when it's convenient for you, without any pressure."
   }, {
     number: "3",
-    icon: <Award size={40} className="text-white " />,
+    icon: <Award size={32} className="text-white " />,
     title: "Celebrate Achievements",
     description: "Every small step forward is a victory worth celebrating. Track your progress and feel proud of how far you've come on your learning journey."
   }];
