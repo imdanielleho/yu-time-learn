@@ -46,7 +46,7 @@ const Testimonials = () => {
                 "{testimonial.quote}"
               </blockquote>
               
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 px-[2px]">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yutime-gold flex-shrink-0">
                   <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
                 </div>
