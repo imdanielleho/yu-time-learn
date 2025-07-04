@@ -55,14 +55,11 @@ const LearningProcess = () => {
           </div>
           
           {/* Ready to begin section - horizontal layout */}
-          <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm max-w-md mx-auto">
+          <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm w-fit mx-auto">
             <div className="flex items-center gap-6">
-              {/* Emoji icons on the left */}
+              {/* Emoji icon on the left */}
               <div className="flex-shrink-0">
-                <div className="flex space-x-1">
-                  <span className="text-2xl">🌟</span>
-                  <span className="text-2xl">✨</span>
-                </div>
+                <span className="text-2xl">🌟</span>
               </div>
               
               {/* Text content on the right */}
