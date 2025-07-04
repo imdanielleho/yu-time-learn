@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Users, BookOpen, Award } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -59,13 +58,13 @@ const LearningProcess = () => {
             <div className="flex items-center gap-6">
               {/* Emoji icon on the left */}
               <div className="flex-shrink-0">
-                <span className="text-2xl">🌟</span>
+                <span className="text-3xl">🌟</span>
               </div>
               
               {/* Text content on the right */}
               <div className="flex-1 text-left">
-                <h3 className="text-2xl font-bold text-white mb-1">Ready to begin?</h3>
-                <p className="text-white/80 mb-4 text-lg">Your journey starts with a single step</p>
+                <h3 className="text-xl font-bold text-white mb-1">Ready to begin?</h3>
+                <p className="text-white/80 mb-4 text-base">Your journey starts with a single step</p>
                 <Button onClick={() => scrollToSection('courses')} className="bg-yutime-gold hover:bg-yutime-gold/90 text-yutime-indigo px-8 py-3 text-lg rounded-xl font-bold shadow-warm hover-lift">
                   Start Learning Today
                 </Button>
