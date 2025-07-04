@@ -14,12 +14,12 @@ const Footer = () => {
   };
   
   return (
-    <footer className="bg-yutime-terracotta text-white py-12" style={{ paddingBottom: '100px' }}>
+    <footer className="bg-yutime-coral text-white py-12" style={{ paddingBottom: '100px' }}>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="font-heading text-2xl font-bold mb-4 inline-block text-white">
-              YŪ<span className="text-yutime-bronzeLight">TIME</span>
+              YŪ<span className="text-yutime-yellow">TIME</span>
             </Link>
             <p className="mb-4 text-white/90">
               Learning made simple and accessible for adults 45+. Discover new skills at your own pace.
