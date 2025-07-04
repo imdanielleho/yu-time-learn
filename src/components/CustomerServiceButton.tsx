@@ -65,7 +65,7 @@ const CustomerServiceButton = () => {
       
       <Button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all flex-shrink-0 p-0"
+        className="bg-yutime-blue hover:bg-yutime-blue/90 text-white rounded-full w-16 h-16 shadow-lg hover:shadow-xl transition-all flex-shrink-0 p-0"
       >
         <MessageCircleQuestion size={40} />
       </Button>
