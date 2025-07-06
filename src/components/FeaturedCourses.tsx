@@ -42,7 +42,7 @@ const FeaturedCourses = () => {
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          <div className="absolute top-4 right-4 bg-yutime-sunshine text-yutime-primary px-4 py-2 rounded-full text-sm font-medium shadow-soft">
+          <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">
             {course.level}
           </div>
         </div>
