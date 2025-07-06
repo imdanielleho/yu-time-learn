@@ -70,16 +70,11 @@ const Hero = () => {
                   className="w-full h-auto rounded-2xl"
                 />
                 <div className="mt-6 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-3 h-3 bg-yutime-secondary rounded-full"></div>
-                      <span className="text-yutime-text font-medium">Active Learning</span>
-                    </div>
-                    <span className="text-yutime-secondary font-medium">95% Complete</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-yutime-secondary rounded-full"></div>
+                    <span className="text-yutime-text font-medium text-lg">Active Learning Session</span>
                   </div>
-                  <div className="w-full bg-yutime-neutral rounded-full h-2">
-                    <div className="bg-yutime-secondary h-2 rounded-full" style={{ width: '95%' }}></div>
-                  </div>
+                  <p className="text-yutime-text/60 text-base">Join our supportive community of learners</p>
                 </div>
               </div>
             </div>

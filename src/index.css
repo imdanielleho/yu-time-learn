@@ -48,37 +48,43 @@
     @apply scroll-smooth;
     font-feature-settings: 'cv11', 'ss01';
     font-variant: normal;
+    font-size: 16px; /* Base 16px minimum */
   }
 
   body {
     @apply bg-yutime-neutral text-yutime-text font-sans;
-    line-height: 1.6;
+    line-height: 1.6; /* Improved readability */
     letter-spacing: -0.01em;
+    font-size: 1rem; /* 16px minimum */
+    font-weight: 400; /* Regular weight minimum */
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-medium text-yutime-primary;
+    @apply font-heading text-yutime-primary;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.5; /* Improved line height */
+    font-weight: 600; /* Semi-bold for headings */
   }
   
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    font-size: 2.5rem; /* 40px minimum */
     font-weight: 600;
   }
   
   h2 {
-    @apply text-3xl md:text-4xl;
+    font-size: 2rem; /* 32px minimum */
     font-weight: 600;
   }
   
   h3 {
-    @apply text-xl md:text-2xl;
+    font-size: 1.5rem; /* 24px minimum */
     font-weight: 500;
   }
   
   p {
-    @apply text-base md:text-lg leading-relaxed text-yutime-text/80;
+    font-size: 1rem; /* 16px minimum */
+    line-height: 1.6;
+    color: hsl(var(--foreground) / 0.8);
   }
 
   .container {
