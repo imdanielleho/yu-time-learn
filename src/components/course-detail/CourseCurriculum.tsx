@@ -35,7 +35,10 @@ const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) =
               {Array.from({ length: chapter.lessons }).map((_, lessonIndex) => (
                 <div key={lessonIndex} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div className="flex items-start space-x-3 flex-1">
-                    <span className="bg-yutime-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0">
+                    <span 
+                      className="text-white rounded-full w-6 h-6 flex items-center justify-center text-sm flex-shrink-0"
+                      style={{ backgroundColor: '#2a9d8f' }}
+                    >
                       {lessonIndex + 1}
                     </span>
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-1 lg:space-y-0 flex-1">
@@ -45,7 +48,10 @@ const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) =
                       {chapter.chapter === 1 && lessonIndex === 0 && (
                         <button
                           onClick={() => onLessonPlay(`Lesson 1: Introduction to ${chapter.title}`)}
-                          className="flex items-center space-x-1 bg-yutime-primary hover:bg-yutime-primary/90 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start lg:self-center lg:ml-4"
+                          className="flex items-center space-x-1 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start lg:self-center lg:ml-4"
+                          style={{ backgroundColor: '#2a9d8f' }}
+                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
+                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
                         >
                           <Play size={14} />
                           <span>Free Preview</span>

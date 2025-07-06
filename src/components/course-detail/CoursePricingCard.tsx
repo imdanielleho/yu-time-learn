@@ -21,7 +21,10 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <div className="flex gap-2">
             <Button
               onClick={onBuyNow}
-              className="py-2 px-4 text-white bg-yutime-primary hover:bg-yutime-primary/90 rounded-lg font-medium text-sm shadow-sm transition-colors min-h-[40px]"
+              className="py-2 px-4 text-white rounded-lg font-medium text-sm shadow-sm transition-colors min-h-[40px]"
+              style={{ backgroundColor: '#2a9d8f' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
               data-testid="buynow-btn"
             >
               Buy Now
@@ -29,7 +32,16 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
             <Button
               onClick={onAddToCart}
               variant="outline"
-              className="flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg border-yutime-primary text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors"
+              className="flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg transition-colors"
+              style={{ borderColor: '#2a9d8f', color: '#2a9d8f' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#2a9d8f';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = '#2a9d8f';
+              }}
               data-testid="addtocart-btn"
             >
               <ShoppingCart size={16} />
@@ -49,7 +61,10 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
         <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
           <Button
             onClick={onBuyNow}
-            className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white bg-yutime-primary hover:bg-yutime-primary/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-primary/50"
+            className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-offset-2"
+            style={{ backgroundColor: '#2a9d8f', focusRingColor: '#2a9d8f' }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
             data-testid="buynow-btn"
           >
             Buy Now
@@ -57,7 +72,16 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl border-yutime-primary text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-yutime-primary/50"
+            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2"
+            style={{ borderColor: '#2a9d8f', color: '#2a9d8f', focusRingColor: '#2a9d8f' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#2a9d8f';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = '#2a9d8f';
+            }}
             data-testid="addtocart-btn"
           >
             <ShoppingCart size={20} />
