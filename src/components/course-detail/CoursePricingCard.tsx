@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Check } from "lucide-react";
 
 interface CoursePricingCardProps {
   onBuyNow: () => void;
@@ -12,27 +12,27 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
   return (
     <div className="fixed bottom-16 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
       {/* Mobile compact bar */}
-      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3">
+      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 shadow-lg">
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
-            <div className="text-lg font-bold" style={{ color: '#2a9d8f' }}>HKD 120</div>
-            <div className="text-xs text-yutime-text/60">One-time payment</div>
+            <div className="text-xl font-light" style={{ color: '#2a9d8f' }}>HKD 120</div>
+            <div className="text-sm text-gray-500">One-time payment</div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Button
               onClick={onBuyNow}
-              className="py-2 px-4 text-white rounded-lg font-medium text-sm shadow-sm transition-colors min-h-[40px]"
+              className="py-3 px-6 text-white rounded-xl font-medium text-sm shadow-md transition-all duration-300 min-h-[44px] hover:shadow-lg"
               style={{ backgroundColor: '#2a9d8f' }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
               data-testid="buynow-btn"
             >
-              Buy Now
+              Get Started
             </Button>
             <Button
               onClick={onAddToCart}
               variant="outline"
-              className="flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg transition-colors"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] py-3 px-3 rounded-xl transition-all duration-300 border-2"
               style={{ borderColor: '#2a9d8f', color: '#2a9d8f' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#2a9d8f';
@@ -44,35 +44,49 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
               }}
               data-testid="addtocart-btn"
             >
-              <ShoppingCart size={16} />
+              <ShoppingCart size={18} />
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Desktop card - keep existing design */}
-      <div className="hidden lg:block bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-        <h3 className="text-2xl font-bold text-yutime-primary mb-6 text-center">Course Price</h3>
-        <div className="text-center mb-8">
-          <div className="text-4xl font-bold mb-2" style={{ color: '#2a9d8f' }}>HKD 120</div>
-          <div className="text-yutime-text/70 text-lg">One-time investment in yourself</div>
+      {/* Desktop card */}
+      <div className="hidden lg:block bg-white rounded-3xl shadow-xl p-10 border-0">
+        <div className="text-center mb-10">
+          <div className="text-5xl font-light mb-3" style={{ color: '#2a9d8f' }}>HKD 120</div>
+          <div className="text-gray-600 text-lg font-light">One-time investment in yourself</div>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
+        <div className="space-y-4 mb-10">
+          <div className="flex items-center space-x-3 text-gray-600">
+            <Check size={20} style={{ color: '#2a9d8f' }} />
+            <span className="font-light">Lifetime access to course materials</span>
+          </div>
+          <div className="flex items-center space-x-3 text-gray-600">
+            <Check size={20} style={{ color: '#2a9d8f' }} />
+            <span className="font-light">Learn at your own pace</span>
+          </div>
+          <div className="flex items-center space-x-3 text-gray-600">
+            <Check size={20} style={{ color: '#2a9d8f' }} />
+            <span className="font-light">Expert instructor support</span>
+          </div>
+        </div>
+        
+        <div className="flex flex-col gap-4 w-full">
           <Button
             onClick={onBuyNow}
-            className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full py-6 px-8 text-white rounded-2xl font-medium text-lg shadow-lg transition-all duration-300 hover:shadow-xl min-h-[56px]"
             style={{ backgroundColor: '#2a9d8f' }}
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
             data-testid="buynow-btn"
           >
-            Buy Now
+            Get Started Today
           </Button>
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full flex items-center justify-center min-h-[56px] py-6 px-8 rounded-2xl transition-all duration-300 border-2 font-medium text-lg"
             style={{ borderColor: '#2a9d8f', color: '#2a9d8f' }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#2a9d8f';
@@ -84,7 +98,8 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
             }}
             data-testid="addtocart-btn"
           >
-            <ShoppingCart size={20} />
+            <ShoppingCart size={22} className="mr-3" />
+            Add to Cart
           </Button>
         </div>
       </div>
