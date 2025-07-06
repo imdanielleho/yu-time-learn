@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -34,31 +33,35 @@ const FeaturedCourses = () => {
   }, [api]);
 
   const CourseCard = ({ course }: { course: typeof courses[0] }) => (
-    <div className="bg-white border border-gray-200/50 rounded-lg overflow-hidden flex flex-col h-full group hover:border-gray-300 hover:bg-white/90 focus-within:ring-2 focus-within:ring-yutime-indigo/20 transition-all duration-300">
+    <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:border-yutime-secondary/50 hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
-        <div className="relative h-48 overflow-hidden rounded-t-lg">
+        <div className="relative h-48 overflow-hidden">
           <img 
             src={course.image} 
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          <div className="absolute top-3 right-3 bg-yutime-gold text-yutime-indigo px-3 py-1 rounded-full text-sm font-bold">
+          <div className="absolute top-4 right-4 bg-yutime-sunshine text-yutime-primary px-4 py-2 rounded-full text-sm font-medium shadow-soft">
             {course.level}
           </div>
         </div>
-        <div className="flex-1 flex flex-col p-6">
-          <div className="mb-3">
-            <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">{course.category}</span>
+        <div className="flex-1 flex flex-col p-8">
+          <div className="mb-4">
+            <span className="bg-yutime-neutral text-yutime-text/60 px-4 py-2 rounded-full text-sm font-medium">
+              {course.category}
+            </span>
           </div>
-          <h3 className="text-xl font-bold mb-4 text-yutime-indigo">{course.title}</h3>
-          <p className="text-yutime-blue text-lg font-bold mb-4">HKD {course.price}</p>
-          <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-            <div className="flex items-center gap-1 text-sm text-gray-500">
+          <h3 className="text-xl font-semibold mb-4 text-yutime-primary group-hover:text-yutime-secondary transition-colors">
+            {course.title}
+          </h3>
+          <p className="text-yutime-secondary text-xl font-bold mb-6">HKD {course.price}</p>
+          <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex items-center gap-2 text-sm text-yutime-text/60">
               <Timer size={16} />
               <span>{course.totalTime}</span>
             </div>
             <Button 
-              className="bg-yutime-indigo hover:bg-yutime-indigo/90 text-white text-sm px-4 py-2 w-full md:w-auto"
+              className="bg-yutime-primary hover:bg-yutime-primary/90 text-white text-sm px-6 py-3 w-full md:w-auto rounded-xl font-medium shadow-soft hover-lift"
             >
               Get started for free
             </Button>
@@ -69,11 +72,16 @@ const FeaturedCourses = () => {
   );
 
   return (
-    <section id="courses" className="bg-gradient-to-br from-yutime-sage/5 to-yutime-coral/5 py-20 md:py-32">
+    <section id="courses" className="bg-yutime-neutral/20 py-24 md:py-32">
       <div className="container">
-        <div className="mb-12 text-center">
-          <h2 className="text-yutime-indigo mb-4">Featured Courses</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
+        <div className="mb-16 text-center">
+          <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
+            Our Courses
+          </p>
+          <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
+            Featured Courses
+          </h2>
+          <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg font-light">
             Our most popular courses, designed with your learning goals in mind.
             Start your learning journey today.
           </p>
@@ -101,7 +109,7 @@ const FeaturedCourses = () => {
                 <button
                   key={index}
                   className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                    index === current - 1 ? 'bg-yutime-blue' : 'bg-gray-300'
+                    index === current - 1 ? 'bg-yutime-secondary' : 'bg-yutime-neutral'
                   }`}
                   onClick={() => api?.scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
@@ -110,7 +118,7 @@ const FeaturedCourses = () => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}

@@ -12,16 +12,22 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-yutime-sage/5 to-yutime-coral/5 py-20 md:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-yutime-neutral via-white to-yutime-cream py-24 md:py-32 overflow-hidden">
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8 animate-fade-in">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yutime-sage leading-tight font-heading">
-                Learning Made
-                <span className="block text-yutime-coral">Simple & Joyful</span>
-              </h1>
-              <p className="text-lg md:text-xl text-yutime-warmGray leading-relaxed max-w-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-10 animate-fade-in">
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase">
+                  Learning Made Simple
+                </p>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-yutime-primary leading-[1.1]">
+                  Built for accuracy,
+                  <span className="block text-yutime-secondary italic font-light">designed for</span>
+                  <span className="block text-yutime-primary">your every day</span>
+                </h1>
+              </div>
+              <p className="text-xl text-yutime-text/70 leading-relaxed max-w-lg font-light">
                 Discover new skills at your own pace with courses designed specifically for adults 45+. 
                 No pressure, just gentle guidance and celebration of every step forward.
               </p>
@@ -30,50 +36,64 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 onClick={() => scrollToSection('courses')}
-                className="bg-yutime-coral hover:bg-yutime-coral/90 text-white px-8 py-4 text-lg rounded-xl shadow-warm hover-lift font-medium"
+                className="bg-yutime-primary hover:bg-yutime-primary/90 text-white px-10 py-4 text-lg rounded-2xl shadow-soft hover-lift font-medium"
               >
-                Explore Courses
+                Start Learning Today
                 <ArrowRight className="ml-2" size={20} />
+              </Button>
+              <Button 
+                variant="outline"
+                className="border-2 border-yutime-secondary text-yutime-secondary hover:bg-yutime-secondary hover:text-white px-10 py-4 text-lg rounded-2xl font-medium transition-all duration-300"
+              >
+                How It Works
               </Button>
             </div>
             
-            <div className="flex items-center space-x-6 text-sm text-yutime-warmGray">
-              <div className="flex items-center space-x-2">
-                <span className="text-2xl">🌟</span>
+            <div className="flex items-center space-x-8 text-sm text-yutime-text/60">
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-yutime-secondary rounded-full"></div>
                 <span>Self-paced learning</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-2xl">💝</span>
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-yutime-accent rounded-full"></div>
                 <span>Supportive community</span>
               </div>
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative animate-slide-up">
             <div className="relative z-10">
-              <img 
-                src="https://images.squarespace-cdn.com/content/v1/5d9f65d12a10d4166969add0/1602827328312-9JIXYE4JI8AHG54FKS77/computer+classes+for+seniors+1" 
-                alt="Computer classes for seniors - learning together"
-                className="w-full h-auto rounded-2xl shadow-warm hover-lift"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-yutime-sunshine text-yutime-sage px-6 py-3 rounded-2xl shadow-soft font-medium">
-                <div className="flex items-center space-x-2">
-                  <span className="text-2xl">✨</span>
-                  <span>Start your journey today!</span>
+              <div className="bg-white rounded-3xl p-8 shadow-wellness border border-yutime-neutral/20">
+                <img 
+                  src="https://images.squarespace-cdn.com/content/v1/5d9f65d12a10d4166969add0/1602827328312-9JIXYE4JI8AHG54FKS77/computer+classes+for+seniors+1" 
+                  alt="Computer classes for seniors - learning together"
+                  className="w-full h-auto rounded-2xl"
+                />
+                <div className="mt-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-3 h-3 bg-yutime-secondary rounded-full"></div>
+                      <span className="text-yutime-text font-medium">Active Learning</span>
+                    </div>
+                    <span className="text-yutime-secondary font-medium">95% Complete</span>
+                  </div>
+                  <div className="w-full bg-yutime-neutral rounded-full h-2">
+                    <div className="bg-yutime-secondary h-2 rounded-full" style={{ width: '95%' }}></div>
+                  </div>
                 </div>
               </div>
             </div>
             
-            {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-yutime-lavender/20 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-yutime-coral/10 rounded-full blur-2xl"></div>
+            {/* Floating elements */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-yutime-lavender/20 rounded-full blur-2xl"></div>
+            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-yutime-sunshine/20 rounded-full blur-xl"></div>
           </div>
         </div>
       </div>
       
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yutime-sunshine/10 to-transparent rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-yutime-sage/10 to-transparent rounded-full blur-2xl"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yutime-secondary/5 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-yutime-accent/5 to-transparent rounded-full blur-2xl"></div>
     </section>
   );
 };

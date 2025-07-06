@@ -30,22 +30,33 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				yutime: {
-					sage: '#6B9B76',      // Primary - calming sage green
-					coral: '#FF8B7A',     // Secondary - warm coral
-					lavender: '#B19CD9',  // Accent - gentle lavender
-					sunshine: '#FFD166',  // Supporting - joyful yellow
-					cream: '#FDF6E3',     // Warm background
-					warmGray: '#8B7F72',  // Neutral text
-					softWhite: '#FEFCF8', // Soft white background
-					indigo: '#6B9B76',    // Map to sage for backward compatibility
-					gold: '#FFD166',      // Map to sunshine
-					blue: '#6B9B76',      // Map to sage
-					navy: '#5A6C57',      // Darker sage for contrast
-					navy_dark: '#4A5B47', // Even darker sage
-					yellow: '#FFD166',    // Keep sunshine
-					yellow_light: '#FFF4D6', // Light sunshine
-					sand: '#FDF6E3',      // Map to cream
-					sand_dark: '#F5EDD3', // Darker cream
+					// Headspace-inspired wellness palette
+					sage: '#5A7C65',        // Deep forest green
+					coral: '#F4A261',       // Warm terracotta
+					lavender: '#A8DADC',    // Soft blue-green
+					sunshine: '#E9C46A',    // Warm gold
+					cream: '#F1FAEE',       // Clean off-white
+					warmGray: '#457B9D',    // Professional blue-gray
+					softWhite: '#FFFFFF',   // Pure white
+					charcoal: '#264653',    // Deep navy-green
+					
+					// Health/wellness inspired palette
+					primary: '#264653',     // Professional dark teal
+					secondary: '#2A9D8F',   // Medical teal
+					accent: '#E76F51',      // Warm accent
+					neutral: '#F8F9FA',     // Light neutral
+					text: '#343A40',        // Dark gray text
+					
+					// Legacy mappings for compatibility
+					indigo: '#264653',
+					gold: '#E9C46A',
+					blue: '#2A9D8F',
+					navy: '#264653',
+					navy_dark: '#1A3A42',
+					yellow: '#E9C46A',
+					yellow_light: '#FFF3CD',
+					sand: '#F1FAEE',
+					sand_dark: '#E8F4F8',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -78,20 +89,22 @@ export default {
 			},
 			fontFamily: {
 				sans: ["Inter", "sans-serif"],
-				heading: ["Inter", "sans-serif"]
+				heading: ["Inter", "sans-serif"],
+				serif: ["Playfair Display", "serif"]
 			},
 			borderRadius: {
-				lg: '12px',
-				md: '10px',
-				sm: '6px',
-				xl: '16px',
-				'2xl': '20px'
+				lg: '16px',
+				md: '12px',
+				sm: '8px',
+				xl: '20px',
+				'2xl': '24px'
 			},
 			boxShadow: {
-				'soft': '0 4px 20px rgba(107, 155, 118, 0.08)',
-				'card': '0 8px 32px rgba(107, 155, 118, 0.12)',
-				'warm': '0 6px 24px rgba(255, 139, 122, 0.1)',
-				'gentle': '0 2px 12px rgba(177, 156, 217, 0.08)'
+				'soft': '0 2px 20px rgba(38, 70, 83, 0.06)',
+				'card': '0 4px 32px rgba(38, 70, 83, 0.08)',
+				'warm': '0 8px 40px rgba(231, 111, 81, 0.12)',
+				'gentle': '0 3px 16px rgba(42, 157, 143, 0.08)',
+				'wellness': '0 6px 24px rgba(90, 124, 101, 0.1)'
 			},
 			keyframes: {
 				"accordion-down": {
@@ -103,20 +116,25 @@ export default {
 					to: { height: "0" },
 				},
 				"fade-in": {
-					"0%": { opacity: "0", transform: "translateY(10px)" },
+					"0%": { opacity: "0", transform: "translateY(20px)" },
 					"100%": { opacity: "1", transform: "translateY(0)" }
 				},
 				"gentle-scale": {
 					"0%": { transform: "scale(1)" },
-					"50%": { transform: "scale(1.02)" },
+					"50%": { transform: "scale(1.01)" },
 					"100%": { transform: "scale(1)" }
+				},
+				"slide-up": {
+					"0%": { opacity: "0", transform: "translateY(40px)" },
+					"100%": { opacity: "1", transform: "translateY(0)" }
 				}
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
-				"fade-in": "fade-in 0.5s ease-out",
-				"gentle-scale": "gentle-scale 2s ease-in-out infinite"
+				"fade-in": "fade-in 0.6s ease-out",
+				"gentle-scale": "gentle-scale 3s ease-in-out infinite",
+				"slide-up": "slide-up 0.8s ease-out"
 			}
 		}
 	},
