@@ -52,7 +52,6 @@ const FeaturedCourses = () => {
               {course.category}
             </span>
           </div>
-          {/* Removed hover color change - maintain consistent text color */}
           <h3 className="text-xl font-semibold mb-4 text-yutime-primary transition-colors">
             {course.title}
           </h3>
@@ -105,7 +104,7 @@ const FeaturedCourses = () => {
               </div>
             </Carousel>
             
-            {/* Enhanced mobile carousel indicators with better visibility */}
+            {/* Enhanced mobile carousel indicators with improved accessibility */}
             <div className="flex justify-center space-x-3 mt-8 sm:hidden">
               {Array.from({ length: count }).map((_, index) => (
                 <button
@@ -113,7 +112,7 @@ const FeaturedCourses = () => {
                   className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
                     index === current - 1 
                       ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' 
-                      : 'bg-white border-yutime-neutral/60 shadow-md hover:border-yutime-secondary/50'
+                      : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'
                   }`}
                   onClick={() => api?.scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}

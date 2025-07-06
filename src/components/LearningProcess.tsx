@@ -51,8 +51,8 @@ const LearningProcess = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {steps.map((step, index) => (
-              <div key={index} className="group">
-                <div className="bg-white rounded-3xl p-8 shadow-card hover:shadow-wellness transition-all duration-300 border border-yutime-neutral/20 text-center h-full flex flex-col">
+              <div key={index}>
+                <div className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col">
                   
                   {/* Integrated step number and icon design */}
                   <div className="flex justify-center mb-8">
@@ -70,7 +70,7 @@ const LearningProcess = () => {
                   
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-4 text-yutime-primary group-hover:text-yutime-secondary transition-colors">
+                    <h3 className="text-xl font-semibold mb-4 text-yutime-primary">
                       {step.title}
                     </h3>
                     <p className="text-yutime-text/70 leading-relaxed font-light">

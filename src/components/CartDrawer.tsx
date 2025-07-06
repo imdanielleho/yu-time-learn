@@ -54,8 +54,8 @@ const CartDrawer = () => {
       <div className="flex-1 overflow-y-auto p-5">
         {items.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-yutime-warmGray mb-6 text-base">Your cart is empty</p>
-            <Button onClick={handleBrowseCourses} className="bg-yutime-blue hover:bg-yutime-blue/90 py-3 text-base">
+            <p className="text-yutime-text/70 mb-6 text-base">Your cart is empty</p>
+            <Button onClick={handleBrowseCourses} className="bg-yutime-primary hover:bg-yutime-primary/90 py-3 text-base">
               Browse Courses
             </Button>
           </div>
@@ -66,7 +66,7 @@ const CartDrawer = () => {
               {items.map((item) => (
                 <div 
                   key={item.id} 
-                  className="flex gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:bg-yutime-cream/30 hover:border-yutime-coral hover:shadow-sm min-h-[70px] transition-all duration-200"
+                  className="flex gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:bg-yutime-neutral/30 hover:border-yutime-secondary hover:shadow-sm min-h-[70px] transition-all duration-200"
                 >
                   <img 
                     src={item.image} 
@@ -74,13 +74,13 @@ const CartDrawer = () => {
                     className="w-12 h-12 object-cover rounded-lg border flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-base text-yutime-sage leading-snug mb-1 line-clamp-2">{item.title}</h4>
-                    <div className="flex flex-wrap items-center gap-1 text-sm text-yutime-warmGray mb-1">
+                    <h4 className="font-semibold text-base text-yutime-primary leading-snug mb-1 line-clamp-2">{item.title}</h4>
+                    <div className="flex flex-wrap items-center gap-1 text-sm text-yutime-text/70 mb-1">
                       <span>{item.category}</span>
                       <span>•</span>
                       <span>{item.totalTime}</span>
                     </div>
-                    <p className="font-bold text-base text-yutime-sage">HKD {item.price}</p>
+                    <p className="font-bold text-base text-yutime-primary">HKD {item.price}</p>
                   </div>
                   <div className="flex items-center">
                     <Button
@@ -98,10 +98,10 @@ const CartDrawer = () => {
             </div>
 
             {/* Total */}
-            <div className="border-t border-yutime-sage/10 pt-4 mb-6">
+            <div className="border-t border-yutime-primary/10 pt-4 mb-6">
               <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold text-yutime-sage">Total:</span>
-                <span className="text-xl font-bold text-yutime-sage">HKD {total}</span>
+                <span className="text-lg font-semibold text-yutime-primary">Total:</span>
+                <span className="text-xl font-bold text-yutime-primary">HKD {total}</span>
               </div>
             </div>
           </>
@@ -110,17 +110,17 @@ const CartDrawer = () => {
       
       {/* Footer Actions */}
       {items.length > 0 && (
-        <div className="border-t border-yutime-sage/10 p-4 space-y-3">
+        <div className="border-t border-yutime-primary/10 p-4 space-y-3">
           <Button 
             onClick={handleBrowseCourses}
             variant="outline"
-            className="w-full border-yutime-sage text-yutime-sage hover:bg-yutime-sage hover:text-white py-3 text-base font-medium rounded-lg transition-all duration-200"
+            className="w-full border-yutime-primary text-yutime-primary hover:bg-yutime-primary hover:text-white py-3 text-base font-medium rounded-lg transition-all duration-200"
           >
             Browse More Courses
           </Button>
           <Button 
             onClick={handleProceedToCheckout}
-            className="w-full bg-yutime-coral hover:bg-yutime-coral/90 text-white py-3 text-base font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-full bg-yutime-secondary hover:bg-yutime-secondary/90 text-white py-3 text-base font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Proceed to Checkout
           </Button>
@@ -138,8 +138,8 @@ const CartDrawer = () => {
           side="right"
           className="max-w-full w-[400px] h-full flex flex-col p-0"
         >
-          <SheetHeader className="border-b border-yutime-sage/10 p-4">
-            <SheetTitle className="text-xl font-bold text-yutime-sage">
+          <SheetHeader className="border-b border-yutime-primary/10 p-4">
+            <SheetTitle className="text-xl font-bold text-yutime-primary">
               Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
             </SheetTitle>
           </SheetHeader>
@@ -155,8 +155,8 @@ const CartDrawer = () => {
   return (
     <Drawer open={isCartOpen} onOpenChange={(open) => !open && closeCart()}>
       <DrawerContent className="max-h-[90vh]">
-        <DrawerHeader className="border-b border-yutime-sage/10 p-4">
-          <DrawerTitle className="text-xl font-bold text-yutime-sage">
+        <DrawerHeader className="border-b border-yutime-primary/10 p-4">
+          <DrawerTitle className="text-xl font-bold text-yutime-primary">
             Your Cart ({itemCount} {itemCount === 1 ? 'course' : 'courses'})
           </DrawerTitle>
         </DrawerHeader>
