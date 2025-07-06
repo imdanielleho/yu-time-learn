@@ -62,7 +62,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <Button
             onClick={onBuyNow}
             className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-offset-2"
-            style={{ backgroundColor: '#2a9d8f', focusRingColor: '#2a9d8f' }}
+            style={{ backgroundColor: '#2a9d8f' }}
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
             data-testid="buynow-btn"
@@ -73,7 +73,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
             onClick={onAddToCart}
             variant="outline"
             className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2"
-            style={{ borderColor: '#2a9d8f', color: '#2a9d8f', focusRingColor: '#2a9d8f' }}
+            style={{ borderColor: '#2a9d8f', color: '#2a9d8f' }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#2a9d8f';
               e.currentTarget.style.color = 'white';
