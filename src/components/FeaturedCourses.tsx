@@ -48,7 +48,7 @@ const FeaturedCourses = () => {
         </div>
         <div className="flex-1 flex flex-col p-8">
           <div className="mb-4">
-            <span className="bg-yutime-neutral text-yutime-text/60 px-4 py-2 rounded-full text-sm font-medium">
+            <span className="bg-yutime-secondary/10 text-yutime-secondary border border-yutime-secondary/20 px-4 py-2 rounded-full text-sm font-medium">
               {course.category}
             </span>
           </div>
