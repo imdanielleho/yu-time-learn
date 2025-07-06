@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Play, ShoppingCart } from "lucide-react";
+import { Play, ShoppingCart, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProfileDropdown from './ProfileDropdown';
 
@@ -80,12 +80,12 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
       {!isLoggedIn ? (
         <button 
           onClick={handleLoginSignupClick}
-          className="btn-primary"
+          className="bg-[#2a9d8f] hover:bg-[#2a9d8f]/90 text-white h-10 px-6 py-2 rounded-md font-medium text-base transition-all shadow-sm hover:shadow flex items-center justify-center"
         >
           Log In/Sign Up
         </button>
       ) : (
-        <ProfileDropdown />
+        <ProfileDropdown enableHover />
       )}
     </div>
   </nav>

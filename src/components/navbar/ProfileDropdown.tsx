@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { User, Settings, LogOut } from 'lucide-react';
+import { User, Settings, LogOut, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,7 +14,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
-const ProfileDropdown = () => {
+interface ProfileDropdownProps {
+  enableHover?: boolean;
+}
+
+const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
   const { user, logout, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
 
@@ -36,14 +40,26 @@ const ProfileDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={user.avatar} alt={user.name} />
-            <AvatarFallback className="bg-yutime-blue text-white">
-              {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-        </Button>
+        <div 
+          className={`flex items-center space-x-2 cursor-pointer ${
+            enableHover ? 'group' : ''
+          }`}
+        >
+          <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarFallback className="bg-yutime-blue text-white">
+                {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </Button>
+          {enableHover && (
+            <ChevronDown 
+              size={16} 
+              className="text-yutime-navy group-hover:text-yutime-blue transition-colors" 
+            />
+          )}
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-white" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
