@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, BookOpen, Award } from 'lucide-react';
+import { Users, BookOpen, Award, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const LearningProcess = () => {
