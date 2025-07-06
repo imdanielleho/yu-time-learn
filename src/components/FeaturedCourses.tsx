@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Timer, Plus } from 'lucide-react';
+import { Timer } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -41,20 +42,16 @@ const FeaturedCourses = () => {
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          
-          {/* Category Label - Top Left with icon */}
-          <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/95 backdrop-blur-sm text-yutime-primary px-4 py-2 rounded-full text-sm font-medium shadow-lg border border-white/20">
-            <div className="w-2 h-2 bg-yutime-secondary rounded-full"></div>
-            <span>{course.category}</span>
-          </div>
-          
-          {/* Difficulty Level - Top Right with plus icon */}
-          <div className="absolute top-4 right-4 flex items-center gap-2 bg-white/95 backdrop-blur-sm text-yutime-primary px-4 py-2 rounded-full text-sm font-medium shadow-lg border border-white/20">
-            <Plus size={14} className="text-yutime-secondary" />
-            <span>{course.level}</span>
+          <div className="absolute top-4 right-4 bg-yutime-sunshine text-yutime-primary px-4 py-2 rounded-full text-sm font-medium shadow-soft">
+            {course.level}
           </div>
         </div>
         <div className="flex-1 flex flex-col p-8">
+          <div className="mb-4">
+            <span className="bg-yutime-neutral text-yutime-text/60 px-4 py-2 rounded-full text-sm font-medium">
+              {course.category}
+            </span>
+          </div>
           <h3 className="text-xl font-semibold mb-4 text-yutime-primary transition-colors">
             {course.title}
           </h3>
@@ -115,7 +112,7 @@ const FeaturedCourses = () => {
                   className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
                     index === current - 1 
                       ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' 
-                      : 'bg-yutime-primary/20 border-yutime-primary/50 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-primary/30'
+                      : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'
                   }`}
                   onClick={() => api?.scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
