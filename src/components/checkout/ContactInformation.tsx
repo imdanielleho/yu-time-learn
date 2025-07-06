@@ -11,29 +11,29 @@ interface ContactInformationProps {
 
 const ContactInformation = ({ formData, onInputChange }: ContactInformationProps) => {
   return (
-    <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-yutime-sage/10 rounded-full flex items-center justify-center">
-          <span className="text-yutime-sage font-semibold">1</span>
+        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+          <span className="text-gray-700 font-medium">1</span>
         </div>
-        <h2 className="text-xl font-semibold text-yutime-sage">Contact Information</h2>
+        <h2 className="text-xl font-light text-gray-900">Contact Information</h2>
       </div>
       
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="fullName" className="mb-2 block text-base text-yutime-sage">Full Name</Label>
+          <Label htmlFor="fullName" className="mb-2 block text-base text-gray-700 font-light">Full Name</Label>
           <Input
             id="fullName"
             name="fullName"
             value={formData.fullName}
             onChange={onInputChange}
             required
-            className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
+            className="text-base py-3 border-gray-200 focus:border-gray-400 font-light"
             autoComplete="name"
           />
         </div>
         <div>
-          <Label htmlFor="email" className="mb-2 block text-base text-yutime-sage">Email Address</Label>
+          <Label htmlFor="email" className="mb-2 block text-base text-gray-700 font-light">Email Address</Label>
           <Input
             id="email"
             name="email"
@@ -41,7 +41,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
             value={formData.email}
             onChange={onInputChange}
             required
-            className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
+            className="text-base py-3 border-gray-200 focus:border-gray-400 font-light"
             autoComplete="email"
           />
         </div>

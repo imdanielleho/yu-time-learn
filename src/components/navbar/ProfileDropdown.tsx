@@ -18,7 +18,7 @@ interface ProfileDropdownProps {
   enableHover?: boolean;
 }
 
-const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
+const ProfileDropdown = ({ enableHover = true }: ProfileDropdownProps) => {
   const { user, logout, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
 
@@ -41,9 +41,7 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div 
-          className={`flex items-center space-x-2 cursor-pointer ${
-            enableHover ? 'group' : ''
-          }`}
+          className="flex items-center space-x-2 cursor-pointer group"
         >
           <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 hover:bg-transparent">
             <Avatar className="h-8 w-8">
@@ -53,15 +51,13 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
               </AvatarFallback>
             </Avatar>
           </Button>
-          {enableHover && (
-            <ChevronDown 
-              size={16} 
-              className="text-yutime-navy group-hover:text-yutime-blue transition-colors" 
-            />
-          )}
+          <ChevronDown 
+            size={16} 
+            className="text-yutime-navy group-hover:text-yutime-blue transition-colors" 
+          />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-white" align="end" forceMount>
+      <DropdownMenuContent className="w-56 bg-white z-50" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{user.name}</p>

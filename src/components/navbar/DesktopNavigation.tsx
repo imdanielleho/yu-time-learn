@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Play, ShoppingCart, ChevronDown } from "lucide-react";
+import { Play, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProfileDropdown from './ProfileDropdown';
 
@@ -85,7 +85,9 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
           Log In/Sign Up
         </button>
       ) : (
-        <ProfileDropdown enableHover />
+        <div className="group relative">
+          <ProfileDropdown />
+        </div>
       )}
     </div>
   </nav>
