@@ -14,7 +14,6 @@ interface CourseHeaderProps {
     lessons: number;
     image: string;
     longDescription: string;
-    price: number;
   };
   onPlay: (title: string, videoUrl?: string) => void;
 }
@@ -48,7 +47,7 @@ const CourseHeader = ({ course, onPlay }: CourseHeaderProps) => (
         </div>
         <div className="space-y-4">
           <div className="mb-4">
-            <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
+            <span className="bg-yutime-neutral text-yutime-text/60 px-4 py-2 rounded-full text-sm font-medium">
               {course.category}
             </span>
           </div>
@@ -59,7 +58,6 @@ const CourseHeader = ({ course, onPlay }: CourseHeaderProps) => (
             </p>
           )}
           <p className="text-base text-yutime-text/70 leading-relaxed">{course.longDescription}</p>
-          <p className="text-2xl font-bold" style={{ color: '#2a9d8f' }}>HKD {course.price}</p>
           <div className="flex flex-wrap items-center gap-6 text-base text-yutime-text/60">
             <div className="flex items-center space-x-2">
               <Clock size={16} className="text-yutime-text/60" />

@@ -36,7 +36,7 @@ const FeaturedCourses = () => {
   const CourseCard = ({ course }: { course: typeof courses[0] }) => (
     <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
-        <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
+        <div className="relative h-48 overflow-hidden">
           <img 
             src={course.image} 
             alt={course.title} 
@@ -48,7 +48,7 @@ const FeaturedCourses = () => {
         </div>
         <div className="flex-1 flex flex-col p-8">
           <div className="mb-4">
-            <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
+            <span className="bg-yutime-secondary/10 text-yutime-secondary border border-yutime-secondary/20 px-4 py-2 rounded-full text-sm font-medium">
               {course.category}
             </span>
           </div>
