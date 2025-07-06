@@ -57,7 +57,8 @@ const FAQ = () => {
                 <AccordionTrigger className="text-lg font-medium py-6 px-8 text-left hover:no-underline hover:bg-yutime-neutral/10 transition-colors">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-yutime-text/70 px-8 pb-6 leading-relaxed font-light">
+                {/* Ensured minimum 16px font size for answers */}
+                <AccordionContent className="text-yutime-text/70 px-8 pb-6 leading-relaxed font-light text-base">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>

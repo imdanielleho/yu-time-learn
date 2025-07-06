@@ -63,18 +63,23 @@ const Hero = () => {
           
           <div className="relative animate-slide-up">
             <div className="relative z-10">
-              <div className="bg-white rounded-3xl p-8 shadow-wellness border border-yutime-neutral/20">
+              {/* Removed border and simplified design */}
+              <div className="relative">
                 <img 
                   src="https://images.squarespace-cdn.com/content/v1/5d9f65d12a10d4166969add0/1602827328312-9JIXYE4JI8AHG54FKS77/computer+classes+for+seniors+1" 
                   alt="Computer classes for seniors - learning together"
-                  className="w-full h-auto rounded-2xl"
+                  className="w-full h-auto rounded-3xl shadow-wellness"
                 />
-                <div className="mt-6 space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-yutime-secondary rounded-full"></div>
-                    <span className="text-yutime-text font-medium text-lg">Active Learning Session</span>
+                
+                {/* Text overlay positioned outside the image */}
+                <div className="absolute -bottom-8 left-8 right-8">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-card border border-yutime-neutral/20">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className="w-3 h-3 bg-yutime-secondary rounded-full animate-pulse"></div>
+                      <span className="text-yutime-text font-medium text-lg">Active Learning Session</span>
+                    </div>
+                    <p className="text-yutime-text/70 text-base font-light">Join our supportive community of learners</p>
                   </div>
-                  <p className="text-yutime-text/60 text-base">Join our supportive community of learners</p>
                 </div>
               </div>
             </div>

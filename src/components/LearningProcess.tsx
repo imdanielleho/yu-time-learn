@@ -7,19 +7,19 @@ const LearningProcess = () => {
   const steps = [
     {
       number: "1",
-      icon: <Users size={28} className="text-yutime-primary" />,
+      icon: <Users size={40} className="text-yutime-primary" />,
       title: "Tell us what you need",
       description: "We take a personalized approach to self-assessment, prioritizing how members prefer to receive care."
     },
     {
       number: "2", 
-      icon: <BookOpen size={28} className="text-yutime-secondary" />,
+      icon: <BookOpen size={40} className="text-yutime-secondary" />,
       title: "Get connected to care",
       description: "This allows us to structure a plan that best suits each individual member's learning journey."
     },
     {
       number: "3",
-      icon: <Award size={28} className="text-yutime-accent" />,
+      icon: <Award size={40} className="text-yutime-accent" />,
       title: "Assess and adapt", 
       description: "Track your progress and celebrate achievements as you develop new skills at your own pace."
     }
@@ -47,23 +47,24 @@ const LearningProcess = () => {
           </p>
         </div>
         
-        {/* Vertical Column Layout */}
+        {/* Vertical Column Layout with integrated step numbers and larger icons */}
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {steps.map((step, index) => (
               <div key={index} className="group">
                 <div className="bg-white rounded-3xl p-8 shadow-card hover:shadow-wellness transition-all duration-300 border border-yutime-neutral/20 text-center h-full flex flex-col">
-                  {/* Step number */}
-                  <div className="flex justify-center mb-6">
-                    <div className="w-16 h-16 bg-yutime-sunshine rounded-2xl flex items-center justify-center shadow-gentle">
-                      <span className="text-yutime-primary text-xl font-bold">{step.number}</span>
-                    </div>
-                  </div>
                   
-                  {/* Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className="w-16 h-16 bg-yutime-neutral/50 rounded-2xl flex items-center justify-center">
-                      {step.icon}
+                  {/* Integrated step number and icon design */}
+                  <div className="flex justify-center mb-8">
+                    <div className="relative">
+                      {/* Larger icon background */}
+                      <div className="w-20 h-20 bg-yutime-neutral/30 rounded-2xl flex items-center justify-center">
+                        {step.icon}
+                      </div>
+                      {/* Smaller, integrated step number */}
+                      <div className="absolute -top-2 -right-2 w-8 h-8 bg-yutime-sunshine rounded-full flex items-center justify-center shadow-soft border-2 border-white">
+                        <span className="text-yutime-primary text-sm font-bold">{step.number}</span>
+                      </div>
                     </div>
                   </div>
                   

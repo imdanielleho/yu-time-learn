@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -51,7 +52,8 @@ const FeaturedCourses = () => {
               {course.category}
             </span>
           </div>
-          <h3 className="text-xl font-semibold mb-4 text-yutime-primary group-hover:text-yutime-secondary transition-colors">
+          {/* Removed hover color change - maintain consistent text color */}
+          <h3 className="text-xl font-semibold mb-4 text-yutime-primary transition-colors">
             {course.title}
           </h3>
           <p className="text-yutime-secondary text-xl font-bold mb-6">HKD {course.price}</p>
@@ -103,13 +105,15 @@ const FeaturedCourses = () => {
               </div>
             </Carousel>
             
-            {/* Swipe Indicators */}
-            <div className="flex justify-center space-x-2 mt-6 sm:hidden">
+            {/* Enhanced mobile carousel indicators with better visibility */}
+            <div className="flex justify-center space-x-3 mt-8 sm:hidden">
               {Array.from({ length: count }).map((_, index) => (
                 <button
                   key={index}
-                  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                    index === current - 1 ? 'bg-yutime-secondary' : 'bg-yutime-neutral'
+                  className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                    index === current - 1 
+                      ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' 
+                      : 'bg-white border-yutime-neutral/60 shadow-md hover:border-yutime-secondary/50'
                   }`}
                   onClick={() => api?.scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
