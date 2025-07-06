@@ -45,7 +45,7 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
             enableHover ? 'group' : ''
           }`}
         >
-          <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
+          <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 hover:bg-transparent">
             <Avatar className="h-8 w-8">
               <AvatarImage src={user.avatar} alt={user.name} />
               <AvatarFallback className="bg-yutime-blue text-white">
