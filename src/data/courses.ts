@@ -1,3 +1,4 @@
+
 export interface Course {
   id: number;
   title: string;
@@ -50,7 +51,7 @@ export const courses = [
     level: "All Levels",
     lessons: 12,
     totalTime: "4 hours 45 min",
-    image: "https://www.verywellfit.com/thmb/Ux4lbFJxq6NTZPK4t6_cYBTGcEE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/beautiful-young-yoga-girl-lying-in-asana-shavasana-653952114-74c56c2a731b439b8e9f7d0dc0b9dbd2.jpg",
+    image: "https://www.pristyncare.com/blog/wp-content/uploads/2020/06/bhujangasana-or-cobra-pose-e1591386678565.jpg",
     price: 120,
     description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices.",
     longDescription: "Discover the benefits of gentle yoga designed specifically for adults 45+. This course focuses on improving flexibility, reducing joint pain, and enhancing overall well-being through safe, accessible yoga practices that can be done at home.",

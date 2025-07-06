@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
@@ -14,13 +15,13 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
       <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
-            <div className="text-lg font-bold text-yutime-sage">HKD 120</div>
-            <div className="text-xs text-yutime-warmGray">One-time payment</div>
+            <div className="text-lg font-bold text-yutime-primary">HKD 120</div>
+            <div className="text-xs text-yutime-text/60">One-time payment</div>
           </div>
           <div className="flex gap-2">
             <Button
               onClick={onBuyNow}
-              className="py-2 px-4 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-lg font-medium text-sm shadow-sm transition-colors min-h-[40px]"
+              className="py-2 px-4 text-white bg-yutime-primary hover:bg-yutime-primary/90 rounded-lg font-medium text-sm shadow-sm transition-colors min-h-[40px]"
               data-testid="buynow-btn"
             >
               Buy Now
@@ -28,7 +29,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
             <Button
               onClick={onAddToCart}
               variant="outline"
-              className="flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors"
+              className="flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg border-yutime-primary text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors"
               data-testid="addtocart-btn"
             >
               <ShoppingCart size={16} />
@@ -39,16 +40,16 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
 
       {/* Desktop card - keep existing design */}
       <div className="hidden lg:block bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-        <h3 className="text-2xl font-bold text-yutime-sage mb-6 text-center">Course Price</h3>
+        <h3 className="text-2xl font-bold text-yutime-primary mb-6 text-center">Course Price</h3>
         <div className="text-center mb-8">
-          <div className="text-4xl font-bold text-yutime-sage mb-2">HKD 120</div>
-          <div className="text-yutime-warmGray text-lg">One-time investment in yourself</div>
+          <div className="text-4xl font-bold text-yutime-primary mb-2">HKD 120</div>
+          <div className="text-yutime-text/70 text-lg">One-time investment in yourself</div>
         </div>
         
         <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
           <Button
             onClick={onBuyNow}
-            className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white bg-yutime-coral hover:bg-yutime-coral/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
+            className="flex-1 min-w-0 py-4 px-3 sm:px-6 text-white bg-yutime-primary hover:bg-yutime-primary/90 rounded-xl font-medium text-base shadow-md transition-colors min-h-[48px] focus-visible:ring-2 focus-visible:ring-yutime-primary/50"
             data-testid="buynow-btn"
           >
             Buy Now
@@ -56,7 +57,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl border-yutime-coral text-yutime-coral hover:bg-yutime-coral hover:text-white transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-yutime-coral/50"
+            className="flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl border-yutime-primary text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-yutime-primary/50"
             data-testid="addtocart-btn"
           >
             <ShoppingCart size={20} />
