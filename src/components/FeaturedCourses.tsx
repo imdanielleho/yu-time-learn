@@ -34,7 +34,7 @@ const FeaturedCourses = () => {
   }, [api]);
 
   const CourseCard = ({ course }: { course: typeof courses[0] }) => (
-    <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:border-yutime-secondary/50 hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
+    <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative h-48 overflow-hidden">
           <img 
@@ -42,7 +42,7 @@ const FeaturedCourses = () => {
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium border border-white/30">
+          <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium">
             {course.level}
           </div>
         </div>
