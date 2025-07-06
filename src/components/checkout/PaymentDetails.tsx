@@ -12,17 +12,17 @@ interface PaymentDetailsProps {
 
 const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+    <div className="bg-white rounded-2xl shadow-soft p-6 border border-yutime-sand">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-          <span className="text-gray-700 font-medium">2</span>
+        <div className="w-8 h-8 bg-yutime-sage/10 rounded-full flex items-center justify-center">
+          <span className="text-yutime-sage font-semibold">2</span>
         </div>
-        <h2 className="text-xl font-light text-gray-900">Payment Details</h2>
+        <h2 className="text-xl font-semibold text-yutime-sage">Payment Details</h2>
       </div>
 
       <div className="space-y-4">
         <div>
-          <Label htmlFor="cardNumber" className="mb-2 block text-base text-gray-700 font-light">Card Number</Label>
+          <Label htmlFor="cardNumber" className="mb-2 block text-base text-yutime-sage">Card Number</Label>
           <div className="relative">
             <Input
               id="cardNumber"
@@ -31,17 +31,17 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.cardNumber}
               onChange={onInputChange}
               required
-              className="text-base py-3 pl-12 border-gray-200 focus:border-gray-400 font-light"
+              className="text-base py-3 pl-12 border-yutime-sand focus:border-yutime-sage"
               inputMode="numeric"
               autoComplete="cc-number"
             />
-            <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-yutime-warmGray" />
           </div>
         </div>
         
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <Label htmlFor="expiryDate" className="mb-2 block text-base text-gray-700 font-light">Expiry</Label>
+            <Label htmlFor="expiryDate" className="mb-2 block text-base text-yutime-sage">Expiry</Label>
             <Input
               id="expiryDate"
               name="expiryDate"
@@ -49,13 +49,13 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.expiryDate}
               onChange={onInputChange}
               required
-              className="text-base py-3 border-gray-200 focus:border-gray-400 font-light"
+              className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
               inputMode="numeric"
               autoComplete="cc-exp"
             />
           </div>
           <div>
-            <Label htmlFor="cvv" className="mb-2 block text-base text-gray-700 font-light">CVV</Label>
+            <Label htmlFor="cvv" className="mb-2 block text-base text-yutime-sage">CVV</Label>
             <Input
               id="cvv"
               name="cvv"
@@ -63,13 +63,13 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.cvv}
               onChange={onInputChange}
               required
-              className="text-base py-3 border-gray-200 focus:border-gray-400 font-light"
+              className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
               inputMode="numeric"
               autoComplete="cc-csc"
             />
           </div>
           <div>
-            <Label htmlFor="postalCode" className="mb-2 block text-base text-gray-700 font-light">Postal Code</Label>
+            <Label htmlFor="postalCode" className="mb-2 block text-base text-yutime-sage">Postal Code</Label>
             <Input
               id="postalCode"
               name="postalCode"
@@ -77,7 +77,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.postalCode}
               onChange={onInputChange}
               required
-              className="text-base py-3 border-gray-200 focus:border-gray-400 font-light"
+              className="text-base py-3 border-yutime-sand focus:border-yutime-sage"
               autoComplete="postal-code"
             />
           </div>

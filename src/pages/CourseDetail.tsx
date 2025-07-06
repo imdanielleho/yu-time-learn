@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -174,14 +173,14 @@ const CourseDetail = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
         <CourseHeader course={course} onPlay={handleVideoPlay} />
         <div className="bg-gray-50">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 py-16 pb-32 lg:pb-16">
-              <div className="lg:col-span-2 space-y-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-24 lg:pb-8">
+              <div className="lg:col-span-2 space-y-8">
                 <CourseContent />
                 <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
               </div>
@@ -212,14 +211,14 @@ const CourseDetail = () => {
 
       {/* Video Modal */}
       <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
-        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black rounded-3xl overflow-hidden">
-          <DialogClose className="absolute right-6 top-6 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition-colors">
+        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
             <X className="h-6 w-6" />
           </DialogClose>
           {currentVideo && (
             <div className="w-full">
-              <div className="p-8 bg-white text-black">
-                <h3 className="text-2xl font-light text-gray-800">{currentVideo.title}</h3>
+              <div className="p-4 bg-white text-black border-b border-gray-200">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
               <div className="aspect-video">
                 <video
