@@ -42,13 +42,13 @@ const FeaturedCourses = () => {
             alt={course.title} 
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" 
           />
-          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-yutime-primary px-3 py-1.5 rounded-full text-xs font-medium shadow-soft border border-white/20">
+          <div className="absolute top-4 right-4 bg-yutime-sunshine text-yutime-primary px-4 py-2 rounded-full text-sm font-medium shadow-soft">
             {course.level}
           </div>
         </div>
         <div className="flex-1 flex flex-col p-8">
           <div className="mb-4">
-            <span className="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium border border-amber-200/50">
+            <span className="bg-yutime-neutral text-yutime-text/60 px-4 py-2 rounded-full text-sm font-medium">
               {course.category}
             </span>
           </div>
@@ -112,7 +112,7 @@ const FeaturedCourses = () => {
                   className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
                     index === current - 1 
                       ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' 
-                      : 'bg-white/90 border-yutime-primary/70 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'
+                      : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'
                   }`}
                   onClick={() => api?.scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
