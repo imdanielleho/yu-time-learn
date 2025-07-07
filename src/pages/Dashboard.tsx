@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { BookOpen, Clock, Trophy, Activity } from 'lucide-react';
@@ -84,7 +85,9 @@ const Dashboard = () => {
             <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
               <div className="bg-yutime-blue h-2 rounded-full" style={{ width: '75%' }}></div>
             </div>
-            <Button className="bg-yutime-blue hover:bg-yutime-blue/90">Continue Learning</Button>
+            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+              Continue Learning
+            </Button>
           </div>
           
           <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
@@ -99,7 +102,9 @@ const Dashboard = () => {
             <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
               <div className="bg-yutime-blue h-2 rounded-full" style={{ width: '40%' }}></div>
             </div>
-            <Button className="bg-yutime-blue hover:bg-yutime-blue/90">Continue Learning</Button>
+            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+              Continue Learning
+            </Button>
           </div>
         </div>
       </div>
