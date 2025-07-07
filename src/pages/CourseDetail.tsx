@@ -177,16 +177,12 @@ const CourseDetail = () => {
       <Navbar />
       <main className="flex-1">
         <CourseHeader course={course} onPlay={handleVideoPlay} />
-        <div className="bg-gradient-to-br from-yutime-neutral/30 via-white to-yutime-cream/20">
+        <div className="bg-gray-50">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-24 lg:pb-8">
               <div className="lg:col-span-2 space-y-8">
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-soft border border-yutime-neutral/20">
-                  <CourseContent />
-                </div>
-                <div className="bg-gradient-to-r from-white to-yutime-secondary/3 rounded-2xl p-6 md:p-8 shadow-soft border border-yutime-secondary/10">
-                  <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
-                </div>
+                <CourseContent />
+                <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
               </div>
               <div className="lg:col-span-1">
                 <CoursePricingCard
