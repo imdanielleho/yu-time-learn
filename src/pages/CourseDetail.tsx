@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -194,8 +193,6 @@ const CourseDetail = () => {
             </div>
           </div>
         </div>
-        {/* Add bottom spacing for mobile to prevent footer overlap with sticky elements */}
-        <div className="lg:hidden h-20"></div>
       </main>
       <Footer />
       {!isMobile && <CustomerServiceButton />}
