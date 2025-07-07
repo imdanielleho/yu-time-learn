@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -126,7 +125,7 @@ const CourseDetail = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="flex-1 flex items-center justify-center bg-gradient-to-br from-yutime-cream to-yutime-lavender/20">
+        <main className="flex-1 flex items-center justify-center bg-gray-50">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Course not found</h1>
             <Link to="/" className="text-yutime-blue hover:underline">
@@ -178,23 +177,12 @@ const CourseDetail = () => {
       <Navbar />
       <main className="flex-1">
         <CourseHeader course={course} onPlay={handleVideoPlay} />
-        <div className="bg-gradient-to-br from-yutime-cream via-white to-yutime-lavender/10">
+        <div className="bg-gray-50">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-24 lg:pb-8">
               <div className="lg:col-span-2 space-y-8">
-                {/* Course Content with subtle accent */}
-                <div className="bg-white rounded-2xl shadow-soft border border-yutime-lavender/20 hover:shadow-card transition-all duration-300">
-                  <div className="border-l-4 border-[#2a9d8f] rounded-l-2xl">
-                    <CourseContent />
-                  </div>
-                </div>
-                
-                {/* Course Curriculum with subtle accent */}
-                <div className="bg-white rounded-2xl shadow-soft border border-yutime-coral/20 hover:shadow-card transition-all duration-300">
-                  <div className="border-l-4 border-yutime-coral rounded-l-2xl">
-                    <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
-                  </div>
-                </div>
+                <CourseContent />
+                <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
               </div>
               <div className="lg:col-span-1">
                 <CoursePricingCard
@@ -221,15 +209,15 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
-      {/* Video Modal with enhanced styling */}
+      {/* Video Modal */}
       <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
-        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black border-2 border-yutime-lavender/30">
-          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20 transition-colors">
+        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
             <X className="h-6 w-6" />
           </DialogClose>
           {currentVideo && (
             <div className="w-full">
-              <div className="p-4 bg-gradient-to-r from-[#2a9d8f] to-[#26a085] text-white border-b border-white/20">
+              <div className="p-4 bg-white text-black border-b border-gray-200">
                 <h3 className="text-xl font-medium">{currentVideo.title}</h3>
               </div>
               <div className="aspect-video">
