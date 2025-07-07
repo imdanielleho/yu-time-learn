@@ -12,11 +12,11 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
   return (
     <div className="fixed bottom-16 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
       {/* Mobile compact bar */}
-      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3 shadow-lg">
+      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
             <div className="text-lg font-bold text-[#2a9d8f]">HKD 120</div>
-            <div className="text-xs text-gray-500">One-time payment</div>
+            <div className="text-xs text-yutime-text/60">One-time payment</div>
           </div>
           <div className="flex gap-2">
             <Button
@@ -38,34 +38,29 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
         </div>
       </div>
 
-      {/* Desktop card - Simplified */}
-      <div className="hidden lg:block bg-white rounded-2xl shadow-xl p-6 border border-gray-100 backdrop-blur-sm">
-        {/* Price section - simplified */}
-        <div className="bg-gray-50 rounded-xl p-6 mb-6 text-center border border-gray-100">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-sm font-medium text-[#2a9d8f]">Single Course</span>
-          </div>
-          <div className="text-3xl font-bold mb-1 text-[#2a9d8f]">HKD 120</div>
-          <div className="text-gray-600 text-sm">Lifetime access • No subscription</div>
+      {/* Desktop card */}
+      <div className="hidden lg:block bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+        <h3 className="text-2xl font-bold text-yutime-primary mb-6 text-center">Course Price</h3>
+        <div className="text-center mb-8">
+          <div className="text-4xl font-bold mb-2 text-[#2a9d8f]">HKD 120</div>
+          <div className="text-yutime-text/70 text-lg">One-time investment in yourself</div>
         </div>
         
-        {/* Action buttons */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
           <Button
             onClick={onBuyNow}
-            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white w-full py-4 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-lg hover:shadow-xl min-h-[52px] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a9d8f]"
+            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white flex-1 min-w-0 py-4 px-3 sm:px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg min-h-[48px] focus-visible:ring-2 focus-visible:ring-offset-2"
             data-testid="buynow-btn"
           >
-            Enroll Now
+            Buy Now
           </Button>
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white w-full py-4 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] min-h-[52px] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a9d8f] flex items-center justify-center gap-2"
+            className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl transition-all duration-300 transform hover:scale-[1.01] flex-shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2"
             data-testid="addtocart-btn"
           >
-            <ShoppingCart size={18} />
-            Add to Cart
+            <ShoppingCart size={20} />
           </Button>
         </div>
       </div>
