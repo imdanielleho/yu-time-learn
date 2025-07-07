@@ -39,7 +39,7 @@ const OrderSummary = ({
           <Button
             variant="outline"
             size="sm"
-            className={`transition-all duration-200 cursor-pointer ${
+            className={`transition-all duration-200 cursor-pointer font-medium ${
               showDeleteButtons 
                 ? "bg-gray-700 text-white border-gray-700 hover:bg-gray-800 hover:text-white" 
                 : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -58,7 +58,7 @@ const OrderSummary = ({
           }`}>
             <div className="flex-1 min-w-0">
               <h4 className="font-medium text-gray-900 text-base mb-2 line-clamp-2">{item.title}</h4>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#2A9D8F]/10 text-[#2A9D8F] border border-[#2A9D8F]/20">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#2A9D8F]/10 text-[#2A9D8F]">
                 {item.category}
               </span>
             </div>

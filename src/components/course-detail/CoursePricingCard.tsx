@@ -10,9 +10,9 @@ interface CoursePricingCardProps {
 
 const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) => {
   return (
-    <div className="fixed bottom-16 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
+    <div className="fixed bottom-0 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
       {/* Mobile compact bar */}
-      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3 mb-16">
+      <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3 mb-0">
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
             <div className="text-lg font-bold text-[#2a9d8f]">HKD 120</div>

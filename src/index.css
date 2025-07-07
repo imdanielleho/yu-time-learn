@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -57,6 +56,7 @@
     letter-spacing: -0.01em;
     font-size: 1rem; /* 16px minimum */
     font-weight: 400; /* Regular weight minimum */
+    cursor: default; /* Ensure default cursor */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -91,9 +91,18 @@
     @apply max-w-7xl mx-auto px-4;
   }
 
-  /* Ensure all links have pointer cursor */
-  a {
+  /* Ensure all interactive elements have pointer cursor */
+  a, button, [role="button"], input[type="button"], input[type="submit"], input[type="reset"], select, label[for], [tabindex="0"] {
     cursor: pointer;
+  }
+
+  /* Ensure non-interactive elements have default cursor */
+  [disabled], [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"], textarea {
+    cursor: text;
   }
 }
 
