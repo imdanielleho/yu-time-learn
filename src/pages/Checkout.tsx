@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
@@ -140,73 +141,69 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f9fa]">
       <SecureCheckoutHeader />
 
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto px-4 py-8 max-w-2xl">
         {/* Step Indicator */}
         <StepIndicator currentStep={2} totalSteps={3} stepLabel="Checkout" />
 
         {/* Main Title */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Complete Your Purchase</h1>
-          <p className="text-gray-600">Secure checkout with instant access</p>
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-[#264653] mb-3">Start healing on your terms</h1>
+          <p className="text-gray-600 text-lg">Have questions before joining? Call 332-900-4403.</p>
+          <p className="text-gray-500 mt-2">Or, schedule your free consult below.</p>
         </div>
 
-        {/* Main Checkout Layout */}
-        <div className="grid lg:grid-cols-5 gap-8">
-          {/* Left Side - Form */}
-          <div className="lg:col-span-3 space-y-6">
-            <ContactInformation 
-              formData={formData}
-              onInputChange={handleInputChange}
-            />
+        {/* Centered Form */}
+        <div className="space-y-8">
+          <ContactInformation 
+            formData={formData}
+            onInputChange={handleInputChange}
+          />
 
-            <PaymentDetails 
-              formData={formData}
-              onInputChange={handleInputChange}
-            />
+          <PaymentDetails 
+            formData={formData}
+            onInputChange={handleInputChange}
+          />
 
-            <TermsAgreement 
-              agreed={agreed}
-              onAgreedChange={setAgreed}
+          {/* Order Summary - Mobile Friendly */}
+          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-200">
+            <OrderSummary
+              items={items}
+              showDeleteButtons={showDeleteButtons}
+              onEditToggle={handleEditToggle}
+              onDeleteCourse={handleDeleteCourse}
+              singleCourse={singleCourse}
+              currentTotal={currentTotal}
+              discount={discount}
+              total={total}
+              couponApplied={couponApplied}
+              couponCode={formData.coupon}
             />
           </div>
 
-          {/* Right Side - Order Summary */}
-          <div className="lg:col-span-2">
-            <div className="sticky top-8 space-y-6">
-              <OrderSummary
-                items={items}
-                showDeleteButtons={showDeleteButtons}
-                onEditToggle={handleEditToggle}
-                onDeleteCourse={handleDeleteCourse}
-                singleCourse={singleCourse}
-                currentTotal={currentTotal}
-                discount={discount}
-                total={total}
-                couponApplied={couponApplied}
-                couponCode={formData.coupon}
-              />
+          <CouponSection
+            formData={formData}
+            onInputChange={handleInputChange}
+            onCouponSubmit={handleCoupon}
+            couponApplied={couponApplied}
+            couponError={couponError}
+            discount={discount}
+          />
 
-              <CouponSection
-                formData={formData}
-                onInputChange={handleInputChange}
-                onCouponSubmit={handleCoupon}
-                couponApplied={couponApplied}
-                couponError={couponError}
-                discount={discount}
-              />
+          <TermsAgreement 
+            agreed={agreed}
+            onAgreedChange={setAgreed}
+          />
 
-              <CheckoutButton
-                isProcessing={isProcessing}
-                formData={formData}
-                agreed={agreed}
-                total={total}
-                onSubmit={handleSubmit}
-              />
-            </div>
-          </div>
+          <CheckoutButton
+            isProcessing={isProcessing}
+            formData={formData}
+            agreed={agreed}
+            total={total}
+            onSubmit={handleSubmit}
+          />
         </div>
       </div>
 

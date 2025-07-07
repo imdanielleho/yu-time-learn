@@ -11,38 +11,64 @@ interface ContactInformationProps {
 
 const ContactInformation = ({ formData, onInputChange }: ContactInformationProps) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-200">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-          <span className="text-gray-700 font-semibold">1</span>
+    <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-200">
+      <div className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <Label htmlFor="fullName" className="mb-3 block text-sm font-medium text-gray-700 uppercase tracking-wide">First Name*</Label>
+            <Input
+              id="fullName"
+              name="fullName"
+              placeholder="First name"
+              value={formData.fullName}
+              onChange={onInputChange}
+              required
+              className="text-base py-4 px-4 border-2 border-gray-200 rounded-xl focus:border-[#2a9d8f] focus:ring-0 bg-gray-50"
+              autoComplete="given-name"
+            />
+          </div>
+          <div>
+            <Label htmlFor="lastName" className="mb-3 block text-sm font-medium text-gray-700 uppercase tracking-wide">Last Name*</Label>
+            <Input
+              id="lastName"
+              name="lastName"
+              placeholder="Last name"
+              value=""
+              onChange={onInputChange}
+              required
+              className="text-base py-4 px-4 border-2 border-gray-200 rounded-xl focus:border-[#2a9d8f] focus:ring-0 bg-gray-50"
+              autoComplete="family-name"
+            />
+          </div>
         </div>
-        <h2 className="text-xl font-semibold text-gray-900">Contact Information</h2>
-      </div>
-      
-      <div className="grid md:grid-cols-2 gap-4">
+        
         <div>
-          <Label htmlFor="fullName" className="mb-2 block text-base text-gray-700">Full Name</Label>
-          <Input
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={onInputChange}
-            required
-            className="text-base py-3 border-gray-300 focus:border-gray-500"
-            autoComplete="name"
-          />
-        </div>
-        <div>
-          <Label htmlFor="email" className="mb-2 block text-base text-gray-700">Email Address</Label>
+          <Label htmlFor="email" className="mb-3 block text-sm font-medium text-gray-700 uppercase tracking-wide">Email*</Label>
           <Input
             id="email"
             name="email"
             type="email"
+            placeholder="email@parsley.com"
             value={formData.email}
             onChange={onInputChange}
             required
-            className="text-base py-3 border-gray-300 focus:border-gray-500"
+            className="text-base py-4 px-4 border-2 border-gray-200 rounded-xl focus:border-[#2a9d8f] focus:ring-0 bg-gray-50"
             autoComplete="email"
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="phone" className="mb-3 block text-sm font-medium text-gray-700 uppercase tracking-wide">Phone Number*</Label>
+          <Input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="+1"
+            value=""
+            onChange={onInputChange}
+            required
+            className="text-base py-4 px-4 border-2 border-gray-200 rounded-xl focus:border-[#2a9d8f] focus:ring-0 bg-gray-50"
+            autoComplete="tel"
           />
         </div>
       </div>
