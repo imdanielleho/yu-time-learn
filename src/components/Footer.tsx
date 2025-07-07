@@ -14,7 +14,7 @@ const Footer = () => {
   };
   
   return (
-    <footer className="bg-yutime-coral text-white py-6">
+    <footer className="bg-yutime-coral text-white py-6 pb-6 lg:pb-6 mb-16 lg:mb-0">
       <div className="container">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           {/* All Links - Left Aligned */}

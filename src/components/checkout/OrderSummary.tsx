@@ -42,7 +42,7 @@ const OrderSummary = ({
             className={`transition-all duration-200 cursor-pointer font-medium ${
               showDeleteButtons 
                 ? "bg-gray-700 text-white border-gray-700 hover:bg-gray-800 hover:text-white" 
-                : "text-gray-600 border-gray-300 hover:bg-gray-50"
+                : "text-gray-600 border-gray-300 hover:bg-gray-50 hover:text-gray-700"
             }`}
             onClick={onEditToggle}
           >

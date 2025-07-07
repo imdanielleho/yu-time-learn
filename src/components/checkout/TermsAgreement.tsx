@@ -19,7 +19,7 @@ const TermsAgreement = ({ agreed, onAgreedChange }: TermsAgreementProps) => {
           required
         />
         <div className="flex-1">
-          <label htmlFor="agree" className="text-yutime-sage text-base select-none cursor-pointer leading-relaxed">
+          <label htmlFor="agree" className="text-base select-none cursor-pointer leading-relaxed" style={{ color: '#264653' }}>
             I agree to the <a href="#" className="text-yutime-blue hover:underline font-medium">Terms of Service</a> and <a href="#" className="text-yutime-blue hover:underline font-medium">Privacy Policy</a>
           </label>
         </div>
