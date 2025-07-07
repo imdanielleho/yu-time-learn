@@ -93,7 +93,7 @@ const LearningProcess = () => {
               </p>
               <Button 
                 onClick={() => scrollToSection('courses')}
-                className="bg-yutime-primary hover:bg-yutime-primary/90 text-white px-10 py-4 text-lg rounded-2xl font-medium shadow-soft hover-lift"
+                className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-10 py-4 text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
               >
                 Start Learning Today
                 <ArrowRight className="ml-2" size={20} />

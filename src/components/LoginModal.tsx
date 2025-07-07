@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -176,7 +175,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
         <div className={activeScreen === 'signup' ? 'pt-6' : 'pt-2'}>
           <Button
             type="submit"
-            className="w-full py-3 sm:py-4 text-base sm:text-lg bg-yutime-blue hover:bg-yutime-blue/90"
+            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white w-full py-3 sm:py-4 text-base sm:text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
           >
             {activeScreen === 'login' ? 'Login' : 'Create Account'}
           </Button>
@@ -241,7 +240,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
         
         <Button
           type="submit"
-          className="w-full py-3 sm:py-4 text-base sm:text-lg bg-yutime-blue hover:bg-yutime-blue/90"
+          className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white w-full py-3 sm:py-4 text-base sm:text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
         >
           Send Reset Link
         </Button>

@@ -53,7 +53,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
       {isLoggedIn && hasPurchasedCourses && (
         <button 
           onClick={handleResumeLearning}
-          className="bg-yutime-blue hover:bg-yutime-blue/90 text-white h-10 px-4 py-2 rounded-md font-medium text-base transition-all shadow-sm hover:shadow flex items-center"
+          className="bg-[#264653] hover:bg-[#1e3a42] text-white h-10 px-4 py-2 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md flex items-center"
         >
           <Play size={16} className="mr-2" />
           <span>Resume Learning</span>
@@ -80,7 +80,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
       {!isLoggedIn ? (
         <button 
           onClick={handleLoginSignupClick}
-          className="bg-[#2a9d8f] hover:bg-[#2a9d8f]/90 text-white h-10 px-6 py-2 rounded-md font-medium text-base transition-all shadow-sm hover:shadow flex items-center justify-center"
+          className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white h-10 px-6 py-2 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md flex items-center justify-center"
         >
           Log In/Sign Up
         </button>

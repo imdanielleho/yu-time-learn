@@ -69,7 +69,7 @@ const Success = () => {
         <div className="text-center mb-12">
           <Button
             onClick={handleStartLearning}
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 text-lg font-medium flex items-center mx-auto"
+            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg rounded-xl flex items-center mx-auto"
           >
             <Play className="mr-2" size={20} />
             Start Learning

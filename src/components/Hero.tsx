@@ -36,14 +36,14 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 onClick={() => scrollToSection('courses')}
-                className="bg-yutime-primary hover:bg-yutime-primary/90 text-white px-10 py-4 text-lg rounded-2xl shadow-soft hover-lift font-medium"
+                className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-10 py-4 text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
               >
                 Start Learning Today
                 <ArrowRight className="ml-2" size={20} />
               </Button>
               <Button 
                 variant="outline"
-                className="border-2 border-yutime-secondary text-yutime-secondary hover:bg-yutime-secondary hover:text-white px-10 py-4 text-lg rounded-2xl font-medium transition-all duration-300"
+                className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white px-10 py-4 text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01]"
               >
                 How It Works
               </Button>

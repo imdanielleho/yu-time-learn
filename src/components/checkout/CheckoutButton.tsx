@@ -26,7 +26,7 @@ const CheckoutButton = ({ isProcessing, formData, agreed, total, onSubmit }: Che
       <Button
         type="submit"
         disabled={isDisabled}
-        className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 text-xl font-bold rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:scale-[1.02]"
+        className="bg-[#2a9d8f] hover:bg-[#228b7a] disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:transform-none disabled:shadow-none text-white w-full py-6 text-xl font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
       >
         {isProcessing ? (
           <div className="flex items-center justify-center gap-3">

@@ -95,10 +95,17 @@ const PasswordModal = ({ isOpen, onClose }: PasswordModalProps) => {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>
+          <Button 
+            variant="outline" 
+            onClick={onClose}
+            className="border-2 border-gray-300 text-gray-700 bg-transparent hover:bg-gray-50 py-2 px-4 rounded-lg transition-colors duration-200"
+          >
             Cancel
           </Button>
-          <Button onClick={handleChangePassword} className="bg-yutime-blue hover:bg-yutime-blue/90">
+          <Button 
+            onClick={handleChangePassword} 
+            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
+          >
             Change Password
           </Button>
         </DialogFooter>

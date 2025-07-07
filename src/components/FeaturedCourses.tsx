@@ -62,7 +62,7 @@ const FeaturedCourses = () => {
               <span>{course.totalTime}</span>
             </div>
             <Button 
-              className="bg-yutime-primary hover:bg-yutime-primary/90 text-white text-sm px-6 py-3 w-full md:w-auto rounded-xl font-medium shadow-soft hover-lift"
+              className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-sm px-6 py-3 w-full md:w-auto rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
             >
               Get started for free
             </Button>

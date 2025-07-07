@@ -40,9 +40,11 @@ const CouponSection = ({
           <Button
             type="submit"
             variant={couponApplied ? "secondary" : "outline"}
-            size="sm"
             disabled={couponApplied || !formData.coupon}
-            className={`${couponApplied ? "bg-green-50 text-green-700 border-green-200" : "border-yutime-sage/30 text-yutime-sage hover:bg-yutime-sage/5"} text-sm`}
+            className={`${couponApplied 
+              ? "bg-green-50 text-green-700 border-green-200" 
+              : "border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white"
+            } text-sm py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.01]`}
           >
             {couponApplied ? "Applied" : "Apply"}
           </Button>
