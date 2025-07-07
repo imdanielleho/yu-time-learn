@@ -82,10 +82,6 @@ const OrderSummary = ({
 
       {/* Pricing Breakdown */}
       <div className="space-y-3 py-4 border-t border-gray-200">
-        <div className="flex justify-between items-center text-base">
-          <span className="text-gray-600">Subtotal</span>
-          <span className="text-gray-900">HKD {currentTotal}</span>
-        </div>
         {couponApplied && discount > 0 && (
           <div className="flex justify-between items-center text-base">
             <span className="text-green-600">Discount ({couponCode})</span>

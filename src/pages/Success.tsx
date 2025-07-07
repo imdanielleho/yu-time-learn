@@ -62,7 +62,7 @@ const Success = () => {
                   <span>-HKD {orderSummary.discount}</span>
                 </div>
               )}
-              <div className="flex justify-between items-center pt-4 border-t border-yutime-lavender/30">
+              <div className="flex justify-between items-center pt-4">
                 <span className="text-xl font-heading font-semibold text-yutime-charcoal">Total</span>
                 <span className="text-xl font-heading font-semibold text-yutime-charcoal">HKD {orderSummary.total}</span>
               </div>

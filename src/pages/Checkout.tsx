@@ -130,14 +130,11 @@ const Checkout = () => {
   if (checkoutItems.length === 0) {
     return (
       <div className="min-h-screen flex flex-col" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
-        <div className="hidden md:block">
-          <SimpleHeader />
-        </div>
         <div className="flex-1 flex items-center justify-center px-4">
           <div className="text-center">
             <h1 className="text-2xl font-heading font-semibold text-yutime-charcoal mb-6">Your cart is empty</h1>
             <Button asChild className="bg-yutime-secondary hover:bg-yutime-charcoal text-white px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg rounded-xl">
-              <Link to="/">Browse courses</Link>
+              <Link to="/#courses">Browse courses</Link>
             </Button>
           </div>
         </div>
