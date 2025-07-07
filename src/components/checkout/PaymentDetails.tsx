@@ -31,7 +31,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.cardNumber}
               onChange={onInputChange}
               required
-              className="text-base py-3 h-12 pl-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
+              className="text-base py-3 h-12 pl-12 border border-gray-200 focus:border-yutime-secondary focus:ring-0 focus:outline-none rounded-lg bg-white transition-colors duration-200"
               inputMode="numeric"
               autoComplete="cc-number"
             />
@@ -49,7 +49,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.expiryDate}
               onChange={onInputChange}
               required
-              className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
+              className="text-base py-3 h-12 border border-gray-200 focus:border-yutime-secondary focus:ring-0 focus:outline-none rounded-lg bg-white transition-colors duration-200"
               inputMode="numeric"
               autoComplete="cc-exp"
             />
@@ -63,7 +63,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.cvv}
               onChange={onInputChange}
               required
-              className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
+              className="text-base py-3 h-12 border border-gray-200 focus:border-yutime-secondary focus:ring-0 focus:outline-none rounded-lg bg-white transition-colors duration-200"
               inputMode="numeric"
               autoComplete="cc-csc"
             />
@@ -77,7 +77,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.postalCode}
               onChange={onInputChange}
               required
-              className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
+              className="text-base py-3 h-12 border border-gray-200 focus:border-yutime-secondary focus:ring-0 focus:outline-none rounded-lg bg-white transition-colors duration-200"
               autoComplete="postal-code"
             />
           </div>

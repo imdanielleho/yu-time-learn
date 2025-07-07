@@ -28,7 +28,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
             value={formData.fullName}
             onChange={onInputChange}
             required
-            className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
+            className="text-base py-3 h-12 border border-gray-200 focus:border-yutime-secondary focus:ring-0 focus:outline-none rounded-lg bg-white transition-colors duration-200"
             autoComplete="name"
           />
         </div>
@@ -41,7 +41,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
             value={formData.email}
             onChange={onInputChange}
             required
-            className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
+            className="text-base py-3 h-12 border border-gray-200 focus:border-yutime-secondary focus:ring-0 focus:outline-none rounded-lg bg-white transition-colors duration-200"
             autoComplete="email"
           />
         </div>
