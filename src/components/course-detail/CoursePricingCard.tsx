@@ -10,7 +10,7 @@ interface CoursePricingCardProps {
 
 const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) => {
   return (
-    <div className="fixed bottom-16 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto">
+    <div className="fixed bottom-16 left-0 right-0 z-40 lg:sticky lg:top-8 lg:left-auto lg:right-auto lg:bottom-auto lg:z-auto mb-16 lg:mb-0">
       {/* Mobile compact bar */}
       <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between gap-3">
@@ -21,7 +21,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <div className="flex gap-2">
             <Button
               onClick={onBuyNow}
-              className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md min-h-[40px]"
+              className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md min-h-[40px] cursor-pointer"
               data-testid="buynow-btn"
             >
               Buy Now
@@ -29,7 +29,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
             <Button
               onClick={onAddToCart}
               variant="outline"
-              className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg transition-all duration-300 transform hover:scale-[1.01]"
+              className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white flex items-center justify-center min-h-[40px] min-w-[40px] py-2 px-2 rounded-lg transition-all duration-300 transform hover:scale-[1.01] cursor-pointer"
               data-testid="addtocart-btn"
             >
               <ShoppingCart size={16} />
@@ -49,7 +49,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
         <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
           <Button
             onClick={onBuyNow}
-            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white flex-1 min-w-0 py-4 px-3 sm:px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg min-h-[48px] focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white flex-1 min-w-0 py-4 px-3 sm:px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg min-h-[48px] focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer"
             data-testid="buynow-btn"
           >
             Buy Now
@@ -57,7 +57,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           <Button
             onClick={onAddToCart}
             variant="outline"
-            className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl transition-all duration-300 transform hover:scale-[1.01] flex-shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white flex items-center justify-center min-h-[48px] min-w-[44px] sm:min-w-[48px] max-w-full py-4 px-3 rounded-xl transition-all duration-300 transform hover:scale-[1.01] flex-shrink-0 focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer"
             data-testid="addtocart-btn"
           >
             <ShoppingCart size={20} />

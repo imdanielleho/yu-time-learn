@@ -17,12 +17,12 @@ interface CourseCurriculumProps {
 }
 
 const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) => (
-  <div className="space-y-6">
+  <div className="space-y-6 pb-8">
     <h2 className="text-2xl font-bold mb-6 text-yutime-primary">Course Curriculum</h2>
     <Accordion type="single" collapsible defaultValue="chapter-1" className="w-full space-y-3">
       {curriculum.map((chapter, index) => (
         <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
-          <AccordionTrigger className="text-yutime-primary font-semibold text-lg">
+          <AccordionTrigger className="text-yutime-primary font-semibold text-lg cursor-pointer">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full mr-4">
               <span className="text-left">Chapter {chapter.chapter}. {chapter.title}</span>
               <span className="text-sm text-yutime-text/60 font-medium mt-1 lg:mt-0 text-left lg:text-right">
@@ -48,7 +48,7 @@ const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) =
                       {chapter.chapter === 1 && lessonIndex === 0 && (
                         <button
                           onClick={() => onLessonPlay(`Lesson 1: Introduction to ${chapter.title}`)}
-                          className="flex items-center space-x-1 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start lg:self-center lg:ml-4"
+                          className="flex items-center space-x-1 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start lg:self-center lg:ml-4 cursor-pointer"
                           style={{ backgroundColor: '#2a9d8f' }}
                           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
                           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}

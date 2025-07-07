@@ -39,10 +39,10 @@ const OrderSummary = ({
           <Button
             variant="outline"
             size="sm"
-            className={`transition-all duration-200 ${
+            className={`transition-all duration-200 cursor-pointer ${
               showDeleteButtons 
                 ? "bg-gray-700 text-white border-gray-700 hover:bg-gray-800 hover:text-white" 
-                : "text-gray-600 border-gray-300 hover:bg-gray-50"
+                : "text-gray-600 border-gray-300 hover:bg-gray-50 hover:text-gray-600"
             }`}
             onClick={onEditToggle}
           >
@@ -58,7 +58,7 @@ const OrderSummary = ({
           }`}>
             <div className="flex-1 min-w-0">
               <h4 className="font-medium text-gray-900 text-base mb-2 line-clamp-2">{item.title}</h4>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <span className="bg-yutime-secondary/10 text-yutime-secondary px-3 py-1 rounded-full text-sm font-medium">
                 {item.category}
               </span>
             </div>
@@ -69,7 +69,7 @@ const OrderSummary = ({
                   variant="ghost"
                   size="sm"
                   onClick={() => onDeleteCourse(item.id)}
-                  className="text-red-500 hover:text-red-700 hover:bg-red-100 p-2 transition-all duration-200"
+                  className="text-red-500 hover:text-red-700 hover:bg-red-100 p-2 transition-all duration-200 cursor-pointer"
                   aria-label={`Remove ${item.title} from cart`}
                 >
                   <Trash2 className="w-4 h-4" />
