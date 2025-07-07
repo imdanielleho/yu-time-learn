@@ -128,10 +128,10 @@ const Checkout = () => {
 
   if (checkoutItems.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-yutime-cream">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
-          <Link to="/" className="text-gray-600 hover:text-gray-800 hover:underline">
+          <h1 className="text-2xl font-bold text-yutime-primary mb-4">Your cart is empty</h1>
+          <Link to="/" className="text-yutime-charcoal hover:text-yutime-secondary hover:underline">
             Browse courses
           </Link>
         </div>
@@ -140,7 +140,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-yutime-cream">
       <SecureCheckoutHeader />
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -149,8 +149,8 @@ const Checkout = () => {
 
         {/* Main Title */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Complete Your Purchase</h1>
-          <p className="text-gray-600">Secure checkout with instant access</p>
+          <h1 className="text-3xl font-bold text-yutime-primary mb-2">Complete Your Purchase</h1>
+          <p className="text-yutime-charcoal/70">Secure checkout with instant access</p>
         </div>
 
         {/* Main Checkout Layout */}
