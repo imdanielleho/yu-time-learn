@@ -46,7 +46,7 @@ const FeaturedCourses = () => {
             {course.level}
           </div>
         </div>
-        <div className="flex-1 flex flex-col p-8">
+        <div className="flex-1 flex flex-col p-6 md:p-8">
           <div className="mb-4">
             <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
               {course.category}
@@ -73,9 +73,9 @@ const FeaturedCourses = () => {
   );
 
   return (
-    <section id="courses" className="bg-yutime-neutral/20 py-24 md:py-32">
+    <section id="courses" className="bg-yutime-neutral/20 py-16 md:py-24 lg:py-32">
       <div className="container">
-        <div className="mb-16 text-center">
+        <div className="mb-12 md:mb-16 text-center">
           <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             Our Courses
           </p>
@@ -105,7 +105,7 @@ const FeaturedCourses = () => {
             </Carousel>
             
             {/* Enhanced mobile carousel indicators with improved accessibility */}
-            <div className="flex justify-center space-x-3 mt-8 sm:hidden">
+            <div className="flex justify-center space-x-3 mt-6 sm:hidden">
               {Array.from({ length: count }).map((_, index) => (
                 <button
                   key={index}
