@@ -40,7 +40,7 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
 
       {/* Desktop card */}
       <div className="hidden lg:block bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-        <h3 className="text-2xl font-bold text-yutime-primary mb-6 text-center">Course Price</h3>
+        <h3 className="text-2xl font-bold text-yutime-primary mb-6 text-center">Single Course</h3>
         <div className="text-center mb-8">
           <div className="text-4xl font-bold mb-2 text-[#2a9d8f]">HKD 120</div>
           <div className="text-yutime-text/70 text-lg">One-time investment in yourself</div>
