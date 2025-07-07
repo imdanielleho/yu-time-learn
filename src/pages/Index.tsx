@@ -38,7 +38,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1" style={{ paddingBottom: isMobile ? '80px' : '0' }}>
+      <main className="flex-1" style={{ paddingBottom: isMobile ? '0' : '0' }}>
         <div id="hero">
           <Hero />
         </div>
