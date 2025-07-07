@@ -38,14 +38,15 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
         </div>
       </div>
 
-      {/* Desktop card */}
-      <div className="hidden lg:block bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-        <h3 className="text-2xl font-bold text-yutime-primary mb-6 text-center">Course Price</h3>
-        <div className="text-center mb-8">
+      {/* Desktop card - redesigned */}
+      <div className="hidden lg:block bg-gradient-to-br from-white to-yutime-neutral/30 rounded-2xl shadow-wellness p-8 border border-yutime-neutral/40 backdrop-blur-sm">
+        {/* Price section with accent background */}
+        <div className="bg-gradient-to-r from-yutime-secondary/5 to-yutime-accent/5 rounded-xl p-6 mb-8 text-center border border-yutime-secondary/10">
           <div className="text-4xl font-bold mb-2 text-[#2a9d8f]">HKD 120</div>
           <div className="text-yutime-text/70 text-lg">One-time investment in yourself</div>
         </div>
         
+        {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6 w-full">
           <Button
             onClick={onBuyNow}
@@ -62,6 +63,22 @@ const CoursePricingCard = ({ onBuyNow, onAddToCart }: CoursePricingCardProps) =>
           >
             <ShoppingCart size={20} />
           </Button>
+        </div>
+        
+        {/* Additional features with subtle accents */}
+        <div className="space-y-3 text-sm text-yutime-text/60">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-yutime-secondary rounded-full"></div>
+            <span>Lifetime access</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-yutime-accent rounded-full"></div>
+            <span>Certificate of completion</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-yutime-sunshine rounded-full"></div>
+            <span>30-day money-back guarantee</span>
+          </div>
         </div>
       </div>
     </div>
