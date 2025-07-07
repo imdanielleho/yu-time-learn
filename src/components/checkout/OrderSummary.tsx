@@ -57,8 +57,10 @@ const OrderSummary = ({
             showDeleteButtons ? "bg-red-50 border border-red-100" : "bg-gray-50"
           }`}>
             <div className="flex-1 min-w-0">
-              <h4 className="font-medium text-gray-900 text-base mb-1 line-clamp-2">{item.title}</h4>
-              <p className="text-sm text-gray-600">{item.category}</p>
+              <h4 className="font-medium text-gray-900 text-base mb-2 line-clamp-2">{item.title}</h4>
+              <span className="bg-yutime-secondary/10 text-yutime-secondary px-3 py-1 rounded-full text-sm font-medium">
+                {item.category}
+              </span>
             </div>
             <div className="flex items-center gap-3">
               <span className="font-semibold text-gray-900 text-lg">HKD {item.price}</span>

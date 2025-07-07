@@ -18,7 +18,9 @@ const Success = () => {
 
   return (
     <div className="min-h-screen" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
-      <SimpleHeader />
+      <div className="hidden md:block">
+        <SimpleHeader />
+      </div>
       
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Progress Tracker */}
