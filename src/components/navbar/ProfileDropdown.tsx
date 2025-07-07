@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { User, Settings, LogOut, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +21,7 @@ interface ProfileDropdownProps {
 const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
   const { user, logout, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -37,13 +38,24 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
 
   if (!user) return null;
 
+  const triggerProps = enableHover ? {
+    onMouseEnter: () => setIsOpen(true),
+    onMouseLeave: () => setIsOpen(false),
+  } : {};
+
+  const contentProps = enableHover ? {
+    onMouseEnter: () => setIsOpen(true),
+    onMouseLeave: () => setIsOpen(false),
+  } : {};
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <div 
           className={`flex items-center space-x-2 cursor-pointer ${
             enableHover ? 'group' : ''
           }`}
+          {...triggerProps}
         >
           <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 hover:bg-transparent">
             <Avatar className="h-8 w-8">
@@ -61,7 +73,12 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
           )}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-white" align="end" forceMount>
+      <DropdownMenuContent 
+        className="w-56 bg-white" 
+        align="end" 
+        forceMount
+        {...contentProps}
+      >
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{user.name}</p>
