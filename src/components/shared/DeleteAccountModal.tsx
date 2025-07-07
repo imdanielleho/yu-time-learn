@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -62,7 +63,7 @@ const DeleteAccountModal = ({ isOpen, onClose }: DeleteAccountModalProps) => {
           <Button 
             variant="outline" 
             onClick={onClose} 
-            className="border-2 border-gray-300 text-gray-700 bg-transparent hover:bg-gray-50 flex-1 py-2 px-4 rounded-lg transition-colors duration-200"
+            className="border-2 border-[#264653] text-[#264653] bg-transparent hover:bg-[#264653] hover:text-white flex-1 py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.01]"
           >
             Cancel
           </Button>

@@ -19,7 +19,7 @@ const MainCTAs = () => {
               </div>
               <h3 className="text-2xl font-bold text-yutime-navy mb-3">Continue Learning</h3>
               <p className="text-gray-700 mb-4">Pick up where you left off with your current courses</p>
-              <div className="mt-auto flex items-center text-yutime-blue font-medium transition-colors duration-200">
+              <div className="mt-auto flex items-center text-[#2a9d8f] font-medium transition-colors duration-200">
                 Go to my courses <ArrowRight className="ml-2" />
               </div>
             </div>
@@ -36,7 +36,7 @@ const MainCTAs = () => {
               </div>
               <h3 className="text-2xl font-bold text-yutime-navy mb-3">Today's Recommendation</h3>
               <p className="text-gray-700 mb-4">Discover a new course selected just for you</p>
-              <div className="mt-auto flex items-center text-yutime-blue font-medium transition-colors duration-200">
+              <div className="mt-auto flex items-center text-[#2a9d8f] font-medium transition-colors duration-200">
                 View recommendation <ArrowRight className="ml-2" />
               </div>
             </div>

@@ -93,10 +93,12 @@
 }
 
 @layer components {
+  /* Primary CTA - Teal (#2a9d8f) for main conversion actions */
   .btn-primary {
     @apply bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-4 px-8 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg flex items-center justify-center;
   }
   
+  /* Secondary CTA - Navy (#264653) for supporting actions */
   .btn-secondary {
     @apply bg-[#264653] hover:bg-[#1e3a42] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md;
   }
@@ -105,8 +107,14 @@
     @apply bg-yutime-accent hover:bg-yutime-accent/90 text-white py-3 px-8 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-warm;
   }
 
-  .btn-outline {
+  /* Primary outline - Teal border for main actions */
+  .btn-outline-primary {
     @apply border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01];
+  }
+
+  /* Secondary outline - Navy border for supporting actions */
+  .btn-outline-secondary {
+    @apply border-2 border-[#264653] text-[#264653] bg-transparent hover:bg-[#264653] hover:text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01];
   }
 
   .btn-destructive {

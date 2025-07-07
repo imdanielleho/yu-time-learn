@@ -98,7 +98,7 @@ const PasswordModal = ({ isOpen, onClose }: PasswordModalProps) => {
           <Button 
             variant="outline" 
             onClick={onClose}
-            className="border-2 border-gray-300 text-gray-700 bg-transparent hover:bg-gray-50 py-2 px-4 rounded-lg transition-colors duration-200"
+            className="border-2 border-[#264653] text-[#264653] bg-transparent hover:bg-[#264653] hover:text-white py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.01]"
           >
             Cancel
           </Button>
