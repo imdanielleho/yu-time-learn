@@ -24,10 +24,10 @@ const Success = () => {
         {/* Success Message */}
         <div className="text-center mb-8">
           <CheckCircle className="mx-auto text-yutime-secondary mb-6" size={48} />
-          <h1 className="text-3xl font-bold text-yutime-primary mb-4">
+          <h1 className="text-3xl font-heading font-semibold text-yutime-charcoal mb-4">
             Thank you for your purchase!
           </h1>
-          <p className="text-yutime-charcoal/70">
+          <p className="text-yutime-charcoal/70 text-base">
             Your courses have been added to your account and you can start learning immediately.
           </p>
         </div>
@@ -35,7 +35,7 @@ const Success = () => {
         {/* Order Summary */}
         {orderSummary && (
           <div className="bg-white rounded-2xl shadow-sm p-6 border border-yutime-lavender/30 mb-8">
-            <h2 className="text-2xl font-bold text-yutime-primary mb-4">Order Summary</h2>
+            <h2 className="text-2xl font-heading font-semibold text-yutime-charcoal mb-4">Order Summary</h2>
             <div className="space-y-4">
               {orderSummary.items.map((item: any, index: number) => (
                 <div key={index} className="flex items-center gap-4 py-3 border-b border-yutime-lavender/30 last:border-b-0">
@@ -45,7 +45,7 @@ const Success = () => {
                     className="w-16 h-16 rounded-lg object-cover"
                   />
                   <div className="flex-1">
-                    <h4 className="font-medium text-yutime-primary text-base mb-1">{item.title}</h4>
+                    <h4 className="font-medium text-yutime-charcoal text-base mb-1">{item.title}</h4>
                     <p className="text-sm text-yutime-charcoal/60">{item.category}</p>
                   </div>
                   <span className="text-yutime-charcoal font-medium">HKD {item.price}</span>
@@ -58,8 +58,8 @@ const Success = () => {
                 </div>
               )}
               <div className="flex justify-between items-center pt-4 border-t border-yutime-lavender/30">
-                <span className="text-xl font-bold text-yutime-primary">Total</span>
-                <span className="text-xl font-bold text-yutime-primary">HKD {orderSummary.total}</span>
+                <span className="text-xl font-heading font-semibold text-yutime-charcoal">Total</span>
+                <span className="text-xl font-heading font-semibold text-yutime-charcoal">HKD {orderSummary.total}</span>
               </div>
             </div>
           </div>

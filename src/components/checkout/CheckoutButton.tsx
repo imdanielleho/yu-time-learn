@@ -26,7 +26,7 @@ const CheckoutButton = ({ isProcessing, formData, agreed, total, onSubmit }: Che
       <Button
         type="submit"
         disabled={isDisabled}
-        className="bg-yutime-secondary hover:bg-yutime-charcoal disabled:bg-yutime-charcoal/40 disabled:hover:bg-yutime-charcoal/40 disabled:transform-none disabled:shadow-none text-white w-full py-6 text-xl font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+        className="bg-yutime-secondary hover:bg-yutime-charcoal disabled:bg-yutime-charcoal/40 disabled:hover:bg-yutime-charcoal/40 disabled:transform-none disabled:shadow-none text-white w-full py-6 text-xl font-heading font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
       >
         {isProcessing ? (
           <div className="flex items-center justify-center gap-3">

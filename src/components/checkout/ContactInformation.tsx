@@ -13,15 +13,15 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6 border border-yutime-lavender/30">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-yutime-lavender rounded-full flex items-center justify-center">
-          <span className="text-yutime-charcoal font-semibold">1</span>
+        <div className="w-8 h-8 bg-yutime-secondary rounded-full flex items-center justify-center">
+          <span className="text-white font-semibold">1</span>
         </div>
-        <h2 className="text-xl font-semibold text-yutime-primary">Contact Information</h2>
+        <h2 className="text-xl font-heading font-semibold text-yutime-charcoal">Contact Information</h2>
       </div>
       
       <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="fullName" className="mb-2 block text-base text-yutime-charcoal">Full Name</Label>
+          <Label htmlFor="fullName" className="mb-2 block text-base text-yutime-charcoal font-medium">Full Name</Label>
           <Input
             id="fullName"
             name="fullName"
@@ -33,7 +33,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
           />
         </div>
         <div>
-          <Label htmlFor="email" className="mb-2 block text-base text-yutime-charcoal">Email Address</Label>
+          <Label htmlFor="email" className="mb-2 block text-base text-yutime-charcoal font-medium">Email Address</Label>
           <Input
             id="email"
             name="email"

@@ -14,15 +14,15 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6 border border-yutime-lavender/30">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-yutime-lavender rounded-full flex items-center justify-center">
-          <span className="text-yutime-charcoal font-semibold">2</span>
+        <div className="w-8 h-8 bg-yutime-secondary rounded-full flex items-center justify-center">
+          <span className="text-white font-semibold">2</span>
         </div>
-        <h2 className="text-xl font-semibold text-yutime-primary">Payment Details</h2>
+        <h2 className="text-xl font-heading font-semibold text-yutime-charcoal">Payment Details</h2>
       </div>
 
       <div className="space-y-4">
         <div>
-          <Label htmlFor="cardNumber" className="mb-2 block text-base text-yutime-charcoal">Card Number</Label>
+          <Label htmlFor="cardNumber" className="mb-2 block text-base text-yutime-charcoal font-medium">Card Number</Label>
           <div className="relative">
             <Input
               id="cardNumber"
@@ -41,7 +41,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
         
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <Label htmlFor="expiryDate" className="mb-2 block text-base text-yutime-charcoal">Expiry</Label>
+            <Label htmlFor="expiryDate" className="mb-2 block text-base text-yutime-charcoal font-medium">Expiry</Label>
             <Input
               id="expiryDate"
               name="expiryDate"
@@ -55,7 +55,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
             />
           </div>
           <div>
-            <Label htmlFor="cvv" className="mb-2 block text-base text-yutime-charcoal">CVV</Label>
+            <Label htmlFor="cvv" className="mb-2 block text-base text-yutime-charcoal font-medium">CVV</Label>
             <Input
               id="cvv"
               name="cvv"
@@ -69,7 +69,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
             />
           </div>
           <div>
-            <Label htmlFor="postalCode" className="mb-2 block text-base text-yutime-charcoal">Postal Code</Label>
+            <Label htmlFor="postalCode" className="mb-2 block text-base text-yutime-charcoal font-medium">Postal Code</Label>
             <Input
               id="postalCode"
               name="postalCode"
