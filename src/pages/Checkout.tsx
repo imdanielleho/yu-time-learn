@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import SecureCheckoutHeader from "@/components/checkout/SecureCheckoutHeader";
+import SimpleHeader from "@/components/checkout/SimpleHeader";
 import ContactInformation from "@/components/checkout/ContactInformation";
 import PaymentDetails from "@/components/checkout/PaymentDetails";
 import TermsAgreement from "@/components/checkout/TermsAgreement";
@@ -10,7 +10,7 @@ import CouponSection from "@/components/checkout/CouponSection";
 import CheckoutButton from "@/components/checkout/CheckoutButton";
 import DeleteCourseDialog from "@/components/checkout/DeleteCourseDialog";
 import CustomerServiceButton from "@/components/CustomerServiceButton";
-import StepIndicator from "@/components/StepIndicator";
+import ProgressTracker from "@/components/ProgressTracker";
 import { validateCoupon, calculateTotal } from "@/components/checkout/utils";
 import { FormData, DeleteDialog } from "@/components/checkout/types";
 
@@ -141,11 +141,11 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
-      <SecureCheckoutHeader />
+      <SimpleHeader />
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* Step Indicator */}
-        <StepIndicator currentStep={2} totalSteps={3} stepLabel="Checkout" />
+        {/* Progress Tracker */}
+        <ProgressTracker currentStep={2} totalSteps={3} stepLabel="Checkout" />
 
         {/* Main Title */}
         <div className="text-center mb-8">
