@@ -16,7 +16,7 @@ const Success = () => {
   };
 
   return (
-    <div className="min-h-screen bg-yutime-cream">
+    <div className="min-h-screen" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Step Indicator */}
         <StepIndicator currentStep={3} totalSteps={3} stepLabel="Complete" />
@@ -27,7 +27,7 @@ const Success = () => {
           <h1 className="text-3xl font-heading font-semibold text-yutime-charcoal mb-4">
             Thank you for your purchase!
           </h1>
-          <p className="text-yutime-charcoal/70 text-base">
+          <p className="text-base" style={{ color: '#343a40b3' }}>
             Your courses have been added to your account and you can start learning immediately.
           </p>
         </div>
@@ -77,7 +77,7 @@ const Success = () => {
         </div>
 
         <div className="text-center">
-          <p className="text-sm md:text-base text-yutime-charcoal/60">
+          <p className="text-sm md:text-base" style={{ color: '#343a40b3' }}>
             A confirmation email has been sent to your inbox with your purchase details.
           </p>
         </div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
@@ -129,7 +128,7 @@ const Checkout = () => {
 
   if (checkoutItems.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-yutime-cream">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
         <div className="text-center">
           <h1 className="text-2xl font-heading font-semibold text-yutime-charcoal mb-4">Your cart is empty</h1>
           <Link to="/" className="text-yutime-charcoal hover:text-yutime-secondary hover:underline">
@@ -141,7 +140,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-yutime-cream">
+    <div className="min-h-screen" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
       <SecureCheckoutHeader />
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -151,7 +150,7 @@ const Checkout = () => {
         {/* Main Title */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-heading font-semibold text-yutime-charcoal mb-2">Complete Your Purchase</h1>
-          <p className="text-yutime-charcoal/70 text-base">Secure checkout with instant access</p>
+          <p className="text-base" style={{ color: '#343a40b3' }}>Secure checkout with instant access</p>
         </div>
 
         {/* Main Checkout Layout */}

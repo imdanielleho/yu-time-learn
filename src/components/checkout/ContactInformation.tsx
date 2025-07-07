@@ -13,7 +13,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6 border border-yutime-lavender/30">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-yutime-secondary rounded-full flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgb(42, 157, 143)' }}>
           <span className="text-white font-semibold">1</span>
         </div>
         <h2 className="text-xl font-heading font-semibold text-yutime-charcoal">Contact Information</h2>
@@ -28,7 +28,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
             value={formData.fullName}
             onChange={onInputChange}
             required
-            className="text-base py-3 border-yutime-lavender/50 focus:border-yutime-secondary focus:ring-yutime-secondary/30"
+            className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
             autoComplete="name"
           />
         </div>
@@ -41,7 +41,7 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
             value={formData.email}
             onChange={onInputChange}
             required
-            className="text-base py-3 border-yutime-lavender/50 focus:border-yutime-secondary focus:ring-yutime-secondary/30"
+            className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
             autoComplete="email"
           />
         </div>

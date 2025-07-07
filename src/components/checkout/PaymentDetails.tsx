@@ -14,7 +14,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6 border border-yutime-lavender/30">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-yutime-secondary rounded-full flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgb(42, 157, 143)' }}>
           <span className="text-white font-semibold">2</span>
         </div>
         <h2 className="text-xl font-heading font-semibold text-yutime-charcoal">Payment Details</h2>
@@ -31,7 +31,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.cardNumber}
               onChange={onInputChange}
               required
-              className="text-base py-3 pl-12 border-yutime-lavender/50 focus:border-yutime-secondary focus:ring-yutime-secondary/30"
+              className="text-base py-3 h-12 pl-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
               inputMode="numeric"
               autoComplete="cc-number"
             />
@@ -49,7 +49,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.expiryDate}
               onChange={onInputChange}
               required
-              className="text-base py-3 border-yutime-lavender/50 focus:border-yutime-secondary focus:ring-yutime-secondary/30"
+              className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
               inputMode="numeric"
               autoComplete="cc-exp"
             />
@@ -63,7 +63,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.cvv}
               onChange={onInputChange}
               required
-              className="text-base py-3 border-yutime-lavender/50 focus:border-yutime-secondary focus:ring-yutime-secondary/30"
+              className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
               inputMode="numeric"
               autoComplete="cc-csc"
             />
@@ -77,7 +77,7 @@ const PaymentDetails = ({ formData, onInputChange }: PaymentDetailsProps) => {
               value={formData.postalCode}
               onChange={onInputChange}
               required
-              className="text-base py-3 border-yutime-lavender/50 focus:border-yutime-secondary focus:ring-yutime-secondary/30"
+              className="text-base py-3 h-12 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
               autoComplete="postal-code"
             />
           </div>

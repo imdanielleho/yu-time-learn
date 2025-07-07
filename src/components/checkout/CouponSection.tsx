@@ -24,7 +24,7 @@ const CouponSection = ({
   return (
     <div className="bg-white rounded-xl p-4 border border-yutime-sand/50">
       <div className="flex items-center gap-2 mb-3">
-        <span className="text-sm font-medium text-yutime-warmGray">Have a coupon code?</span>
+        <span className="text-sm font-medium" style={{ color: '#364653' }}>Have a coupon code?</span>
       </div>
       
       <form onSubmit={onCouponSubmit} className="space-y-2">
@@ -34,7 +34,7 @@ const CouponSection = ({
             placeholder="Enter code"
             value={formData.coupon}
             onChange={onInputChange}
-            className="flex-1 text-sm border-yutime-sand focus:border-yutime-sage"
+            className="flex-1 text-sm h-10 border-2 border-gray-200 focus:border-yutime-secondary focus:ring-0 rounded-lg bg-white transition-colors duration-200"
             disabled={couponApplied}
           />
           <Button
@@ -44,7 +44,7 @@ const CouponSection = ({
             className={`${couponApplied 
               ? "bg-green-50 text-green-700 border-green-200" 
               : "border-2 border-[#2a9d8f] text-[#2a9d8f] bg-transparent hover:bg-[#2a9d8f] hover:text-white"
-            } text-sm py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.01]`}
+            } text-sm py-2 px-4 h-10 rounded-lg transition-all duration-300 transform hover:scale-[1.01]`}
           >
             {couponApplied ? "Applied" : "Apply"}
           </Button>
