@@ -39,7 +39,7 @@ const OrderSummary = ({
           <Button
             variant="outline"
             size="sm"
-            className={`transition-all duration-200 ${
+            className={`transition-all duration-200 cursor-pointer ${
               showDeleteButtons 
                 ? "bg-gray-700 text-white border-gray-700 hover:bg-gray-800 hover:text-white" 
                 : "text-gray-600 border-gray-300 hover:bg-gray-50"
@@ -58,7 +58,7 @@ const OrderSummary = ({
           }`}>
             <div className="flex-1 min-w-0">
               <h4 className="font-medium text-gray-900 text-base mb-2 line-clamp-2">{item.title}</h4>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#2A9D8F]/10 text-[#2A9D8F] border border-[#2A9D8F]/20">
                 {item.category}
               </span>
             </div>
@@ -69,7 +69,7 @@ const OrderSummary = ({
                   variant="ghost"
                   size="sm"
                   onClick={() => onDeleteCourse(item.id)}
-                  className="text-red-500 hover:text-red-700 hover:bg-red-100 p-2 transition-all duration-200"
+                  className="text-red-500 hover:text-red-700 hover:bg-red-100 p-2 transition-all duration-200 cursor-pointer"
                   aria-label={`Remove ${item.title} from cart`}
                 >
                   <Trash2 className="w-4 h-4" />
@@ -88,9 +88,7 @@ const OrderSummary = ({
             <span className="text-green-600">-HKD {discount}</span>
           </div>
         )}
-        <div className={`flex justify-between items-center font-bold text-xl text-gray-900 ${
-          couponApplied && discount > 0 ? 'pt-2' : 'pt-4'
-        } border-t border-gray-200`}>
+        <div className="flex justify-between items-center font-bold text-xl text-gray-900 pt-4 border-t border-gray-200">
           <span>Total</span>
           <span>HKD {total}</span>
         </div>

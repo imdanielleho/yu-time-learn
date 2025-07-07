@@ -17,7 +17,7 @@ interface CourseCurriculumProps {
 }
 
 const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) => (
-  <div className="space-y-6">
+  <div className="space-y-6 pb-4 lg:pb-28">
     <h2 className="text-2xl font-bold mb-6 text-yutime-primary">Course Curriculum</h2>
     <Accordion type="single" collapsible defaultValue="chapter-1" className="w-full space-y-3">
       {curriculum.map((chapter, index) => (
@@ -48,7 +48,7 @@ const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) =
                       {chapter.chapter === 1 && lessonIndex === 0 && (
                         <button
                           onClick={() => onLessonPlay(`Lesson 1: Introduction to ${chapter.title}`)}
-                          className="flex items-center space-x-1 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start lg:self-center lg:ml-4"
+                          className="flex items-center space-x-1 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors self-start lg:self-center lg:ml-4 cursor-pointer"
                           style={{ backgroundColor: '#2a9d8f' }}
                           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#238b7a'}
                           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2a9d8f'}
