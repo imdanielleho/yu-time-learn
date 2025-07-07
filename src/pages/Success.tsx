@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CheckCircle, Play } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -11,27 +11,10 @@ const Success = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const orderSummary = location.state?.orderSummary;
-  const [countdown, setCountdown] = useState(5);
 
   const handleStartLearning = () => {
     navigate('/dashboard');
   };
-
-  // Auto-redirect countdown
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          navigate('/dashboard');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [navigate]);
 
   return (
     <div className="min-h-screen" style={{ background: 'rgba(248, 249, 250, 0.5)', backgroundImage: 'linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(241, 250, 238, 0.6) 100%)' }}>
@@ -85,18 +68,15 @@ const Success = () => {
           </div>
         )}
 
-        {/* Start Learning Button with Countdown */}
+        {/* Start Learning Button */}
         <div className="text-center mb-12">
           <Button
             onClick={handleStartLearning}
-            className="bg-yutime-secondary hover:bg-yutime-charcoal text-white px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg rounded-xl flex items-center mx-auto mb-4"
+            className="bg-yutime-secondary hover:bg-yutime-charcoal text-white px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg rounded-xl flex items-center mx-auto"
           >
             <Play className="mr-2" size={20} />
             Start Learning
           </Button>
-          <p className="text-sm" style={{ color: '#343a40b3' }}>
-            Redirecting to dashboard in {countdown} seconds...
-          </p>
         </div>
 
         <div className="text-center">
