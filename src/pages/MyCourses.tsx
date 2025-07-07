@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BookOpen, Clock, Trophy, Calendar } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -171,7 +172,10 @@ const MyCourses = () => {
             </span>
           </div>
           <Button 
-            className={expired ? "bg-red-600 hover:bg-red-700" : "bg-yutime-blue hover:bg-yutime-blue/90"}
+            className={expired 
+              ? "bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+              : "bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+            }
           >
             {expired 
               ? 'Repurchase Course' 

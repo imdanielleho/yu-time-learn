@@ -76,15 +76,13 @@ const Settings = () => {
           <h2 className="text-xl font-semibold text-yutime-navy mb-4">Account</h2>
           <div className="flex gap-2">
             <Button 
-              variant="outline" 
-              className="w-full sm:w-auto"
+              className="bg-[#264653] hover:bg-[#1e3a42] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md w-full sm:w-auto"
               onClick={() => setIsPasswordModalOpen(true)}
             >
               Change Password
             </Button>
             <Button 
-              variant="outline" 
-              className="w-full sm:w-auto text-red-600 border-red-200 hover:bg-red-50"
+              className="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md w-full sm:w-auto"
               onClick={() => setIsDeleteModalOpen(true)}
             >
               Delete Account
