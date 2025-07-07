@@ -41,7 +41,7 @@ const OrderSummary = ({
             size="sm"
             className={`transition-all duration-200 ${
               showDeleteButtons 
-                ? "bg-gray-700 text-white border-gray-700 hover:bg-gray-800" 
+                ? "bg-gray-700 text-white border-gray-700 hover:bg-gray-800 hover:text-white" 
                 : "text-gray-600 border-gray-300 hover:bg-gray-50"
             }`}
             onClick={onEditToggle}
@@ -58,7 +58,7 @@ const OrderSummary = ({
           }`}>
             <div className="flex-1 min-w-0">
               <h4 className="font-medium text-gray-900 text-base mb-2 line-clamp-2">{item.title}</h4>
-              <span className="bg-yutime-secondary/10 text-yutime-secondary px-3 py-1 rounded-full text-sm font-medium">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                 {item.category}
               </span>
             </div>
@@ -81,14 +81,16 @@ const OrderSummary = ({
       </div>
 
       {/* Pricing Breakdown */}
-      <div className="space-y-3 py-4 border-t border-gray-200">
+      <div className="space-y-3 py-4">
         {couponApplied && discount > 0 && (
-          <div className="flex justify-between items-center text-base">
+          <div className="flex justify-between items-center text-base border-t border-gray-200 pt-4">
             <span className="text-green-600">Discount ({couponCode})</span>
             <span className="text-green-600">-HKD {discount}</span>
           </div>
         )}
-        <div className="flex justify-between items-center font-bold text-xl text-gray-900 pt-2 border-t border-gray-200">
+        <div className={`flex justify-between items-center font-bold text-xl text-gray-900 ${
+          couponApplied && discount > 0 ? 'pt-2' : 'pt-4'
+        } border-t border-gray-200`}>
           <span>Total</span>
           <span>HKD {total}</span>
         </div>
