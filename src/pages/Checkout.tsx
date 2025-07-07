@@ -128,10 +128,10 @@ const Checkout = () => {
 
   if (checkoutItems.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-        <div className="text-center bg-white p-12 rounded-2xl shadow-lg border border-slate-200">
-          <h1 className="text-3xl font-bold text-slate-800 mb-4">Your cart is empty</h1>
-          <Link to="/" className="text-teal-600 hover:text-teal-700 hover:underline font-medium">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
+          <Link to="/" className="text-gray-600 hover:text-gray-800 hover:underline">
             Browse courses
           </Link>
         </div>
@@ -140,23 +140,23 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gray-50">
       <SecureCheckoutHeader />
 
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Step Indicator */}
         <StepIndicator currentStep={2} totalSteps={3} stepLabel="Checkout" />
 
         {/* Main Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-slate-800 mb-4">Complete Your Purchase</h1>
-          <p className="text-slate-600 text-lg">Secure checkout with instant access</p>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Complete Your Purchase</h1>
+          <p className="text-gray-600">Secure checkout with instant access</p>
         </div>
 
         {/* Main Checkout Layout */}
         <div className="grid lg:grid-cols-5 gap-8">
           {/* Left Side - Form */}
-          <div className="lg:col-span-3 space-y-8">
+          <div className="lg:col-span-3 space-y-6">
             <ContactInformation 
               formData={formData}
               onInputChange={handleInputChange}

@@ -11,30 +11,29 @@ interface ContactInformationProps {
 
 const ContactInformation = ({ formData, onInputChange }: ContactInformationProps) => {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200">
-      <div className="flex items-center gap-4 mb-8">
-        <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
-          <span className="text-teal-700 font-bold text-lg">1</span>
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-200">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+          <span className="text-gray-700 font-semibold">1</span>
         </div>
-        <h2 className="text-2xl font-bold text-slate-800">Contact Information</h2>
+        <h2 className="text-xl font-semibold text-gray-900">Contact Information</h2>
       </div>
       
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="fullName" className="mb-3 block text-base font-medium text-slate-700">Full Name</Label>
+          <Label htmlFor="fullName" className="mb-2 block text-base text-gray-700">Full Name</Label>
           <Input
             id="fullName"
             name="fullName"
             value={formData.fullName}
             onChange={onInputChange}
             required
-            className="text-base py-4 px-4 border-slate-300 focus:border-teal-500 focus:ring-teal-500 rounded-xl"
+            className="text-base py-3 border-gray-300 focus:border-gray-500"
             autoComplete="name"
-            placeholder="Enter your full name"
           />
         </div>
         <div>
-          <Label htmlFor="email" className="mb-3 block text-base font-medium text-slate-700">Email Address</Label>
+          <Label htmlFor="email" className="mb-2 block text-base text-gray-700">Email Address</Label>
           <Input
             id="email"
             name="email"
@@ -42,9 +41,8 @@ const ContactInformation = ({ formData, onInputChange }: ContactInformationProps
             value={formData.email}
             onChange={onInputChange}
             required
-            className="text-base py-4 px-4 border-slate-300 focus:border-teal-500 focus:ring-teal-500 rounded-xl"
+            className="text-base py-3 border-gray-300 focus:border-gray-500"
             autoComplete="email"
-            placeholder="Enter your email"
           />
         </div>
       </div>
