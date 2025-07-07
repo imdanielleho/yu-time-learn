@@ -14,7 +14,7 @@ const Footer = () => {
   };
   
   return (
-    <footer className="bg-yutime-coral text-white py-8" style={{ paddingBottom: '100px' }}>
+    <footer className="bg-yutime-coral text-white py-6" style={{ paddingBottom: '100px' }}>
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Copyright */}

@@ -43,6 +43,7 @@ const Hero = () => {
               </Button>
               <Button 
                 variant="outline"
+                onClick={() => scrollToSection('how-it-works')}
                 className="border-2 border-[#264653] text-[#264653] bg-transparent hover:bg-[#264653] hover:text-white px-8 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01]"
               >
                 How It Works
