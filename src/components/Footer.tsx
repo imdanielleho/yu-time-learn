@@ -2,7 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+interface FooterProps {
+  isOnCourseDetail?: boolean;
+}
+
+const Footer = ({ isOnCourseDetail = false }: FooterProps) => {
   const currentYear = new Date().getFullYear();
   
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
@@ -14,7 +18,9 @@ const Footer = () => {
   };
   
   return (
-    <footer className="bg-yutime-coral text-white py-6 pb-6 lg:pb-6 mb-16 lg:mb-0">
+    <footer className={`bg-yutime-coral text-white py-6 lg:pb-6 ${
+      isOnCourseDetail ? 'pb-20 mb-0' : 'pb-6 mb-16'
+    } lg:mb-0`}>
       <div className="container">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           {/* All Links - Left Aligned */}

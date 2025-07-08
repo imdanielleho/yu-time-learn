@@ -179,7 +179,7 @@ const CourseDetail = () => {
         <CourseHeader course={course} onPlay={handleVideoPlay} />
         <div className="bg-gray-50">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-24 lg:pb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-8">
               <div className="lg:col-span-2 space-y-8">
                 <CourseContent />
                 <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
@@ -194,7 +194,7 @@ const CourseDetail = () => {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer isOnCourseDetail={true} />
       {!isMobile && <CustomerServiceButton />}
       {isMobile && !isLoggedIn && (
         <HomeMobileNavigation 
