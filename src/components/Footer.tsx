@@ -19,7 +19,7 @@ const Footer = ({ isOnCourseDetail = false }: FooterProps) => {
   
   return (
     <footer className={`bg-yutime-coral text-white py-6 lg:pb-6 ${
-      isOnCourseDetail ? 'pb-28 mb-0' : 'pb-6 mb-16'
+      isOnCourseDetail ? 'pb-[134px] mb-0' : 'pb-6 mb-16'
     } lg:mb-0`}>
       <div className="container">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
