@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Play, BookOpen, ShoppingCart, X } from 'lucide-react';
@@ -195,10 +194,7 @@ const CourseDetail = () => {
           </div>
         </div>
       </main>
-      {/* Course Detail specific footer with mobile spacing */}
-      <div className="pb-24 lg:pb-0">
-        <Footer />
-      </div>
+      <Footer />
       {!isMobile && <CustomerServiceButton />}
       {isMobile && !isLoggedIn && (
         <HomeMobileNavigation 
