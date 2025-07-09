@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Facebook, Twitter, Linkedin } from "lucide-react";
+import { Facebook, Twitter, Apple } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 
 const LoginSignup = () => {
@@ -158,9 +157,9 @@ const LoginSignup = () => {
                   variant="outline" 
                   size="icon" 
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
-                  onClick={() => handleSocialLogin("LinkedIn")}
+                  onClick={() => handleSocialLogin("Apple")}
                 >
-                  <Linkedin className="h-5 w-5 text-gray-600" />
+                  <Apple className="h-5 w-5 text-gray-600" />
                 </Button>
               </div>
               
@@ -262,9 +261,9 @@ const LoginSignup = () => {
                   variant="outline" 
                   size="icon" 
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
-                  onClick={() => handleSocialLogin("LinkedIn")}
+                  onClick={() => handleSocialLogin("Apple")}
                 >
-                  <Linkedin className="h-5 w-5 text-gray-600" />
+                  <Apple className="h-5 w-5 text-gray-600" />
                 </Button>
               </div>
             </TabsContent>
