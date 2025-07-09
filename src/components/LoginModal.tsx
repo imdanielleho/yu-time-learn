@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Facebook, Twitter, ArrowLeft } from "lucide-react";
+import { Facebook, Twitter, Apple, ArrowLeft } from "lucide-react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -192,11 +192,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
           <Facebook className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </Button>
         <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
-          <img 
-            src="/lovable-uploads/da91191a-545c-444d-be93-957fa4a3864e.png" 
-            alt="Apple" 
-            className="h-4 w-4 sm:h-5 sm:w-5"
-          />
+          <Apple className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </Button>
       </div>
       
