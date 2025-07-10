@@ -47,9 +47,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
       </div>
       
       {/* Login/Profile Section */}
-      {!isLoggedIn ? <button onClick={handleLoginSignupClick} className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white h-10 px-6 py-2 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md flex items-center justify-center">
-          Log In/Sign Up
-        </button> : <ProfileDropdown enableHover />}
+      {!isLoggedIn ? <button onClick={handleLoginSignupClick} className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white h-10 px-6 py-2 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md flex items-center justify-center">登入/註冊</button> : <ProfileDropdown enableHover />}
     </div>
   </nav>;
 export default DesktopNavigation;
