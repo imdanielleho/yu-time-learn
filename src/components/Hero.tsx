@@ -19,7 +19,7 @@ const Hero = () => {
             <div className="space-y-4 md:space-y-8">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase">
-                  Learning Made Simple
+                  重新定義熟齡學習體驗
                 </p>
                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-yutime-primary leading-[1.1]">
                   Built for accuracy,
@@ -28,8 +28,7 @@ const Hero = () => {
                 </h1>
               </div>
               <p className="text-lg md:text-xl text-yutime-text/70 leading-relaxed max-w-lg font-light">
-                Discover new skills at your own pace with courses designed specifically for adults 45+. 
-                No pressure, just gentle guidance and celebration of every step forward.
+                打造懂你節奏的成長空間，陪你穩健轉型、從容退休、優雅生活。
               </p>
             </div>
             
@@ -38,7 +37,7 @@ const Hero = () => {
                 onClick={() => scrollToSection('courses')}
                 className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-8 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
               >
-                Start Learning Today
+                免費體驗課程
                 <ArrowRight className="ml-2" size={20} />
               </Button>
               <Button 
@@ -46,18 +45,18 @@ const Hero = () => {
                 onClick={() => scrollToSection('how-it-works')}
                 className="border-2 border-[#264653] text-[#264653] bg-transparent hover:bg-[#264653] hover:text-white px-8 md:px-10 py-3 md:py-4 text-base md:text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01]"
               >
-                How It Works
+                了解怎麼上課
               </Button>
             </div>
             
             <div className="flex items-center space-x-6 md:space-x-8 text-sm text-yutime-text/60">
               <div className="flex items-center space-x-2 md:space-x-3">
                 <div className="w-2 h-2 bg-yutime-secondary rounded-full"></div>
-                <span>Self-paced learning</span>
+                <span>自主節奏學習</span>
               </div>
               <div className="flex items-center space-x-2 md:space-x-3">
                 <div className="w-2 h-2 bg-yutime-accent rounded-full"></div>
-                <span>Supportive community</span>
+                <span>互助支持社群</span>
               </div>
             </div>
           </div>
