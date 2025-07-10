@@ -33,7 +33,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
     <div className="flex items-center space-x-3 h-10">
       {isLoggedIn && hasPurchasedCourses && <button onClick={handleResumeLearning} className="bg-[#264653] hover:bg-[#1e3a42] text-white h-10 px-4 py-2 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md flex items-center">
           <Play size={16} className="mr-2" />
-          <span>Resume Learning</span>
+          <span>繼續學習</span>
         </button>}
       
       {/* Shopping Cart Button */}
