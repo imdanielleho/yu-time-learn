@@ -5,13 +5,11 @@ import { Timer } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { courses } from '@/data/courses';
-
 const FeaturedCourses = () => {
   const isMobile = useIsMobile();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     if (!api) {
       return;
@@ -22,9 +20,11 @@ const FeaturedCourses = () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
-
-  const CourseCard = ({ course }: { course: typeof courses[0] }) => (
-    <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
+  const CourseCard = ({
+    course
+  }: {
+    course: typeof courses[0];
+  }) => <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative overflow-hidden" style={{
         aspectRatio: '16/9'
@@ -49,17 +49,12 @@ const FeaturedCourses = () => {
               <Timer size={16} />
               <span>{course.totalTime}</span>
             </div>
-            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-sm px-6 py-3 w-full md:w-auto rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md">
-              Get started for free
-            </Button>
+            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-sm px-6 py-3 w-full md:w-auto rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md">開始試看</Button>
           </div>
         </div>
       </Link>
-    </div>
-  );
-
-  return (
-    <section id="courses" className="bg-yutime-neutral/20 py-16 md:py-24 lg:py-32">
+    </div>;
+  return <section id="courses" className="bg-yutime-neutral/20 py-16 md:py-24 lg:py-32">
       <div className="container">
         <div className="mb-12 md:mb-16 text-center">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">精選課程</p>
@@ -90,8 +85,6 @@ const FeaturedCourses = () => {
             {courses.map(course => <CourseCard key={course.id} course={course} />)}
           </div>}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default FeaturedCourses;
