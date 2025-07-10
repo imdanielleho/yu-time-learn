@@ -103,7 +103,7 @@ const HomeMobileNavigation = ({
 
         {!isLoggedIn ? <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={onLoginClick}>
             <LogIn className="h-5 w-5" />
-            <span className="text-xs font-medium">Login</span>
+            <span className="text-xs font-medium">登入</span>
           </button> : <MobileMoreMenu />}
       </div>
     </div>;
