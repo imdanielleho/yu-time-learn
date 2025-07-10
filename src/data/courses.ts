@@ -24,7 +24,7 @@ export const courses = [
     category: "Technology",
     level: "Beginner",
     lessons: 8,
-    totalTime: "3 hours 20 min",
+    totalTime: "3 小時 20 分鐘",
     image: "https://mobileklinik.ca/wp-content/uploads/2022/12/what-affects-the-price-of-a-phone-scaled.jpg",
     price: 120,
     description: "Master essential smartphone skills for daily use, from messaging to apps.",
