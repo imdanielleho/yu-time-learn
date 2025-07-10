@@ -1,41 +1,30 @@
-
 import React from 'react';
 import { Heart, BookOpen, Sparkles } from 'lucide-react';
-
 const ValueProposition = () => {
-  const values = [
-    {
-      icon: <Heart size={32} className="text-yutime-coral" />,
-      title: "Evidence-Based Wellness",
-      description: "Discover health and wellness practices backed by science and delivered with warmth. Every course is designed to support your journey to feeling your best."
-    },
-    {
-      icon: <BookOpen size={32} className="text-yutime-secondary" />,
-      title: "Digital Confidence",
-      description: "Build tech skills at your own pace in a supportive environment. No judgment, just gentle guidance and celebration of every small victory."
-    },
-    {
-      icon: <Sparkles size={32} className="text-yutime-accent" />,
-      title: "Financial Empowerment",
-      description: "Take control of your financial future with clear, compassionate guidance. Learn practical skills that bring peace of mind and confidence."
-    }
-  ];
-
-  return (
-    <section className="bg-yutime-softWhite py-16 md:py-24">
+  const values = [{
+    icon: <Heart size={32} className="text-yutime-coral" />,
+    title: "Evidence-Based Wellness",
+    description: "Discover health and wellness practices backed by science and delivered with warmth. Every course is designed to support your journey to feeling your best."
+  }, {
+    icon: <BookOpen size={32} className="text-yutime-secondary" />,
+    title: "Digital Confidence",
+    description: "Build tech skills at your own pace in a supportive environment. No judgment, just gentle guidance and celebration of every small victory."
+  }, {
+    icon: <Sparkles size={32} className="text-yutime-accent" />,
+    title: "Financial Empowerment",
+    description: "Take control of your financial future with clear, compassionate guidance. Learn practical skills that bring peace of mind and confidence."
+  }];
+  return <section className="bg-yutime-softWhite py-16 md:py-24">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
             Your Growth, Your Way
           </h2>
-          <p className="text-lg text-yutime-text/70 max-w-2xl mx-auto leading-relaxed font-light">
-            We believe learning should feel joyful, not overwhelming. Each step forward is worth celebrating.
-          </p>
+          <p className="text-lg text-yutime-text/70 max-w-2xl mx-auto leading-relaxed font-light">專為熟齡設計，簡單學會、有感成長</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-          {values.map((value, index) => (
-            <div key={index} className="text-center space-y-6 group">
+          {values.map((value, index) => <div key={index} className="text-center space-y-6 group">
               <div className="flex justify-center">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yutime-cream to-yutime-neutral flex items-center justify-center shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
                   {value.icon}
@@ -43,8 +32,7 @@ const ValueProposition = () => {
               </div>
               <h3 className="text-xl font-semibold text-yutime-primary font-heading">{value.title}</h3>
               <p className="text-yutime-text/70 leading-relaxed font-light">{value.description}</p>
-            </div>
-          ))}
+            </div>)}
         </div>
         
         {/* Encouraging message */}
@@ -55,8 +43,6 @@ const ValueProposition = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ValueProposition;
