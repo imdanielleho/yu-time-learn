@@ -40,7 +40,7 @@ const Testimonials = () => {
     <section id="testimonials" className="section bg-yutime-neutral/30">
       <div className="container">
         <div className="text-center mb-20">
-          <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
+          <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             Success Stories
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
