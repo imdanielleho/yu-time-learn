@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Facebook, Twitter, Apple } from "lucide-react";
+import { FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
 import { toast } from "@/components/ui/use-toast";
 
 const LoginSignup = () => {
@@ -141,9 +142,9 @@ const LoginSignup = () => {
                   variant="outline" 
                   size="icon" 
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
-                  onClick={() => handleSocialLogin("Twitter")}
+                  onClick={() => handleSocialLogin("Google")}
                 >
-                  <Twitter className="h-5 w-5 text-gray-600" />
+                  <FaGoogle className="h-5 w-5 text-gray-600" />
                 </Button>
                 <Button 
                   variant="outline" 
@@ -151,7 +152,7 @@ const LoginSignup = () => {
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
                   onClick={() => handleSocialLogin("Facebook")}
                 >
-                  <Facebook className="h-5 w-5 text-gray-600" />
+                  <FaFacebookF className="h-5 w-5 text-gray-600" />
                 </Button>
                 <Button 
                   variant="outline" 
@@ -159,7 +160,7 @@ const LoginSignup = () => {
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
                   onClick={() => handleSocialLogin("Apple")}
                 >
-                  <Apple className="h-5 w-5 text-gray-600" />
+                  <FaApple className="h-5 w-5 text-gray-600" />
                 </Button>
               </div>
               
@@ -245,9 +246,9 @@ const LoginSignup = () => {
                   variant="outline" 
                   size="icon" 
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
-                  onClick={() => handleSocialLogin("Twitter")}
+                  onClick={() => handleSocialLogin("Google")}
                 >
-                  <Twitter className="h-5 w-5 text-gray-600" />
+                  <FaGoogle className="h-5 w-5 text-gray-600" />
                 </Button>
                 <Button 
                   variant="outline" 
@@ -255,7 +256,7 @@ const LoginSignup = () => {
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
                   onClick={() => handleSocialLogin("Facebook")}
                 >
-                  <Facebook className="h-5 w-5 text-gray-600" />
+                  <FaFacebookF className="h-5 w-5 text-gray-600" />
                 </Button>
                 <Button 
                   variant="outline" 
@@ -263,7 +264,7 @@ const LoginSignup = () => {
                   className="rounded-full h-12 w-12 bg-gray-200 hover:bg-gray-300 border-0"
                   onClick={() => handleSocialLogin("Apple")}
                 >
-                  <Apple className="h-5 w-5 text-gray-600" />
+                  <FaApple className="h-5 w-5 text-gray-600" />
                 </Button>
               </div>
             </TabsContent>

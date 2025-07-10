@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Facebook, Twitter, Apple, ArrowLeft } from "lucide-react";
+import { FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
+import { ArrowLeft } from "lucide-react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -186,13 +187,13 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       
       <div className="flex justify-center gap-3 my-1">
         <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
-          <Twitter className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
+          <FaGoogle className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </Button>
         <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
-          <Facebook className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
+          <FaFacebookF className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </Button>
         <Button variant="outline" size="icon" className="rounded-full h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 hover:bg-gray-300 border-0">
-          <Apple className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
+          <FaApple className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </Button>
       </div>
       
