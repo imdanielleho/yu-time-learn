@@ -90,7 +90,7 @@ const HomeMobileNavigation = ({
 
         {showResumeButton && <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={onResumeLearningClick}>
             <Play className="h-5 w-5" />
-            <span className="text-xs font-medium">Resume</span>
+            <span className="text-xs font-medium">快速學習</span>
           </button>}
 
         <button className="relative flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={handleCartClick}>
