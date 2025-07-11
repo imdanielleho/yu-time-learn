@@ -24,9 +24,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between h-16 px-6 border-b">
-          <span className="font-heading text-2xl font-bold text-yutime-navy">
-            YŪ<span className="text-yutime-blue">TIME</span>
-          </span>
+          <img 
+            src="/lovable-uploads/6c5f0bde-8821-4750-a50d-52c7232fe54c.png" 
+            alt="YŪTIME" 
+            className="h-8 w-auto"
+          />
           <Button 
             variant="ghost" 
             size="icon" 
