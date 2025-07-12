@@ -42,13 +42,11 @@ const Index = () => {
         <div id="hero">
           <Hero />
         </div>
+        <ValueProposition />
         <div id="courses">
           <FeaturedCourses />
         </div>
-        <ValueProposition />
-        <div id="how-it-works">
-          <LearningProcess />
-        </div>
+        <LearningProcess />
         <div id="testimonials">
           <Testimonials />
         </div>

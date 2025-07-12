@@ -1,39 +1,32 @@
-
 import React from 'react';
 import { Users, BookOpen, Award, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-
 const LearningProcess = () => {
-  const steps = [
-    {
-      number: "1",
-      icon: <Users size={40} className="text-yutime-primary" />,
-      title: "Tell us what you need",
-      description: "We take a personalized approach to self-assessment, prioritizing how members prefer to receive care."
-    },
-    {
-      number: "2", 
-      icon: <BookOpen size={40} className="text-yutime-secondary" />,
-      title: "Get connected to care",
-      description: "This allows us to structure a plan that best suits each individual member's learning journey."
-    },
-    {
-      number: "3",
-      icon: <Award size={40} className="text-yutime-accent" />,
-      title: "Assess and adapt", 
-      description: "Track your progress and celebrate achievements as you develop new skills at your own pace."
-    }
-  ];
-
+  const steps = [{
+    number: "1",
+    icon: <Users size={40} className="text-yutime-primary" />,
+    title: "Tell us what you need",
+    description: "We take a personalized approach to self-assessment, prioritizing how members prefer to receive care."
+  }, {
+    number: "2",
+    icon: <BookOpen size={40} className="text-yutime-secondary" />,
+    title: "Get connected to care",
+    description: "This allows us to structure a plan that best suits each individual member's learning journey."
+  }, {
+    number: "3",
+    icon: <Award size={40} className="text-yutime-accent" />,
+    title: "Assess and adapt",
+    description: "Track your progress and celebrate achievements as you develop new skills at your own pace."
+  }];
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section id="how-it-works" className="bg-yutime-neutral/20 py-16 md:py-20">
+  return <section id="how-it-works" className="bg-white py-16 md:py-20">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
@@ -50,8 +43,7 @@ const LearningProcess = () => {
         {/* Vertical Column Layout with integrated step numbers and larger icons */}
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {steps.map((step, index) => (
-              <div key={index}>
+            {steps.map((step, index) => <div key={index}>
                 <div className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col">
                   
                   {/* Integrated step number and icon design */}
@@ -78,8 +70,7 @@ const LearningProcess = () => {
                     </p>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
           
           {/* CTA Section */}
@@ -89,10 +80,7 @@ const LearningProcess = () => {
               <p className="text-yutime-text/70 mb-8 text-lg font-light">
                 Join thousands of learners who have transformed their lives through personalized education.
               </p>
-              <Button 
-                onClick={() => scrollToSection('courses')} 
-                className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-10 py-4 text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
-              >
+              <Button onClick={() => scrollToSection('courses')} className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-10 py-4 text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
                 Start Learning Today
                 <ArrowRight className="ml-2" size={20} />
               </Button>
@@ -100,8 +88,6 @@ const LearningProcess = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default LearningProcess;
