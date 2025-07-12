@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 
@@ -37,7 +36,7 @@ const communityAvatars = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="section bg-yutime-neutral/30">
+    <section id="testimonials" className="section bg-white">
       <div className="container">
         <div className="text-center mb-20">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
@@ -53,7 +52,7 @@ const Testimonials = () => {
         
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white rounded-3xl p-8 shadow-card hover:shadow-wellness transition-all duration-300 group">
+            <div key={testimonial.id} className="bg-yutime-neutral/30 rounded-3xl p-8 shadow-card hover:shadow-wellness transition-all duration-300 group">
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between mb-6">
                   <Quote size={24} className="text-yutime-secondary/60" />
@@ -87,7 +86,7 @@ const Testimonials = () => {
         </div>
 
         {/* Community section */}
-        <div className="max-w-lg mx-auto bg-white rounded-3xl p-8 shadow-soft border border-yutime-neutral/20">
+        <div className="max-w-lg mx-auto bg-yutime-neutral/30 rounded-3xl p-8 shadow-soft border border-yutime-neutral/20">
           <div className="flex items-center justify-between">
             {/* Avatar section */}
             <div className="flex -space-x-3">
