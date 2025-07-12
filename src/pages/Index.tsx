@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import HeroCarousel from '@/components/HeroCarousel';
-import FeaturedCourses from '@/components/FeaturedCourses';
+import Hero from '@/components/Hero';
 import ValueProposition from '@/components/ValueProposition';
+import FeaturedCourses from '@/components/FeaturedCourses';
 import LearningProcess from '@/components/LearningProcess';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
@@ -39,31 +39,18 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1" style={{ paddingBottom: isMobile ? '0' : '0' }}>
-        {/* Hero Carousel - First Section */}
-        <HeroCarousel />
-        
-        {/* Featured Courses */}
-        <div id="courses" className="bg-yutime-neutral/10">
+        <div id="hero">
+          <Hero />
+        </div>
+        <ValueProposition />
+        <div id="courses">
           <FeaturedCourses />
         </div>
-        
-        {/* Your Growth, Your Way */}
-        <div className="bg-yutime-cream/30">
-          <ValueProposition />
-        </div>
-        
-        {/* How It Works */}
-        <div id="how-it-works" className="bg-white">
-          <LearningProcess />
-        </div>
-        
-        {/* Testimonials */}
-        <div id="testimonials" className="bg-yutime-softWhite">
+        <LearningProcess />
+        <div id="testimonials">
           <Testimonials />
         </div>
-        
-        {/* FAQ */}
-        <div id="faq" className="bg-yutime-neutral/5">
+        <div id="faq">
           <FAQ />
         </div>
       </main>
