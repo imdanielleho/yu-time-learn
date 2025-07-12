@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ const Hero = () => {
           <div className="space-y-6 md:space-y-10 animate-fade-in">
             <div className="space-y-4 md:space-y-8">
               <div className="space-y-2">
-                <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase">
+                <p className="text-lg font-medium text-yutime-secondary tracking-wide uppercase">
                   重新定義熟齡學習體驗
                 </p>
                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-yutime-primary leading-[1.1]">
