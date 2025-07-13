@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const NavbarLogo = () => (
   <Link to="/" className="flex items-center space-x-2">
     <img 
-      src="/lovable-uploads/25eec59d-9afd-4215-9712-6e965098d2a5.png" 
+      src="/lovable-uploads/4c53a398-8f65-4b8f-864d-b8742e5de784.png" 
       alt="YUTIME" 
       className="h-8 w-auto"
     />
