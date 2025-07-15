@@ -30,13 +30,13 @@ const FeaturedCourses = () => {
         aspectRatio: '16/10'
       }}>
           <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" />
-          <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-xs font-medium">
+          <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-base font-medium">
             {course.level}
           </div>
         </div>
         <div className="flex-1 flex flex-col p-4 md:p-5">
           <div className="mb-3">
-            <span className="bg-yutime-secondary/10 text-yutime-secondary px-3 py-1.5 rounded-full text-xs font-medium">
+            <span className="bg-yutime-secondary/10 text-yutime-secondary px-3 py-1.5 rounded-full text-base font-medium">
               {course.category}
             </span>
           </div>
@@ -45,11 +45,11 @@ const FeaturedCourses = () => {
           </h3>
           <p className="text-yutime-secondary text-lg font-bold mb-4">HKD {course.price}</p>
           <div className="mt-auto pt-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-            <div className="flex items-center gap-2 text-xs text-yutime-text/60">
-              <Timer size={14} />
+            <div className="flex items-center gap-2 text-base text-yutime-text/60">
+              <Timer size={16} />
               <span>{course.totalTime}</span>
             </div>
-            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-xs px-4 py-2 w-full md:w-auto rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md">開始試看</Button>
+            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-base px-4 py-2 w-full md:w-auto rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md">開始試看</Button>
           </div>
         </div>
       </Link>
