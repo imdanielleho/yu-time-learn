@@ -27,7 +27,7 @@ const OurLearners = () => {
   ];
 
   return (
-    <section className="bg-yutime-neutral/30 py-16 md:py-20">
+    <section className="bg-white py-16 md:py-20">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
@@ -41,34 +41,53 @@ const OurLearners = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {personas.map((persona, index) => (
-            <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
-              <div className="flex-1">
-                <div className="flex justify-center mb-6">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yutime-cream to-yutime-neutral flex items-center justify-center shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
-                    {persona.icon}
+        <div className="relative">
+          {/* Connecting line for desktop */}
+          <div className="hidden md:block absolute top-16 left-0 w-full h-0.5 bg-gradient-to-r from-yutime-coral/20 via-yutime-secondary/20 to-yutime-accent/20"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+            {personas.map((persona, index) => (
+              <div key={index} className="relative bg-yutime-softWhite/50 rounded-2xl p-6 md:p-8 border border-yutime-neutral/10 group hover:bg-yutime-softWhite transition-all duration-300">
+                {/* Timeline dot */}
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 md:block hidden">
+                  <div className="w-8 h-8 rounded-full bg-white border-4 border-yutime-secondary shadow-soft group-hover:border-yutime-accent transition-colors duration-300"></div>
+                </div>
+                
+                <div className="text-center space-y-4">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yutime-cream to-yutime-neutral flex items-center justify-center shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
+                      {persona.icon}
+                    </div>
                   </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-yutime-primary font-heading">
+                      {persona.title}
+                    </h3>
+                    <span className="inline-block bg-yutime-secondary/15 text-yutime-secondary px-3 py-1 rounded-full text-sm font-semibold">
+                      {persona.ageStage}
+                    </span>
+                  </div>
+                  
+                  <blockquote className="text-lg font-medium text-yutime-primary italic leading-relaxed px-2">
+                    "{persona.tagline}"
+                  </blockquote>
+                  
+                  <p className="text-yutime-text/70 leading-relaxed font-light">
+                    {persona.description}
+                  </p>
                 </div>
-                <div className="mb-6">
-                  <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
-                    {persona.title}
-                  </h3>
-                  <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
-                    {persona.ageStage}
-                  </span>
-                </div>
-                
-                <blockquote className="text-lg font-medium text-yutime-primary mb-6 italic leading-relaxed">
-                  "{persona.tagline}"
-                </blockquote>
-                
-                <p className="text-yutime-text/70 leading-relaxed font-light">
-                  {persona.description}
-                </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+        
+        {/* Bottom encouragement */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yutime-accent/10 to-yutime-coral/10 px-6 py-3 rounded-full border border-yutime-accent/20">
+            <span className="text-2xl">✨</span>
+            <span className="text-yutime-primary font-medium">Learning has no expiration date</span>
+          </div>
         </div>
       </div>
     </section>
