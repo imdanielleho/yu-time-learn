@@ -43,10 +43,10 @@ const Index = () => {
         <div id="hero">
           <Hero />
         </div>
-        <ValueProposition />
         <div id="courses">
           <FeaturedCourses />
         </div>
+        <ValueProposition />
         <OurLearners />
         <LearningProcess />
         <div id="testimonials">
