@@ -1,4 +1,5 @@
 import React from 'react';
+import { Briefcase, RefreshCw, GraduationCap } from 'lucide-react';
 
 const OurLearners = () => {
   const personas = [
@@ -6,19 +7,22 @@ const OurLearners = () => {
       title: "Sarah",
       ageStage: "28 • Working Professional",
       tagline: "I want to level up my skills without disrupting my career",
-      description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule"
+      description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
+      icon: <Briefcase size={32} className="text-yutime-coral" />
     },
     {
       title: "Marcus",
       ageStage: "35 • Career Switcher", 
       tagline: "I need practical skills to transition into tech",
-      description: "Looking for industry-relevant training to make a successful career change"
+      description: "Looking for industry-relevant training to make a successful career change",
+      icon: <RefreshCw size={32} className="text-yutime-secondary" />
     },
     {
       title: "Elena",
       ageStage: "24 • Recent Graduate",
       tagline: "I want to gain real-world experience beyond my degree",
-      description: "Needs hands-on learning to bridge the gap between theory and practice"
+      description: "Needs hands-on learning to bridge the gap between theory and practice",
+      icon: <GraduationCap size={32} className="text-yutime-accent" />
     }
   ];
 
@@ -41,6 +45,11 @@ const OurLearners = () => {
           {personas.map((persona, index) => (
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
+                <div className="flex justify-center mb-6">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yutime-cream to-yutime-neutral flex items-center justify-center shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
+                    {persona.icon}
+                  </div>
+                </div>
                 <div className="mb-6">
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
                     {persona.title}
