@@ -1,28 +1,28 @@
 import React from 'react';
-import { Briefcase, RefreshCw, GraduationCap } from 'lucide-react';
+import { TrendingUp, PlaneTakeoff, Heart } from 'lucide-react';
 
 const OurLearners = () => {
   const personas = [
     {
-      title: "Sarah",
-      ageStage: "28 • Working Professional",
-      tagline: "I want to level up my skills without disrupting my career",
-      description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
-      icon: <Briefcase size={32} className="text-yutime-coral" />
+      title: "Jennifer",
+      ageStage: "45–54 • Working Professional",
+      tagline: "I'm not ready to be left behind by technology",
+      description: "Wants to stay competitive and relevant in her career while adapting to digital changes",
+      icon: <TrendingUp size={32} className="text-yutime-coral" />
     },
     {
-      title: "Marcus",
-      ageStage: "35 • Career Switcher", 
-      tagline: "I need practical skills to transition into tech",
-      description: "Looking for industry-relevant training to make a successful career change",
-      icon: <RefreshCw size={32} className="text-yutime-secondary" />
+      title: "Michael",
+      ageStage: "55–64 • Nearing Retirement", 
+      tagline: "I want to make my transition into retirement meaningful",
+      description: "Preparing for the next chapter with new skills and purposeful activities",
+      icon: <PlaneTakeoff size={32} className="text-yutime-secondary" />
     },
     {
-      title: "Elena",
-      ageStage: "24 • Recent Graduate",
-      tagline: "I want to gain real-world experience beyond my degree",
-      description: "Needs hands-on learning to bridge the gap between theory and practice",
-      icon: <GraduationCap size={32} className="text-yutime-accent" />
+      title: "Grace",
+      ageStage: "65+ • Retired",
+      tagline: "I have time now to pursue what I've always wanted to learn",
+      description: "Exploring new interests and staying mentally active with flexible, engaging learning",
+      icon: <Heart size={32} className="text-yutime-accent" />
     }
   ];
 
@@ -54,16 +54,16 @@ const OurLearners = () => {
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
                     {persona.title}
                   </h3>
-                  <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
+                  <span className="bg-yutime-secondary/20 text-yutime-secondary px-4 py-2 rounded-full text-base font-semibold border border-yutime-secondary/30">
                     {persona.ageStage}
                   </span>
                 </div>
                 
-                <blockquote className="text-lg font-medium text-yutime-primary mb-6 italic leading-relaxed">
+                <blockquote className="text-2xl font-medium text-yutime-primary mb-6 italic leading-relaxed">
                   "{persona.tagline}"
                 </blockquote>
                 
-                <p className="text-yutime-text/70 leading-relaxed font-light">
+                <p className="text-yutime-text/80 leading-relaxed font-normal text-lg">
                   {persona.description}
                 </p>
               </div>
