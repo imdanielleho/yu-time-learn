@@ -27,7 +27,7 @@ const FeaturedCourses = () => {
   }) => <div className="bg-white border border-yutime-neutral/30 rounded-xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative overflow-hidden" style={{
-        aspectRatio: '4/3'
+        aspectRatio: '16/10'
       }}>
           <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" />
           <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium">
@@ -65,7 +65,7 @@ const FeaturedCourses = () => {
         {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none">
             <Carousel className="w-full" setApi={setApi}>
               <CarouselContent className="-ml-2 md:-ml-4">
-                {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/2 xl:basis-1/3">
+                {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                     <CourseCard course={course} />
                   </CarouselItem>)}
               </CarouselContent>
@@ -81,7 +81,7 @@ const FeaturedCourses = () => {
             length: count
           }).map((_, index) => <button key={index} className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${index === current - 1 ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'}`} onClick={() => api?.scrollTo(index)} aria-label={`Go to slide ${index + 1}`} />)}
             </div>
-          </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map(course => <CourseCard key={course.id} course={course} />)}
           </div>}
       </div>
