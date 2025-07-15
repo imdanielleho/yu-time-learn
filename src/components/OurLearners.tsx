@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 
 const OurLearners = () => {
   const personas = [
@@ -24,41 +23,42 @@ const OurLearners = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-yutime-neutral/10">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-yutime-dark mb-4">
+    <section className="bg-yutime-neutral/30 py-16 md:py-20">
+      <div className="container max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             Our Learners
+          </p>
+          <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
+            Every Journey is Unique
           </h2>
-          <p className="text-lg text-yutime-textSecondary max-w-2xl mx-auto">
-            Every learning journey is unique. Meet the learners we're designed to serve.
+          <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg leading-relaxed font-light">
+            Meet the learners we're designed to serve, each with their own goals and aspirations.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {personas.map((persona, index) => (
-            <Card key={index} className="bg-white border-yutime-neutral/20 hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-6">
-                <div className="text-center space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-yutime-dark mb-1">
-                      {persona.title}
-                    </h3>
-                    <span className="text-sm text-yutime-primary font-medium bg-yutime-primary/10 px-3 py-1 rounded-full">
-                      {persona.ageStage}
-                    </span>
-                  </div>
-                  
-                  <blockquote className="text-lg font-medium text-yutime-dark italic">
-                    "{persona.tagline}"
-                  </blockquote>
-                  
-                  <p className="text-yutime-textSecondary text-sm leading-relaxed">
-                    {persona.description}
-                  </p>
+            <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
+              <div className="flex-1">
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
+                    {persona.title}
+                  </h3>
+                  <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
+                    {persona.ageStage}
+                  </span>
                 </div>
-              </CardContent>
-            </Card>
+                
+                <blockquote className="text-lg font-medium text-yutime-primary mb-6 italic leading-relaxed">
+                  "{persona.tagline}"
+                </blockquote>
+                
+                <p className="text-yutime-text/70 leading-relaxed font-light">
+                  {persona.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
