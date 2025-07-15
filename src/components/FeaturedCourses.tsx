@@ -27,24 +27,24 @@ const FeaturedCourses = () => {
   }) => <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative overflow-hidden" style={{
-        aspectRatio: '16/9'
+        aspectRatio: '3/2'
       }}>
           <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" />
-          <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-medium">
+          <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm font-medium">
             {course.level}
           </div>
         </div>
-        <div className="flex-1 flex flex-col p-6 md:p-8">
-          <div className="mb-4">
-            <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
+        <div className="flex-1 flex flex-col p-4 md:p-5">
+          <div className="mb-3">
+            <span className="bg-yutime-secondary/10 text-yutime-secondary px-3 py-1 rounded-full text-sm font-medium">
               {course.category}
             </span>
           </div>
-          <h3 className="text-xl font-semibold mb-4 text-yutime-primary transition-colors">
+          <h3 className="text-xl font-semibold mb-3 text-yutime-primary transition-colors">
             {course.title}
           </h3>
-          <p className="text-yutime-secondary text-xl font-bold mb-6">HKD {course.price}</p>
-          <div className="mt-auto pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <p className="text-yutime-secondary text-xl font-bold mb-4">HKD {course.price}</p>
+          <div className="mt-auto pt-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-2 text-sm text-yutime-text/60">
               <Timer size={16} />
               <span>{course.totalTime}</span>
@@ -54,9 +54,9 @@ const FeaturedCourses = () => {
         </div>
       </Link>
     </div>;
-  return <section id="courses" className="bg-yutime-neutral/20 py-16 md:py-24 lg:py-32">
-      <div className="container">
-        <div className="mb-12 md:mb-16 text-center">
+  return <section id="courses" className="bg-yutime-neutral/20 py-12 md:py-16 lg:py-20">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8">
+        <div className="mb-8 md:mb-12 text-center">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">精選課程</p>
           <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">今天，遇見更好的自己</h2>
           <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg font-light">從數位生活到身心健康，陪你每一段熟齡成長旅程</p>
@@ -81,7 +81,7 @@ const FeaturedCourses = () => {
             length: count
           }).map((_, index) => <button key={index} className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${index === current - 1 ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'}`} onClick={() => api?.scrollTo(index)} aria-label={`Go to slide ${index + 1}`} />)}
             </div>
-          </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map(course => <CourseCard key={course.id} course={course} />)}
           </div>}
       </div>
