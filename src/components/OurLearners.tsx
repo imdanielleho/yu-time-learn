@@ -48,7 +48,7 @@ const OurLearners = () => {
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
                 <div className="flex justify-center mb-6">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
+                  <div className="w-32 h-32 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
                     <img 
                       src={persona.image} 
                       alt={persona.title}
