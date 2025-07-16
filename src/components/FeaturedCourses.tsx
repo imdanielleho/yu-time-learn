@@ -55,7 +55,7 @@ const FeaturedCourses = () => {
       </Link>
     </div>;
   return <section id="courses" className="bg-yutime-neutral/20 py-12 md:py-16 lg:py-20">
-      <div className="w-full max-w-[1140px] mx-auto px-4 md:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8">
         <div className="mb-8 md:mb-12 text-center">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">精選課程</p>
           <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">今天，遇見更好的自己</h2>
