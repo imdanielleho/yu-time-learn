@@ -1,7 +1,7 @@
 import React from 'react';
-import careerShifterImg from '@/assets/career-shifter-unified.jpg';
-import preRetireeImg from '@/assets/pre-retiree-unified.jpg';
-import activeRetireeImg from '@/assets/active-retiree-unified.jpg';
+import midlifeCareerShifterImg from '@/assets/midlife-career-shifter.jpg';
+import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
+import activeRetireeImg from '@/assets/active-retiree.jpg';
 
 const OurLearners = () => {
   const personas = [
@@ -10,27 +10,21 @@ const OurLearners = () => {
       ageStage: "在職",
       tagline: "我不想等被淘汰，現在就想升級自己",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
-      image: careerShifterImg,
-      colorTag: "transformation",
-      tagColor: "bg-blue-500"
+      image: midlifeCareerShifterImg
     },
     {
       title: "過渡規劃者",
       ageStage: "準備退休", 
       tagline: "有規劃的退場，才能有選擇的第二人生",
       description: "Looking for industry-relevant training to make a successful career change",
-      image: preRetireeImg,
-      colorTag: "lifestyle",
-      tagColor: "bg-orange-500"
+      image: preRetireeplannerImg
     },
     {
       title: "樂齡生活家",
       ageStage: "已退休",
       tagline: "現在的我，才真正有時間學自己想學的東西",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
-      image: activeRetireeImg,
-      colorTag: "health",
-      tagColor: "bg-green-500"
+      image: activeRetireeImg
     }
   ];
 
@@ -54,15 +48,13 @@ const OurLearners = () => {
           {personas.map((persona, index) => (
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
-                <div className="flex justify-center mb-6 relative">
-                  <div className="w-40 h-40 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift relative">
+                <div className="flex justify-center mb-6">
+                  <div className="w-32 h-32 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
                     <img 
                       src={persona.image} 
                       alt={persona.title}
                       className="w-full h-full object-cover"
                     />
-                    {/* Color tag */}
-                    <div className={`absolute top-3 right-3 w-4 h-4 rounded-full ${persona.tagColor} shadow-lg`}></div>
                   </div>
                 </div>
                 <div className="mb-6">
