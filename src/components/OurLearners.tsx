@@ -1,7 +1,8 @@
 import React from 'react';
-import midlifeCareerShifterImg from '@/assets/midlife-career-shifter.jpg';
-import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
-import activeRetireeImg from '@/assets/active-retiree.jpg';
+import { Badge } from '@/components/ui/badge';
+import careerShifterImg from '@/assets/career-shifter-unified.jpg';
+import preRetireeplannerImg from '@/assets/pre-retiree-unified.jpg';
+import activeRetireeImg from '@/assets/active-retiree-unified.jpg';
 
 const OurLearners = () => {
   const personas = [
@@ -10,21 +11,24 @@ const OurLearners = () => {
       ageStage: "在職",
       tagline: "我不想等被淘汰，現在就想升級自己",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
-      image: midlifeCareerShifterImg
+      image: careerShifterImg,
+      badgeColor: "bg-blue-500 text-white"
     },
     {
       title: "過渡規劃者",
       ageStage: "準備退休", 
       tagline: "有規劃的退場，才能有選擇的第二人生",
       description: "Looking for industry-relevant training to make a successful career change",
-      image: preRetireeplannerImg
+      image: preRetireeplannerImg,
+      badgeColor: "bg-orange-500 text-white"
     },
     {
       title: "樂齡生活家",
       ageStage: "已退休",
       tagline: "現在的我，才真正有時間學自己想學的東西",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
-      image: activeRetireeImg
+      image: activeRetireeImg,
+      badgeColor: "bg-green-500 text-white"
     }
   ];
 
@@ -48,14 +52,17 @@ const OurLearners = () => {
           {personas.map((persona, index) => (
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
-                <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
+                <div className="flex justify-center mb-6 relative">
+                  <div className="w-40 h-40 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
                     <img 
                       src={persona.image} 
                       alt={persona.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
+                  <Badge className={`absolute -top-2 -right-2 ${persona.badgeColor} border-0 shadow-lg`}>
+                    {index === 0 ? 'T' : index === 1 ? 'L' : 'H'}
+                  </Badge>
                 </div>
                 <div className="mb-6">
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
