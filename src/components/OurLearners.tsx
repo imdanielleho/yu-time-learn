@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, RefreshCw, GraduationCap } from 'lucide-react';
+import { Target, Calendar, Heart } from 'lucide-react';
 
 const OurLearners = () => {
   const personas = [
@@ -8,21 +8,21 @@ const OurLearners = () => {
       ageStage: "working professional",
       tagline: "I want to level up my skills without disrupting my career",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
-      icon: <Briefcase size={32} className="text-yutime-coral" />
+      icon: <Target size={32} className="text-yutime-coral" />
     },
     {
       title: "Pre-Retiree Planner",
       ageStage: "nearing retirement", 
       tagline: "I need practical skills to transition into tech",
       description: "Looking for industry-relevant training to make a successful career change",
-      icon: <RefreshCw size={32} className="text-yutime-secondary" />
+      icon: <Calendar size={32} className="text-yutime-secondary" />
     },
     {
       title: "Active Retiree",
       ageStage: "retired",
       tagline: "I want to gain real-world experience beyond my degree",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
-      icon: <GraduationCap size={32} className="text-yutime-accent" />
+      icon: <Heart size={32} className="text-yutime-accent" />
     }
   ];
 
