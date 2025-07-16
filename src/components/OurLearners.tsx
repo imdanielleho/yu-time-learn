@@ -61,11 +61,7 @@ const OurLearners = () => {
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
                     {persona.title}
                   </h3>
-                  <span className={`px-4 py-2 rounded-full text-sm font-medium ${
-                    index === 0 ? 'bg-yutime-secondary/10 text-yutime-secondary' :
-                    index === 1 ? 'bg-yutime-coral/10 text-yutime-coral' :
-                    'bg-yutime-accent/10 text-yutime-accent'
-                  }`}>
+                  <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
                     {persona.ageStage}
                   </span>
                 </div>
