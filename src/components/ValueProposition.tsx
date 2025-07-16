@@ -15,7 +15,7 @@ const ValueProposition = () => {
     description: "Take control of your financial future with clear, compassionate guidance. Learn practical skills that bring peace of mind and confidence."
   }];
   return <section className="bg-yutime-softWhite py-16 md:py-24">
-      <div className="container max-w-7xl mx-auto px-4">
+      <div className="max-w-[1140px] mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
             Your Growth, Your Way
