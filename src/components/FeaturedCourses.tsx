@@ -27,7 +27,7 @@ const FeaturedCourses = () => {
   }) => <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative overflow-hidden" style={{
-        aspectRatio: '3/2'
+        aspectRatio: '16/9'
       }}>
           <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" />
           <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm font-medium">
