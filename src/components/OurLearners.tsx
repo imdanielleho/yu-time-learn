@@ -4,22 +4,22 @@ import { Briefcase, RefreshCw, GraduationCap } from 'lucide-react';
 const OurLearners = () => {
   const personas = [
     {
-      title: "Sarah",
-      ageStage: "28 • Working Professional",
+      title: "Midlife Career Shifter",
+      ageStage: "working professional",
       tagline: "I want to level up my skills without disrupting my career",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
       icon: <Briefcase size={32} className="text-yutime-coral" />
     },
     {
-      title: "Marcus",
-      ageStage: "35 • Career Switcher", 
+      title: "Pre-Retiree Planner",
+      ageStage: "nearing retirement", 
       tagline: "I need practical skills to transition into tech",
       description: "Looking for industry-relevant training to make a successful career change",
       icon: <RefreshCw size={32} className="text-yutime-secondary" />
     },
     {
-      title: "Elena",
-      ageStage: "24 • Recent Graduate",
+      title: "Active Retiree",
+      ageStage: "retired",
       tagline: "I want to gain real-world experience beyond my degree",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
       icon: <GraduationCap size={32} className="text-yutime-accent" />
