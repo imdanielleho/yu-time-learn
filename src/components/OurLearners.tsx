@@ -45,17 +45,7 @@ const OurLearners = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {personas.map((persona, index) => {
-            const getSpanColors = (index: number) => {
-              switch(index) {
-                case 0: return "bg-yutime-secondary/10 text-yutime-secondary"; // Blue for transformation
-                case 1: return "bg-yutime-coral/10 text-yutime-coral"; // Coral for health/planning
-                case 2: return "bg-yutime-accent/10 text-yutime-accent"; // Orange for lifestyle
-                default: return "bg-yutime-secondary/10 text-yutime-secondary";
-              }
-            };
-
-            return (
+          {personas.map((persona, index) => (
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
                 <div className="flex justify-center mb-6">
@@ -71,7 +61,7 @@ const OurLearners = () => {
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
                     {persona.title}
                   </h3>
-                  <span className={`${getSpanColors(index)} px-4 py-2 rounded-full text-sm font-medium`}>
+                  <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
                     {persona.ageStage}
                   </span>
                 </div>
@@ -85,8 +75,7 @@ const OurLearners = () => {
                 </p>
               </div>
             </div>
-            );
-          })}
+          ))}
         </div>
         </div>
       </div>
