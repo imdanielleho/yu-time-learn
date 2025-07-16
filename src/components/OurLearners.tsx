@@ -1,7 +1,7 @@
 import React from 'react';
 import midlifeCareerShifterImg from '@/assets/midlife-career-shifter.jpg';
 import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
-import activeRetireeImg from '@/assets/active-retiree.jpg';
+import asianCreativeLearnerImg from '@/assets/asian-creative-learner.jpg';
 
 const OurLearners = () => {
   const personas = [
@@ -24,7 +24,7 @@ const OurLearners = () => {
       ageStage: "已退休",
       tagline: "現在的我，才真正有時間學自己想學的東西",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
-      image: activeRetireeImg
+      image: asianCreativeLearnerImg
     }
   ];
 
@@ -49,7 +49,7 @@ const OurLearners = () => {
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
                 <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
+                  <div className="w-40 h-40 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
                     <img 
                       src={persona.image} 
                       alt={persona.title}
