@@ -12,16 +12,22 @@ const slides = [
     id: 1,
     image: bannerLongevityWellness,
     alt: 'The Longevity Code: Daily Habits for a Healthier, Longer Life',
+    title: 'The Longevity Code',
+    subtitle: 'Daily Habits for a Healthier, Longer Life',
   },
   {
     id: 2,
     image: bannerAiWorkplace,
-    alt: 'Work Smarter with AI: 30 Tools for the Modern Professional',
+    alt: 'Work Smarter with AI: 30 Essential Tools for 45+ Professionals',
+    title: 'Work Smarter with AI',
+    subtitle: '30 Essential Tools for 45+ Professionals',
   },
   {
     id: 3,
     image: bannerMenopauseGuide,
-    alt: 'Strong, Calm & Confident: A Modern Guide to Menopause',
+    alt: 'Strong, Calm & Confident: Your Menopause Wellness Toolkit',
+    title: 'Strong, Calm & Confident',
+    subtitle: 'Your Menopause Wellness Toolkit',
   },
 ];
 
@@ -98,14 +104,26 @@ const HeroCarousel = () => {
               aria-roledescription="slide"
               aria-label={`Slide ${index + 1} of ${slides.length}`}
             >
-              <div className="relative w-full h-[400px] md:h-[600px] lg:h-[720px] overflow-hidden">
+              <div className="relative w-full h-[320px] md:h-[450px] lg:h-[580px] overflow-hidden">
                 <img
                   src={slide.image}
                   alt={slide.alt}
                   className="w-full h-full object-cover object-center"
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+                
+                {/* Course Information Overlay */}
+                <div className="absolute inset-0 flex items-center justify-start pl-8 md:pl-16 lg:pl-24">
+                  <div className="max-w-2xl text-white">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 leading-tight">
+                      {slide.title}
+                    </h2>
+                    <p className="text-sm md:text-lg lg:text-xl opacity-90 leading-relaxed">
+                      {slide.subtitle}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
