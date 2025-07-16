@@ -1,22 +1,10 @@
+
 import React from 'react';
 import midlifeCareerShifterImg from '@/assets/midlife-career-shifter.jpg';
 import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
 import asianCreativeLearnerImg from '@/assets/asian-creative-learner.jpg';
 
 const OurLearners = () => {
-  const getSpanClasses = (color: string) => {
-    switch (color) {
-      case 'blue':
-        return 'bg-yutime-secondary/10 text-yutime-secondary';
-      case 'green':
-        return 'bg-yutime-coral/10 text-yutime-coral';
-      case 'orange':
-        return 'bg-yutime-accent/10 text-yutime-accent';
-      default:
-        return 'bg-yutime-secondary/10 text-yutime-secondary';
-    }
-  };
-
   const personas = [
     {
       title: "轉型前鋒",
@@ -24,7 +12,7 @@ const OurLearners = () => {
       tagline: "我不想等被淘汰，現在就想升級自己",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
       image: midlifeCareerShifterImg,
-      color: "blue"
+      spanStyle: "bg-yutime-secondary/10 text-yutime-secondary" // Blue for transformation
     },
     {
       title: "過渡規劃者",
@@ -32,7 +20,7 @@ const OurLearners = () => {
       tagline: "有規劃的退場，才能有選擇的第二人生",
       description: "Looking for industry-relevant training to make a successful career change",
       image: preRetireeplannerImg,
-      color: "green"
+      spanStyle: "bg-yutime-sage/10 text-yutime-sage" // Green for health/planning
     },
     {
       title: "樂齡生活家",
@@ -40,7 +28,7 @@ const OurLearners = () => {
       tagline: "現在的我，才真正有時間學自己想學的東西",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
       image: asianCreativeLearnerImg,
-      color: "orange"
+      spanStyle: "bg-yutime-accent/10 text-yutime-accent" // Orange for lifestyle
     }
   ];
 
@@ -77,7 +65,7 @@ const OurLearners = () => {
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
                     {persona.title}
                   </h3>
-                  <span className={`${getSpanClasses(persona.color)} px-4 py-2 rounded-full text-sm font-medium`}>
+                  <span className={`${persona.spanStyle} px-4 py-2 rounded-full text-sm font-medium`}>
                     {persona.ageStage}
                   </span>
                 </div>
