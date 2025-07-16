@@ -98,7 +98,7 @@ const HeroCarousel = () => {
               aria-roledescription="slide"
               aria-label={`Slide ${index + 1} of ${slides.length}`}
             >
-              <div className="relative w-full h-[400px] md:h-[600px] lg:h-[720px] overflow-hidden">
+              <div className="relative w-full h-[300px] md:h-[500px] lg:h-[576px] overflow-hidden">
                 <img
                   src={slide.image}
                   alt={slide.alt}
