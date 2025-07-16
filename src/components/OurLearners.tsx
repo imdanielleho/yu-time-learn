@@ -20,7 +20,7 @@ const OurLearners = () => {
       tagline: "有規劃的退場，才能有選擇的第二人生",
       description: "Looking for industry-relevant training to make a successful career change",
       image: preRetireeplannerImg,
-      spanStyle: "bg-yutime-coral/10 text-yutime-coral" // Coral for health/planning
+      spanStyle: "bg-yutime-sage/10 text-yutime-sage" // Green for health/planning
     },
     {
       title: "樂齡生活家",
