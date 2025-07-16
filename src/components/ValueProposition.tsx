@@ -16,14 +16,15 @@ const ValueProposition = () => {
   }];
   return <section className="bg-yutime-softWhite py-16 md:py-24">
       <div className="container">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
-            Your Growth, Your Way
-          </h2>
-          <p className="text-lg text-yutime-text/70 max-w-2xl mx-auto leading-relaxed font-light">專為熟齡設計，簡單學會、有感成長</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
+              Your Growth, Your Way
+            </h2>
+            <p className="text-lg text-yutime-text/70 max-w-2xl mx-auto leading-relaxed font-light">專為熟齡設計，簡單學會、有感成長</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {values.map((value, index) => <div key={index} className="text-center space-y-6 group">
               <div className="flex justify-center">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yutime-cream to-yutime-neutral flex items-center justify-center shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
@@ -33,15 +34,16 @@ const ValueProposition = () => {
               <h3 className="text-xl font-semibold text-yutime-primary font-heading">{value.title}</h3>
               <p className="text-yutime-text/70 leading-relaxed font-light">{value.description}</p>
             </div>)}
-        </div>
-        
-        {/* Encouraging message */}
-        <div className="mt-16 text-center">
+          </div>
+          
+          {/* Encouraging message */}
+          <div className="mt-16 text-center">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yutime-secondary/10 to-yutime-accent/10 px-6 py-3 rounded-full border border-yutime-secondary/20">
             <span className="text-2xl">🌱</span>
             <span className="text-yutime-primary font-medium">Every expert was once a beginner</span>
           </div>
         </div>
+      </div>
       </div>
     </section>;
 };

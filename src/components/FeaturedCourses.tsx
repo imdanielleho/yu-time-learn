@@ -56,13 +56,14 @@ const FeaturedCourses = () => {
     </div>;
   return <section id="courses" className="bg-yutime-neutral/20 py-12 md:py-16 lg:py-20">
       <div className="container">
-        <div className="mb-8 md:mb-12 text-center">
-          <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">精選課程</p>
-          <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">今天，遇見更好的自己</h2>
-          <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg font-light">從數位生活到身心健康，陪你每一段熟齡成長旅程</p>
-        </div>
-        
-        {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8 md:mb-12 text-center">
+            <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">精選課程</p>
+            <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">今天，遇見更好的自己</h2>
+            <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg font-light">從數位生活到身心健康，陪你每一段熟齡成長旅程</p>
+          </div>
+          
+          {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none">
             <Carousel className="w-full" setApi={setApi}>
               <CarouselContent className="-ml-2 md:-ml-4">
                 {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
@@ -84,6 +85,7 @@ const FeaturedCourses = () => {
           </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map(course => <CourseCard key={course.id} course={course} />)}
           </div>}
+        </div>
       </div>
     </section>;
 };

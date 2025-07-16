@@ -31,19 +31,20 @@ const OurLearners = () => {
   return (
     <section className="bg-yutime-neutral/30 py-16 md:py-20">
       <div className="container">
-        <div className="text-center mb-16">
-          <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
-            Our Learners
-          </p>
-          <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
-            Every Journey is Unique
-          </h2>
-          <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg leading-relaxed font-light">
-            Meet the learners we're designed to serve, each with their own goals and aspirations.
-          </p>
-        </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
+              Our Learners
+            </p>
+            <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
+              Every Journey is Unique
+            </h2>
+            <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg leading-relaxed font-light">
+              Meet the learners we're designed to serve, each with their own goals and aspirations.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {personas.map((persona, index) => (
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
@@ -75,6 +76,7 @@ const OurLearners = () => {
               </div>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>
