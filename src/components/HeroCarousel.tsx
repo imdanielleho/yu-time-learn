@@ -3,9 +3,11 @@ import React, { useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import bannerLongevityWellness from '@/assets/banner-longevity-wellness.jpg';
-import bannerAiWorkplace from '@/assets/banner-ai-workplace.jpg';
-import bannerMenopauseGuide from '@/assets/banner-menopause-guide.jpg';
+
+// Import banner images using proper paths
+const bannerLongevityWellness = '/src/assets/banner-longevity-wellness.jpg';
+const bannerAiWorkplace = '/src/assets/banner-ai-workplace.jpg';
+const bannerMenopauseGuide = '/src/assets/banner-menopause-guide.jpg';
 
 const slides = [
   {
@@ -110,6 +112,11 @@ const HeroCarousel = () => {
                   alt={slide.alt}
                   className="w-full h-full object-cover object-center"
                   loading={index === 0 ? 'eager' : 'lazy'}
+                  onError={(e) => {
+                    console.log(`Failed to load image: ${slide.image}`);
+                    // Fallback to a solid color background if image fails
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
                 
