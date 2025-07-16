@@ -1,26 +1,27 @@
+
 import React, { useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import bannerDigitalSkills from '@/assets/banner-digital-skills.jpg';
-import bannerCulinaryArts from '@/assets/banner-culinary-arts.jpg';
-import bannerWellness from '@/assets/banner-wellness.jpg';
+import bannerLongevityWellness from '@/assets/banner-longevity-wellness.jpg';
+import bannerAiWorkplace from '@/assets/banner-ai-workplace.jpg';
+import bannerMenopauseGuide from '@/assets/banner-menopause-guide.jpg';
 
 const slides = [
   {
     id: 1,
-    image: bannerDigitalSkills,
-    alt: 'Digital Skills Course - Learn digital life skills with expert guidance',
+    image: bannerLongevityWellness,
+    alt: 'The Longevity Code: Daily Habits for a Healthier, Longer Life',
   },
   {
     id: 2,
-    image: bannerCulinaryArts,
-    alt: 'Culinary Arts Course - Master classic cuisine with professional chef',
+    image: bannerAiWorkplace,
+    alt: 'Work Smarter with AI: 30 Tools for the Modern Professional',
   },
   {
     id: 3,
-    image: bannerWellness,
-    alt: 'Wellness & Mindfulness Course - Discover inner peace and healthy living',
+    image: bannerMenopauseGuide,
+    alt: 'Strong, Calm & Confident: A Modern Guide to Menopause',
   },
 ];
 
