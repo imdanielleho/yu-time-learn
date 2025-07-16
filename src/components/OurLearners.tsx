@@ -4,43 +4,27 @@ import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
 import asianCreativeLearnerImg from '@/assets/asian-creative-learner.jpg';
 
 const OurLearners = () => {
-  const getSpanClasses = (color: string) => {
-    switch (color) {
-      case 'blue':
-        return 'bg-blue-100 text-blue-800';
-      case 'green':
-        return 'bg-green-100 text-green-800';
-      case 'orange':
-        return 'bg-orange-100 text-orange-800';
-      default:
-        return 'bg-yutime-secondary/10 text-yutime-secondary';
-    }
-  };
-
   const personas = [
     {
       title: "轉型前鋒",
       ageStage: "在職",
       tagline: "我不想等被淘汰，現在就想升級自己",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
-      image: midlifeCareerShifterImg,
-      color: "blue"
+      image: midlifeCareerShifterImg
     },
     {
       title: "過渡規劃者",
       ageStage: "準備退休", 
       tagline: "有規劃的退場，才能有選擇的第二人生",
       description: "Looking for industry-relevant training to make a successful career change",
-      image: preRetireeplannerImg,
-      color: "green"
+      image: preRetireeplannerImg
     },
     {
       title: "樂齡生活家",
       ageStage: "已退休",
       tagline: "現在的我，才真正有時間學自己想學的東西",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
-      image: asianCreativeLearnerImg,
-      color: "orange"
+      image: asianCreativeLearnerImg
     }
   ];
 
@@ -77,7 +61,7 @@ const OurLearners = () => {
                   <h3 className="text-xl font-semibold text-yutime-primary mb-3 font-heading">
                     {persona.title}
                   </h3>
-                  <span className={`${getSpanClasses(persona.color)} px-4 py-2 rounded-full text-sm font-medium`}>
+                  <span className="bg-yutime-secondary/10 text-yutime-secondary px-4 py-2 rounded-full text-sm font-medium">
                     {persona.ageStage}
                   </span>
                 </div>
