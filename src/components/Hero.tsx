@@ -12,7 +12,7 @@ const Hero = () => {
 
   return (
     <section className="relative bg-gradient-to-br from-yutime-neutral via-white to-yutime-cream py-12 md:py-24 lg:py-32 overflow-hidden">
-      <div className="container max-w-7xl mx-auto px-4">
+      <div className="container max-w-[1440px] mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-10 animate-fade-in">
             <div className="space-y-4 md:space-y-8">
