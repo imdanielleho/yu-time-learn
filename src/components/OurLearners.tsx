@@ -30,7 +30,7 @@ const OurLearners = () => {
 
   return (
     <section className="bg-yutime-neutral/30 py-16 md:py-20">
-      <div className="container max-w-7xl mx-auto px-4">
+      <div className="container">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             Our Learners
