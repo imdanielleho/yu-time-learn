@@ -1,5 +1,7 @@
 import React from 'react';
-import { Target, Calendar, Heart } from 'lucide-react';
+import midlifeCareerShifterImg from '@/assets/midlife-career-shifter.jpg';
+import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
+import activeRetireeImg from '@/assets/active-retiree.jpg';
 
 const OurLearners = () => {
   const personas = [
@@ -8,21 +10,21 @@ const OurLearners = () => {
       ageStage: "working professional",
       tagline: "I want to level up my skills without disrupting my career",
       description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
-      icon: <Target size={32} className="text-yutime-coral" />
+      image: midlifeCareerShifterImg
     },
     {
       title: "Pre-Retiree Planner",
       ageStage: "nearing retirement", 
       tagline: "I need practical skills to transition into tech",
       description: "Looking for industry-relevant training to make a successful career change",
-      icon: <Calendar size={32} className="text-yutime-secondary" />
+      image: preRetireeplannerImg
     },
     {
       title: "Active Retiree",
       ageStage: "retired",
       tagline: "I want to gain real-world experience beyond my degree",
       description: "Needs hands-on learning to bridge the gap between theory and practice",
-      icon: <Heart size={32} className="text-yutime-accent" />
+      image: activeRetireeImg
     }
   ];
 
@@ -46,8 +48,12 @@ const OurLearners = () => {
             <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
                 <div className="flex justify-center mb-6">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yutime-cream to-yutime-neutral flex items-center justify-center shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
-                    {persona.icon}
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
+                    <img 
+                      src={persona.image} 
+                      alt={persona.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
                 <div className="mb-6">
