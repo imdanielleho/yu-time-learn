@@ -30,7 +30,7 @@ const LearningProcess = () => {
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
-            How It Works
+            如何開始
           </p>
           <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6 max-w-3xl mx-auto">
             Personalized learning care at scale
