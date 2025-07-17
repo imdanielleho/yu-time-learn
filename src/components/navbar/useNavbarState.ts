@@ -17,20 +17,26 @@ const useNavbarState = () => {
   };
 
   const handleScrollTo = (id: string) => {
+    console.log('handleScrollTo called with id:', id, 'current path:', location.pathname);
     setIsMenuOpen(false);
     if (location.pathname !== '/') {
+      console.log('Not on homepage, navigating to / first');
       navigate('/');
       setTimeout(() => {
+        console.log('Attempting to scroll to element:', id);
         const element = document.getElementById(id);
+        console.log('Element found:', element);
         if (element) {
           element.scrollIntoView({ 
             behavior: 'smooth',
             block: 'start'
           });
         }
-      }, 100);
+      }, 200); // Increased timeout to ensure page loads
     } else {
+      console.log('Already on homepage, scrolling directly');
       const element = document.getElementById(id);
+      console.log('Element found:', element);
       if (element) {
         element.scrollIntoView({ 
           behavior: 'smooth',
