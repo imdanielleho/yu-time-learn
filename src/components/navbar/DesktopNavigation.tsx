@@ -26,7 +26,7 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
     <div className="flex items-center space-x-6">
       <button onClick={() => handleScrollTo('courses')} className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">課程</button>
       <button onClick={() => handleScrollTo('our-learners')} className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">適合對象</button>
-      <button onClick={() => handleScrollTo('learning-process')} className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">如何開始</button>
+      <button onClick={() => handleScrollTo('how-it-works')} className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">如何開始</button>
       <button onClick={() => handleScrollTo('faq')} className="text-lg font-medium text-yutime-navy hover:text-yutime-blue transition-colors">常見問題</button>
     </div>
 
