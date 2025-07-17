@@ -28,7 +28,6 @@ const Footer = ({ isOnCourseDetail = false }: FooterProps) => {
             <p className="text-white/90 text-base font-medium">
               © {currentYear} YŪTIME. All rights reserved.
             </p>
-            <Link to="/" className="text-white/90 hover:text-white transition-colors text-base font-medium">主頁</Link>
             <a href="#courses" onClick={(e) => scrollToSection(e, 'courses')} className="text-white/90 hover:text-white transition-colors text-base font-medium">課程</a>
             <a href="#faq" onClick={(e) => scrollToSection(e, 'faq')} className="text-white/90 hover:text-white transition-colors text-base font-medium">常見問題</a>
             <Link to="/contact" className="text-white/90 hover:text-white transition-colors text-base font-medium">聯絡我們</Link>
