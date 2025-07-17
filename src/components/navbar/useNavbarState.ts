@@ -53,7 +53,7 @@ const useNavbarState = () => {
   const handleLogin = (username: string, password: string) => {
     login(username, password);
     setIsLoginModalOpen(false);
-    // Don't auto-navigate to dashboard, let user stay on current page
+    navigate("/dashboard");
   };
 
   const handleLoginSignupClick = () => {
