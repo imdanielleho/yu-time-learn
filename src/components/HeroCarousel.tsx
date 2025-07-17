@@ -4,10 +4,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-// Import banner images using proper paths
-const bannerLongevityWellness = '/src/assets/banner-longevity-wellness.jpg';
-const bannerAiWorkplace = '/src/assets/banner-ai-workplace.jpg';
-const bannerMenopauseGuide = '/src/assets/banner-menopause-guide.jpg';
+// Import banner images as ES6 modules
+import bannerLongevityWellness from '@/assets/banner-longevity-wellness.jpg';
+import bannerAiWorkplace from '@/assets/banner-ai-workplace.jpg';
+import bannerMenopauseGuide from '@/assets/banner-menopause-guide.jpg';
 
 const slides = [
   {
