@@ -24,7 +24,7 @@ const MobileMoreMenu = () => {
       <DropdownMenuTrigger asChild>
         <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors">
           <MoreHorizontal className="h-5 w-5" />
-          <span className="text-xs font-medium">More</span>
+          <span className="text-xs font-medium">更多</span>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48 bg-white mb-2" align="end" side="top" sideOffset={8}>
