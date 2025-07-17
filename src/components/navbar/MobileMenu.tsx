@@ -37,16 +37,22 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
         <nav className="flex flex-col p-6 space-y-6">
           <button
-            onClick={() => handleScrollTo('testimonials')}
+            onClick={() => handleScrollTo('our-learners')}
             className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
           >
-            Testimonials
+            適合對象
+          </button>
+          <button
+            onClick={() => handleScrollTo('how-it-works')}
+            className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
+          >
+            如何開始
           </button>
           <button
             onClick={() => handleScrollTo('faq')}
             className="text-xl font-medium text-yutime-navy hover:text-yutime-blue text-left"
           >
-            FAQ
+            常見問題
           </button>
         </nav>
       </div>
