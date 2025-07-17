@@ -54,7 +54,7 @@ const FeaturedCourses = () => {
         </div>
       </Link>
     </div>;
-  return <section id="courses" className="bg-yutime-neutral/20 py-12 md:py-16 lg:py-20">
+  return <section id="courses" className="bg-yutime-softWhite py-12 md:py-16 lg:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 md:mb-12 text-center">
