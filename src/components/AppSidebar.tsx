@@ -45,9 +45,11 @@ const AppSidebar = () => {
     <Sidebar className="bg-white border-r">
       <SidebarHeader className="p-4 bg-white border-b">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="font-heading text-xl font-bold text-yutime-navy">
-            YŪ<span className="text-yutime-blue">TIME</span>
-          </span>
+          <img 
+            src="/lovable-uploads/25eec59d-9afd-4215-9712-6e965098d2a5.png" 
+            alt="YUTIME" 
+            className="h-8 w-auto"
+          />
         </Link>
       </SidebarHeader>
       
