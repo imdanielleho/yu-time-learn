@@ -82,7 +82,7 @@ const OurLearners = () => {
                   </span>
                 </div>
                 
-                <blockquote className="text-lg font-medium text-yutime-primary mb-6 italic leading-relaxed">
+                <blockquote className="text-lg font-medium text-yutime-primary mb-6 leading-relaxed">
                   "{persona.tagline}"
                 </blockquote>
                 
