@@ -11,8 +11,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const AppSidebar = () => {
   const location = useLocation();
@@ -43,12 +45,20 @@ const AppSidebar = () => {
 
   return (
     <Sidebar className="bg-white border-r">
-      <SidebarHeader className="p-4 bg-white border-b">
+      <SidebarHeader className="p-4 bg-white border-b relative">
         <Link to="/" className="flex items-center space-x-2">
           <span className="font-heading text-xl font-bold text-yutime-navy">
             YŪ<span className="text-yutime-blue">TIME</span>
           </span>
         </Link>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <SidebarTrigger className="absolute top-2 right-2" />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Collapse/Expand Menu</p>
+          </TooltipContent>
+        </Tooltip>
       </SidebarHeader>
       
       <SidebarContent className="bg-white">
