@@ -22,7 +22,7 @@ const OurLearners = () => {
       title: "轉型前鋒",
       ageStage: "在職",
       tagline: "我不想等被淘汰，現在就想升級自己",
-      description: "Seeking flexible learning that fits around a demanding 9-to-5 schedule",
+      description: "想提升數位力、掌握 AI 工具，開展副業或轉型升級職涯。",
       image: midlifeCareerShifterImg,
       color: "blue"
     },
@@ -30,7 +30,7 @@ const OurLearners = () => {
       title: "過渡規劃者",
       ageStage: "準備退休", 
       tagline: "有規劃的退場，才能有選擇的第二人生",
-      description: "Looking for industry-relevant training to make a successful career change",
+      description: "開始為退休做準備，想規劃健康與財務，生活更有方向。",
       image: preRetireeplannerImg,
       color: "green"
     },
@@ -38,7 +38,7 @@ const OurLearners = () => {
       title: "樂齡生活家",
       ageStage: "已退休",
       tagline: "現在的我，才真正有時間學自己想學的東西",
-      description: "Needs hands-on learning to bridge the gap between theory and practice",
+      description: "想活得健康、有趣、有伴，學習新科技與生活實用技能。",
       image: asianCreativeLearnerImg,
       color: "orange"
     }
