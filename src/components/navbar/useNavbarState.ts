@@ -53,7 +53,6 @@ const useNavbarState = () => {
   const handleLogin = (username: string, password: string) => {
     login(username, password);
     setIsLoginModalOpen(false);
-    navigate("/dashboard");
   };
 
   const handleLoginSignupClick = () => {
