@@ -5,13 +5,13 @@ const LearningProcess = () => {
   const steps = [{
     number: "1",
     icon: <Users size={40} className="text-yutime-primary" />,
-    title: "選擇一門課",
-    description: "We take a personalized approach to self-assessment, prioritizing how members prefer to receive care."
+    title: "選擇課程",
+    description: "根據你的階段與興趣選課"
   }, {
     number: "2",
     icon: <BookOpen size={40} className="text-yutime-secondary" />,
     title: "按照你的節奏學",
-    description: "This allows us to structure a plan that best suits each individual member's learning journey."
+    description: "影片短、可回放，手機隨時可看"
   }, {
     number: "3",
     icon: <Award size={40} className="text-yutime-accent" />,
