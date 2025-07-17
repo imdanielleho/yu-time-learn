@@ -48,7 +48,7 @@ const AppSidebar = () => {
           <img 
             src="/lovable-uploads/25eec59d-9afd-4215-9712-6e965098d2a5.png" 
             alt="YUTIME" 
-            className="h-8 w-auto"
+            className="h-7 w-auto"
           />
         </Link>
       </SidebarHeader>
