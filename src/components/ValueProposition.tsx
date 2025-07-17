@@ -11,8 +11,8 @@ const ValueProposition = () => {
     description: "Build tech skills at your own pace in a supportive environment. No judgment, just gentle guidance and celebration of every small victory."
   }, {
     icon: <Sparkles size={32} className="text-yutime-accent" />,
-    title: "Financial Empowerment",
-    description: "Take control of your financial future with clear, compassionate guidance. Learn practical skills that bring peace of mind and confidence."
+    title: "每堂課都是「用得上的知識」",
+    description: "從生活常見場景出發，內容實用、精簡、有解法"
   }];
   return <section className="bg-yutime-softWhite py-16 md:py-24">
       <div className="container">
