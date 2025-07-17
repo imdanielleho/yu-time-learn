@@ -30,7 +30,7 @@ const OurLearners = () => {
       title: "過渡規劃者",
       ageStage: "準備退休", 
       tagline: "有規劃的退場，才能有選擇的第二人生",
-      description: "開始為退休做準備，想規劃健康與財務，生活更有方向。",
+      description: "掌握健康、財務與心理韌性，安心迎接轉變。",
       image: preRetireeplannerImg,
       color: "green"
     },
