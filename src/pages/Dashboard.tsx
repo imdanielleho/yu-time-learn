@@ -100,7 +100,9 @@ const Dashboard = () => {
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="font-semibold text-yutime-navy">{course.title}</h3>
                   {course.accessType === 'limited' && course.expiryDate && (
-                    <ExpiryCountdown expiryDate={course.expiryDate} />
+                    <div className="hidden md:block">
+                      <ExpiryCountdown expiryDate={course.expiryDate} />
+                    </div>
                   )}
                 </div>
                 <p className="text-sm text-gray-500 mb-4">{course.session}</p>
@@ -112,6 +114,11 @@ const Dashboard = () => {
               <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                 <div className="bg-yutime-blue h-2 rounded-full" style={{ width: `${course.progress}%` }}></div>
               </div>
+              {course.accessType === 'limited' && course.expiryDate && (
+                <div className="md:hidden mb-4">
+                  <ExpiryCountdown expiryDate={course.expiryDate} isMobile={true} />
+                </div>
+              )}
               <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
                 Continue Learning
               </Button>

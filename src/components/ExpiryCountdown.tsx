@@ -5,9 +5,10 @@ import { Eye } from 'lucide-react';
 interface ExpiryCountdownProps {
   expiryDate: Date;
   className?: string;
+  isMobile?: boolean;
 }
 
-const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className = "" }) => {
+const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className = "", isMobile = false }) => {
   const [daysLeft, setDaysLeft] = useState<number>(0);
 
   useEffect(() => {
@@ -30,6 +31,13 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
   }, [expiryDate]);
 
   const formatExpiryDate = (date: Date) => {
+    if (isMobile) {
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -45,6 +53,17 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
       <div className={`flex items-center space-x-1 text-red-600 text-sm font-medium ${className}`}>
         <Eye size={14} />
         <span>Access Expired</span>
+      </div>
+    );
+  }
+
+  if (isMobile) {
+    return (
+      <div className={`flex items-center space-x-1 text-sm ${isExpiringSoon ? 'text-orange-600' : 'text-gray-600'} ${className}`}>
+        <Eye size={14} />
+        <span>
+          {daysLeft} days left. Access ends on {formatExpiryDate(expiryDate)}
+        </span>
       </div>
     );
   }
