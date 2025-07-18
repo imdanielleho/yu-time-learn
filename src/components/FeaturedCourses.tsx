@@ -30,9 +30,6 @@ const FeaturedCourses = () => {
         aspectRatio: '16/9'
       }}>
           <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" />
-          <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm font-medium">
-            {course.level}
-          </div>
         </div>
         <div className="flex-1 flex flex-col p-4 md:p-5">
           <div className="mb-3">

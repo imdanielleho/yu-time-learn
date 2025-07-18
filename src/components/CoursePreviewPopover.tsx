@@ -29,7 +29,7 @@ const CoursePreviewPopover = ({ courseId }: CoursePreviewPopoverProps) => {
           <img src={course.image} alt={course.title} className="w-8 h-8 object-cover rounded" />
           <div className="font-semibold text-yutime-sage">{course.title}</div>
         </div>
-        <div className="text-sm text-yutime-warmGray mb-1">{course.category} · {course.level}</div>
+        <div className="text-sm text-yutime-warmGray mb-1">{course.category}</div>
         <div className="text-sm text-yutime-sage">{course.description}</div>
       </PopoverContent>
     </Popover>
