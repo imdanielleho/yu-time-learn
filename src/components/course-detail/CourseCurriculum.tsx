@@ -14,9 +14,11 @@ interface Chapter {
 interface CourseCurriculumProps {
   curriculum: Chapter[];
   onLessonPlay: (title: string, videoUrl?: string) => void;
+  accessType: 'unlimited' | 'expires';
+  expiryDays?: number;
 }
 
-const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) => (
+const CourseCurriculum = ({ curriculum, onLessonPlay, accessType, expiryDays }: CourseCurriculumProps) => (
   <div className="space-y-6 pb-4 lg:pb-24">
     <h2 className="text-2xl font-bold mb-6 text-yutime-primary">Course Curriculum</h2>
     <Accordion type="multiple" defaultValue={["chapter-1"]} className="w-full space-y-3">
@@ -25,9 +27,20 @@ const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) =
           <AccordionTrigger className="text-yutime-primary font-semibold text-lg">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full mr-4">
               <span className="text-left">Chapter {chapter.chapter}. {chapter.title}</span>
-              <span className="text-sm text-yutime-text/60 font-medium mt-1 lg:mt-0 text-left lg:text-right">
-                {chapter.lessons} lessons | {chapter.duration}
-              </span>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 mt-1 lg:mt-0">
+                <span className="text-sm text-yutime-text/60 font-medium text-left lg:text-right">
+                  {chapter.lessons} lessons | {chapter.duration}
+                </span>
+                {chapter.chapter === 1 && (
+                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                    accessType === 'unlimited' 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-orange-100 text-orange-700'
+                  }`}>
+                    {accessType === 'unlimited' ? 'Unlimited Access' : `Expires in ${expiryDays} days`}
+                  </span>
+                )}
+              </div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
