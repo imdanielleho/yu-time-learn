@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { BookOpen, Clock, Trophy, Activity } from 'lucide-react';
 import ExpiryCountdown from '@/components/ExpiryCountdown';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
@@ -12,6 +14,10 @@ const Dashboard = () => {
       setShowOnboarding(true);
     }
   }, []);
+
+  const handleContinueLearning = (courseId: number) => {
+    navigate(`/course-player/${courseId}`);
+  };
 
   // Mock data for courses with expiry dates
   const mockCourses = [
@@ -119,7 +125,10 @@ const Dashboard = () => {
                   <ExpiryCountdown expiryDate={course.expiryDate} isMobile={true} />
                 </div>
               )}
-              <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+              <Button 
+                onClick={() => handleContinueLearning(course.id)}
+                className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+              >
                 Continue Learning
               </Button>
             </div>
