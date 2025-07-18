@@ -40,7 +40,7 @@ const SessionContent: React.FC<SessionContentProps> = ({
       case 'image':
         return <Image size={16} className="text-blue-500" />;
       default:
-        return <Download size={16} className="text-gray-500" />;
+        return <Download size={16} className="text-yutime-text/60" />;
     }
   };
 
@@ -55,83 +55,83 @@ const SessionContent: React.FC<SessionContentProps> = ({
   `;
 
   return (
-    <div className="bg-white border-t border-gray-200">
-      <div className="max-w-4xl mx-auto p-6">
+    <div className="bg-yutime-neutral border-t border-yutime-neutral/20">
+      <div className="max-w-5xl mx-auto p-8">
         {/* Navigation Buttons */}
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+        <div className="flex items-center justify-between mb-8 pb-6 border-b border-yutime-neutral/20">
           <Button
             variant="outline"
             onClick={onPrevious}
             disabled={!canGoPrevious}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-3 h-12 px-6 border-yutime-neutral/30 hover:bg-yutime-primary/5 hover:border-yutime-primary/30 transition-colors disabled:opacity-50"
           >
-            <ChevronLeft size={16} />
-            <span>Previous Lesson</span>
+            <ChevronLeft size={18} />
+            <span className="font-medium">Previous Lesson</span>
           </Button>
           
-          <div className="text-center">
-            <h2 className="font-semibold text-gray-900">{lesson.title}</h2>
-            <p className="text-sm text-gray-500">{lesson.duration}</p>
+          <div className="text-center space-y-1">
+            <h2 className="font-heading font-semibold text-xl text-yutime-charcoal">{lesson.title}</h2>
+            <p className="text-sm text-yutime-text/70 font-medium">{lesson.duration}</p>
           </div>
           
           <Button
             onClick={onNext}
             disabled={!canGoNext}
-            className="flex items-center space-x-2 bg-yutime-blue hover:bg-yutime-blue/90"
+            className="flex items-center space-x-3 h-12 px-6 bg-yutime-primary hover:bg-yutime-primary/90 transition-colors disabled:opacity-50"
           >
-            <span>Next Lesson</span>
-            <ChevronRight size={16} />
+            <span className="font-medium">Next Lesson</span>
+            <ChevronRight size={18} />
           </Button>
         </div>
 
         {/* Session Description */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="text-lg">About This Lesson</CardTitle>
+        <Card className="mb-8 border-yutime-neutral/20 shadow-soft">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl font-heading text-yutime-charcoal">About This Lesson</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-700 leading-relaxed">{lesson.description}</p>
+            <p className="text-yutime-text leading-relaxed text-base">{lesson.description}</p>
           </CardContent>
         </Card>
 
         {/* Downloadable Resources */}
         {lesson.resources.length > 0 && (
-          <Card className="mb-6">
+          <Card className="mb-8 border-yutime-neutral/20 shadow-soft">
             <Collapsible open={resourcesOpen} onOpenChange={setResourcesOpen}>
               <CollapsibleTrigger asChild>
-                <CardHeader className="cursor-pointer hover:bg-gray-50 transition-colors">
-                  <CardTitle className="text-lg flex items-center justify-between">
+                <CardHeader className="cursor-pointer hover:bg-yutime-neutral/30 transition-colors rounded-t-xl">
+                  <CardTitle className="text-xl font-heading text-yutime-charcoal flex items-center justify-between">
                     <span>Downloadable Resources ({lesson.resources.length})</span>
                     <ChevronRight 
                       size={20} 
-                      className={`transition-transform ${resourcesOpen ? 'rotate-90' : ''}`}
+                      className={`transition-transform text-yutime-primary ${resourcesOpen ? 'rotate-90' : ''}`}
                     />
                   </CardTitle>
                 </CardHeader>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <CardContent className="pt-0">
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {lesson.resources.map((resource, index) => (
                       <div 
                         key={index}
-                        className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center justify-between p-4 border border-yutime-neutral/20 rounded-xl hover:bg-yutime-neutral/30 hover:border-yutime-primary/30 transition-colors"
                       >
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-4">
                           {getResourceIcon(resource.type)}
                           <div>
-                            <p className="font-medium text-gray-900">{resource.name}</p>
-                            <p className="text-sm text-gray-500">{resource.type.toUpperCase()}</p>
+                            <p className="font-medium text-yutime-charcoal text-base">{resource.name}</p>
+                            <p className="text-sm text-yutime-text/70 font-medium">{resource.type.toUpperCase()}</p>
                           </div>
                         </div>
                         <Button
                           variant="outline"
                           size="sm"
                           onClick={() => window.open(resource.url, '_blank')}
-                          className="flex items-center space-x-2"
+                          className="flex items-center space-x-2 h-10 px-4 border-yutime-primary/40 text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors"
                         >
                           <Download size={14} />
-                          <span>Download</span>
+                          <span className="font-medium">Download</span>
                         </Button>
                       </div>
                     ))}
@@ -144,28 +144,28 @@ const SessionContent: React.FC<SessionContentProps> = ({
 
         {/* Transcript Toggle */}
         {lesson.hasTranscript && (
-          <Card>
+          <Card className="border-yutime-neutral/20 shadow-soft">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Video Transcript</CardTitle>
+                <CardTitle className="text-xl font-heading text-yutime-charcoal">Video Transcript</CardTitle>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setShowTranscript(!showTranscript)}
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 h-10 px-4 border-yutime-primary/40 text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors"
                 >
                   {showTranscript ? <EyeOff size={16} /> : <Eye size={16} />}
-                  <span>{showTranscript ? 'Hide' : 'Show'} Transcript</span>
+                  <span className="font-medium">{showTranscript ? 'Hide' : 'Show'} Transcript</span>
                 </Button>
               </div>
             </CardHeader>
             {showTranscript && (
               <CardContent>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="prose prose-sm max-w-none text-gray-700">
+                <div className="bg-yutime-neutral/50 p-6 rounded-xl border border-yutime-neutral/20">
+                  <div className="prose prose-sm max-w-none text-yutime-text">
                     {mockTranscript.split('\n').map((paragraph, index) => 
                       paragraph.trim() && (
-                        <p key={index} className="mb-3">
+                        <p key={index} className="mb-4 leading-relaxed text-base">
                           {paragraph.trim()}
                         </p>
                       )

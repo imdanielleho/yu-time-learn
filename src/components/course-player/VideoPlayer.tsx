@@ -119,7 +119,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-black" onKeyDown={handleKeyDown} tabIndex={0}>
+    <div className="flex-1 flex flex-col bg-yutime-charcoal" onKeyDown={handleKeyDown} tabIndex={0}>
       <div className="flex-1 relative">
         <video
           ref={videoRef}
@@ -136,7 +136,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={handlePlayPause}
-            className="text-white bg-black bg-opacity-50 hover:bg-opacity-70 w-16 h-16 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+            className="text-white bg-black bg-opacity-50 hover:bg-opacity-70 w-16 h-16 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-wellness"
             aria-label={isPlaying ? "Pause video" : "Play video"}
           >
             {isPlaying ? <Pause size={32} /> : <Play size={32} />}
@@ -145,13 +145,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       </div>
       
       {/* Video controls */}
-      <div className="bg-gray-900 p-4 space-y-4">
+      <div className="bg-yutime-charcoal p-6 space-y-4">
         <div className="flex items-center space-x-4">
-          <span className="text-white text-sm font-medium">{lesson.title}</span>
+          <h3 className="text-white font-heading font-semibold text-lg">{lesson.title}</h3>
         </div>
         
         <div 
-          className="w-full bg-gray-700 rounded-full h-2 cursor-pointer"
+          className="w-full bg-yutime-charcoal/50 rounded-full h-2 cursor-pointer border border-yutime-neutral/20"
           onClick={handleProgressClick}
           role="slider"
           aria-label="Video progress"
@@ -160,19 +160,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           aria-valuenow={progress}
         >
           <div 
-            className="bg-yutime-blue h-2 rounded-full transition-all duration-150"
+            className="bg-yutime-primary h-2 rounded-full transition-all duration-150"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
         
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <Button
               variant="ghost"
               size="icon"
               onClick={onPrevious}
               disabled={!canGoPrevious}
-              className="text-white hover:bg-gray-800 disabled:opacity-50"
+              className="text-white hover:bg-yutime-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               aria-label="Previous lesson"
             >
               <SkipBack size={20} />
@@ -182,7 +182,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               variant="ghost"
               size="icon"
               onClick={handlePlayPause}
-              className="text-white hover:bg-gray-800"
+              className="text-white hover:bg-yutime-primary/20 transition-colors"
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? <Pause size={20} /> : <Play size={20} />}
@@ -193,7 +193,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               size="icon"
               onClick={onNext}
               disabled={!canGoNext}
-              className="text-white hover:bg-gray-800 disabled:opacity-50"
+              className="text-white hover:bg-yutime-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               aria-label="Next lesson"
             >
               <SkipForward size={20} />
@@ -202,18 +202,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:bg-gray-800"
+              className="text-white hover:bg-yutime-primary/20 transition-colors"
               aria-label="Volume"
             >
               <Volume2 size={20} />
             </Button>
           </div>
           
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:bg-gray-800"
+              className="text-white hover:bg-yutime-primary/20 transition-colors"
               aria-label="Settings"
             >
               <Settings size={20} />
@@ -222,7 +222,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:bg-gray-800"
+              className="text-white hover:bg-yutime-primary/20 transition-colors"
               aria-label="Fullscreen"
             >
               <Maximize size={20} />

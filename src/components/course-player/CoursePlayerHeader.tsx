@@ -23,27 +23,27 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   setAutoAdvance
 }) => {
   return (
-    <header className="bg-black border-b border-gray-800 px-4 py-3 flex items-center justify-between">
-      <div className="flex items-center space-x-4">
+    <header className="bg-white border-b border-yutime-neutral/20 px-6 py-4 flex items-center justify-between shadow-soft">
+      <div className="flex items-center space-x-6">
         <Button
           variant="ghost"
           size="icon"
           onClick={onBack}
-          className="text-white hover:bg-gray-800"
+          className="text-yutime-charcoal hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors"
           aria-label="Go back to dashboard"
         >
           <ArrowLeft size={20} />
         </Button>
-        <div>
-          <h1 className="text-white font-semibold text-lg">{course.title}</h1>
-          <p className="text-gray-400 text-sm">{course.instructor}</p>
+        <div className="space-y-1">
+          <h1 className="text-yutime-charcoal font-heading font-semibold text-xl leading-tight">{course.title}</h1>
+          <p className="text-yutime-text/70 text-sm font-medium">{course.instructor}</p>
         </div>
       </div>
       
-      <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2 text-white">
-          <Settings size={16} />
-          <span className="text-sm">Auto-advance</span>
+      <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-3 text-yutime-charcoal">
+          <Settings size={18} className="text-yutime-primary" />
+          <span className="text-sm font-medium">Auto-advance</span>
           <Switch 
             checked={autoAdvance}
             onCheckedChange={setAutoAdvance}
@@ -55,7 +55,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           variant="ghost"
           size="icon"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-white hover:bg-gray-800"
+          className="text-yutime-charcoal hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors"
           aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
         >
           {sidebarOpen ? <X size={20} /> : <Menu size={20} />}

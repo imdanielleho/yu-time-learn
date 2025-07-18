@@ -124,7 +124,7 @@ const CoursePlayer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="min-h-screen bg-yutime-neutral flex flex-col">
       <CoursePlayerHeader 
         course={course}
         onBack={() => navigate('/dashboard')}

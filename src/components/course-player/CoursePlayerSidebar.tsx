@@ -33,13 +33,13 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   const progressPercentage = (completedLessons / lessons.length) * 100;
 
   return (
-    <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-gray-200 transform transition-transform duration-300 ${
+    <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/20 transform transition-transform duration-300 ${
       isOpen ? 'translate-x-0' : 'translate-x-full'
-    } z-10`}>
-      <div className="p-6 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">Course Content</h2>
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm text-gray-600">
+    } z-10 shadow-wellness`}>
+      <div className="p-6 border-b border-yutime-neutral/20 bg-yutime-neutral/5">
+        <h2 className="text-xl font-heading font-semibold text-yutime-charcoal mb-3">Course Content</h2>
+        <div className="space-y-3">
+          <div className="flex justify-between text-sm text-yutime-text/70 font-medium">
             <span>{completedLessons}/{lessons.length} lessons completed</span>
             <span>{Math.round(progressPercentage)}%</span>
           </div>
@@ -48,15 +48,15 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
       </div>
       
       <div className="flex-1 overflow-y-auto">
-        <div className="p-6 space-y-2">
+        <div className="p-6 space-y-3">
           {lessons.map((lesson, index) => (
             <div
               key={lesson.id}
               onClick={() => onLessonSelect(index)}
-              className={`p-4 rounded-lg border cursor-pointer transition-all hover:bg-gray-50 ${
+              className={`p-4 rounded-xl border cursor-pointer transition-all hover:bg-yutime-neutral/30 hover:shadow-soft ${
                 currentLesson === index
-                  ? 'bg-yutime-blue/10 border-yutime-blue'
-                  : 'border-gray-200'
+                  ? 'bg-yutime-primary/5 border-yutime-primary shadow-gentle'
+                  : 'border-yutime-neutral/20 hover:border-yutime-primary/30'
               }`}
               role="button"
               tabIndex={0}
@@ -73,18 +73,18 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                   {lesson.completed ? (
                     <CheckCircle size={20} className="text-green-500" />
                   ) : currentLesson === index ? (
-                    <Play size={20} className="text-yutime-blue" />
+                    <Play size={20} className="text-yutime-primary" />
                   ) : (
-                    <Circle size={20} className="text-gray-400" />
+                    <Circle size={20} className="text-yutime-text/40" />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className={`font-medium text-sm mb-1 ${
-                    currentLesson === index ? 'text-yutime-blue' : 'text-gray-900'
+                  <h3 className={`font-heading font-medium text-base mb-2 leading-snug ${
+                    currentLesson === index ? 'text-yutime-primary' : 'text-yutime-charcoal'
                   }`}>
                     {lesson.title}
                   </h3>
-                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                  <div className="flex items-center justify-between text-xs text-yutime-text/60 mb-2 font-medium">
                     <div className="flex items-center">
                       <Clock size={12} className="mr-1" />
                       {lesson.duration}
@@ -92,12 +92,12 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     {lesson.resources.length > 0 && (
                       <div className="flex items-center">
                         <FileText size={12} className="mr-1" />
-                        {lesson.resources.length}
+                        {lesson.resources.length} resources
                       </div>
                     )}
                   </div>
                   {currentLesson === index && (
-                    <p className="text-xs text-gray-600 line-clamp-2">
+                    <p className="text-sm text-yutime-text/70 line-clamp-2 leading-relaxed">
                       {lesson.description}
                     </p>
                   )}
