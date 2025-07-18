@@ -13,11 +13,9 @@ interface CourseHeaderProps {
     image: string;
     longDescription: string;
   };
-  onPlay: (title: string, videoUrl?: string) => void;
 }
 const CourseHeader = ({
-  course,
-  onPlay
+  course
 }: CourseHeaderProps) => <div className="bg-white">
     <div className="container py-8">
       <Link to="/" className="inline-flex items-center space-x-2 text-yutime-primary hover:text-yutime-primary/80 mb-6">
@@ -26,13 +24,13 @@ const CourseHeader = ({
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <div className="relative aspect-video rounded-lg overflow-hidden">
-          <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-            <Button onClick={() => onPlay(course.title)} className="bg-white/90 hover:bg-white text-yutime-primary rounded-full p-4">
-              <Play size={24} />
-            </Button>
-          </div>
+        <div className="aspect-video rounded-lg overflow-hidden">
+          <video
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            className="w-full h-full object-cover"
+            controls
+            poster={course.image}
+          />
         </div>
         <div className="space-y-4">
           <div className="mb-4">

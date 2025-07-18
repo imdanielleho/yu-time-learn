@@ -176,7 +176,7 @@ const CourseDetail = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <CourseHeader course={course} onPlay={handleVideoPlay} />
+        <CourseHeader course={course} />
         <div className="bg-gray-50">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-8">
