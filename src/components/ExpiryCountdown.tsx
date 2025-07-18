@@ -8,11 +8,7 @@ interface ExpiryCountdownProps {
 }
 
 const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className = "" }) => {
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-  }>({ days: 0, hours: 0, minutes: 0 });
+  const [daysLeft, setDaysLeft] = useState<number>(0);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -21,12 +17,9 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
 
       if (difference > 0) {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-
-        setTimeLeft({ days, hours, minutes });
+        setDaysLeft(days);
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0 });
+        setDaysLeft(0);
       }
     };
 
@@ -36,8 +29,16 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
     return () => clearInterval(timer);
   }, [expiryDate]);
 
-  const isExpiringSoon = timeLeft.days <= 7;
-  const isExpired = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0;
+  const formatExpiryDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const isExpiringSoon = daysLeft <= 7;
+  const isExpired = daysLeft === 0;
 
   if (isExpired) {
     return (
@@ -52,9 +53,7 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
     <div className={`flex items-center space-x-1 text-sm ${isExpiringSoon ? 'text-orange-600' : 'text-gray-600'} ${className}`}>
       <Eye size={14} />
       <span>
-        {timeLeft.days > 0 && `${timeLeft.days}d `}
-        {timeLeft.hours > 0 && `${timeLeft.hours}h `}
-        {timeLeft.minutes}m left
+        Your course access ends in {daysLeft} days (on {formatExpiryDate(expiryDate)})
       </span>
     </div>
   );
