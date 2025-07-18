@@ -15,6 +15,8 @@ export interface Course {
   students: number;
   curriculum: string[];
   isPurchased: boolean;
+  accessType: 'unlimited' | 'expires';
+  expiryDays?: number;
 }
 
 export const courses = [
@@ -42,7 +44,9 @@ export const courses = [
       "Troubleshooting common problems",
       "Advanced features and tips"
     ],
-    isPurchased: false
+    isPurchased: false,
+    accessType: 'expires',
+    expiryDays: 30
   },
   {
     id: 2,
@@ -72,7 +76,8 @@ export const courses = [
       "Managing common aches and pains",
       "Creating your personal practice"
     ],
-    isPurchased: false
+    isPurchased: false,
+    accessType: 'unlimited'
   },
   {
     id: 3,
@@ -100,7 +105,9 @@ export const courses = [
       "Sharing your work online",
       "Building a photo portfolio"
     ],
-    isPurchased: false
+    isPurchased: false,
+    accessType: 'expires',
+    expiryDays: 90
   },
   {
     id: 4,
@@ -124,7 +131,8 @@ export const courses = [
       "Retirement planning essentials",
       "Estate planning overview"
     ],
-    isPurchased: false
+    isPurchased: false,
+    accessType: 'unlimited'
   },
   {
     id: 5,
@@ -149,6 +157,8 @@ export const courses = [
       "Using WhatsApp for messaging",
       "Avoiding scams and misinformation"
     ],
-    isPurchased: false
+    isPurchased: false,
+    accessType: 'expires',
+    expiryDays: 60
   }
 ];
