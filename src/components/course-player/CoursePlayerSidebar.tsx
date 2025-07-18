@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CheckCircle, Circle, Play, Clock } from 'lucide-react';
+import { CheckCircle, Circle, Play, Clock, FileText } from 'lucide-react';
 import { Course } from '@/data/courses';
 import { Progress } from "@/components/ui/progress";
 
@@ -9,6 +9,9 @@ interface Lesson {
   title: string;
   duration: string;
   completed: boolean;
+  description: string;
+  resources: Array<{ name: string; type: string; url: string }>;
+  hasTranscript: boolean;
 }
 
 interface CoursePlayerSidebarProps {
@@ -55,6 +58,15 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                   ? 'bg-yutime-blue/10 border-yutime-blue'
                   : 'border-gray-200'
               }`}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onLessonSelect(index);
+                }
+              }}
+              aria-label={`Lesson ${index + 1}: ${lesson.title}`}
             >
               <div className="flex items-start space-x-3">
                 <div className="flex-shrink-0 mt-1">
@@ -72,10 +84,23 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                   }`}>
                     {lesson.title}
                   </h3>
-                  <div className="flex items-center text-xs text-gray-500">
-                    <Clock size={12} className="mr-1" />
-                    {lesson.duration}
+                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                    <div className="flex items-center">
+                      <Clock size={12} className="mr-1" />
+                      {lesson.duration}
+                    </div>
+                    {lesson.resources.length > 0 && (
+                      <div className="flex items-center">
+                        <FileText size={12} className="mr-1" />
+                        {lesson.resources.length}
+                      </div>
+                    )}
                   </div>
+                  {currentLesson === index && (
+                    <p className="text-xs text-gray-600 line-clamp-2">
+                      {lesson.description}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
