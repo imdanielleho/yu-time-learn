@@ -19,7 +19,7 @@ interface CourseCurriculumProps {
 const CourseCurriculum = ({ curriculum, onLessonPlay }: CourseCurriculumProps) => (
   <div className="space-y-6 pb-4 lg:pb-24">
     <h2 className="text-2xl font-bold mb-6 text-yutime-primary">Course Curriculum</h2>
-    <Accordion type="single" collapsible defaultValue="chapter-1" className="w-full space-y-3">
+    <Accordion type="multiple" defaultValue={["chapter-1"]} className="w-full space-y-3">
       {curriculum.map((chapter, index) => (
         <AccordionItem key={index} value={`chapter-${chapter.chapter}`} className="bg-white rounded-xl border border-gray-200 px-4">
           <AccordionTrigger className="text-yutime-primary font-semibold text-lg">

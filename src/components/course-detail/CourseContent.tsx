@@ -9,7 +9,7 @@ const CourseContent = () => (
       This comprehensive course is designed to guide you through every step of your learning journey. 
       Each lesson builds upon the previous one, ensuring you develop strong foundations before advancing.
     </p>
-    <Accordion type="single" collapsible defaultValue="who-is-this-for" className="w-full space-y-3">
+    <Accordion type="multiple" defaultValue={["who-is-this-for"]} className="w-full space-y-3">
       <AccordionItem value="who-is-this-for" className="bg-white rounded-xl border border-gray-200 px-4">
         <AccordionTrigger className="text-yutime-primary font-semibold text-lg">
           Who is this course for?
