@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { BookOpen, Clock, Trophy, Activity } from 'lucide-react';
+import ExpiryCountdown from '@/components/ExpiryCountdown';
 
 const Dashboard = () => {
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -12,6 +12,27 @@ const Dashboard = () => {
       setShowOnboarding(true);
     }
   }, []);
+
+  // Mock data for courses with expiry dates
+  const mockCourses = [
+    {
+      id: 1,
+      title: "Smartphone Basics for Everyday Use",
+      session: "Session 3: Managing Apps and Settings",
+      progress: 75,
+      lessons: { completed: 9, total: 12 },
+      accessType: 'unlimited' as const,
+    },
+    {
+      id: 2,
+      title: "Gentle Yoga for Better Mobility",
+      session: "Session 2: Standing Poses and Balance",
+      progress: 40,
+      lessons: { completed: 6, total: 15 },
+      accessType: 'limited' as const,
+      expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+    }
+  ];
 
   return (
     <div className="p-4 md:p-6">
@@ -73,39 +94,29 @@ const Dashboard = () => {
       <div data-tour="course-cards">
         <h2 className="text-lg md:text-xl font-bold text-yutime-navy mb-4">In Progress Courses</h2>
         <div className="space-y-4">
-          <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-            <div className="mb-4">
-              <h3 className="font-semibold text-yutime-navy mb-3">Smartphone Basics for Everyday Use</h3>
-              <p className="text-sm text-gray-500 mb-4">Session 3: Managing Apps and Settings</p>
-              <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-                <span>9/12 lessons</span>
-                <span className="font-medium">75% complete</span>
+          {mockCourses.map((course) => (
+            <div key={course.id} className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
+              <div className="mb-4">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-semibold text-yutime-navy">{course.title}</h3>
+                  {course.accessType === 'limited' && course.expiryDate && (
+                    <ExpiryCountdown expiryDate={course.expiryDate} />
+                  )}
+                </div>
+                <p className="text-sm text-gray-500 mb-4">{course.session}</p>
+                <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
+                  <span>{course.lessons.completed}/{course.lessons.total} lessons</span>
+                  <span className="font-medium">{course.progress}% complete</span>
+                </div>
               </div>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-              <div className="bg-yutime-blue h-2 rounded-full" style={{ width: '75%' }}></div>
-            </div>
-            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
-              Continue Learning
-            </Button>
-          </div>
-          
-          <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-            <div className="mb-4">
-              <h3 className="font-semibold text-yutime-navy mb-3">Gentle Yoga for Better Mobility</h3>
-              <p className="text-sm text-gray-500 mb-4">Session 2: Standing Poses and Balance</p>
-              <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-                <span>6/15 lessons</span>
-                <span className="font-medium">40% complete</span>
+              <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+                <div className="bg-yutime-blue h-2 rounded-full" style={{ width: `${course.progress}%` }}></div>
               </div>
+              <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+                Continue Learning
+              </Button>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-              <div className="bg-yutime-blue h-2 rounded-full" style={{ width: '40%' }}></div>
-            </div>
-            <Button className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
-              Continue Learning
-            </Button>
-          </div>
+          ))}
         </div>
       </div>
     </div>
