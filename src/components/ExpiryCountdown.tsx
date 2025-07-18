@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Clock } from 'lucide-react';
+import { Eye } from 'lucide-react';
 
 interface ExpiryCountdownProps {
   expiryDate: Date;
@@ -42,7 +42,7 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
   if (isExpired) {
     return (
       <div className={`flex items-center space-x-1 text-red-600 text-sm font-medium ${className}`}>
-        <Clock size={14} />
+        <Eye size={14} />
         <span>Access Expired</span>
       </div>
     );
@@ -50,7 +50,7 @@ const ExpiryCountdown: React.FC<ExpiryCountdownProps> = ({ expiryDate, className
 
   return (
     <div className={`flex items-center space-x-1 text-sm ${isExpiringSoon ? 'text-orange-600' : 'text-gray-600'} ${className}`}>
-      <Clock size={14} />
+      <Eye size={14} />
       <span>
         {timeLeft.days > 0 && `${timeLeft.days}d `}
         {timeLeft.hours > 0 && `${timeLeft.hours}h `}

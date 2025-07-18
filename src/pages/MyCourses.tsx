@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BookOpen, Clock, Trophy, Calendar } from 'lucide-react';
+import { BookOpen, Clock, Trophy, Eye } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const MyCourses = () => {
@@ -152,7 +152,7 @@ const MyCourses = () => {
         )}
 
         <div className="mb-4 flex items-center space-x-2 text-sm text-gray-600">
-          <Calendar className="h-4 w-4" />
+          <Eye className="h-4 w-4" />
           <span>
             Expires: {formatDate(course.expirationDate)}
             {!expired && daysRemaining > 0 && (
