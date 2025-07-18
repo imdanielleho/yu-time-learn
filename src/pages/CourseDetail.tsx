@@ -182,12 +182,7 @@ const CourseDetail = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-8">
               <div className="lg:col-span-2 space-y-8">
                 <CourseContent />
-                <CourseCurriculum 
-                  curriculum={curriculum} 
-                  onLessonPlay={handleVideoPlay}
-                  accessType={course.accessType as 'unlimited' | 'expires'}
-                  expiryDays={course.expiryDays}
-                />
+                <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
               </div>
               <div className="lg:col-span-1">
                 <CoursePricingCard
