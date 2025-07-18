@@ -25,6 +25,8 @@ const CourseDetail = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState<{title: string, url: string} | null>(null);
   const { addToCart, openCart } = useCart();
   const [postLoginAction, setPostLoginAction] = useState<null | "buyNow" | "addToCart">(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -111,6 +113,13 @@ const CourseDetail = () => {
     }
   };
 
+  const handleVideoPlay = (title: string, videoUrl?: string) => {
+    setCurrentVideo({
+      title,
+      url: videoUrl || "https://www.w3schools.com/html/mov_bbb.mp4"
+    });
+    setIsVideoModalOpen(true);
+  };
 
   if (!course) {
     return (
@@ -167,13 +176,13 @@ const CourseDetail = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <CourseHeader course={course} />
+        <CourseHeader course={course} onPlay={handleVideoPlay} />
         <div className="bg-gray-50">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8 pb-8">
               <div className="lg:col-span-2 space-y-8">
                 <CourseContent />
-                <CourseCurriculum curriculum={curriculum} />
+                <CourseCurriculum curriculum={curriculum} onLessonPlay={handleVideoPlay} />
               </div>
               <div className="lg:col-span-1">
                 <CoursePricingCard
@@ -200,6 +209,29 @@ const CourseDetail = () => {
         onLogin={handleLogin}
       />
 
+      {/* Video Modal */}
+      <Dialog open={isVideoModalOpen} onOpenChange={setIsVideoModalOpen}>
+        <DialogContent className="max-w-full sm:max-w-[70vw] max-h-[90vh] p-0 bg-black">
+          <DialogClose className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20">
+            <X className="h-6 w-6" />
+          </DialogClose>
+          {currentVideo && (
+            <div className="w-full">
+              <div className="p-4 bg-white text-black border-b border-gray-200">
+                <h3 className="text-xl font-medium">{currentVideo.title}</h3>
+              </div>
+              <div className="aspect-video">
+                <video
+                  src={currentVideo.url}
+                  className="w-full h-full"
+                  controls
+                  autoPlay
+                />
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
