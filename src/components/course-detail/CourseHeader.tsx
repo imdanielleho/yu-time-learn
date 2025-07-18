@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import { ArrowLeft, Play, Clock, BookOpen } from "lucide-react";
+import { ArrowLeft, Play, Clock, BookOpen, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Course } from "@/data/courses";
+
 interface CourseHeaderProps {
-  course: {
-    id: number;
-    title: string;
-    category: string;
-    instructor?: string;
-    totalTime: string;
-    lessons: number;
-    image: string;
-    longDescription: string;
-  };
+  course: Course;
 }
 const CourseHeader = ({
   course
@@ -64,6 +57,12 @@ const CourseHeader = ({
             <div className="flex items-center space-x-2">
               <BookOpen size={16} className="text-yutime-text/60" />
               <span className="font-medium">{course.lessons} lessons</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Calendar size={16} className="text-yutime-text/60" />
+              <span className="font-medium">
+                {course.accessType === 'unlimited' ? 'Unlimited Access' : course.accessDuration}
+              </span>
             </div>
           </div>
         </div>
