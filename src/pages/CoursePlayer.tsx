@@ -18,7 +18,7 @@ const CoursePlayer = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [autoAdvance, setAutoAdvance] = useState(true);
 
-  // Enhanced lessons data with more content
+  // Enhanced lessons data with video support
   const lessons = [
     { 
       id: 1, 
@@ -30,7 +30,9 @@ const CoursePlayer = () => {
         { name: "Quick Start Guide", type: "PDF", url: "#" },
         { name: "Home Screen Layout", type: "Image", url: "#" }
       ],
-      hasTranscript: true
+      hasTranscript: true,
+      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      videoType: "youtube" as const
     },
     { 
       id: 2, 
@@ -42,7 +44,9 @@ const CoursePlayer = () => {
         { name: "Home Screen Customization Guide", type: "PDF", url: "#" },
         { name: "Widget Reference Sheet", type: "PDF", url: "#" }
       ],
-      hasTranscript: true
+      hasTranscript: true,
+      videoUrl: "https://vimeo.com/123456789",
+      videoType: "vimeo" as const
     },
     { 
       id: 3, 
@@ -54,7 +58,9 @@ const CoursePlayer = () => {
         { name: "Calling Features Worksheet", type: "PDF", url: "#" },
         { name: "Emergency Contacts Template", type: "PDF", url: "#" }
       ],
-      hasTranscript: true
+      hasTranscript: true,
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+      videoType: "hosted" as const
     },
     { 
       id: 4, 
@@ -66,7 +72,9 @@ const CoursePlayer = () => {
         { name: "Texting Tips & Tricks", type: "PDF", url: "#" },
         { name: "Emoji Guide", type: "PDF", url: "#" }
       ],
-      hasTranscript: true
+      hasTranscript: true,
+      videoUrl: "https://www.youtube.com/watch?v=ScMzIvxBSi4",
+      videoType: "youtube" as const
     },
     { 
       id: 5, 
@@ -79,7 +87,9 @@ const CoursePlayer = () => {
         { name: "Photo Editing Basics", type: "PDF", url: "#" },
         { name: "Sharing Photos Checklist", type: "PDF", url: "#" }
       ],
-      hasTranscript: true
+      hasTranscript: true,
+      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+      videoType: "hosted" as const
     },
   ];
 
