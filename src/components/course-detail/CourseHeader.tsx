@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowLeft, Play, Clock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -16,7 +16,10 @@ interface CourseHeaderProps {
 }
 const CourseHeader = ({
   course
-}: CourseHeaderProps) => <div className="bg-white">
+}: CourseHeaderProps) => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  return <div className="bg-white">
     <div className="container py-8">
       <Link to="/" className="inline-flex items-center space-x-2 text-yutime-primary hover:text-yutime-primary/80 mb-6">
         <ArrowLeft size={20} />
@@ -24,13 +27,23 @@ const CourseHeader = ({
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <div className="aspect-video rounded-lg overflow-hidden">
+        <div className="relative aspect-video rounded-lg overflow-hidden">
           <video
             src="https://www.w3schools.com/html/mov_bbb.mp4"
             className="w-full h-full object-cover"
             controls
             poster={course.image}
+            onPlay={() => setIsVideoPlaying(true)}
+            onPause={() => setIsVideoPlaying(false)}
+            onEnded={() => setIsVideoPlaying(false)}
           />
+          {!isVideoPlaying && (
+            <div className="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
+              <div className="bg-white/90 hover:bg-white rounded-full p-4 shadow-lg">
+                <Play size={24} className="text-yutime-primary ml-1" />
+              </div>
+            </div>
+          )}
         </div>
         <div className="space-y-4">
           <div className="mb-4">
@@ -57,4 +70,5 @@ const CourseHeader = ({
       </div>
     </div>
   </div>;
+};
 export default CourseHeader;
