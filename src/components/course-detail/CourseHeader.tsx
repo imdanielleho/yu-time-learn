@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowLeft, Play, Clock, BookOpen, Calendar } from "lucide-react";
+import { ArrowLeft, Play, Clock, BookOpen, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Course } from "@/data/courses";
@@ -59,7 +59,7 @@ const CourseHeader = ({
               <span className="font-medium">{course.lessons} lessons</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Calendar size={16} className="text-yutime-text/60" />
+              <Eye size={16} className="text-yutime-text/60" />
               <span className="font-medium">
                 {course.accessType === 'unlimited' ? 'Unlimited Access' : course.accessDuration}
               </span>
