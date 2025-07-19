@@ -22,15 +22,18 @@ const Index = () => {
   const navigate = useNavigate();
 
   const handleLogin = (email: string, password: string) => {
+    console.log("Index handleLogin called");
     login(email, password);
     setIsLoginModalOpen(false);
     
     // Check if user has purchased courses and redirect appropriately
     setTimeout(() => {
+      console.log("Checking hasPurchasedCourses:", hasPurchasedCourses);
       if (hasPurchasedCourses) {
+        console.log("Redirecting to dashboard");
         navigate("/dashboard");
       }
-    }, 1200); // Increased delay to ensure auth state is fully updated
+    }, 800); // Adjusted delay to 800ms to allow auth state to update
   };
 
   const handleLogout = () => {
