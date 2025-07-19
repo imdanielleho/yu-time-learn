@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image } from 'lucide-react';
+import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -177,7 +177,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                           <div className="flex-shrink-0 mt-1">
                             {lesson.completed ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
-                                <CheckCircle size={12} className="text-white" fill="white" stroke="none" />
+                                <Check size={10} className="text-white font-bold" strokeWidth={3} />
                               </div>
                             ) : isCurrentLesson ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
