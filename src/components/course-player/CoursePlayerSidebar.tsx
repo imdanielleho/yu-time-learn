@@ -100,8 +100,8 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
         </div>
       </div>
       
-      {/* Chapters and Lessons */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Chapters and Lessons - Independently scrollable */}
+      <div className="flex-1 overflow-y-auto max-h-[calc(100vh-200px)]">
         {chapters.map((chapter, chapterIdx) => (
           <div key={chapter.id} className="border-b border-yutime-neutral/20">
             {/* Chapter Header */}

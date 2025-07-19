@@ -249,7 +249,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {/* Video Container */}
       <div 
         ref={containerRef}
-        className={`relative w-full bg-black cursor-pointer rounded-lg overflow-hidden ${isFullscreen ? 'h-screen' : ''}`} 
+        className={`relative w-full bg-black cursor-pointer overflow-hidden ${isFullscreen ? 'h-screen' : ''}`} 
         style={!isFullscreen ? { height: '50vh' } : {}}
         onClick={handleVideoClick}
         onMouseMove={handleMouseMove}
@@ -359,9 +359,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 e.stopPropagation();
                 handlePlayPause();
               }}
-              className="text-white hover:bg-white/20"
+              className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+              title={isPlaying ? "暫停播放" : "開始播放"}
             >
-              {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+              {isPlaying ? <Pause size={24} /> : <Play size={24} />}
             </Button>
             
             <div className="flex-1 flex items-center space-x-2">
@@ -378,7 +379,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <span className="text-white text-sm">{lesson.duration}</span>
+               <span className="text-white text-sm">{lesson.duration}</span>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -392,9 +393,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                       e.stopPropagation();
                       handleVolumeToggle();
                     }}
-                    className="text-white hover:bg-white/20"
+                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    title={isMuted ? "取消靜音" : "靜音"}
                   >
-                    {isMuted || volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                    {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume2 size={20} />}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-32 p-2" onClick={(e) => e.stopPropagation()}>
@@ -416,9 +418,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   e.stopPropagation();
                   setShowCaptions(!showCaptions);
                 }}
-                className={`text-white hover:bg-white/20 ${showCaptions ? 'bg-white/20' : ''}`}
+                className={`text-white hover:bg-white/20 min-w-[44px] min-h-[44px] ${showCaptions ? 'bg-white/20' : ''}`}
+                title={showCaptions ? "關閉字幕" : "開啟字幕"}
               >
-                <Captions size={16} />
+                <Captions size={20} />
               </Button>
 
               {/* Settings Menu */}
@@ -428,9 +431,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={(e) => e.stopPropagation()}
-                    className="text-white hover:bg-white/20"
+                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    title="播放設定"
                   >
-                    <Settings size={16} />
+                    <Settings size={20} />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-48 p-2" onClick={(e) => e.stopPropagation()}>
@@ -477,9 +481,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   e.stopPropagation();
                   handleFullscreen();
                 }}
-                className="text-white hover:bg-white/20"
+                className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                title={isFullscreen ? "退出全螢幕" : "全螢幕播放"}
               >
-                <Maximize size={16} />
+                <Maximize size={20} />
               </Button>
             </div>
           </div>
