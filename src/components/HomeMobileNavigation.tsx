@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Home, Book, LogIn, Play } from 'lucide-react';
@@ -7,10 +8,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import MobileMoreMenu from '@/components/navbar/MobileMoreMenu';
+
 interface HomeMobileNavigationProps {
   onLoginClick: () => void;
   onResumeLearningClick?: () => void;
 }
+
 const HomeMobileNavigation = ({
   onLoginClick,
   onResumeLearningClick
@@ -26,7 +29,9 @@ const HomeMobileNavigation = ({
     isLoggedIn,
     hasPurchasedCourses
   } = useAuth();
+
   if (!isMobile) return null;
+
   const handleHomeClick = () => {
     if (location.pathname === '/') {
       // Already on home page, scroll to hero section
@@ -49,6 +54,7 @@ const HomeMobileNavigation = ({
       }, 100);
     }
   };
+
   const handleCoursesClick = () => {
     if (location.pathname === '/') {
       // Already on home page, scroll to courses section
@@ -71,41 +77,88 @@ const HomeMobileNavigation = ({
       }, 100);
     }
   };
+
   const handleCartClick = () => {
     openCart();
   };
+
+  const handleLoginClick = () => {
+    onLoginClick();
+  };
+
+  const handleResumeLearningClick = () => {
+    if (!isLoggedIn) {
+      onLoginClick();
+      return;
+    }
+    
+    // Redirect to dashboard if user has purchased courses
+    if (hasPurchasedCourses) {
+      navigate("/dashboard");
+    } else if (onResumeLearningClick) {
+      onResumeLearningClick();
+    }
+  };
+
   const itemCount = getItemCount();
   const showResumeButton = isLoggedIn && hasPurchasedCourses;
-  return <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
       <div className={`h-16 ${showResumeButton ? 'grid grid-cols-5' : 'grid grid-cols-4'}`}>
-        <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={handleHomeClick}>
+        <button 
+          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" 
+          onClick={handleHomeClick}
+        >
           <Home className="h-5 w-5" />
           <span className="text-xs font-medium">主頁</span>
         </button>
 
-        <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={handleCoursesClick}>
+        <button 
+          className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" 
+          onClick={handleCoursesClick}
+        >
           <Book className="h-5 w-5" />
           <span className="text-xs font-medium">課程</span>
         </button>
 
-        {showResumeButton && <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={onResumeLearningClick}>
+        {showResumeButton && (
+          <button 
+            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" 
+            onClick={handleResumeLearningClick}
+          >
             <Play className="h-5 w-5" />
             <span className="text-xs font-medium">繼續學習</span>
-          </button>}
+          </button>
+        )}
 
-        <button className="relative flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={handleCartClick}>
+        <button 
+          className="relative flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" 
+          onClick={handleCartClick}
+        >
           <ShoppingCart className="h-5 w-5" />
-          {itemCount > 0 && <span className="absolute -top-1 right-3 bg-yutime-coral text-white text-xs rounded-full h-5 w-5 flex items-center justify-center px-1 leading-none">
+          {itemCount > 0 && (
+            <span className="absolute -top-1 right-3 bg-yutime-coral text-white text-xs rounded-full h-5 w-5 flex items-center justify-center px-1 leading-none">
               {itemCount}
-            </span>}
+            </span>
+          )}
           <span className="text-xs font-medium">購物車</span>
         </button>
 
-        {!isLoggedIn ? <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={onLoginClick}>
+        {!isLoggedIn ? (
+          <button 
+            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" 
+            onClick={handleLoginClick}
+          >
             <LogIn className="h-5 w-5" />
             <span className="text-xs font-medium">登入</span>
-          </button> : <MobileMoreMenu />}
+          </button>
+        ) : (
+          <MobileMoreMenu />
+        )}
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default HomeMobileNavigation;

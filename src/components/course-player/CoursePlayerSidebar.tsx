@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -220,45 +221,47 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                 {lesson.duration}
                               </div>
                               
-                               {lesson.hasResources && lesson.resources && (
-                                 <Popover>
-                                   <PopoverTrigger asChild>
-                                     <Button
-                                       variant="outline"
-                                       size="sm"
-                                       className="h-7 px-1.5 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
-                                       onClick={(e) => e.stopPropagation()}
-                                     >
-                                       <Folder size={12} className="text-yutime-secondary pr-1" />
-                                       <span className="text-xs font-medium">課程資源</span>
-                                       <ChevronDown size={10} className="text-yutime-secondary" />
-                                     </Button>
-                                   </PopoverTrigger>
-                                    <PopoverContent className="w-64 p-3" align="end">
-                                      <div className="space-y-2">
-                                        {lesson.resources.map((resource, index) => (
-                                           <div 
-                                             key={index}
-                                             className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
-                                           >
-                                             <div className="flex items-center space-x-2">
-                                               {getResourceIcon(resource.type)}
-                                               <div>
-                                                 <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
-                                                 <p className="text-xs text-yutime-text/60">{resource.type}</p>
-                                               </div>
-                                             </div>
-                                             <Button
-                                               onClick={() => handleResourceDownload(resource.url)}
-                                               className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
-                                               size="sm"
-                                             >
-                                               <Download size={12} className="text-white" />
-                                             </Button>
-                                           </div>
-                                         ))}
-                                       </div>
-                                     </PopoverContent>
+                              {lesson.hasResources && lesson.resources && (
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="h-7 px-1.5 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                      }}
+                                    >
+                                      <Folder size={12} className="text-yutime-secondary pr-1" />
+                                      <span className="text-xs font-medium">課程資源</span>
+                                      <ChevronDown size={10} className="text-yutime-secondary" />
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-64 p-3" align="end">
+                                    <div className="space-y-2">
+                                      {lesson.resources.map((resource, index) => (
+                                        <div 
+                                          key={index}
+                                          className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                                        >
+                                          <div className="flex items-center space-x-2">
+                                            {getResourceIcon(resource.type)}
+                                            <div>
+                                              <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
+                                              <p className="text-xs text-yutime-text/60">{resource.type}</p>
+                                            </div>
+                                          </div>
+                                          <Button
+                                            onClick={() => handleResourceDownload(resource.url)}
+                                            className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                            size="sm"
+                                          >
+                                            <Download size={12} className="text-white" />
+                                          </Button>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </PopoverContent>
                                 </Popover>
                               )}
                             </div>
