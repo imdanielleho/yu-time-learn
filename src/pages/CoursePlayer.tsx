@@ -14,74 +14,88 @@ const CoursePlayer = () => {
   
   const [currentLesson, setCurrentLesson] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(9); // 9% as shown in the image
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [autoAdvance, setAutoAdvance] = useState(true);
 
-  // Enhanced lessons data with more content
-  const lessons = [
-    { 
-      id: 1, 
-      title: "Getting Started with Your Smartphone", 
-      duration: "12:30", 
-      completed: true,
-      description: "Learn the basics of using your smartphone, including how to turn it on, navigate the home screen, and understand the basic interface elements.",
-      resources: [
-        { name: "Quick Start Guide", type: "PDF", url: "#" },
-        { name: "Home Screen Layout", type: "Image", url: "#" }
-      ],
-      hasTranscript: true
+  // Enhanced lessons data organized by chapters
+  const chapters = [
+    {
+      id: 1,
+      title: "Chapter 1. 專利財報3D教學法｜掌握賺錢、花錢、算錢思維",
+      duration: "00:48:01",
+      lessons: [
+        { 
+          id: 1, 
+          title: "1. 不懂財報，依然賺錢！有什麼好學的？策略、計畫、財務三者相連", 
+          duration: "00:16:35", 
+          completed: true,
+          description: "Learn the fundamentals of financial reports and their connection to strategy and planning.",
+          hasTranscript: true
+        },
+        { 
+          id: 2, 
+          title: "2. 我不是老闆也不是高管，怎麼將財報用在生活中？", 
+          duration: "00:13:52", 
+          completed: true,
+          description: "Discover how to apply financial report knowledge in your daily life.",
+          hasTranscript: true
+        },
+        { 
+          id: 3, 
+          title: "3. 財富中翻中，你比自己想像的更懂財報", 
+          duration: "00:08:33", 
+          completed: true,
+          description: "Understand that you know more about financial reports than you think.",
+          hasTranscript: true
+        },
+        { 
+          id: 4, 
+          title: "4. 三大報表財會科目練習", 
+          duration: "00:09:01", 
+          completed: false,
+          description: "Practice with the three major financial statement categories.",
+          hasTranscript: true
+        }
+      ]
     },
-    { 
-      id: 2, 
-      title: "Understanding the Home Screen", 
-      duration: "8:45", 
-      completed: true,
-      description: "Explore the home screen layout, learn about app icons, widgets, and how to customize your home screen to suit your needs.",
-      resources: [
-        { name: "Home Screen Customization Guide", type: "PDF", url: "#" },
-        { name: "Widget Reference Sheet", type: "PDF", url: "#" }
-      ],
-      hasTranscript: true
-    },
-    { 
-      id: 3, 
-      title: "Making Your First Call", 
-      duration: "10:15", 
-      completed: false,
-      description: "Step-by-step instructions on how to make phone calls, including dialing numbers, using contacts, and understanding call options.",
-      resources: [
-        { name: "Calling Features Worksheet", type: "PDF", url: "#" },
-        { name: "Emergency Contacts Template", type: "PDF", url: "#" }
-      ],
-      hasTranscript: true
-    },
-    { 
-      id: 4, 
-      title: "Sending Text Messages", 
-      duration: "9:30", 
-      completed: false,
-      description: "Learn how to send and receive text messages, use predictive text, add emojis, and manage your message conversations.",
-      resources: [
-        { name: "Texting Tips & Tricks", type: "PDF", url: "#" },
-        { name: "Emoji Guide", type: "PDF", url: "#" }
-      ],
-      hasTranscript: true
-    },
-    { 
-      id: 5, 
-      title: "Using the Camera", 
-      duration: "15:20", 
-      completed: false,
-      description: "Discover how to take photos and videos with your smartphone camera, including basic editing and sharing options.",
-      resources: [
-        { name: "Camera Settings Guide", type: "PDF", url: "#" },
-        { name: "Photo Editing Basics", type: "PDF", url: "#" },
-        { name: "Sharing Photos Checklist", type: "PDF", url: "#" }
-      ],
-      hasTranscript: true
-    },
+    {
+      id: 2,
+      title: "Chapter 2. 賺錢的能力：是賺還是虧｜損益",
+      duration: "00:45:20",
+      lessons: [
+        { 
+          id: 5, 
+          title: "1. 損益表基礎概念", 
+          duration: "00:12:15", 
+          completed: false,
+          description: "Basic concepts of profit and loss statements.",
+          hasTranscript: true
+        },
+        { 
+          id: 6, 
+          title: "2. 營收分析技巧", 
+          duration: "00:18:30", 
+          completed: false,
+          description: "Techniques for analyzing revenue streams.",
+          hasTranscript: true
+        },
+        { 
+          id: 7, 
+          title: "3. 成本控制策略", 
+          duration: "00:14:35", 
+          completed: false,
+          description: "Strategies for effective cost control.",
+          hasTranscript: true
+        }
+      ]
+    }
   ];
+
+  // Flatten lessons for easier navigation
+  const allLessons = chapters.flatMap(chapter => chapter.lessons);
+  const totalLessons = allLessons.length;
+  const completedLessons = allLessons.filter(lesson => lesson.completed).length;
 
   useEffect(() => {
     if (!course) {
@@ -96,7 +110,7 @@ const CoursePlayer = () => {
   };
 
   const handleNextLesson = () => {
-    if (currentLesson < lessons.length - 1) {
+    if (currentLesson < allLessons.length - 1) {
       setCurrentLesson(currentLesson + 1);
       setProgress(0);
       setIsPlaying(false);
@@ -112,10 +126,10 @@ const CoursePlayer = () => {
   };
 
   const handleVideoEnd = () => {
-    if (autoAdvance && currentLesson < lessons.length - 1) {
+    if (autoAdvance && currentLesson < allLessons.length - 1) {
       setTimeout(() => {
         handleNextLesson();
-      }, 2000); // 2 second delay before auto-advance
+      }, 2000);
     }
   };
 
@@ -124,7 +138,7 @@ const CoursePlayer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-yutime-neutral flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <CoursePlayerHeader 
         course={course}
         onBack={() => navigate('/dashboard')}
@@ -136,10 +150,10 @@ const CoursePlayer = () => {
       
       <div className="flex flex-1 overflow-hidden">
         <div className={`flex-1 flex flex-col transition-all duration-300 ${
-          sidebarOpen ? 'mr-80' : ''
+          sidebarOpen ? 'mr-96' : ''
         }`}>
           <VideoPlayer 
-            lesson={lessons[currentLesson]}
+            lesson={allLessons[currentLesson]}
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}
             progress={progress}
@@ -147,27 +161,30 @@ const CoursePlayer = () => {
             onNext={handleNextLesson}
             onPrevious={handlePreviousLesson}
             onVideoEnd={handleVideoEnd}
-            canGoNext={currentLesson < lessons.length - 1}
+            canGoNext={currentLesson < allLessons.length - 1}
             canGoPrevious={currentLesson > 0}
-            lessons={lessons}
+            lessons={allLessons}
             currentLesson={currentLesson}
+            overallProgress={9}
           />
           
           <SessionContent 
-            lesson={lessons[currentLesson]}
+            lesson={allLessons[currentLesson]}
             onNext={handleNextLesson}
             onPrevious={handlePreviousLesson}
-            canGoNext={currentLesson < lessons.length - 1}
+            canGoNext={currentLesson < allLessons.length - 1}
             canGoPrevious={currentLesson > 0}
           />
         </div>
         
         <CoursePlayerSidebar 
           course={course}
-          lessons={lessons}
+          chapters={chapters}
           currentLesson={currentLesson}
           onLessonSelect={handleLessonSelect}
           isOpen={sidebarOpen}
+          totalLessons={totalLessons}
+          completedLessons={completedLessons}
         />
       </div>
     </div>

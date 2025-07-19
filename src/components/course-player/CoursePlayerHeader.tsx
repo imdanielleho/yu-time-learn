@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { ArrowLeft, Menu, X, Settings } from 'lucide-react';
+import { ArrowLeft, Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { Course } from '@/data/courses';
 
 interface CoursePlayerHeaderProps {
@@ -23,40 +22,28 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   setAutoAdvance
 }) => {
   return (
-    <header className="bg-white border-b border-yutime-neutral/20 px-6 py-4 flex items-center justify-between shadow-soft">
+    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
       <div className="flex items-center space-x-6">
         <Button
           variant="ghost"
           size="icon"
           onClick={onBack}
-          className="text-yutime-charcoal hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors"
-          aria-label="Go back to dashboard"
+          className="text-gray-700 hover:bg-gray-100"
         >
           <ArrowLeft size={20} />
         </Button>
-        <div className="space-y-1">
-          <h1 className="text-yutime-charcoal font-heading font-semibold text-xl leading-tight">{course.title}</h1>
-          <p className="text-yutime-text/70 text-sm font-medium">{course.instructor}</p>
+        <div>
+          <h1 className="text-xl font-semibold text-gray-900">{course.title}</h1>
+          <p className="text-sm text-gray-500">by {course.instructor}</p>
         </div>
       </div>
       
-      <div className="flex items-center space-x-6">
-        <div className="flex items-center space-x-3 text-yutime-charcoal">
-          <Settings size={18} className="text-yutime-primary" />
-          <span className="text-sm font-medium">Auto-advance</span>
-          <Switch 
-            checked={autoAdvance}
-            onCheckedChange={setAutoAdvance}
-            aria-label="Toggle auto-advance to next lesson"
-          />
-        </div>
-        
+      <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-yutime-charcoal hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors"
-          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+          className="text-gray-700 hover:bg-gray-100"
         >
           {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
         </Button>
