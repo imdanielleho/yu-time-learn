@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -99,11 +98,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
 
   const handleLessonClick = (globalIndex: number) => {
     if (globalIndex === currentLesson) {
-      // If clicking on current lesson and it's playing, pause it
-      if (isPlaying && setIsPlaying) {
-        setIsPlaying(false);
-      }
-      // If not playing or no setIsPlaying function, do nothing
+      // If clicking on current lesson, do nothing
       return;
     }
     
@@ -119,7 +114,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
       <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/30 transform transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       } z-20 flex flex-col shadow-wellness`}>
-        {/* Toggle button at top */}
+        
         <div className="p-4 border-b border-yutime-neutral/30 flex items-center justify-between">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -231,10 +226,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      <Button
                                        variant="outline"
                                        size="sm"
-                                       className="h-7 px-2 flex items-center gap-0.5 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                       className="h-7 px-1.5 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                        onClick={(e) => e.stopPropagation()}
                                      >
-                                       <Folder size={12} className="text-yutime-secondary" />
+                                       <Folder size={12} className="text-yutime-secondary pr-1" />
                                        <span className="text-xs font-medium">課程資源</span>
                                        <ChevronDown size={10} className="text-yutime-secondary" />
                                      </Button>

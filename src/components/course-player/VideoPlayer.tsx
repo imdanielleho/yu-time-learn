@@ -53,6 +53,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [videoKey, setVideoKey] = useState(0);
   const [captionsEnabled, setCaptionsEnabled] = useState(false);
   const [showEndOverlay, setShowEndOverlay] = useState(false);
+  const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -93,17 +94,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleLoadedMetadata = () => {
       console.log('Video metadata loaded, duration:', video.duration);
       setDuration(video.duration || 0);
+      
+      if (!hasAutoPlayed) {
+        setIsPlaying(true);
+        setHasAutoPlayed(true);
+      }
     };
 
     const handleTimeUpdate = () => {
-      const currentVideoTime = video.currentTime || 0;
-      const videoDuration = video.duration || 0;
-      
-      console.log('Time update:', currentVideoTime, '/', videoDuration);
-      
-      if (videoDuration > 0) {
+      if (video.duration > 0) {
+        const currentVideoTime = video.currentTime;
         setCurrentTime(currentVideoTime);
-        const progressPercent = (currentVideoTime / videoDuration) * 100;
+        const progressPercent = (currentVideoTime / video.duration) * 100;
         setProgress(progressPercent);
       }
     };
@@ -152,7 +154,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('loadstart', handleLoadStart);
     };
-  }, [lesson.id, setProgress, canGoNext]);
+  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
