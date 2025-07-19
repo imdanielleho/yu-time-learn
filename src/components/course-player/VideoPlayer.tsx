@@ -234,16 +234,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     setProgress(progressPercent);
   };
 
-  const handleSkipBackward = (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    e?.stopPropagation();
+  const handleSkipBackward = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log('Skip backward button clicked');
     skip5Seconds(false);
   };
 
-  const handleSkipForward = (e?: React.MouseEvent) => {
-    e?.preventDefault();
-    e?.stopPropagation();
+  const handleSkipForward = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log('Skip forward button clicked');
     skip5Seconds(true);
   };
@@ -280,25 +280,37 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         />
 
         {/* Skip Buttons on Left and Right Edges */}
-        <button
-          onClick={handleSkipBackward}
-          className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all flex flex-col items-center justify-center border-0 outline-none ${
-            showControls ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <RotateCcw size={20} />
-          <span className="text-xs mt-1">5s</span>
-        </button>
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleSkipBackward}
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+              showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="flex flex-col items-center">
+              <RotateCcw size={20} />
+              <span className="text-xs mt-1">5s</span>
+            </div>
+          </Button>
+        </div>
 
-        <button
-          onClick={handleSkipForward}
-          className={`absolute right-4 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all flex flex-col items-center justify-center border-0 outline-none ${
-            showControls ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <RotateCw size={20} />
-          <span className="text-xs mt-1">5s</span>
-        </button>
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleSkipForward}
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+              showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="flex flex-col items-center">
+              <RotateCw size={20} />
+              <span className="text-xs mt-1">5s</span>
+            </div>
+          </Button>
+        </div>
 
         {/* Play/Pause Button in Center */}
         <div className="absolute inset-0 flex items-center justify-center">
