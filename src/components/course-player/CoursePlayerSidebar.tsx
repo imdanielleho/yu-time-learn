@@ -74,50 +74,57 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   const { chapterIndex: currentChapterIndex, lessonIndex: currentLessonIndex } = getCurrentLessonChapterAndIndex();
 
   return (
-    <div className={`fixed right-0 top-0 h-full w-80 bg-yutime-primary/98 backdrop-blur-md border-l border-yutime-primary/20 transform transition-transform duration-300 ${
+    <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/30 transform transition-transform duration-300 ${
       isOpen ? 'translate-x-0' : 'translate-x-full'
-    } z-20 flex flex-col text-white`}>
-      {/* Minimal header */}
-      <div className="p-6 border-b border-white/10 flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-medium text-white">課程內容</h2>
-          <p className="text-white/60 text-sm">{totalLessons} 個單元・635 分鐘</p>
-        </div>
+    } z-20 flex flex-col shadow-wellness`}>
+      {/* Toggle button at top */}
+      <div className="p-4 border-b border-yutime-neutral/30 flex items-center justify-between">
         <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setSidebarOpen(false)}
-          className="text-white/70 hover:text-white hover:bg-white/10"
+          variant="outline"
+          size="sm"
+          onClick={() => setSidebarOpen(!isOpen)}
+          className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50"
         >
-          <X size={18} />
+          <X size={16} />
+          <span>隱藏課程內容</span>
         </Button>
       </div>
+
+      {/* Header */}
+      <div className="p-6 border-b border-yutime-neutral/30 flex-shrink-0">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
+          <div className="text-sm text-yutime-text/60">
+            {totalLessons} 個單元・635 分鐘
+          </div>
+        </div>
+      </div>
       
-      {/* Chapters and Lessons - MasterClass style */}
+      {/* Chapters and Lessons */}
       <div className="flex-1 overflow-y-auto">
         {chapters.map((chapter, chapterIdx) => (
-          <div key={chapter.id} className="border-b border-white/10 last:border-0">
+          <div key={chapter.id} className="border-b border-yutime-neutral/20">
             {/* Chapter Header */}
             <div
               onClick={() => toggleChapter(chapter.id)}
-              className="flex items-center justify-between p-4 cursor-pointer hover:bg-white/5 transition-colors"
+              className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/30 transition-colors"
             >
               <div className="flex items-center space-x-3">
                 {expandedChapters.includes(chapter.id) ? (
-                  <ChevronDown size={16} className="text-white/60" />
+                  <ChevronDown size={16} className="text-yutime-text/60" />
                 ) : (
-                  <ChevronRight size={16} className="text-white/60" />
+                  <ChevronRight size={16} className="text-yutime-text/60" />
                 )}
                 <div>
-                  <h3 className="font-medium text-white text-sm leading-tight">{chapter.title}</h3>
-                  <div className="text-xs text-white/50 mt-1">{chapter.duration}</div>
+                  <h3 className="font-medium text-yutime-text text-sm leading-tight">{chapter.title}</h3>
+                  <div className="text-xs text-yutime-text/60 mt-1">{chapter.duration}</div>
                 </div>
               </div>
             </div>
             
             {/* Lessons */}
             {expandedChapters.includes(chapter.id) && (
-              <div className="bg-white/5">
+              <div className="bg-yutime-neutral/20">
                 {chapter.lessons.map((lesson, lessonIdx) => {
                   const globalIndex = getLessonGlobalIndex(chapterIdx, lessonIdx);
                   const isCurrentLesson = globalIndex === currentLesson;
@@ -126,30 +133,30 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     <div
                       key={lesson.id}
                       onClick={() => onLessonSelect(globalIndex)}
-                      className={`flex items-center justify-between p-4 pl-12 cursor-pointer transition-all duration-200 ${
+                      className={`flex items-center justify-between p-4 pl-12 cursor-pointer transition-colors ${
                         isCurrentLesson 
-                          ? 'bg-yutime-secondary/20 border-l-2 border-yutime-secondary' 
-                          : 'hover:bg-white/10'
+                          ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
+                          : 'hover:bg-yutime-neutral/40'
                       }`}
                     >
                       <div className="flex items-center space-x-3 flex-1">
                         <div className="flex-shrink-0">
                           {lesson.completed ? (
-                            <CheckCircle size={16} className="text-yutime-accent" />
+                            <CheckCircle size={16} className="text-yutime-secondary" />
                           ) : isCurrentLesson ? (
-                            <Play size={16} className="text-yutime-secondary fill-yutime-secondary" />
+                            <Play size={16} className="text-yutime-secondary" />
                           ) : (
-                            <Circle size={16} className="text-white/30" />
+                            <Circle size={16} className="text-yutime-text/40" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm leading-tight ${
-                            isCurrentLesson ? 'text-yutime-secondary font-medium' : 'text-white'
+                          <p className={`text-sm font-medium leading-tight ${
+                            isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                           }`}>
                             {lesson.title}
                           </p>
                         </div>
-                        <div className="text-xs text-white/50 ml-auto">
+                        <div className="text-xs text-yutime-text/60 ml-auto">
                           {lesson.duration}
                         </div>
                       </div>

@@ -22,24 +22,19 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   setAutoAdvance
 }) => {
   return (
-    <header className="bg-yutime-primary/95 backdrop-blur-md border-b border-yutime-primary/20 px-6 py-3 flex items-center justify-between relative z-10">
-      <div className="flex items-center space-x-6">
+    <header className="bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft">
+      <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
           size="icon"
           onClick={onBack}
-          className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
+          className="text-yutime-text hover:bg-yutime-neutral/50 transition-colors"
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={20} />
         </Button>
-        <div className="flex items-center space-x-4">
-          <div className="w-8 h-8 bg-yutime-secondary rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-medium">財</span>
-          </div>
-          <div>
-            <h1 className="text-white font-medium text-base">{course.title}</h1>
-            <p className="text-white/60 text-sm">by {course.instructor}</p>
-          </div>
+        <div>
+          <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
+          <p className="text-sm text-yutime-text/60">by {course.instructor}</p>
         </div>
       </div>
       
@@ -48,10 +43,10 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           variant="ghost"
           size="icon"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
+          className="text-yutime-text hover:bg-yutime-neutral/50 transition-colors"
           aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
         >
-          <Menu size={18} />
+          <Menu size={20} />
         </Button>
       </div>
     </header>

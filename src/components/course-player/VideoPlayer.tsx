@@ -245,39 +245,46 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className="flex flex-col bg-black">
-      {/* Video Container - MasterClass inspired clean design */}
+    <div className="flex flex-col bg-white">
+      {/* Video Container */}
       <div 
         ref={containerRef}
-        className={`relative w-full bg-black cursor-pointer ${isFullscreen ? 'h-screen' : 'aspect-video'}`}
+        className={`relative w-full bg-black cursor-pointer rounded-lg overflow-hidden ${isFullscreen ? 'h-screen' : ''}`} 
+        style={!isFullscreen ? { height: '50vh' } : {}}
         onClick={handleVideoClick}
         onMouseMove={handleMouseMove}
       >
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           onTimeUpdate={handleTimeUpdate}
           onEnded={handleVideoEnded}
           src="https://www.w3schools.com/html/mov_bbb.mp4"
           aria-label={`Video: ${lesson.title}`}
         />
         
-        {/* Auto-advance overlay - MasterClass style */}
+        {/* Auto-advance overlay */}
         {showAutoAdvance && (
-          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-30">
-            <div className="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
-              <h3 className="text-xl font-medium text-yutime-primary mb-4">下一課程即將開始</h3>
-              <p className="text-yutime-text/70 mb-6">
-                <span className="font-medium text-yutime-secondary text-2xl">{countdown}</span> 秒後自動播放
+          <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
+            <div className="bg-white rounded-xl p-6 max-w-md mx-4 text-center shadow-wellness">
+              <h3 className="text-lg font-serif font-medium text-yutime-primary mb-4">課程即將切換</h3>
+              <p className="text-yutime-text/70 mb-4">
+                下一個課程將在 <span className="font-medium text-yutime-secondary">{countdown}</span> 秒後開始...
               </p>
               <div className="flex space-x-3 justify-center">
                 <Button
                   variant="outline"
                   onClick={handleWatchAgain}
-                  className="flex items-center space-x-2 border-yutime-neutral/30"
+                  className="flex items-center space-x-2"
                 >
                   <RotateCcw size={16} />
                   <span>重新觀看</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleCancelAutoAdvance}
+                >
+                  取消自動播放
                 </Button>
                 <Button
                   onClick={() => {
@@ -286,7 +293,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   }}
                   className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white"
                 >
-                  下一課程
+                  立即前往下一課
                 </Button>
               </div>
             </div>
@@ -296,93 +303,82 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {/* Play/Pause Feedback Icon */}
         {showPlayPauseIcon && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-            <div className="bg-black/50 rounded-full p-4 animate-scale-in">
+            <div className="bg-black/70 rounded-full p-6 animate-scale-in">
               {playPauseIconType === 'play' ? 
-                <Play size={40} className="text-white fill-white" /> : 
-                <Pause size={40} className="text-white fill-white" />
+                <Play size={48} className="text-white fill-white" /> : 
+                <Pause size={48} className="text-white fill-white" />
               }
             </div>
           </div>
         )}
 
-        {/* Minimal Navigation buttons - MasterClass style */}
-        {canGoPrevious && (
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={(e) => {
-                e.stopPropagation();
-                onPrevious();
-              }}
-              className={`bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm transition-all duration-200 h-12 w-12 rounded-full ${
-                showControls ? 'opacity-100' : 'opacity-0 hover:opacity-100'
-              }`}
-            >
-              <ChevronLeft size={20} />
-            </Button>
-          </div>
-        )}
+        {/* Enhanced Navigation buttons */}
+        <div className="absolute left-6 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={(e) => {
+              e.stopPropagation();
+              onPrevious();
+            }}
+            disabled={!canGoPrevious}
+            className={`bg-yutime-primary/70 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-14 ${
+              showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
+            } disabled:opacity-30 disabled:cursor-not-allowed`}
+          >
+            <ChevronLeft size={28} />
+          </Button>
+        </div>
 
-        {canGoNext && (
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={(e) => {
-                e.stopPropagation();
-                onNext();
-              }}
-              className={`bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm transition-all duration-200 h-12 w-12 rounded-full ${
-                showControls ? 'opacity-100' : 'opacity-0 hover:opacity-100'
-              }`}
-            >
-              <ChevronRight size={20} />
-            </Button>
-          </div>
-        )}
+        <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }}
+            disabled={!canGoNext}
+            className={`bg-yutime-primary/70 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-14 ${
+              showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
+            } disabled:opacity-30 disabled:cursor-not-allowed`}
+          >
+            <ChevronRight size={28} />
+          </Button>
+        </div>
         
-        {/* Video controls overlay - MasterClass inspired */}
-        <div className={`video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 transition-opacity duration-300 ${
+        {/* Video controls overlay */}
+        <div className={`video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300 ${
           showControls ? 'opacity-100' : 'opacity-0'
         }`}>
-          {/* Progress bar */}
-          <div className="mb-4">
-            <div 
-              className="h-1 bg-white/20 rounded-full cursor-pointer group"
+          <div className="flex items-center space-x-4">
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={(e) => {
                 e.stopPropagation();
-                handleProgressClick(e);
+                handlePlayPause();
               }}
+              className="text-white hover:bg-white/20"
             >
+              {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+            </Button>
+            
+            <div className="flex-1 flex items-center space-x-2">
+              <span className="text-white text-sm">{getCurrentTime()}</span>
               <div 
-                className="h-1 bg-yutime-secondary rounded-full transition-all duration-150 relative"
-                style={{ width: `${progress}%` }}
-              >
-                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-yutime-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="icon"
+                className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handlePlayPause();
+                  handleProgressClick(e);
                 }}
-                className="text-white hover:bg-white/20 h-10 w-10"
               >
-                {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-              </Button>
-              
-              <div className="flex items-center space-x-2 text-white text-sm">
-                <span>{getCurrentTime()}</span>
-                <span className="text-white/60">/</span>
-                <span>{lesson.duration}</span>
+                <div 
+                  className="h-1 bg-white rounded-full transition-all duration-150"
+                  style={{ width: `${progress}%` }}
+                />
               </div>
+              <span className="text-white text-sm">{lesson.duration}</span>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -394,8 +390,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={(e) => {
                       e.stopPropagation();
+                      handleVolumeToggle();
                     }}
-                    className="text-white hover:bg-white/20 h-9 w-9"
+                    className="text-white hover:bg-white/20"
                   >
                     {isMuted || volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
                   </Button>
@@ -411,6 +408,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 </PopoverContent>
               </Popover>
 
+              {/* Closed Captions */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowCaptions(!showCaptions);
+                }}
+                className={`text-white hover:bg-white/20 ${showCaptions ? 'bg-white/20' : ''}`}
+              >
+                <Captions size={16} />
+              </Button>
+
               {/* Settings Menu */}
               <Popover>
                 <PopoverTrigger asChild>
@@ -418,7 +428,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={(e) => e.stopPropagation()}
-                    className="text-white hover:bg-white/20 h-9 w-9"
+                    className="text-white hover:bg-white/20"
                   >
                     <Settings size={16} />
                   </Button>
@@ -441,6 +451,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                         ))}
                       </div>
                     </div>
+                    <div>
+                      <label className="text-sm font-medium">畫質</label>
+                      <div className="space-y-1 mt-1">
+                        {qualityOptions.map((quality) => (
+                          <Button
+                            key={quality}
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-xs"
+                          >
+                            {quality}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </PopoverContent>
               </Popover>
@@ -452,7 +477,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   e.stopPropagation();
                   handleFullscreen();
                 }}
-                className="text-white hover:bg-white/20 h-9 w-9"
+                className="text-white hover:bg-white/20"
               >
                 <Maximize size={16} />
               </Button>
@@ -461,25 +486,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         </div>
       </div>
 
-      {/* Lesson title and progress - Clean MasterClass style */}
+      {/* Progress section below video */}
       {!isFullscreen && (
-        <div className="bg-yutime-primary/95 text-white p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-lg font-medium mb-1">{lesson.title}</h2>
-              <p className="text-white/70 text-sm">課程 {currentLesson + 1} / {lessons.length}</p>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-white/70 mb-1">課程進度</div>
-              <div className="text-yutime-accent font-medium">{overallProgress}%</div>
+        <div className="bg-white p-6 border-b border-yutime-neutral/30">
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-yutime-secondary font-medium">上課進度 {overallProgress}%</span>
+            <div className="flex-1">
+              <Progress value={overallProgress} className="h-2 bg-yutime-neutral">
+                <div 
+                  className="h-full bg-yutime-secondary rounded-full transition-all duration-300"
+                  style={{ width: `${overallProgress}%` }}
+                />
+              </Progress>
             </div>
           </div>
-          <Progress value={overallProgress} className="h-1 bg-white/20">
-            <div 
-              className="h-full bg-yutime-accent rounded-full transition-all duration-300"
-              style={{ width: `${overallProgress}%` }}
-            />
-          </Progress>
         </div>
       )}
     </div>
