@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -116,10 +117,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
         <div className="flex-1 overflow-y-auto max-h-[calc(100vh-200px)]">
           {chapters.map((chapter, chapterIdx) => (
             <div key={chapter.id} className="border-b border-yutime-neutral/20">
-              {/* Chapter Header */}
+              {/* Chapter Header with background shading */}
               <div
                 onClick={() => toggleChapter(chapter.id)}
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/30 transition-colors bg-yutime-neutral/20"
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/30 transition-colors bg-yutime-neutral/30"
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (

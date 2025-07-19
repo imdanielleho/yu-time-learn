@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -53,19 +52,29 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Video sources for different lessons
+  // Updated video sources for different lessons
   const getVideoSource = (lessonId: number) => {
-    switch (lessonId) {
-      case 1:
-        return "/lovable-uploads/sample-video-1.mp4"; // You'll need to add this
-      case 2:
-        return "/lovable-uploads/sample-video-2.mp4"; // You'll need to add this
-      case 3:
-        return "/lovable-uploads/sample-video-3.mp4"; // You'll need to add this
-      default:
-        // For demo purposes, we'll use a placeholder video or the first one
-        return "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-    }
+    // Using publicly available sample videos that should work
+    const videoSources = {
+      1: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      2: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", 
+      3: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      4: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      5: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      6: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      7: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      8: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+      9: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
+      10: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      11: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
+      12: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+      13: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+      14: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      15: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      16: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    };
+    
+    return videoSources[lessonId] || videoSources[1];
   };
 
   useEffect(() => {
@@ -87,14 +96,26 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onVideoEnd();
     };
 
+    const handleError = (e) => {
+      console.error('Video error:', e);
+      // Try to reload the video source
+      video.load();
+    };
+
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('ended', handleEnded);
+    video.addEventListener('error', handleError);
+
+    // Load the video source
+    video.src = getVideoSource(lesson.id);
+    video.load();
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('error', handleError);
     };
   }, [lesson.id, setProgress, onVideoEnd]);
 
@@ -183,6 +204,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           className="w-full h-full object-cover"
           src={getVideoSource(lesson.id)}
           poster="/placeholder.svg"
+          preload="metadata"
+          crossOrigin="anonymous"
         />
 
         {/* Play/Pause Overlay */}

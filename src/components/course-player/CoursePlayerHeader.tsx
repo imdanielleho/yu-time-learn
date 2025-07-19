@@ -47,7 +47,10 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           <div className="flex items-center justify-between flex-1">
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
-              <p className="text-sm text-yutime-text/60">by {course.instructor}</p>
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-yutime-text/60">by</span>
+                <span className="text-sm text-yutime-text">{course.instructor}</span>
+              </div>
             </div>
           </div>
         </div>
