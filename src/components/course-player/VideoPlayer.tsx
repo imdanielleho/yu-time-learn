@@ -59,6 +59,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [showCaptions, setShowCaptions] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showPlayPauseIcon, setShowPlayPauseIcon] = useState(false);
+  const [playPauseIconType, setPlayPauseIconType] = useState<'play' | 'pause'>('play');
 
   const playbackSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
   const qualityOptions = ['Auto', '1080p', '720p', '480p', '360p'];
@@ -116,7 +118,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   }, [showControls, isPlaying]);
 
   const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
+    const newPlayingState = !isPlaying;
+    setIsPlaying(newPlayingState);
+    
+    // Show play/pause feedback icon
+    setPlayPauseIconType(newPlayingState ? 'play' : 'pause');
+    setShowPlayPauseIcon(true);
+    setTimeout(() => {
+      setShowPlayPauseIcon(false);
+    }, 500);
   };
 
   const handleVideoClick = (e: React.MouseEvent) => {
@@ -290,38 +300,50 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </div>
         )}
         
-        {/* Navigation buttons */}
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex space-x-2">
+        {/* Play/Pause Feedback Icon */}
+        {showPlayPauseIcon && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+            <div className="bg-black/70 rounded-full p-6 animate-scale-in">
+              {playPauseIconType === 'play' ? 
+                <Play size={48} className="text-white fill-white" /> : 
+                <Pause size={48} className="text-white fill-white" />
+              }
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced Navigation buttons */}
+        <div className="absolute left-6 top-1/2 transform -translate-y-1/2">
           <Button
             variant="secondary"
-            size="icon"
+            size="lg"
             onClick={(e) => {
               e.stopPropagation();
               onPrevious();
             }}
             disabled={!canGoPrevious}
-            className={`bg-black/50 text-white hover:bg-black/70 transition-opacity ${
-              showControls ? 'opacity-100' : 'opacity-0 hover:opacity-100'
-            }`}
+            className={`bg-black/60 text-white hover:bg-black/80 border-2 border-white/20 shadow-lg transition-all duration-200 h-14 w-14 ${
+              showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
+            } disabled:opacity-30 disabled:cursor-not-allowed`}
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={28} />
           </Button>
         </div>
 
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+        <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
           <Button
             variant="secondary"
-            size="icon"
+            size="lg"
             onClick={(e) => {
               e.stopPropagation();
               onNext();
             }}
             disabled={!canGoNext}
-            className={`bg-black/50 text-white hover:bg-black/70 transition-opacity ${
-              showControls ? 'opacity-100' : 'opacity-0 hover:opacity-100'
-            }`}
+            className={`bg-black/60 text-white hover:bg-black/80 border-2 border-white/20 shadow-lg transition-all duration-200 h-14 w-14 ${
+              showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
+            } disabled:opacity-30 disabled:cursor-not-allowed`}
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={28} />
           </Button>
         </div>
         

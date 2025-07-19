@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Course } from '@/data/courses';
 
@@ -36,6 +36,18 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           <h1 className="text-lg font-semibold text-gray-900">{course.title}</h1>
           <p className="text-sm text-gray-500">by {course.instructor}</p>
         </div>
+      </div>
+      
+      <div className="flex items-center space-x-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="text-gray-700 hover:bg-gray-100"
+          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+        >
+          <Menu size={20} />
+        </Button>
       </div>
     </header>
   );
