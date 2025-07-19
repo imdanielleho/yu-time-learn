@@ -234,16 +234,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     setProgress(progressPercent);
   };
 
-  const handleSkipBackward = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleSkipBackward = () => {
     console.log('Skip backward button clicked');
     skip5Seconds(false);
   };
 
-  const handleSkipForward = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleSkipForward = () => {
     console.log('Skip forward button clicked');
     skip5Seconds(true);
   };

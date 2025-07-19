@@ -1,11 +1,12 @@
-
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Course } from '@/data/courses';
 
 interface Lesson {
   id: number;
@@ -16,8 +17,21 @@ interface Lesson {
   hasTranscript: boolean;
 }
 
-interface SessionContentProps {
+interface Chapter {
+  id: number;
+  title: string;
+  duration: string;
+  lessons: Lesson[];
+}
+
+interface SessionContentWithSidebarProps {
   lesson: Lesson;
+  course: Course;
+  chapters: Chapter[];
+  currentLesson: number;
+  onLessonSelect: (index: number) => void;
+  totalLessons: number;
+  completedLessons: number;
   onNext: () => void;
   onPrevious: () => void;
   canGoNext: boolean;
@@ -38,14 +52,23 @@ interface QAItem {
   };
 }
 
-const SessionContent: React.FC<SessionContentProps> = ({
+const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   lesson,
+  course,
+  chapters,
+  currentLesson,
+  onLessonSelect,
+  totalLessons,
+  completedLessons,
   onNext,
   onPrevious,
   canGoNext,
   canGoPrevious
 }) => {
+  const isMobile = useIsMobile();
   const [newQuestion, setNewQuestion] = useState('');
+  const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
+  
   const [qaItems, setQaItems] = useState<QAItem[]>([
     {
       id: 1,
@@ -129,12 +152,139 @@ const SessionContent: React.FC<SessionContentProps> = ({
     );
   };
 
+  const toggleChapter = (chapterId: number) => {
+    setExpandedChapters(prev => 
+      prev.includes(chapterId) 
+        ? prev.filter(id => id !== chapterId)
+        : [...prev, chapterId]
+    );
+  };
+
+  const getLessonGlobalIndex = (chapterIndex: number, lessonIndex: number) => {
+    let globalIndex = 0;
+    for (let i = 0; i < chapterIndex; i++) {
+      globalIndex += chapters[i].lessons.length;
+    }
+    return globalIndex + lessonIndex;
+  };
+
+  const getCurrentLessonChapterAndIndex = () => {
+    let globalIndex = 0;
+    for (let chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
+      const chapter = chapters[chapterIndex];
+      if (globalIndex + chapter.lessons.length > currentLesson) {
+        return { chapterIndex, lessonIndex: currentLesson - globalIndex };
+      }
+      globalIndex += chapter.lessons.length;
+    }
+    return { chapterIndex: 0, lessonIndex: 0 };
+  };
+
+  // Sidebar content component
+  const SidebarContent = () => (
+    <div className="h-full flex flex-col">
+      {/* Header */}
+      <div className="p-6 border-b border-yutime-neutral/30 flex-shrink-0">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
+          <div className="text-sm text-yutime-text/80 font-medium">
+            {totalLessons} 個單元・635 分鐘
+          </div>
+        </div>
+        <div className="text-sm text-yutime-text font-medium">
+          已完成: {completedLessons}/{totalLessons}
+        </div>
+      </div>
+      
+      {/* Chapters and Lessons */}
+      <div className="flex-1 overflow-y-auto">
+        {chapters.map((chapter, chapterIdx) => (
+          <div key={chapter.id} className="border-b border-yutime-neutral/20">
+            {/* Chapter Header */}
+            <div
+              onClick={() => toggleChapter(chapter.id)}
+              className={`flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100 transition-colors 
+                bg-gray-50
+                ${chapterIdx === 0 ? 'border-t border-gray-200' : ''}`}
+            >
+              <div className="flex items-center space-x-3">
+                {expandedChapters.includes(chapter.id) ? (
+                  <ChevronDown size={16} className="text-yutime-text" />
+                ) : (
+                  <ChevronRight size={16} className="text-yutime-text" />
+                )}
+                <div>
+                  <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
+                  <div className="text-xs text-yutime-text/70 mt-1">{chapter.duration}</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Lessons */}
+            {expandedChapters.includes(chapter.id) && (
+              <div className="bg-white">
+                {chapter.lessons.map((lesson, lessonIdx) => {
+                  const globalIndex = getLessonGlobalIndex(chapterIdx, lessonIdx);
+                  const isCurrentLesson = globalIndex === currentLesson;
+                  
+                  return (
+                    <div
+                      key={lesson.id}
+                      onClick={() => onLessonSelect(globalIndex)}
+                      className={`flex items-center justify-between p-4 pl-12 cursor-pointer transition-colors ${
+                        isCurrentLesson 
+                          ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
+                          : 'hover:bg-yutime-neutral/40'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-3 flex-1">
+                        <div className="flex-shrink-0">
+                          {lesson.completed ? (
+                            <div className="w-4 h-4 rounded-full bg-yutime-secondary flex items-center justify-center">
+                              <CheckCircle size={12} className="text-white" />
+                            </div>
+                          ) : isCurrentLesson ? (
+                            <Play size={16} className="text-yutime-secondary" />
+                          ) : (
+                            <Circle size={16} className="text-yutime-text/40" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className={`text-sm font-medium leading-tight ${
+                            isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                          }`}>
+                            {lesson.title}
+                          </p>
+                        </div>
+                        <div className="text-xs text-yutime-text/60 ml-auto">
+                          {lesson.duration}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <TooltipProvider>
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-6">
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6 bg-background/50 border border-border rounded-lg p-1">
+          <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
+            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-5' : 'grid-cols-4'} mb-6 bg-background/50 border border-border rounded-lg p-1`}>
+              {isMobile && (
+                <TabsTrigger 
+                  value="sidebar"
+                  className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
+                >
+                  課程內容
+                </TabsTrigger>
+              )}
               <TabsTrigger 
                 value="overview" 
                 className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
@@ -160,6 +310,14 @@ const SessionContent: React.FC<SessionContentProps> = ({
                 課程逐字稿
               </TabsTrigger>
             </TabsList>
+
+            {isMobile && (
+              <TabsContent value="sidebar" className="space-y-0">
+                <Card className="shadow-soft border-yutime-neutral/30 h-[500px]">
+                  <SidebarContent />
+                </Card>
+              </TabsContent>
+            )}
 
             <TabsContent value="overview" className="space-y-0">
               <Card className="shadow-soft border-yutime-neutral/30">
@@ -335,4 +493,4 @@ const SessionContent: React.FC<SessionContentProps> = ({
   );
 };
 
-export default SessionContent;
+export default SessionContentWithSidebar;

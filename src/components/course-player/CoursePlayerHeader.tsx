@@ -86,7 +86,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
                   <Menu size={20} />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent side="left" sideOffset={8}>
                 <p>顯示課程內容</p>
               </TooltipContent>
             </Tooltip>

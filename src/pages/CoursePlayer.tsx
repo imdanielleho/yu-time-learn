@@ -4,11 +4,13 @@ import { courses } from '@/data/courses';
 import CoursePlayerSidebar from '@/components/course-player/CoursePlayerSidebar';
 import VideoPlayer from '@/components/course-player/VideoPlayer';
 import CoursePlayerHeader from '@/components/course-player/CoursePlayerHeader';
-import SessionContent from '@/components/course-player/SessionContent';
+import SessionContentWithSidebar from '@/components/course-player/SessionContentWithSidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const CoursePlayer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const course = courses.find(c => c.id === parseInt(id || '1'));
   
   const [currentLesson, setCurrentLesson] = useState(0);
@@ -241,8 +243,14 @@ const CoursePlayer = () => {
             overallProgress={9}
           />
           
-          <SessionContent 
+          <SessionContentWithSidebar 
             lesson={allLessons[currentLesson]}
+            course={course}
+            chapters={chapters}
+            currentLesson={currentLesson}
+            onLessonSelect={handleLessonSelect}
+            totalLessons={totalLessons}
+            completedLessons={completedLessons}
             onNext={handleNextLesson}
             onPrevious={handlePreviousLesson}
             canGoNext={currentLesson < allLessons.length - 1}
@@ -250,16 +258,18 @@ const CoursePlayer = () => {
           />
         </div>
         
-        <CoursePlayerSidebar 
-          course={course}
-          chapters={chapters}
-          currentLesson={currentLesson}
-          onLessonSelect={handleLessonSelect}
-          isOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-          totalLessons={totalLessons}
-          completedLessons={completedLessons}
-        />
+        {!isMobile && (
+          <CoursePlayerSidebar 
+            course={course}
+            chapters={chapters}
+            currentLesson={currentLesson}
+            onLessonSelect={handleLessonSelect}
+            isOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+            totalLessons={totalLessons}
+            completedLessons={completedLessons}
+          />
+        )}
       </div>
     </div>
   );
