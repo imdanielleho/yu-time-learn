@@ -217,6 +217,8 @@ const CoursePlayer = () => {
         setSidebarOpen={setSidebarOpen}
         autoAdvance={autoAdvance}
         setAutoAdvance={setAutoAdvance}
+        totalLessons={totalLessons}
+        completedLessons={completedLessons}
       />
       
       <div className="flex flex-1 overflow-hidden">

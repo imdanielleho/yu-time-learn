@@ -203,7 +203,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           ref={videoRef}
           className="w-full h-full object-cover"
           src={getVideoSource(lesson.id)}
-          poster="/placeholder.svg"
+          poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
           preload="metadata"
           crossOrigin="anonymous"
         />

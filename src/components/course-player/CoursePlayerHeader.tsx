@@ -2,6 +2,7 @@
 import React from 'react';
 import { ArrowLeft, Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Course } from '@/data/courses';
 
@@ -12,6 +13,8 @@ interface CoursePlayerHeaderProps {
   setSidebarOpen: (open: boolean) => void;
   autoAdvance: boolean;
   setAutoAdvance: (enabled: boolean) => void;
+  totalLessons: number;
+  completedLessons: number;
 }
 
 const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
@@ -20,8 +23,11 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   sidebarOpen,
   setSidebarOpen,
   autoAdvance,
-  setAutoAdvance
+  setAutoAdvance,
+  totalLessons,
+  completedLessons
 }) => {
+  const progressPercentage = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
   return (
     <TooltipProvider>
       <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300 ${
@@ -47,9 +53,14 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           <div className="flex items-center justify-between flex-1">
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-yutime-text/60">by</span>
-                <span className="text-sm text-yutime-text">{course.instructor}</span>
+              <div className="flex items-center space-x-4 min-w-[200px]">
+                <div className="flex flex-col space-y-1">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-yutime-text/60">課程進度</span>
+                    <span className="text-yutime-text font-medium">{completedLessons}/{totalLessons}</span>
+                  </div>
+                  <Progress value={progressPercentage} className="w-32 h-2" />
+                </div>
               </div>
             </div>
           </div>
