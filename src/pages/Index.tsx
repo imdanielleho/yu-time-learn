@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ValueProposition from '@/components/ValueProposition';
@@ -17,23 +17,25 @@ import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const isMobile = useIsMobile();
   const { login, logout, isLoggedIn, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
+
+  // Effect to handle redirect after login
+  useEffect(() => {
+    if (shouldRedirect && isLoggedIn && hasPurchasedCourses) {
+      console.log("Index redirecting to dashboard via useEffect");
+      navigate("/dashboard");
+      setShouldRedirect(false);
+    }
+  }, [shouldRedirect, isLoggedIn, hasPurchasedCourses, navigate]);
 
   const handleLogin = (email: string, password: string) => {
     console.log("Index handleLogin called");
     login(email, password);
     setIsLoginModalOpen(false);
-    
-    // Check if user has purchased courses and redirect appropriately
-    setTimeout(() => {
-      console.log("Checking hasPurchasedCourses:", hasPurchasedCourses);
-      if (hasPurchasedCourses) {
-        console.log("Redirecting to dashboard");
-        navigate("/dashboard");
-      }
-    }, 800); // Adjusted delay to 800ms to allow auth state to update
+    setShouldRedirect(true); // Trigger redirect check via useEffect
   };
 
   const handleLogout = () => {

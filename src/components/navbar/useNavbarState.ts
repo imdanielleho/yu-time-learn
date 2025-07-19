@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -6,10 +6,20 @@ import { useAuth } from '@/contexts/AuthContext';
 const useNavbarState = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { openCart, getItemCount } = useCart();
   const { isLoggedIn, hasPurchasedCourses, login, logout } = useAuth();
+
+  // Effect to handle redirect after login
+  useEffect(() => {
+    if (shouldRedirect && isLoggedIn && hasPurchasedCourses) {
+      console.log("Navbar redirecting to dashboard via useEffect");
+      navigate("/dashboard");
+      setShouldRedirect(false);
+    }
+  }, [shouldRedirect, isLoggedIn, hasPurchasedCourses, navigate]);
 
   const toggleMenu = () => {
     setIsMenuOpen((open) => !open);
@@ -53,15 +63,7 @@ const useNavbarState = () => {
     console.log("Navbar handleLogin called");
     login(username, password);
     setIsLoginModalOpen(false);
-    
-    // Check if user has purchased courses and redirect appropriately
-    setTimeout(() => {
-      console.log("Navbar checking hasPurchasedCourses:", hasPurchasedCourses);
-      if (hasPurchasedCourses) {
-        console.log("Navbar redirecting to dashboard");
-        navigate("/dashboard");
-      }
-    }, 800); // Adjusted delay to 800ms to allow auth state to update
+    setShouldRedirect(true); // Trigger redirect check via useEffect
   };
 
   const handleLoginSignupClick = () => {
