@@ -235,9 +235,9 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             >
               <div className="flex items-center space-x-2 md:space-x-3">
                 {expandedChapters.includes(chapter.id) ? (
-                  <ChevronDown size={14} className="text-yutime-text flex-shrink-0" />
+                  <ChevronDown size={14} className="text-yutime-text flex-shrink-0" strokeWidth={2.5} />
                 ) : (
-                  <ChevronRight size={14} className="text-yutime-text flex-shrink-0" />
+                  <ChevronRight size={14} className="text-yutime-text flex-shrink-0" strokeWidth={2.5} />
                 )}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-yutime-text text-sm md:text-base leading-tight">{chapter.title}</h3>
@@ -265,7 +265,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     >
                       <div className="flex items-start space-x-3">
                         {/* Completion Status Icon - aligned with chapter chevron */}
-                        <div className="flex-shrink-0 mt-1 ml-5">
+                        <div className="flex-shrink-0 mt-1">
                           {lesson.completed ? (
                             <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
                               <Check size={10} className="text-white font-bold" strokeWidth={3} />
@@ -302,7 +302,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                    <Button
                                      variant="outline"
                                      size="sm"
-                                     className="h-6 md:h-7 px-2 md:px-3 flex items-center space-x-1 md:space-x-2 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                     className="h-6 md:h-7 px-2 md:px-3 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                      onClick={(e) => e.stopPropagation()}
                                    >
                                      <Folder size={12} className="text-yutime-secondary" />

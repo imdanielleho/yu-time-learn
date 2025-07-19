@@ -144,9 +144,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (
-                    <ChevronDown size={16} className="text-yutime-text" />
+                    <ChevronDown size={16} className="text-yutime-text" strokeWidth={2.5} />
                   ) : (
-                    <ChevronRight size={16} className="text-yutime-text" />
+                    <ChevronRight size={16} className="text-yutime-text" strokeWidth={2.5} />
                   )}
                   <div>
                     <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
@@ -174,7 +174,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                       >
                         <div className="flex items-start space-x-3">
                           {/* Completion Status Icon - aligned with chapter chevron */}
-                          <div className="flex-shrink-0 mt-1 ml-7">
+                          <div className="flex-shrink-0 mt-1">
                             {lesson.completed ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
                                 <Check size={10} className="text-white font-bold" strokeWidth={3} />
@@ -211,7 +211,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      <Button
                                        variant="outline"
                                        size="sm"
-                                       className="h-7 px-3 flex items-center space-x-2 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                       className="h-7 px-3 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                        onClick={(e) => e.stopPropagation()}
                                      >
                                        <Folder size={14} className="text-yutime-secondary" />

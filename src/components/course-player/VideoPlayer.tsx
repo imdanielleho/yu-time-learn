@@ -92,12 +92,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     const handleLoadedMetadata = () => {
       console.log('Video metadata loaded, duration:', video.duration);
-      setDuration(video.duration);
+      setDuration(video.duration || 0);
     };
 
     const handleTimeUpdate = () => {
-      const currentVideoTime = video.currentTime;
-      const videoDuration = video.duration;
+      const currentVideoTime = video.currentTime || 0;
+      const videoDuration = video.duration || 0;
       
       if (videoDuration > 0) {
         setCurrentTime(currentVideoTime);
@@ -137,7 +137,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     // Ensure video is ready before adding event listeners
     if (video.readyState >= 1) {
-      setDuration(video.duration);
+      setDuration(video.duration || 0);
     }
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -193,9 +193,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   }, [isPlaying, setIsPlaying]);
 
   const formatTime = (timeInSeconds: number) => {
-    if (!timeInSeconds || isNaN(timeInSeconds)) return '00:00';
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
+    if (!timeInSeconds || isNaN(timeInSeconds) || timeInSeconds < 0) return '00:00';
+    
+    const totalSeconds = Math.floor(timeInSeconds);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
