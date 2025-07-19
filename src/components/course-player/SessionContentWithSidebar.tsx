@@ -58,6 +58,8 @@ interface SessionContentWithSidebarProps {
   onPrevious: () => void;
   canGoNext: boolean;
   canGoPrevious: boolean;
+  isPlaying?: boolean;
+  setIsPlaying?: (playing: boolean) => void;
 }
 
 interface QAItem {
@@ -85,7 +87,9 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   onNext,
   onPrevious,
   canGoNext,
-  canGoPrevious
+  canGoPrevious,
+  isPlaying = false,
+  setIsPlaying
 }) => {
   const isMobile = useIsMobile();
   const [newQuestion, setNewQuestion] = useState('');
@@ -178,16 +182,15 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     return { chapterIndex: 0, lessonIndex: 0 };
   };
 
-  // Sort Q&A items based on selected criteria
   const sortedQaItems = [...qaItems].sort((a, b) => {
     switch (qaSortBy) {
       case 'oldest':
-        return a.id - b.id; // Assuming lower ID means older
+        return a.id - b.id;
       case 'most-liked':
         return b.likes - a.likes;
       case 'newest':
       default:
-        return b.id - a.id; // Assuming higher ID means newer
+        return b.id - a.id;
     }
   });
 
@@ -206,10 +209,22 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     window.open(url, '_blank');
   };
 
-  // Sidebar content component
+  const handleLessonClick = (globalIndex: number) => {
+    if (globalIndex === currentLesson) {
+      if (isPlaying && setIsPlaying) {
+        setIsPlaying(false);
+      }
+      return;
+    }
+    
+    onLessonSelect(globalIndex);
+    if (setIsPlaying) {
+      setIsPlaying(true);
+    }
+  };
+
   const SidebarContent = () => (
     <div className="h-full flex flex-col">
-      {/* Header */}
       <div className="p-4 md:p-6 border-b border-yutime-neutral/30 flex-shrink-0">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-base md:text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
@@ -222,11 +237,9 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
         </div>
       </div>
       
-      {/* Chapters and Lessons */}
       <div className="flex-1 overflow-y-auto">
         {chapters.map((chapter, chapterIdx) => (
           <div key={chapter.id} className="border-b border-yutime-neutral/20">
-            {/* Chapter Header */}
             <div
               onClick={() => toggleChapter(chapter.id)}
               className={`flex items-center justify-between p-3 md:p-4 cursor-pointer hover:bg-gray-100 transition-colors 
@@ -235,9 +248,9 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             >
               <div className="flex items-center space-x-2 md:space-x-3">
                 {expandedChapters.includes(chapter.id) ? (
-                  <ChevronDown size={14} className="text-yutime-text flex-shrink-0" strokeWidth={2.5} />
+                  <ChevronDown size={16} className="text-yutime-text flex-shrink-0" strokeWidth={3} />
                 ) : (
-                  <ChevronRight size={14} className="text-yutime-text flex-shrink-0" strokeWidth={2.5} />
+                  <ChevronRight size={16} className="text-yutime-text flex-shrink-0" strokeWidth={3} />
                 )}
                 <div className="min-w-0">
                   <h3 className="font-semibold text-yutime-text text-sm md:text-base leading-tight">{chapter.title}</h3>
@@ -246,7 +259,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
               </div>
             </div>
             
-            {/* Lessons */}
             {expandedChapters.includes(chapter.id) && (
               <div className="bg-white">
                 {chapter.lessons.map((lesson, lessonIdx) => {
@@ -256,7 +268,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   return (
                     <div
                       key={lesson.id}
-                      onClick={() => onLessonSelect(globalIndex)}
+                      onClick={() => handleLessonClick(globalIndex)}
                       className={`p-3 md:p-4 cursor-pointer transition-colors ${
                         isCurrentLesson 
                           ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
@@ -264,7 +276,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                       }`}
                     >
                       <div className="flex items-start space-x-3">
-                        {/* Completion Status Icon - aligned with chapter chevron */}
                         <div className="flex-shrink-0 mt-1">
                           {lesson.completed ? (
                             <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
@@ -272,16 +283,14 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                             </div>
                           ) : isCurrentLesson ? (
                             <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
-                              <Play size={10} className="text-white ml-0.5" />
+                              <Play size={10} className="text-white" />
                             </div>
                           ) : (
                             <Circle size={14} className="text-yutime-text/40" />
                           )}
                         </div>
                         
-                        {/* Lesson Content */}
                         <div className="flex-1 min-w-0">
-                          {/* First Row - Full width lesson title */}
                           <div className="w-full">
                             <p className={`text-sm font-medium leading-tight ${
                               isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
@@ -290,7 +299,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                             </p>
                           </div>
                           
-                          {/* Second Row - Duration left, Resources right */}
                           <div className="flex items-center justify-between mt-2">
                             <div className="text-xs text-yutime-text/60">
                               {lesson.duration}
@@ -302,12 +310,12 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                    <Button
                                      variant="outline"
                                      size="sm"
-                                     className="h-6 md:h-7 px-2 md:px-3 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                     className="h-6 md:h-7 px-2 md:px-3 flex items-center gap-0.5 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                      onClick={(e) => e.stopPropagation()}
                                    >
-                                     <Folder size={12} className="text-yutime-secondary" />
+                                     <Folder size={10} className="text-yutime-secondary" />
                                      <span className="text-xs font-medium">課程資源</span>
-                                     <ChevronDown size={10} className="text-yutime-secondary" />
+                                     <ChevronDown size={8} className="text-yutime-secondary" />
                                    </Button>
                                  </PopoverTrigger>
                                   <PopoverContent className="w-64 p-3" align="end">
@@ -416,7 +424,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   <p className="text-xs md:text-sm text-yutime-text/60 mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
                 </CardHeader>
                 <CardContent className="space-y-4 md:space-y-6">
-                  {/* Submit Question Form */}
                   <div className="bg-yutime-neutral/20 p-3 md:p-4 rounded-xl border border-yutime-neutral/30">
                     <h3 className="font-medium text-yutime-text mb-3 text-sm md:text-base">提出問題</h3>
                     <div className="space-y-3">
@@ -440,7 +447,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     </div>
                   </div>
 
-                  {/* Q&A List with sorting */}
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium text-yutime-text text-sm md:text-base">課程討論 ({qaItems.length})</h3>
@@ -458,7 +464,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     
                     {sortedQaItems.map((item) => (
                       <div key={item.id} className="bg-white p-3 md:p-4 rounded-xl border border-yutime-neutral/30 shadow-soft">
-                        {/* Question */}
                         <div className="mb-4">
                           <div className="flex items-start justify-between mb-2">
                             <div className="flex items-center space-x-2 text-xs md:text-sm text-yutime-text/60">
@@ -489,7 +494,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                           <p className="text-yutime-text leading-relaxed text-sm md:text-base">{item.question}</p>
                         </div>
 
-                        {/* Answer */}
                         {item.answer && (
                           <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-secondary/30 bg-yutime-secondary/5 p-3 rounded-r-lg">
                             <div className="flex items-center space-x-2 mb-2 text-xs md:text-sm">
@@ -509,7 +513,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                           </div>
                         )}
 
-                        {/* No Answer Yet */}
                         {!item.answer && (
                           <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-neutral/30 bg-yutime-neutral/10 p-3 rounded-r-lg">
                             <p className="text-yutime-text/60 text-xs md:text-sm italic">講師尚未回覆，請耐心等候...</p>

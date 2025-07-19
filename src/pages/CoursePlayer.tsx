@@ -16,10 +16,9 @@ const CoursePlayer = () => {
   const [currentLesson, setCurrentLesson] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(9);
-  const [sidebarOpen, setSidebarOpen] = useState(!isMobile); // Default closed on mobile
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
   const [autoAdvance, setAutoAdvance] = useState(true);
 
-  // Enhanced lessons data organized by chapters with additional lessons and resources
   const chapters = [
     {
       id: 1,
@@ -210,12 +209,10 @@ const CoursePlayer = () => {
     }
   ];
 
-  // Flatten lessons for easier navigation
   const allLessons = chapters.flatMap(chapter => chapter.lessons);
   const totalLessons = allLessons.length;
   const completedLessons = allLessons.filter(lesson => lesson.completed).length;
 
-  // Adjust sidebar state based on mobile/desktop changes
   useEffect(() => {
     setSidebarOpen(!isMobile);
   }, [isMobile]);
@@ -318,6 +315,8 @@ const CoursePlayer = () => {
             setSidebarOpen={setSidebarOpen}
             totalLessons={totalLessons}
             completedLessons={completedLessons}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
           />
         )}
       </div>

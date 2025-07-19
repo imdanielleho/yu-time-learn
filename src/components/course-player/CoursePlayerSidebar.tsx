@@ -33,6 +33,8 @@ interface CoursePlayerSidebarProps {
   setSidebarOpen: (open: boolean) => void;
   totalLessons: number;
   completedLessons: number;
+  isPlaying?: boolean;
+  setIsPlaying?: (playing: boolean) => void;
 }
 
 const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
@@ -43,7 +45,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   isOpen,
   setSidebarOpen,
   totalLessons,
-  completedLessons
+  completedLessons,
+  isPlaying = false,
+  setIsPlaying
 }) => {
   // Expand all chapters by default
   const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
@@ -93,6 +97,23 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
     window.open(url, '_blank');
   };
 
+  const handleLessonClick = (globalIndex: number) => {
+    if (globalIndex === currentLesson) {
+      // If clicking on current lesson and it's playing, pause it
+      if (isPlaying && setIsPlaying) {
+        setIsPlaying(false);
+      }
+      // If not playing or no setIsPlaying function, do nothing
+      return;
+    }
+    
+    // If clicking on a different lesson, select it and autoplay
+    onLessonSelect(globalIndex);
+    if (setIsPlaying) {
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <TooltipProvider>
       <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/30 transform transition-transform duration-300 ${
@@ -118,7 +139,6 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
           </Tooltip>
         </div>
 
-        {/* Header */}
         <div className="p-6 border-b border-yutime-neutral/30 flex-shrink-0">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
@@ -165,7 +185,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     return (
                       <div
                         key={lesson.id}
-                        onClick={() => onLessonSelect(globalIndex)}
+                        onClick={() => handleLessonClick(globalIndex)}
                         className={`p-4 cursor-pointer transition-colors ${
                           isCurrentLesson 
                             ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
@@ -181,7 +201,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                               </div>
                             ) : isCurrentLesson ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
-                                <Play size={10} className="text-white ml-0.5" />
+                                <Play size={10} className="text-white" />
                               </div>
                             ) : (
                               <Circle size={16} className="text-yutime-text/40" />
@@ -211,10 +231,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      <Button
                                        variant="outline"
                                        size="sm"
-                                       className="h-7 px-2 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                       className="h-7 px-2 flex items-center gap-0.5 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                        onClick={(e) => e.stopPropagation()}
                                      >
-                                       <Folder size={14} className="text-yutime-secondary" />
+                                       <Folder size={12} className="text-yutime-secondary" />
                                        <span className="text-xs font-medium">課程資源</span>
                                        <ChevronDown size={10} className="text-yutime-secondary" />
                                      </Button>
