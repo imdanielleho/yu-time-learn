@@ -144,9 +144,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (
-                    <ChevronDown size={16} className="text-yutime-text" strokeWidth={2.5} />
+                    <ChevronDown size={18} className="text-yutime-text" strokeWidth={3} />
                   ) : (
-                    <ChevronRight size={16} className="text-yutime-text" strokeWidth={2.5} />
+                    <ChevronRight size={18} className="text-yutime-text" strokeWidth={3} />
                   )}
                   <div>
                     <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
@@ -211,12 +211,12 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      <Button
                                        variant="outline"
                                        size="sm"
-                                       className="h-7 px-3 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                       className="h-7 px-2 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                        onClick={(e) => e.stopPropagation()}
                                      >
                                        <Folder size={14} className="text-yutime-secondary" />
                                        <span className="text-xs font-medium">課程資源</span>
-                                       <ChevronDown size={12} className="text-yutime-secondary" />
+                                       <ChevronDown size={10} className="text-yutime-secondary" />
                                      </Button>
                                    </PopoverTrigger>
                                     <PopoverContent className="w-64 p-3" align="end">

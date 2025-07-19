@@ -99,6 +99,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       const currentVideoTime = video.currentTime || 0;
       const videoDuration = video.duration || 0;
       
+      console.log('Time update:', currentVideoTime, '/', videoDuration);
+      
       if (videoDuration > 0) {
         setCurrentTime(currentVideoTime);
         const progressPercent = (currentVideoTime / videoDuration) * 100;
@@ -134,11 +136,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       setCurrentTime(0);
       setProgress(0);
     };
-
-    // Ensure video is ready before adding event listeners
-    if (video.readyState >= 1) {
-      setDuration(video.duration || 0);
-    }
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
