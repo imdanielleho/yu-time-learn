@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -50,7 +49,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [showControls, setShowControls] = useState(true);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [videoKey, setVideoKey] = useState(0); // Force re-render
+  const [videoKey, setVideoKey] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -79,7 +78,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   useEffect(() => {
-    // Force video re-creation when lesson changes
     setVideoKey(prev => prev + 1);
   }, [lesson.id]);
 
@@ -132,7 +130,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
   }, [lesson.id, setProgress, onVideoEnd, videoKey]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.code === 'ArrowLeft') {
@@ -262,7 +259,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
-        {/* Video Element - Force re-creation with key */}
         <video
           key={videoKey}
           ref={videoRef}
@@ -275,8 +271,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           src={getVideoSource(lesson.id)}
         />
 
-        {/* Skip Buttons on Left and Right Edges */}
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+        <div className="absolute left-8 top-1/2 transform -translate-y-1/2">
           <Button
             variant="ghost"
             size="icon"
@@ -292,7 +287,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </Button>
         </div>
 
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+        <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
           <Button
             variant="ghost"
             size="icon"
@@ -308,7 +303,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </Button>
         </div>
 
-        {/* Play/Pause Button in Center */}
         <div className="absolute inset-0 flex items-center justify-center">
           <Button
             variant="ghost"
@@ -322,12 +316,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </Button>
         </div>
 
-        {/* Controls */}
         <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${
           showControls ? 'opacity-100' : 'opacity-0'
         }`}>
           
-          {/* Progress Bar */}
           <div className="mb-4">
             <Slider
               value={[progress]}
@@ -342,7 +334,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             </div>
           </div>
 
-          {/* Control Buttons */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Tooltip>

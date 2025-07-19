@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { courses } from '@/data/courses';
@@ -16,7 +17,7 @@ const CoursePlayer = () => {
   const [currentLesson, setCurrentLesson] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(9);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile); // Default closed on mobile
   const [autoAdvance, setAutoAdvance] = useState(true);
 
   // Enhanced lessons data organized by chapters with additional lessons
@@ -170,6 +171,11 @@ const CoursePlayer = () => {
   const totalLessons = allLessons.length;
   const completedLessons = allLessons.filter(lesson => lesson.completed).length;
 
+  // Adjust sidebar state based on mobile/desktop changes
+  useEffect(() => {
+    setSidebarOpen(!isMobile);
+  }, [isMobile]);
+
   useEffect(() => {
     if (!course) {
       navigate('/dashboard');
@@ -211,7 +217,7 @@ const CoursePlayer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-yutime-neutral flex flex-col">
+    <div className="min-h-screen bg-yutime-neutral flex flex-col w-full">
       <CoursePlayerHeader 
         course={course}
         onBack={() => navigate('/dashboard')}
@@ -223,9 +229,9 @@ const CoursePlayer = () => {
         completedLessons={completedLessons}
       />
       
-      <div className="flex flex-1 overflow-hidden">
-        <div className={`flex-1 flex flex-col transition-all duration-300 ${
-          sidebarOpen ? 'mr-80' : ''
+      <div className="flex flex-1 overflow-hidden w-full">
+        <div className={`flex-1 flex flex-col transition-all duration-300 w-full ${
+          !isMobile && sidebarOpen ? 'mr-80' : ''
         }`}>
           <VideoPlayer 
             lesson={allLessons[currentLesson]}
