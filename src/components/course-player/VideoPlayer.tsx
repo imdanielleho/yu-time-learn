@@ -3,6 +3,7 @@ import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Setting
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import VideoEndOverlay from './VideoEndOverlay';
 
 interface Lesson {
   id: number;
@@ -51,10 +52,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [videoKey, setVideoKey] = useState(0);
   const [captionsEnabled, setCaptionsEnabled] = useState(false);
+  const [showEndOverlay, setShowEndOverlay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Updated video sources for different lessons
   const getVideoSource = (lessonId: number) => {
     const videoSources = {
       1: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -99,7 +100,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     const handleEnded = () => {
       setIsPlaying(false);
-      onVideoEnd();
+      setShowEndOverlay(true);
     };
 
     const handleError = (e: any) => {
@@ -129,7 +130,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('loadstart', handleLoadStart);
     };
-  }, [lesson.id, setProgress, onVideoEnd, videoKey]);
+  }, [lesson.id, setProgress]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -257,6 +258,33 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         setShowControls(false);
       }
     }, 3000);
+  };
+
+  const handleAutoAdvanceNext = () => {
+    setShowEndOverlay(false);
+    onNext();
+  };
+
+  const handleCancelAutoAdvance = () => {
+    setShowEndOverlay(false);
+  };
+
+  const handleWatchAgain = () => {
+    setShowEndOverlay(false);
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      setCurrentTime(0);
+      setProgress(0);
+      setIsPlaying(true);
+    }
+  };
+
+  const getNextLessonTitle = () => {
+    if (canGoNext && currentLesson < lessons.length - 1) {
+      return lessons[currentLesson + 1].title;
+    }
+    return undefined;
   };
 
   return (
@@ -470,6 +498,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             </div>
           </div>
         </div>
+
+        <VideoEndOverlay
+          show={showEndOverlay}
+          onNext={handleAutoAdvanceNext}
+          onCancel={handleCancelAutoAdvance}
+          onWatchAgain={handleWatchAgain}
+          canGoNext={canGoNext}
+          nextLessonTitle={getNextLessonTitle()}
+          countdownSeconds={10}
+        />
 
       </div>
     </TooltipProvider>
