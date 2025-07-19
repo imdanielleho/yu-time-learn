@@ -45,6 +45,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   currentLesson,
   overallProgress
 }) => {
+  console.log('VideoPlayer rendered with lesson:', lesson);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [showControls, setShowControls] = useState(true);
