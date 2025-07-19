@@ -133,33 +133,52 @@ const SessionContent: React.FC<SessionContentProps> = ({
     <TooltipProvider>
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-6">
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6 bg-gray-50">
+          <Tabs defaultValue="modules" className="w-full">
+            <TabsList className="grid w-full grid-cols-5 mb-6 bg-gray-50/50 rounded-lg p-1">
+              <TabsTrigger 
+                value="modules" 
+                className="text-sm font-medium px-4 py-3 rounded-md transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-yutime-primary data-[state=active]:font-semibold"
+              >
+                課程模組
+              </TabsTrigger>
               <TabsTrigger 
                 value="overview" 
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium px-4 py-3 rounded-md transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-yutime-primary data-[state=active]:font-semibold"
               >
                 課程概要
               </TabsTrigger>
               <TabsTrigger 
                 value="resources"
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium px-4 py-3 rounded-md transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-yutime-primary data-[state=active]:font-semibold"
               >
                 教材資源
               </TabsTrigger>
               <TabsTrigger 
                 value="qa"
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium px-4 py-3 rounded-md transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-yutime-primary data-[state=active]:font-semibold"
               >
                 課程問答
               </TabsTrigger>
               <TabsTrigger 
                 value="transcript"
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium px-4 py-3 rounded-md transition-all data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-yutime-primary data-[state=active]:font-semibold"
               >
                 課程逐字稿
               </TabsTrigger>
             </TabsList>
+
+            <TabsContent value="modules" className="space-y-0">
+              <Card className="shadow-soft border-yutime-neutral/30">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg text-yutime-primary font-serif">課程模組</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-yutime-text/70 leading-relaxed">
+                    課程模組內容將在此顯示...
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
             <TabsContent value="overview" className="space-y-0">
               <Card className="shadow-soft border-yutime-neutral/30">
