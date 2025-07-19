@@ -137,7 +137,7 @@ const CoursePlayer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-yutime-neutral flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">{/* MasterClass inspired dark theme */}
       <CoursePlayerHeader 
         course={course}
         onBack={() => navigate('/dashboard')}
