@@ -274,11 +274,12 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   return (
                     <div
                       key={lesson.id}
-                      className={`p-3 md:p-4 transition-colors ${
+                      className={`p-3 md:p-4 transition-colors cursor-pointer ${
                         isCurrentLesson 
                           ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                           : 'hover:bg-yutime-neutral/40'
                       }`}
+                      onClick={() => handleLessonClick(globalIndex)}
                     >
                       <div className="flex items-start space-x-3">
                         <div className="flex-shrink-0 mt-1">
@@ -296,10 +297,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                          <div 
-                            className="w-full cursor-pointer"
-                            onClick={() => handleLessonClick(globalIndex)}
-                          >
+                          <div className="w-full">
                             <p className={`text-sm font-medium leading-tight ${
                               isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                             }`}>
@@ -318,7 +316,9 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                   <Button
                                     variant="outline"
                                     size="sm"
-                                    onClick={(e) => e.stopPropagation()}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                    }}
                                     className={`${
                                       isMobile 
                                         ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
@@ -330,7 +330,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     <ChevronDown size={10} className="text-yutime-secondary" />
                                   </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-64 p-3" align="end">
+                                <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
                                   <div className="space-y-2">
                                     {lesson.resources.map((resource, index) => (
                                       <div 
@@ -345,7 +345,10 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                           </div>
                                         </div>
                                         <Button
-                                          onClick={() => handleResourceDownload(resource.url)}
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleResourceDownload(resource.url);
+                                          }}
                                           className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                           size="sm"
                                         >
@@ -452,11 +455,12 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                 return (
                                   <div
                                     key={lesson.id}
-                                    className={`p-3 md:p-4 transition-colors ${
+                                    className={`p-3 md:p-4 transition-colors cursor-pointer ${
                                       isCurrentLesson 
                                         ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                                         : 'hover:bg-yutime-neutral/40'
                                     }`}
+                                    onClick={() => handleLessonClick(globalIndex)}
                                   >
                                     <div className="flex items-start space-x-3">
                                       <div className="flex-shrink-0 mt-1">
@@ -474,10 +478,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                       </div>
                                       
                                       <div className="flex-1 min-w-0">
-                                        <div 
-                                          className="w-full cursor-pointer"
-                                          onClick={() => handleLessonClick(globalIndex)}
-                                        >
+                                        <div className="w-full">
                                           <p className={`text-sm font-medium leading-tight ${
                                             isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                                           }`}>
@@ -496,7 +497,9 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                                 <Button
                                                   variant="outline"
                                                   size="sm"
-                                                  onClick={(e) => e.stopPropagation()}
+                                                  onClick={(e) => {
+                                                    e.stopPropagation();
+                                                  }}
                                                   className={`${
                                                     isMobile 
                                                       ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
@@ -508,7 +511,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                                   <ChevronDown size={10} className="text-yutime-secondary" />
                                                 </Button>
                                               </PopoverTrigger>
-                                              <PopoverContent className="w-64 p-3" align="end">
+                                              <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
                                                 <div className="space-y-2">
                                                   {lesson.resources.map((resource, index) => (
                                                     <div 
@@ -523,7 +526,10 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                                         </div>
                                                       </div>
                                                       <Button
-                                                        onClick={() => handleResourceDownload(resource.url)}
+                                                        onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          handleResourceDownload(resource.url);
+                                                        }}
                                                         className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                                         size="sm"
                                                       >
