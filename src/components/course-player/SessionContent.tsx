@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Course } from '@/data/courses';
 
 interface Lesson {
   id: number;
@@ -16,12 +17,25 @@ interface Lesson {
   hasTranscript: boolean;
 }
 
+interface Chapter {
+  id: number;
+  title: string;
+  duration: string;
+  lessons: Lesson[];
+}
+
 interface SessionContentProps {
   lesson: Lesson;
   onNext: () => void;
   onPrevious: () => void;
   canGoNext: boolean;
   canGoPrevious: boolean;
+  course: Course;
+  chapters: Chapter[];
+  currentLesson: number;
+  onLessonSelect: (index: number) => void;
+  totalLessons: number;
+  completedLessons: number;
 }
 
 interface QAItem {
@@ -43,9 +57,16 @@ const SessionContent: React.FC<SessionContentProps> = ({
   onNext,
   onPrevious,
   canGoNext,
-  canGoPrevious
+  canGoPrevious,
+  course,
+  chapters,
+  currentLesson,
+  onLessonSelect,
+  totalLessons,
+  completedLessons
 }) => {
   const [newQuestion, setNewQuestion] = useState('');
+  const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
   const [qaItems, setQaItems] = useState<QAItem[]>([
     {
       id: 1,
@@ -129,37 +150,158 @@ const SessionContent: React.FC<SessionContentProps> = ({
     );
   };
 
+  const toggleChapter = (chapterId: number) => {
+    setExpandedChapters(prev => 
+      prev.includes(chapterId) 
+        ? prev.filter(id => id !== chapterId)
+        : [...prev, chapterId]
+    );
+  };
+
+  const getLessonGlobalIndex = (chapterIndex: number, lessonIndex: number) => {
+    let globalIndex = 0;
+    for (let i = 0; i < chapterIndex; i++) {
+      globalIndex += chapters[i].lessons.length;
+    }
+    return globalIndex + lessonIndex;
+  };
+
+  const getCurrentLessonChapterAndIndex = () => {
+    let globalIndex = 0;
+    for (let chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
+      const chapter = chapters[chapterIndex];
+      if (globalIndex + chapter.lessons.length > currentLesson) {
+        return { chapterIndex, lessonIndex: currentLesson - globalIndex };
+      }
+      globalIndex += chapter.lessons.length;
+    }
+    return { chapterIndex: 0, lessonIndex: 0 };
+  };
+
+  const { chapterIndex: currentChapterIndex, lessonIndex: currentLessonIndex } = getCurrentLessonChapterAndIndex();
+
   return (
     <TooltipProvider>
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-6">
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6 bg-gray-50">
+          <Tabs defaultValue="modules" className="w-full">
+            <TabsList className="grid w-full grid-cols-5 mb-6 bg-white rounded-lg border">
               <TabsTrigger 
-                value="overview" 
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                value="modules" 
+                className="text-sm font-medium rounded-md data-[state=active]:bg-yutime-blue/10 data-[state=active]:text-yutime-blue data-[state=active]:font-semibold transition-all"
+              >
+                課程單元
+              </TabsTrigger>
+              <TabsTrigger 
+                value="overview"
+                className="text-sm font-medium rounded-md data-[state=active]:bg-yutime-blue/10 data-[state=active]:text-yutime-blue data-[state=active]:font-semibold transition-all"
               >
                 課程概要
               </TabsTrigger>
               <TabsTrigger 
                 value="resources"
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium rounded-md data-[state=active]:bg-yutime-blue/10 data-[state=active]:text-yutime-blue data-[state=active]:font-semibold transition-all"
               >
                 教材資源
               </TabsTrigger>
               <TabsTrigger 
                 value="qa"
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium rounded-md data-[state=active]:bg-yutime-blue/10 data-[state=active]:text-yutime-blue data-[state=active]:font-semibold transition-all"
               >
                 課程問答
               </TabsTrigger>
               <TabsTrigger 
                 value="transcript"
-                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
+                className="text-sm font-medium rounded-md data-[state=active]:bg-yutime-blue/10 data-[state=active]:text-yutime-blue data-[state=active]:font-semibold transition-all"
               >
                 課程逐字稿
               </TabsTrigger>
             </TabsList>
+
+            <TabsContent value="modules" className="space-y-0">
+              <Card className="shadow-soft border-yutime-neutral/30">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <CardTitle className="text-lg text-yutime-primary font-serif">課程單元</CardTitle>
+                    <div className="text-sm text-yutime-text/80 font-medium">
+                      {totalLessons} 個單元・635 分鐘
+                    </div>
+                  </div>
+                  <div className="text-sm text-yutime-text font-medium">
+                    已完成: {completedLessons}/{totalLessons}
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {chapters.map((chapter, chapterIdx) => (
+                      <div key={chapter.id} className="border border-yutime-neutral/30 rounded-lg overflow-hidden">
+                        {/* Chapter Header */}
+                        <div
+                          onClick={() => toggleChapter(chapter.id)}
+                          className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors bg-gray-50/70"
+                        >
+                          <div className="flex items-center space-x-3">
+                            {expandedChapters.includes(chapter.id) ? (
+                              <ChevronDown size={16} className="text-yutime-text" />
+                            ) : (
+                              <ChevronUp size={16} className="text-yutime-text" />
+                            )}
+                            <div>
+                              <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
+                              <div className="text-xs text-yutime-text/70 mt-1">{chapter.duration}</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Lessons */}
+                        {expandedChapters.includes(chapter.id) && (
+                          <div className="bg-white">
+                            {chapter.lessons.map((lessonItem, lessonIdx) => {
+                              const globalIndex = getLessonGlobalIndex(chapterIdx, lessonIdx);
+                              const isCurrentLesson = globalIndex === currentLesson;
+                              
+                              return (
+                                <div
+                                  key={lessonItem.id}
+                                  onClick={() => onLessonSelect(globalIndex)}
+                                  className={`flex items-center justify-between p-4 pl-12 cursor-pointer transition-colors border-t border-yutime-neutral/20 ${
+                                    isCurrentLesson 
+                                      ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
+                                      : 'hover:bg-yutime-neutral/40'
+                                  }`}
+                                >
+                                  <div className="flex items-center space-x-3 flex-1">
+                                    <div className="flex-shrink-0">
+                                      {lessonItem.completed ? (
+                                        <CheckCircle size={16} className="text-yutime-secondary" />
+                                      ) : isCurrentLesson ? (
+                                        <Play size={16} className="text-yutime-secondary" />
+                                      ) : (
+                                        <Circle size={16} className="text-yutime-text/40" />
+                                      )}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <p className={`text-sm font-medium leading-tight ${
+                                        isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                                      }`}>
+                                        {lessonItem.title}
+                                      </p>
+                                    </div>
+                                    <div className="text-xs text-yutime-text/60 ml-auto">
+                                      {lessonItem.duration}
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
             <TabsContent value="overview" className="space-y-0">
               <Card className="shadow-soft border-yutime-neutral/30">
