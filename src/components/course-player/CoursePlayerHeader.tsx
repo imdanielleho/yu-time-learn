@@ -7,6 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Course } from '@/data/courses';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface CoursePlayerHeaderProps {
   course: Course;
@@ -29,6 +30,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   totalLessons,
   completedLessons
 }) => {
+  const isMobile = useIsMobile();
   const progressPercentage = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
 
   return (
@@ -72,21 +74,23 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
             />
           </div>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="hover:bg-yutime-neutral/40 min-w-[44px] min-h-[44px]"
-              >
-                {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom" align="end" className="z-50">
-              <p>{sidebarOpen ? '關閉側邊欄' : '開啟側邊欄'}</p>
-            </TooltipContent>
-          </Tooltip>
+          {!isMobile && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className="hover:bg-yutime-neutral/40 min-w-[44px] min-h-[44px]"
+                >
+                  {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" align="end" className="z-50">
+                <p>{sidebarOpen ? '關閉側邊欄' : '開啟側邊欄'}</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
         </div>
       </div>
     </TooltipProvider>

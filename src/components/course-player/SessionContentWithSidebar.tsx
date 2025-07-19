@@ -292,36 +292,36 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 sm:p-6">
           <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
-            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-5' : 'grid-cols-4'} mb-4 sm:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
+            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-5' : 'grid-cols-4'} mb-4 sm:mb-6 bg-white border border-gray-200 rounded-lg p-1`}>
               {isMobile && (
                 <TabsTrigger 
                   value="sidebar"
-                  className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
+                  className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-blue-200 data-[state=active]:border text-gray-600 hover:text-gray-900"
                 >
                   課程內容
                 </TabsTrigger>
               )}
               <TabsTrigger 
                 value="overview" 
-                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
+                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-blue-200 data-[state=active]:border text-gray-600 hover:text-gray-900"
               >
                 課程概要
               </TabsTrigger>
               <TabsTrigger 
                 value="resources"
-                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
+                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-blue-200 data-[state=active]:border text-gray-600 hover:text-gray-900"
               >
                 教材資源
               </TabsTrigger>
               <TabsTrigger 
                 value="qa"
-                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
+                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-blue-200 data-[state=active]:border text-gray-600 hover:text-gray-900"
               >
                 課程問答
               </TabsTrigger>
               <TabsTrigger 
                 value="transcript"
-                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
+                className="text-xs sm:text-sm font-medium rounded-md transition-all px-2 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-600 data-[state=active]:border-blue-200 data-[state=active]:border text-gray-600 hover:text-gray-900"
               >
                 課程逐字稿
               </TabsTrigger>
@@ -388,19 +388,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                       <MessageCircle size={20} />
                       <span>課程問答</span>
                     </CardTitle>
-                    <div className="flex items-center space-x-2">
-                      <ArrowUpDown size={16} className="text-yutime-text/60" />
-                      <Select value={sortBy} onValueChange={(value: 'newest' | 'oldest' | 'most-liked') => setSortBy(value)}>
-                        <SelectTrigger className="w-32 h-8 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="newest">最新</SelectItem>
-                          <SelectItem value="oldest">最舊</SelectItem>
-                          <SelectItem value="most-liked">最多讚</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </div>
                   <p className="text-xs sm:text-sm text-yutime-text/60 mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
                 </CardHeader>
@@ -428,9 +415,24 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     </div>
                   </div>
 
-                  {/* Q&A List */}
+                  {/* Q&A List with sorting in same row as title */}
                   <div className="space-y-4">
-                    <h3 className="font-medium text-yutime-text text-sm sm:text-base">課程討論 ({sortedQAItems.length})</h3>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <h3 className="font-medium text-yutime-text text-sm sm:text-base">課程討論 ({sortedQAItems.length})</h3>
+                      <div className="flex items-center space-x-2">
+                        <ArrowUpDown size={16} className="text-yutime-text/60" />
+                        <Select value={sortBy} onValueChange={(value: 'newest' | 'oldest' | 'most-liked') => setSortBy(value)}>
+                          <SelectTrigger className="w-32 h-8 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="newest">最新</SelectItem>
+                            <SelectItem value="oldest">最舊</SelectItem>
+                            <SelectItem value="most-liked">最多讚</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
                     {sortedQAItems.map((item) => (
                       <div key={item.id} className="bg-white p-3 sm:p-4 rounded-xl border border-yutime-neutral/30 shadow-soft">
                         {/* Question */}
