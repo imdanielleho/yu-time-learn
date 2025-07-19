@@ -369,7 +369,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     <TooltipProvider>
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 md:p-6">
-          <Tabs defaultValue={isMobile ? "overview" : "overview"} className="w-full">
+          <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
             <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
               {isMobile && (
                 <TabsTrigger 
