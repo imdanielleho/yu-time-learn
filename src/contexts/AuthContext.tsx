@@ -55,17 +55,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
     setUser(mockUser);
     
-    // Mock course purchase status - in real app this would come from API
-    // For demo purposes, let's say user has courses after first login
-    setTimeout(() => {
-      console.log("Setting hasPurchasedCourses to true");
-      setHasPurchasedCourses(true);
-      setLastActiveCourse({
-        id: '1',
-        title: 'Japanese Basics',
-        progress: 65
-      });
-    }, 500); // Reduced delay to 500ms
+    // Set course purchase status immediately for demo purposes
+    console.log("Setting hasPurchasedCourses to true");
+    setHasPurchasedCourses(true);
+    setLastActiveCourse({
+      id: '1',
+      title: 'Japanese Basics',
+      progress: 65
+    });
   };
 
   const logout = () => {
