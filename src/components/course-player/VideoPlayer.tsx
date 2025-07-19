@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw, Captions } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -55,6 +54,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [captionsEnabled, setCaptionsEnabled] = useState(false);
   const [showEndOverlay, setShowEndOverlay] = useState(false);
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
+  const [userHasInteracted, setUserHasInteracted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
@@ -82,6 +82,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return videoSources[lessonId] || videoSources[1];
   };
 
+  // Detect user interaction for mobile autoplay
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      setUserHasInteracted(true);
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+
+    document.addEventListener('touchstart', handleUserInteraction, { passive: true });
+    document.addEventListener('click', handleUserInteraction);
+
+    return () => {
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
+  }, []);
+
   // Reset video when lesson changes
   useEffect(() => {
     console.log('Lesson changed to:', lesson.id);
@@ -101,11 +118,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       console.log('Video metadata loaded, duration:', video.duration);
       setDuration(video.duration || 0);
       
-      // Auto-play new videos
+      // Auto-play new videos - with better mobile support
       if (!hasAutoPlayed) {
         console.log('Auto-playing video');
         setIsPlaying(true);
         setHasAutoPlayed(true);
+        
+        // For mobile devices, attempt autoplay after user interaction
+        if (userHasInteracted || !('ontouchstart' in window)) {
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log('Autoplay prevented:', error);
+              // On mobile, we might need user interaction first
+              setIsPlaying(false);
+            });
+          }
+        }
       }
     };
 
@@ -162,7 +191,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('loadstart', handleLoadStart);
     };
-  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying]);
+  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying, userHasInteracted]);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -183,7 +212,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [isPlaying, setIsPlaying]);
 
-  // Sync video play/pause state
+  // Sync video play/pause state with improved mobile handling
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -193,13 +222,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       if (playPromise !== undefined) {
         playPromise.catch(error => {
           console.error('Error playing video:', error);
-          setIsPlaying(false);
+          // On mobile, if autoplay fails, don't automatically set to false
+          // Let user manually start the video
+          if (!userHasInteracted && 'ontouchstart' in window) {
+            console.log('Mobile autoplay blocked - waiting for user interaction');
+          } else {
+            setIsPlaying(false);
+          }
         });
       }
     } else {
       video.pause();
     }
-  }, [isPlaying, setIsPlaying]);
+  }, [isPlaying, setIsPlaying, userHasInteracted]);
 
   const formatTime = (timeInSeconds: number) => {
     if (!timeInSeconds || isNaN(timeInSeconds) || timeInSeconds < 0) return '00:00';
@@ -254,29 +289,29 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       if (document.fullscreenElement) {
         await document.exitFullscreen();
       } else {
-        // Try to request fullscreen on container first, fallback to video
-        if (container.requestFullscreen) {
-          await container.requestFullscreen();
-        } else if (video.requestFullscreen) {
-          await video.requestFullscreen();
-        } else if ((video as any).webkitRequestFullscreen) {
-          // Safari support
-          (video as any).webkitRequestFullscreen();
-        } else if ((video as any).webkitEnterFullscreen) {
-          // iOS Safari support
-          (video as any).webkitEnterFullscreen();
+        // Enhanced mobile fullscreen support
+        if ('ontouchstart' in window) {
+          // Mobile device - try video fullscreen first
+          if ((video as any).webkitEnterFullscreen) {
+            (video as any).webkitEnterFullscreen();
+          } else if ((video as any).requestFullscreen) {
+            await (video as any).requestFullscreen();
+          } else if (container.requestFullscreen) {
+            await container.requestFullscreen();
+          }
+        } else {
+          // Desktop - prefer container fullscreen
+          if (container.requestFullscreen) {
+            await container.requestFullscreen();
+          } else if ((container as any).webkitRequestFullscreen) {
+            (container as any).webkitRequestFullscreen();
+          } else if ((container as any).mozRequestFullScreen) {
+            (container as any).mozRequestFullScreen();
+          }
         }
       }
     } catch (error) {
       console.log('Fullscreen request failed:', error);
-      // Fallback for mobile devices that don't support container fullscreen
-      try {
-        if ((video as any).webkitEnterFullscreen) {
-          (video as any).webkitEnterFullscreen();
-        }
-      } catch (fallbackError) {
-        console.log('Video fullscreen fallback failed:', fallbackError);
-      }
     }
   };
 
@@ -360,6 +395,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => isPlaying && setShowControls(false)}
+        onTouchStart={() => setShowControls(true)}
       >
         
         <video
@@ -372,6 +408,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           controls={false}
           poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
           src={getVideoSource(lesson.id)}
+          onClick={() => {
+            setUserHasInteracted(true);
+            setIsPlaying(!isPlaying);
+          }}
         />
 
         {/* Skip buttons */}
