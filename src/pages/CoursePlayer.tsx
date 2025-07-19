@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { courses } from '@/data/courses';
@@ -20,7 +19,7 @@ const CoursePlayer = () => {
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile); // Default closed on mobile
   const [autoAdvance, setAutoAdvance] = useState(true);
 
-  // Enhanced lessons data organized by chapters with additional lessons
+  // Enhanced lessons data organized by chapters with additional lessons and resources
   const chapters = [
     {
       id: 1,
@@ -34,7 +33,11 @@ const CoursePlayer = () => {
           completed: true,
           description: "Learn the fundamentals of financial reports and their connection to strategy and planning.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "財報基礎講義", type: "PDF", url: "#" },
+            { name: "練習題目", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 2, 
@@ -52,7 +55,10 @@ const CoursePlayer = () => {
           completed: true,
           description: "Understand that you know more about financial reports than you think.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "參考圖表", type: "Image", url: "#" }
+          ]
         },
         { 
           id: 4, 
@@ -61,7 +67,11 @@ const CoursePlayer = () => {
           completed: false,
           description: "Practice with the three major financial statement categories.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "練習工作表", type: "PDF", url: "#" },
+            { name: "解答範例", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 5, 
@@ -79,7 +89,10 @@ const CoursePlayer = () => {
           completed: false,
           description: "Learn how to interpret key financial ratios.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "財務比率表", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 12, 
@@ -97,7 +110,10 @@ const CoursePlayer = () => {
           completed: false,
           description: "Methods for analyzing investment portfolios.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "投資分析模板", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 14, 
@@ -115,7 +131,10 @@ const CoursePlayer = () => {
           completed: false,
           description: "Basics of company valuation.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "估值計算表", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 16, 
@@ -140,7 +159,10 @@ const CoursePlayer = () => {
           completed: false,
           description: "Basic concepts of profit and loss statements.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "損益表範例", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 8, 
@@ -158,7 +180,10 @@ const CoursePlayer = () => {
           completed: false,
           description: "Strategies for effective cost control.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "成本分析工具", type: "PDF", url: "#" }
+          ]
         },
         { 
           id: 10, 
@@ -176,7 +201,10 @@ const CoursePlayer = () => {
           completed: false,
           description: "Comparing quarterly and annual earnings.",
           hasTranscript: true,
-          hasResources: true
+          hasResources: true,
+          resources: [
+            { name: "收益比較表", type: "PDF", url: "#" }
+          ]
         }
       ]
     }

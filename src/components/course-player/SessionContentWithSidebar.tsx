@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -107,31 +106,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
       likes: 12
     }
   ]);
-
-  const mockResources = [
-    { name: "財報基礎講義", type: "PDF", url: "#" },
-    { name: "練習題目", type: "PDF", url: "#" },
-    { name: "參考圖表", type: "Image", url: "#" }
-  ];
-
-  const getResourceIcon = (type: string) => {
-    switch (type.toLowerCase()) {
-      case 'pdf':
-        return <FileText size={16} className="text-red-500" />;
-      case 'image':
-        return <Image size={16} className="text-blue-500" />;
-      default:
-        return <Download size={16} className="text-gray-500" />;
-    }
-  };
-
-  const mockTranscript = `
-    歡迎來到財報學習的第一課。在這個課程中，我們將探討為什麼即使不懂財報，也能在某些情況下賺錢，以及學習財報的真正價值。
-
-    財報不只是數字的堆砌，它反映了企業的策略思維、營運計畫，以及財務狀況。這三者之間有著密不可分的關係。
-
-    讓我們從基礎開始，一步步建立起對財報的正確認知...
-  `;
 
   const handleSubmitQuestion = () => {
     if (newQuestion.trim()) {
@@ -292,7 +266,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 md:p-6">
           <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
-            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-5' : 'grid-cols-4'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
+            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
               {isMobile && (
                 <TabsTrigger 
                   value="sidebar"
@@ -308,12 +282,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                 課程概要
               </TabsTrigger>
               <TabsTrigger 
-                value="resources"
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
-                教材資源
-              </TabsTrigger>
-              <TabsTrigger 
                 value="qa"
                 className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
               >
@@ -321,7 +289,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
               </TabsTrigger>
               <TabsTrigger 
                 value="transcript"
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground px-1"
+                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
               >
                 課程逐字稿
               </TabsTrigger>
@@ -344,39 +312,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   <p className="text-yutime-text/70 leading-relaxed text-sm md:text-base">
                     {lesson.description}
                   </p>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="resources" className="space-y-0 mt-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif">教材下載</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {mockResources.map((resource, index) => (
-                      <div 
-                        key={index}
-                        className="flex items-center justify-between p-3 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
-                      >
-                        <div className="flex items-center space-x-3">
-                          {getResourceIcon(resource.type)}
-                          <div>
-                            <p className="font-medium text-yutime-text text-sm md:text-base">{resource.name}</p>
-                            <p className="text-xs md:text-sm text-yutime-text/60">{resource.type}</p>
-                          </div>
-                        </div>
-                        <Button
-                          onClick={() => window.open(resource.url, '_blank')}
-                          className="btn-primary text-sm md:text-base font-medium min-w-[44px] min-h-[44px]"
-                          size={isMobile ? "sm" : "default"}
-                        >
-                          下載
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
                 </CardContent>
               </Card>
             </TabsContent>

@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder } from 'lucide-react';
+import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Course } from '@/data/courses';
 
 interface Lesson {
@@ -12,7 +13,8 @@ interface Lesson {
   completed: boolean;
   description: string;
   hasTranscript: boolean;
-  hasResources?: boolean; // Add resources indicator
+  hasResources?: boolean;
+  resources?: { name: string; type: string; url: string; }[];
 }
 
 interface Chapter {
@@ -75,6 +77,21 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   };
 
   const { chapterIndex: currentChapterIndex, lessonIndex: currentLessonIndex } = getCurrentLessonChapterAndIndex();
+
+  const getResourceIcon = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'pdf':
+        return <FileText size={16} className="text-red-500" />;
+      case 'image':
+        return <Image size={16} className="text-blue-500" />;
+      default:
+        return <Download size={16} className="text-gray-500" />;
+    }
+  };
+
+  const handleResourceDownload = (url: string) => {
+    window.open(url, '_blank');
+  };
 
   return (
     <TooltipProvider>
@@ -149,16 +166,19 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                       <div
                         key={lesson.id}
                         onClick={() => onLessonSelect(globalIndex)}
-                        className={`flex items-center justify-between p-4 pl-12 cursor-pointer transition-colors ${
+                        className={`p-4 pl-12 cursor-pointer transition-colors ${
                           isCurrentLesson 
                             ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                             : 'hover:bg-yutime-neutral/40'
                         }`}
                       >
-                        <div className="flex items-center space-x-3 flex-1">
-                          <div className="flex-shrink-0">
+                        <div className="flex items-start space-x-3">
+                          {/* Completion Status Icon */}
+                          <div className="flex-shrink-0 mt-1">
                             {lesson.completed ? (
-                              <CheckCircle size={16} className="text-yutime-secondary font-bold" strokeWidth={3} />
+                              <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                                <CheckCircle size={12} className="text-white" fill="white" stroke="none" />
+                              </div>
                             ) : isCurrentLesson ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
                                 <Play size={10} className="text-white ml-0.5" />
@@ -167,20 +187,67 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                               <Circle size={16} className="text-yutime-text/40" />
                             )}
                           </div>
+                          
+                          {/* Lesson Content */}
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
+                            {/* First Row - Full width lesson title */}
+                            <div className="w-full">
                               <p className={`text-sm font-medium leading-tight ${
                                 isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                               }`}>
                                 {lesson.title}
                               </p>
-                              {lesson.hasResources && (
-                                <Folder size={14} className="text-yutime-text/60 flex-shrink-0" />
+                            </div>
+                            
+                            {/* Second Row - Duration left, Resources right */}
+                            <div className="flex items-center justify-between mt-2">
+                              <div className="text-xs text-yutime-text/60">
+                                {lesson.duration}
+                              </div>
+                              
+                              {lesson.hasResources && lesson.resources && (
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-6 w-6 p-0 hover:bg-yutime-secondary/10"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <Folder size={14} className="text-yutime-text/60" />
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-64 p-3" align="end">
+                                    <div className="space-y-2">
+                                      <h4 className="font-medium text-sm text-yutime-text">課程資源</h4>
+                                      <div className="space-y-2">
+                                        {lesson.resources.map((resource, index) => (
+                                          <div 
+                                            key={index}
+                                            className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                                          >
+                                            <div className="flex items-center space-x-2">
+                                              {getResourceIcon(resource.type)}
+                                              <div>
+                                                <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
+                                                <p className="text-xs text-yutime-text/60">{resource.type}</p>
+                                              </div>
+                                            </div>
+                                            <Button
+                                              onClick={() => handleResourceDownload(resource.url)}
+                                              className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                              size="sm"
+                                            >
+                                              <Download size={12} className="text-white" />
+                                            </Button>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </PopoverContent>
+                                </Popover>
                               )}
                             </div>
-                          </div>
-                          <div className="text-xs text-yutime-text/60 ml-auto">
-                            {lesson.duration}
                           </div>
                         </div>
                       </div>
