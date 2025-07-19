@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Book, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +10,18 @@ import { useAuth } from '@/contexts/AuthContext';
 
 const NoCourses = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, isLoggedIn, hasPurchasedCourses } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  // Effect to handle redirect after login
+  useEffect(() => {
+    if (shouldRedirect && isLoggedIn && hasPurchasedCourses) {
+      console.log("NoCourses redirecting to dashboard via useEffect");
+      navigate("/dashboard");
+      setShouldRedirect(false);
+    }
+  }, [shouldRedirect, isLoggedIn, hasPurchasedCourses, navigate]);
 
   const handleBrowseCourses = () => {
     navigate('/');
@@ -33,9 +43,10 @@ const NoCourses = () => {
   };
 
   const handleLogin = (email: string, password: string) => {
+    console.log("NoCourses handleLogin called");
     login(email, password);
     setIsLoginModalOpen(false);
-    navigate('/dashboard');
+    setShouldRedirect(true); // Trigger redirect check via useEffect
   };
 
   return (
