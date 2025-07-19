@@ -205,46 +205,44 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                 {lesson.duration}
                               </div>
                               
-                              {lesson.hasResources && lesson.resources && (
-                                <Popover>
-                                  <PopoverTrigger asChild>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      className="h-6 w-6 p-0 hover:bg-yutime-secondary/10"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <Folder size={14} className="text-yutime-text/60" />
-                                    </Button>
-                                  </PopoverTrigger>
-                                  <PopoverContent className="w-64 p-3" align="end">
-                                    <div className="space-y-2">
-                                      <h4 className="font-medium text-sm text-yutime-text">課程資源</h4>
+                               {lesson.hasResources && lesson.resources && (
+                                 <Popover>
+                                   <PopoverTrigger asChild>
+                                     <Button
+                                       variant="ghost"
+                                       size="sm"
+                                       className="h-6 px-2 flex items-center space-x-1 hover:bg-yutime-secondary/10 border border-yutime-neutral/30"
+                                       onClick={(e) => e.stopPropagation()}
+                                     >
+                                       <Folder size={12} className="text-yutime-text/60" />
+                                       <span className="text-xs text-yutime-text/70">課程資源</span>
+                                     </Button>
+                                   </PopoverTrigger>
+                                    <PopoverContent className="w-64 p-3" align="end">
                                       <div className="space-y-2">
                                         {lesson.resources.map((resource, index) => (
-                                          <div 
-                                            key={index}
-                                            className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
-                                          >
-                                            <div className="flex items-center space-x-2">
-                                              {getResourceIcon(resource.type)}
-                                              <div>
-                                                <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
-                                                <p className="text-xs text-yutime-text/60">{resource.type}</p>
-                                              </div>
-                                            </div>
-                                            <Button
-                                              onClick={() => handleResourceDownload(resource.url)}
-                                              className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
-                                              size="sm"
-                                            >
-                                              <Download size={12} className="text-white" />
-                                            </Button>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  </PopoverContent>
+                                           <div 
+                                             key={index}
+                                             className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                                           >
+                                             <div className="flex items-center space-x-2">
+                                               {getResourceIcon(resource.type)}
+                                               <div>
+                                                 <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
+                                                 <p className="text-xs text-yutime-text/60">{resource.type}</p>
+                                               </div>
+                                             </div>
+                                             <Button
+                                               onClick={() => handleResourceDownload(resource.url)}
+                                               className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                               size="sm"
+                                             >
+                                               <Download size={12} className="text-white" />
+                                             </Button>
+                                           </div>
+                                         ))}
+                                       </div>
+                                     </PopoverContent>
                                 </Popover>
                               )}
                             </div>
