@@ -318,9 +318,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={() => skip5Seconds(false)}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px] group relative"
                   >
                     <RotateCcw size={20} />
+                    <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      -5s
+                    </span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -368,9 +371,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={() => skip5Seconds(true)}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px] group relative"
                   >
                     <RotateCw size={20} />
+                    <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      +5s
+                    </span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>

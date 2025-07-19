@@ -53,36 +53,36 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           <div className="flex items-center justify-between flex-1">
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
-              <div className="flex items-center space-x-4 min-w-[200px]">
-                <div className="flex flex-col space-y-1">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-yutime-text/60">課程進度</span>
-                    <span className="text-yutime-text font-medium">{completedLessons}/{totalLessons}</span>
-                  </div>
-                  <Progress value={progressPercentage} className="w-32 h-2" />
+              {/* Progress Percentage */}
+              <div className="flex items-center gap-2">
+                <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                  上課進度 {Math.round(progressPercentage)}%
                 </div>
               </div>
             </div>
           </div>
         </div>
         
+        {/* Sidebar Toggle - Only show when sidebar is closed */}
         <div className="flex items-center space-x-4">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
-                aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
-              >
-                <Menu size={20} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{sidebarOpen ? "隱藏課程內容" : "顯示課程內容"}</p>
-            </TooltipContent>
-          </Tooltip>
+          {!sidebarOpen && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setSidebarOpen(true)}
+                  className="text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
+                  aria-label="Open sidebar"
+                >
+                  <Menu size={20} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>顯示課程內容</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
         </div>
       </header>
     </TooltipProvider>

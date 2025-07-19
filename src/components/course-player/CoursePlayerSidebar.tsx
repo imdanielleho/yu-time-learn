@@ -120,17 +120,19 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               {/* Chapter Header with background shading */}
               <div
                 onClick={() => toggleChapter(chapter.id)}
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/40 transition-colors bg-yutime-neutral/20"
+                className={`flex items-center justify-between p-4 cursor-pointer hover:bg-blue-100 transition-colors 
+                  bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500
+                  ${chapterIdx === 0 ? 'border-t border-gray-200' : ''}`}
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (
-                    <ChevronDown size={16} className="text-yutime-text/60" />
+                    <ChevronDown size={16} className="text-blue-600" />
                   ) : (
-                    <ChevronRight size={16} className="text-yutime-text/60" />
+                    <ChevronRight size={16} className="text-blue-600" />
                   )}
                   <div>
-                    <h3 className="font-medium text-yutime-text text-sm leading-tight">{chapter.title}</h3>
-                    <div className="text-xs text-yutime-text/60 mt-1">{chapter.duration}</div>
+                    <h3 className="font-semibold text-blue-900 text-sm leading-tight">{chapter.title}</h3>
+                    <div className="text-xs text-blue-700 mt-1">{chapter.duration}</div>
                   </div>
                 </div>
               </div>
