@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, MessageCircle, FileText, ChevronDown, ChevronRight, CheckCircle, Circle, Play, Filter } from 'lucide-react';
+import { BookOpen, MessageCircle, FileText, ChevronDown, ChevronRight, ChevronLeft, CheckCircle, Circle, Play, Filter } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -83,6 +83,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   const isMobile = useIsMobile();
   const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
   const [activeTab, setActiveTab] = useState('lesson');
+  const [sortOrder, setSortOrder] = useState('newest');
 
   const toggleChapter = (chapterId: number) => {
     setExpandedChapters(prev => 
@@ -229,7 +230,22 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   <TranscriptSection />
                 </TabsContent>
                 <TabsContent value="qa">
-                  <QASection />
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-serif font-medium text-yutime-primary">課程討論</h3>
+                      <Select value={sortOrder} onValueChange={setSortOrder}>
+                        <SelectTrigger className="w-32">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="newest">最新</SelectItem>
+                          <SelectItem value="oldest">最舊</SelectItem>
+                          <SelectItem value="most-liked">最多讚</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <QASection />
+                  </div>
                 </TabsContent>
               </Tabs>
             </div>
@@ -298,7 +314,19 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             </TabsContent>
 
             <TabsContent value="qa" className="space-y-4">
-              <h2 className="text-lg font-serif font-medium text-yutime-primary mb-4">討論</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-serif font-medium text-yutime-primary">課程討論</h2>
+                <Select value={sortOrder} onValueChange={setSortOrder}>
+                  <SelectTrigger className="w-24 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="newest">最新</SelectItem>
+                    <SelectItem value="oldest">最舊</SelectItem>
+                    <SelectItem value="most-liked">最多讚</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <QASection />
             </TabsContent>
           </Tabs>
