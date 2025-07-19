@@ -55,6 +55,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [captionsEnabled, setCaptionsEnabled] = useState(false);
   const [showEndOverlay, setShowEndOverlay] = useState(false);
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
+  const [wasPlayingBeforeFullscreen, setWasPlayingBeforeFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -146,12 +147,30 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       setProgress(0);
     };
 
+    const handleFullscreenChange = () => {
+      const doc = document as any;
+      const isFullscreen = !!(doc.fullscreenElement || doc.webkitFullscreenElement);
+      
+      if (!isFullscreen && wasPlayingBeforeFullscreen) {
+        // Resume playback after exiting fullscreen
+        setTimeout(() => {
+          if (video && !video.paused) {
+            setIsPlaying(true);
+          } else if (video && wasPlayingBeforeFullscreen) {
+            setIsPlaying(true);
+          }
+        }, 100);
+      }
+    };
+
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('error', handleError);
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('loadstart', handleLoadStart);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
@@ -160,8 +179,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('error', handleError);
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('loadstart', handleLoadStart);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
     };
-  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying]);
+  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying, wasPlayingBeforeFullscreen]);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -252,12 +273,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       const videoEl = video as any;
       
       if (doc.fullscreenElement || doc.webkitFullscreenElement) {
+        // Store playing state before exiting fullscreen
+        setWasPlayingBeforeFullscreen(isPlaying);
+        
         if (doc.exitFullscreen) {
           doc.exitFullscreen();
         } else if (doc.webkitExitFullscreen) {
           doc.webkitExitFullscreen();
         }
       } else {
+        // Store playing state before entering fullscreen
+        setWasPlayingBeforeFullscreen(isPlaying);
+        
         if (videoEl.requestFullscreen) {
           videoEl.requestFullscreen();
         } else if (videoEl.webkitRequestFullscreen) {
