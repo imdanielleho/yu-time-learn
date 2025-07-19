@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown, Folder, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Course } from '@/data/courses';
 
@@ -34,6 +35,8 @@ interface Lesson {
   completed: boolean;
   description: string;
   hasTranscript: boolean;
+  hasResources?: boolean;
+  resources?: { name: string; type: string; url: string; }[];
 }
 
 interface Chapter {
@@ -188,6 +191,21 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     }
   });
 
+  const getResourceIcon = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'pdf':
+        return <FileText size={16} className="text-red-500" />;
+      case 'image':
+        return <Image size={16} className="text-blue-500" />;
+      default:
+        return <Download size={16} className="text-gray-500" />;
+    }
+  };
+
+  const handleResourceDownload = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   // Sidebar content component
   const SidebarContent = () => (
     <div className="h-full flex flex-col">
@@ -239,33 +257,86 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     <div
                       key={lesson.id}
                       onClick={() => onLessonSelect(globalIndex)}
-                      className={`flex items-center justify-between p-3 md:p-4 pl-8 md:pl-12 cursor-pointer transition-colors ${
+                      className={`p-3 md:p-4 pl-8 md:pl-12 cursor-pointer transition-colors ${
                         isCurrentLesson 
                           ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                           : 'hover:bg-yutime-neutral/40'
                       }`}
                     >
-                      <div className="flex items-center space-x-2 md:space-x-3 flex-1 min-w-0">
-                        <div className="flex-shrink-0">
+                      <div className="flex items-start space-x-3">
+                        {/* Completion Status Icon */}
+                        <div className="flex-shrink-0 mt-1">
                           {lesson.completed ? (
-                            <div className="w-4 h-4 rounded-full bg-yutime-secondary flex items-center justify-center">
-                              <CheckCircle size={10} className="text-white" />
+                            <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                              <Check size={10} className="text-white font-bold" strokeWidth={3} />
                             </div>
                           ) : isCurrentLesson ? (
-                            <Play size={14} className="text-yutime-secondary" />
+                            <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                              <Play size={10} className="text-white ml-0.5" />
+                            </div>
                           ) : (
                             <Circle size={14} className="text-yutime-text/40" />
                           )}
                         </div>
+                        
+                        {/* Lesson Content */}
                         <div className="flex-1 min-w-0">
-                          <p className={`text-xs md:text-sm font-medium leading-tight ${
-                            isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
-                          }`}>
-                            {lesson.title}
-                          </p>
-                        </div>
-                        <div className="text-xs text-yutime-text/60 ml-auto flex-shrink-0">
-                          {lesson.duration}
+                          {/* First Row - Full width lesson title */}
+                          <div className="w-full">
+                            <p className={`text-sm font-medium leading-tight ${
+                              isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                            }`}>
+                              {lesson.title}
+                            </p>
+                          </div>
+                          
+                          {/* Second Row - Duration left, Resources right */}
+                          <div className="flex items-center justify-between mt-2">
+                            <div className="text-xs text-yutime-text/60">
+                              {lesson.duration}
+                            </div>
+                            
+                             {lesson.hasResources && lesson.resources && (
+                               <Popover>
+                                 <PopoverTrigger asChild>
+                                   <Button
+                                     variant="outline"
+                                     size="sm"
+                                     className="h-6 md:h-7 px-2 md:px-3 flex items-center space-x-1 md:space-x-2 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
+                                     onClick={(e) => e.stopPropagation()}
+                                   >
+                                     <Folder size={12} className="text-yutime-secondary" />
+                                     <span className="text-xs font-medium">課程資源</span>
+                                   </Button>
+                                 </PopoverTrigger>
+                                  <PopoverContent className="w-64 p-3" align="end">
+                                    <div className="space-y-2">
+                                      {lesson.resources.map((resource, index) => (
+                                         <div 
+                                           key={index}
+                                           className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                                         >
+                                           <div className="flex items-center space-x-2">
+                                             {getResourceIcon(resource.type)}
+                                             <div>
+                                               <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
+                                               <p className="text-xs text-yutime-text/60">{resource.type}</p>
+                                             </div>
+                                           </div>
+                                           <Button
+                                             onClick={() => handleResourceDownload(resource.url)}
+                                             className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                             size="sm"
+                                           >
+                                             <Download size={12} className="text-white" />
+                                           </Button>
+                                         </div>
+                                       ))}
+                                     </div>
+                                   </PopoverContent>
+                              </Popover>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
