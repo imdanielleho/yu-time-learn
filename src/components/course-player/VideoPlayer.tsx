@@ -81,7 +81,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     setVideoKey(prev => prev + 1);
-    setShowEndOverlay(false); // Reset overlay when lesson changes
+    setShowEndOverlay(false);
+    setCurrentTime(0);
+    setProgress(0);
   }, [lesson.id]);
 
   useEffect(() => {
@@ -89,21 +91,27 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (!video) return;
 
     const handleLoadedMetadata = () => {
-      console.log('Video metadata loaded');
+      console.log('Video metadata loaded, duration:', video.duration);
       setDuration(video.duration);
     };
 
     const handleTimeUpdate = () => {
-      setCurrentTime(video.currentTime);
-      const progressPercent = (video.currentTime / video.duration) * 100;
-      setProgress(progressPercent);
+      const currentVideoTime = video.currentTime;
+      const videoDuration = video.duration;
+      
+      setCurrentTime(currentVideoTime);
+      
+      if (videoDuration > 0) {
+        const progressPercent = (currentVideoTime / videoDuration) * 100;
+        setProgress(progressPercent);
+        console.log('Time update - current:', currentVideoTime, 'duration:', videoDuration, 'progress:', progressPercent);
+      }
     };
 
     const handleEnded = () => {
       console.log('Video ended - canGoNext:', canGoNext);
       setIsPlaying(false);
       
-      // Only show overlay if we can go to next lesson
       if (canGoNext) {
         console.log('Setting showEndOverlay to true');
         setShowEndOverlay(true);
@@ -117,11 +125,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
 
     const handleCanPlay = () => {
-      console.log('Video can play');
+      console.log('Video can play, duration:', video.duration);
+      if (video.duration && !isNaN(video.duration)) {
+        setDuration(video.duration);
+      }
     };
 
     const handleLoadStart = () => {
       console.log('Video load started');
+      setCurrentTime(0);
+      setProgress(0);
     };
 
     // Ensure video is ready before adding event listeners
@@ -182,6 +195,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   }, [isPlaying, setIsPlaying]);
 
   const formatTime = (timeInSeconds: number) => {
+    if (!timeInSeconds || isNaN(timeInSeconds)) return '00:00';
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -189,12 +203,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const handleProgressChange = (value: number[]) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !duration || isNaN(duration)) return;
     
     const newTime = (value[0] / 100) * duration;
     video.currentTime = newTime;
     setCurrentTime(newTime);
     setProgress(value[0]);
+    console.log('Progress changed to:', value[0], 'time:', newTime);
   };
 
   const handleVolumeChange = (value: number[]) => {
@@ -238,7 +253,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const skip5Seconds = (forward: boolean) => {
     const video = videoRef.current;
-    if (!video || !duration) return;
+    if (!video || !duration || isNaN(duration)) return;
     
     console.log(`Skipping ${forward ? 'forward' : 'backward'} 5 seconds`);
     
@@ -304,14 +319,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return undefined;
   };
 
-  const handleTestOverlay = () => {
-    console.log('Test overlay button clicked');
-    setShowEndOverlay(true);
-  };
-
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group h-[73vh]"
+      <div className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
@@ -327,33 +337,33 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           src={getVideoSource(lesson.id)}
         />
 
-        <div className="absolute left-8 top-1/2 transform -translate-y-1/2">
+        <div className="absolute left-2 md:left-8 top-1/2 transform -translate-y-1/2">
           <Button
             variant="ghost"
             size="icon"
             onClick={handleSkipBackward}
-            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <div className="flex flex-col items-center">
-              <RotateCcw size={20} />
+              <RotateCcw size={16} className="md:w-5 md:h-5" />
               <span className="text-xs mt-1">5s</span>
             </div>
           </Button>
         </div>
 
-        <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
+        <div className="absolute right-2 md:right-8 top-1/2 transform -translate-y-1/2">
           <Button
             variant="ghost"
             size="icon"
             onClick={handleSkipForward}
-            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <div className="flex flex-col items-center">
-              <RotateCw size={20} />
+              <RotateCw size={16} className="md:w-5 md:h-5" />
               <span className="text-xs mt-1">5s</span>
             </div>
           </Button>
@@ -364,19 +374,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={() => setIsPlaying(!isPlaying)}
-            className={`w-20 h-20 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all ${
+            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all ${
               showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            {isPlaying ? <Pause size={32} /> : <Play size={32} />}
+            {isPlaying ? <Pause size={24} className="md:w-8 md:h-8" /> : <Play size={24} className="md:w-8 md:h-8" />}
           </Button>
         </div>
 
-        <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${
+        <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 md:p-4 transition-opacity duration-300 ${
           showControls ? 'opacity-100' : 'opacity-0'
         }`}>
           
-          <div className="mb-4">
+          <div className="mb-2 md:mb-4">
             <Slider
               value={[progress]}
               onValueChange={handleProgressChange}
@@ -391,16 +401,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 md:space-x-2">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
                   >
-                    {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+                    {isPlaying ? <Pause size={16} className="md:w-6 md:h-6" /> : <Play size={16} className="md:w-6 md:h-6" />}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -414,9 +424,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleMute}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
                   >
-                    {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+                    {isMuted ? <VolumeX size={16} className="md:w-6 md:h-6" /> : <Volume2 size={16} className="md:w-6 md:h-6" />}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -424,7 +434,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 </TooltipContent>
               </Tooltip>
 
-              <div className="flex items-center space-x-2">
+              <div className="hidden md:flex items-center space-x-2">
                 <Slider
                   value={[isMuted ? 0 : volume]}
                   onValueChange={handleVolumeChange}
@@ -434,7 +444,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 md:space-x-2">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -442,9 +452,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={onPrevious}
                     disabled={!canGoPrevious}
-                    className="px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]"
+                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
                   >
-                    <SkipBack size={24} />
+                    <SkipBack size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -459,9 +469,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={onNext}
                     disabled={!canGoNext}
-                    className="px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]"
+                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
                   >
-                    <SkipForward size={24} />
+                    <SkipForward size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -475,11 +485,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleCaptions}
-                    className={`text-white hover:bg-white/20 min-w-[44px] min-h-[44px] ${
+                    className={`text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] ${
                       captionsEnabled ? 'bg-white/20' : ''
                     }`}
                   >
-                    <Captions size={24} />
+                    <Captions size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -492,7 +502,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="hidden md:flex text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
                   >
                     <Settings size={24} />
                   </Button>
@@ -508,9 +518,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleFullscreen}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
                   >
-                    <Maximize size={24} />
+                    <Maximize size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
