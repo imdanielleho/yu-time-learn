@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown, Folder, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -95,6 +95,12 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   const [newQuestion, setNewQuestion] = useState('');
   const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
   const [qaSortBy, setQaSortBy] = useState<'newest' | 'oldest' | 'most-liked'>('newest');
+  const [activeTab, setActiveTab] = useState(isMobile ? "sidebar" : "overview");
+  
+  // Update active tab when mobile state changes
+  useEffect(() => {
+    setActiveTab(isMobile ? "sidebar" : "overview");
+  }, [isMobile]);
   
   const [qaItems, setQaItems] = useState<QAItem[]>([
     {
@@ -369,7 +375,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     <TooltipProvider>
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 md:p-6">
-          <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
               {isMobile && (
                 <TabsTrigger 
