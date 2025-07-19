@@ -109,7 +109,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
             </div>
           </div>
           <div className="text-sm text-yutime-text font-medium">
-            上課進度: {completedLessons}/{totalLessons}
+            已完成: {completedLessons}/{totalLessons}
           </div>
         </div>
         
