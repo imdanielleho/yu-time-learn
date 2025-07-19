@@ -1,4 +1,5 @@
 
+
 export interface Course {
   id: number;
   title: string;
@@ -17,6 +18,8 @@ export interface Course {
   isPurchased: boolean;
   accessType: 'unlimited' | 'limited';
   accessDuration?: string; // e.g., "18 months"
+  learningObjectives: string[];
+  targetAudience: string;
 }
 
 export const courses: Course[] = [
@@ -45,7 +48,15 @@ export const courses: Course[] = [
       "Advanced features and tips"
     ],
     isPurchased: false,
-    accessType: 'unlimited'
+    accessType: 'unlimited',
+    learningObjectives: [
+      "Navigate your smartphone with confidence",
+      "Make calls and manage contacts effectively",
+      "Send messages and share photos",
+      "Use essential apps for daily tasks",
+      "Stay safe and secure online"
+    ],
+    targetAudience: "Adults 45+ who are new to smartphones or want to improve their mobile technology skills"
   },
   {
     id: 2,
@@ -77,7 +88,15 @@ export const courses: Course[] = [
     ],
     isPurchased: false,
     accessType: 'limited',
-    accessDuration: '18 months'
+    accessDuration: '18 months',
+    learningObjectives: [
+      "Improve flexibility and joint mobility",
+      "Reduce chronic pain and stiffness",
+      "Learn proper breathing techniques",
+      "Build strength through gentle movement",
+      "Develop a sustainable home practice"
+    ],
+    targetAudience: "Adults 45+ looking to improve mobility, reduce pain, and enhance overall well-being through gentle movement"
   },
   {
     id: 3,
@@ -106,7 +125,15 @@ export const courses: Course[] = [
       "Building a photo portfolio"
     ],
     isPurchased: false,
-    accessType: 'unlimited'
+    accessType: 'unlimited',
+    learningObjectives: [
+      "Master camera basics and settings",
+      "Apply composition rules effectively",
+      "Work with natural and artificial light",
+      "Capture compelling portraits and landscapes",
+      "Edit and organize your photos"
+    ],
+    targetAudience: "Photography enthusiasts who want to move beyond automatic settings and create more compelling images"
   },
   {
     id: 4,
@@ -132,7 +159,15 @@ export const courses: Course[] = [
     ],
     isPurchased: false,
     accessType: 'limited',
-    accessDuration: '18 months'
+    accessDuration: '18 months',
+    learningObjectives: [
+      "Create and maintain a personal budget",
+      "Develop effective debt reduction strategies",
+      "Build an emergency fund",
+      "Understand basic investment principles",
+      "Plan for retirement security"
+    ],
+    targetAudience: "Adults who want to take control of their finances and build a secure financial future"
   },
   {
     id: 5,
@@ -158,6 +193,15 @@ export const courses: Course[] = [
       "Avoiding scams and misinformation"
     ],
     isPurchased: false,
-    accessType: 'unlimited'
+    accessType: 'unlimited',
+    learningObjectives: [
+      "Navigate social media platforms safely",
+      "Connect with family and friends online",
+      "Share photos and updates appropriately",
+      "Protect your privacy and security",
+      "Identify and avoid online scams"
+    ],
+    targetAudience: "Adults who are new to social media and want to connect with loved ones while staying safe online"
   }
 ];
+
