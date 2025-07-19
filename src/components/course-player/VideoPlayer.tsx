@@ -247,10 +247,28 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const video = videoRef.current;
     if (!video) return;
     
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      video.requestFullscreen();
+    try {
+      const doc = document as any;
+      const videoEl = video as any;
+      
+      if (doc.fullscreenElement || doc.webkitFullscreenElement) {
+        if (doc.exitFullscreen) {
+          doc.exitFullscreen();
+        } else if (doc.webkitExitFullscreen) {
+          doc.webkitExitFullscreen();
+        }
+      } else {
+        if (videoEl.requestFullscreen) {
+          videoEl.requestFullscreen();
+        } else if (videoEl.webkitRequestFullscreen) {
+          videoEl.webkitRequestFullscreen();
+        } else if (videoEl.webkitEnterFullscreen) {
+          // iOS Safari specific
+          videoEl.webkitEnterFullscreen();
+        }
+      }
+    } catch (error) {
+      console.error('Fullscreen error:', error);
     }
   };
 

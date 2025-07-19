@@ -305,19 +305,22 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                             </div>
                             
                              {lesson.hasResources && lesson.resources && (
-                               <Popover>
-                                 <PopoverTrigger asChild>
-                                   <Button
-                                     variant="outline"
-                                     size="sm"
-                                     className="h-6 md:h-7 px-2 md:px-3 flex items-center gap-0.5 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
-                                     onClick={(e) => e.stopPropagation()}
-                                   >
-                                     <Folder size={10} className="text-yutime-secondary" />
-                                     <span className="text-xs font-medium">課程資源</span>
-                                     <ChevronDown size={8} className="text-yutime-secondary" />
-                                   </Button>
-                                 </PopoverTrigger>
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="h-8 md:h-7 px-3 md:px-3 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md min-w-[44px] min-h-[44px] touch-manipulation"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                      }}
+                                    >
+                                      <Folder size={12} className="text-yutime-secondary" />
+                                      <span className="text-xs font-medium">課程資源</span>
+                                      <ChevronDown size={10} className="text-yutime-secondary" />
+                                    </Button>
+                                  </PopoverTrigger>
                                   <PopoverContent className="w-64 p-3" align="end">
                                     <div className="space-y-2">
                                       {lesson.resources.map((resource, index) => (

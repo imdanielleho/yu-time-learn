@@ -101,7 +101,13 @@ const HomeMobileNavigation = ({
           <span className="text-xs font-medium">購物車</span>
         </button>
 
-        {!isLoggedIn ? <button className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors" onClick={onLoginClick}>
+        {!isLoggedIn ? <button 
+            className="flex flex-col items-center justify-center space-y-1 text-gray-600 hover:text-yutime-blue transition-colors min-w-[44px] min-h-[44px] touch-manipulation" 
+            onClick={() => {
+              onLoginClick();
+              // The login modal will handle redirect after successful login
+            }}
+          >
             <LogIn className="h-5 w-5" />
             <span className="text-xs font-medium">登入</span>
           </button> : <MobileMoreMenu />}

@@ -53,7 +53,15 @@ const useNavbarState = () => {
   const handleLogin = (username: string, password: string) => {
     login(username, password);
     setIsLoginModalOpen(false);
-    navigate("/dashboard");
+    
+    // Check if user has purchased courses after login and redirect appropriately
+    const userHasCourses = localStorage.getItem('hasPurchasedCourses') === 'true';
+    if (userHasCourses) {
+      navigate("/dashboard");
+    } else {
+      // Stay on current page if no courses purchased
+      // No navigation needed
+    }
   };
 
   const handleLoginSignupClick = () => {

@@ -226,10 +226,13 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      <Button
                                        variant="outline"
                                        size="sm"
-                                       className="h-7 px-1.5 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
-                                       onClick={(e) => e.stopPropagation()}
+                                       className="h-8 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md min-w-[44px] min-h-[44px] touch-manipulation"
+                                       onClick={(e) => {
+                                         e.preventDefault();
+                                         e.stopPropagation();
+                                       }}
                                      >
-                                       <Folder size={12} className="text-yutime-secondary pr-1" />
+                                       <Folder size={12} className="text-yutime-secondary" />
                                        <span className="text-xs font-medium">課程資源</span>
                                        <ChevronDown size={10} className="text-yutime-secondary" />
                                      </Button>
