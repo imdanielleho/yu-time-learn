@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -274,29 +275,37 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           src={getVideoSource(lesson.id)}
         />
 
-        {/* Skip Buttons on Left and Right Edges with padding */}
-        <div className="absolute left-8 top-1/2 transform -translate-y-1/2">
-          <button
+        {/* Skip Buttons on Left and Right Edges */}
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={handleSkipBackward}
-            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group flex flex-col items-center justify-center ${
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <RotateCcw size={20} />
-            <span className="text-xs mt-1">5s</span>
-          </button>
+            <div className="flex flex-col items-center">
+              <RotateCcw size={20} />
+              <span className="text-xs mt-1">5s</span>
+            </div>
+          </Button>
         </div>
 
-        <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
-          <button
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={handleSkipForward}
-            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group flex flex-col items-center justify-center ${
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <RotateCw size={20} />
-            <span className="text-xs mt-1">5s</span>
-          </button>
+            <div className="flex flex-col items-center">
+              <RotateCw size={20} />
+              <span className="text-xs mt-1">5s</span>
+            </div>
+          </Button>
         </div>
 
         {/* Play/Pause Button in Center */}
