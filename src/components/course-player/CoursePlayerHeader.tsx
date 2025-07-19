@@ -22,19 +22,19 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   setAutoAdvance
 }) => {
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between relative z-10">
+    <header className="bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft">
       <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
           size="icon"
           onClick={onBack}
-          className="text-gray-700 hover:bg-gray-100"
+          className="text-yutime-text hover:bg-yutime-neutral/50 transition-colors"
         >
           <ArrowLeft size={20} />
         </Button>
         <div>
-          <h1 className="text-lg font-semibold text-gray-900">{course.title}</h1>
-          <p className="text-sm text-gray-500">by {course.instructor}</p>
+          <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
+          <p className="text-sm text-yutime-text/60">by {course.instructor}</p>
         </div>
       </div>
       
@@ -43,7 +43,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           variant="ghost"
           size="icon"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-gray-700 hover:bg-gray-100"
+          className="text-yutime-text hover:bg-yutime-neutral/50 transition-colors"
           aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
         >
           <Menu size={20} />

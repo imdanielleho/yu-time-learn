@@ -55,7 +55,7 @@ const SessionContent: React.FC<SessionContentProps> = ({
   `;
 
   return (
-    <div className="bg-gray-50 min-h-96">
+    <div className="bg-yutime-neutral/50 min-h-96">
       <div className="max-w-6xl mx-auto p-6">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-6">
@@ -65,12 +65,12 @@ const SessionContent: React.FC<SessionContentProps> = ({
           </TabsList>
 
           <TabsContent value="overview" className="space-y-0">
-            <Card className="shadow-sm">
+            <Card className="shadow-soft border-yutime-neutral/30">
               <CardHeader className="pb-4">
-                <CardTitle className="text-lg text-gray-900">關於本課程</CardTitle>
+                <CardTitle className="text-lg text-yutime-primary font-serif">關於本課程</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-yutime-text/70 leading-relaxed">
                   {lesson.description}
                 </p>
               </CardContent>
@@ -78,22 +78,22 @@ const SessionContent: React.FC<SessionContentProps> = ({
           </TabsContent>
 
           <TabsContent value="resources" className="space-y-0">
-            <Card className="shadow-sm">
+            <Card className="shadow-soft border-yutime-neutral/30">
               <CardHeader className="pb-4">
-                <CardTitle className="text-lg text-gray-900">教材下載</CardTitle>
+                <CardTitle className="text-lg text-yutime-primary font-serif">教材下載</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {mockResources.map((resource, index) => (
                     <div 
                       key={index}
-                      className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="flex items-center justify-between p-3 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
                     >
                       <div className="flex items-center space-x-3">
                         {getResourceIcon(resource.type)}
                         <div>
-                          <p className="font-medium text-gray-900">{resource.name}</p>
-                          <p className="text-sm text-gray-500">{resource.type}</p>
+                          <p className="font-medium text-yutime-text">{resource.name}</p>
+                          <p className="text-sm text-yutime-text/60">{resource.type}</p>
                         </div>
                       </div>
                       <Button
@@ -111,14 +111,14 @@ const SessionContent: React.FC<SessionContentProps> = ({
           </TabsContent>
 
           <TabsContent value="transcript" className="space-y-0">
-            <Card className="shadow-sm">
+            <Card className="shadow-soft border-yutime-neutral/30">
               <CardHeader className="pb-4">
-                <CardTitle className="text-lg text-gray-900">課程逐字稿</CardTitle>
+                <CardTitle className="text-lg text-yutime-primary font-serif">課程逐字稿</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="prose prose-sm max-w-none text-gray-700">
-                    {mockTranscript.split('\n').map((paragraph, index) => 
+                <div className="bg-yutime-neutral/30 p-4 rounded-lg">
+                  <div className="prose prose-sm max-w-none text-yutime-text/80">
+                    {mockTranscript.split('\n').map((paragraph, index) =>
                       paragraph.trim() && (
                         <p key={index} className="mb-3 leading-relaxed">
                           {paragraph.trim()}

@@ -249,7 +249,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {/* Video Container */}
       <div 
         ref={containerRef}
-        className={`relative w-full bg-black cursor-pointer ${isFullscreen ? 'h-screen' : ''}`} 
+        className={`relative w-full bg-black cursor-pointer rounded-lg overflow-hidden ${isFullscreen ? 'h-screen' : ''}`} 
         style={!isFullscreen ? { height: '50vh' } : {}}
         onClick={handleVideoClick}
         onMouseMove={handleMouseMove}
@@ -266,10 +266,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {/* Auto-advance overlay */}
         {showAutoAdvance && (
           <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
-            <div className="bg-white rounded-lg p-6 max-w-md mx-4 text-center">
-              <h3 className="text-lg font-semibold mb-4">課程即將切換</h3>
-              <p className="text-gray-600 mb-4">
-                下一個課程將在 <span className="font-bold text-blue-600">{countdown}</span> 秒後開始...
+            <div className="bg-white rounded-xl p-6 max-w-md mx-4 text-center shadow-wellness">
+              <h3 className="text-lg font-serif font-medium text-yutime-primary mb-4">課程即將切換</h3>
+              <p className="text-yutime-text/70 mb-4">
+                下一個課程將在 <span className="font-medium text-yutime-secondary">{countdown}</span> 秒後開始...
               </p>
               <div className="flex space-x-3 justify-center">
                 <Button
@@ -291,7 +291,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     handleCancelAutoAdvance();
                     onNext();
                   }}
-                  className="bg-blue-600 hover:bg-blue-700"
+                  className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white"
                 >
                   立即前往下一課
                 </Button>
@@ -322,7 +322,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               onPrevious();
             }}
             disabled={!canGoPrevious}
-            className={`bg-black/60 text-white hover:bg-black/80 border-2 border-white/20 shadow-lg transition-all duration-200 h-14 w-14 ${
+            className={`bg-yutime-primary/70 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-14 ${
               showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
             } disabled:opacity-30 disabled:cursor-not-allowed`}
           >
@@ -339,7 +339,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               onNext();
             }}
             disabled={!canGoNext}
-            className={`bg-black/60 text-white hover:bg-black/80 border-2 border-white/20 shadow-lg transition-all duration-200 h-14 w-14 ${
+            className={`bg-yutime-primary/70 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-14 ${
               showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
             } disabled:opacity-30 disabled:cursor-not-allowed`}
           >
@@ -488,13 +488,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       {/* Progress section below video */}
       {!isFullscreen && (
-        <div className="bg-white p-6 border-b border-gray-200">
+        <div className="bg-white p-6 border-b border-yutime-neutral/30">
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-blue-600 font-medium">上課進度 {overallProgress}%</span>
+            <span className="text-sm text-yutime-secondary font-medium">上課進度 {overallProgress}%</span>
             <div className="flex-1">
-              <Progress value={overallProgress} className="h-2 bg-gray-200">
+              <Progress value={overallProgress} className="h-2 bg-yutime-neutral">
                 <div 
-                  className="h-full bg-blue-500 transition-all duration-300"
+                  className="h-full bg-yutime-secondary rounded-full transition-all duration-300"
                   style={{ width: `${overallProgress}%` }}
                 />
               </Progress>
