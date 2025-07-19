@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
-import { BookOpen, MessageCircle, FileText, ChevronDown, ChevronRight, ChevronLeft, CheckCircle, Circle, Play, Filter } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Course } from '@/data/courses';
 
 interface Lesson {
@@ -39,34 +40,19 @@ interface SessionContentWithSidebarProps {
   canGoPrevious: boolean;
 }
 
-const mockQAs = [
-  {
-    id: 1,
-    question: "請問這個課程適合完全沒有財報基礎的人嗎？",
-    answer: "當然，這門課從零開始，會用生活化的例子解釋財報觀念，讓你輕鬆入門。",
-    replies: [
-      { id: 101, text: "謝謝老師！這樣我就放心了。", author: "學員A" },
-      { id: 102, text: "太好了，我一直對數字很頭痛，希望這次能學好。", author: "學員B" }
-    ]
-  },
-  {
-    id: 2,
-    question: "課程中會教到如何分析公司的財務報表嗎？",
-    answer: "是的，我們會深入分析三大報表，教你如何評估公司的財務狀況和投資價值。",
-    replies: [
-      { id: 201, text: "這正是我需要的，感謝！", author: "學員C" }
-    ]
-  },
-  {
-    id: 3,
-    question: "如果上課遇到問題，有地方可以發問嗎？",
-    answer: "當然，你可以在課程討論區提問，老師和助教都會盡快回覆。",
-    replies: [
-      { id: 301, text: "了解，謝謝解答！", author: "學員D" },
-      { id: 302, text: "這個服務真棒！", author: "學員E" }
-    ]
-  }
-];
+interface QAItem {
+  id: number;
+  question: string;
+  author: string;
+  timestamp: string;
+  likes: number;
+  answer?: {
+    content: string;
+    author: string;
+    timestamp: string;
+    isInstructor: boolean;
+  };
+}
 
 const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   lesson,
@@ -82,9 +68,92 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   canGoPrevious
 }) => {
   const isMobile = useIsMobile();
+  const [newQuestion, setNewQuestion] = useState('');
   const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
-  const [activeTab, setActiveTab] = useState('lesson');
-  const [sortOrder, setSortOrder] = useState('newest');
+  const [qaSortBy, setQaSortBy] = useState<'newest' | 'oldest' | 'most-liked'>('newest');
+  
+  const [qaItems, setQaItems] = useState<QAItem[]>([
+    {
+      id: 1,
+      question: "請問在財報分析中，如何判斷一家公司的現金流是否健康？",
+      author: "學員 張小明",
+      timestamp: "2天前",
+      likes: 5,
+      answer: {
+        content: "判斷現金流健康度主要看三個指標：1) 營運現金流是否為正且穩定增長 2) 自由現金流（營運現金流減去資本支出）是否充足 3) 現金流與淨利的比例是否合理。如果現金流長期低於淨利，可能存在應收帳款過高或收入品質問題。",
+        author: "講師 王教授",
+        timestamp: "1天前",
+        isInstructor: true
+      }
+    },
+    {
+      id: 2,
+      question: "對於初學者來說，應該優先關注哪些財務比率？",
+      author: "學員 李大華",
+      timestamp: "3天前",
+      likes: 8,
+      answer: {
+        content: "建議初學者先掌握這四類基礎比率：1) 獲利能力：毛利率、淨利率 2) 償債能力：流動比率、負債比率 3) 經營效率：存貨週轉率、應收帳款週轉率 4) 投資報酬：ROE、ROA。熟悉這些後再進階學習其他指標。",
+        author: "講師 王教授",
+        timestamp: "2天前",
+        isInstructor: true
+      }
+    },
+    {
+      id: 3,
+      question: "如何在投資決策中運用所學的財報知識？",
+      author: "學員 陳美玲",
+      timestamp: "1週前",
+      likes: 12
+    }
+  ]);
+
+  const mockResources = [
+    { name: "財報基礎講義", type: "PDF", url: "#" },
+    { name: "練習題目", type: "PDF", url: "#" },
+    { name: "參考圖表", type: "Image", url: "#" }
+  ];
+
+  const getResourceIcon = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'pdf':
+        return <FileText size={16} className="text-red-500" />;
+      case 'image':
+        return <Image size={16} className="text-blue-500" />;
+      default:
+        return <Download size={16} className="text-gray-500" />;
+    }
+  };
+
+  const mockTranscript = `
+    歡迎來到財報學習的第一課。在這個課程中，我們將探討為什麼即使不懂財報，也能在某些情況下賺錢，以及學習財報的真正價值。
+
+    財報不只是數字的堆砌，它反映了企業的策略思維、營運計畫，以及財務狀況。這三者之間有著密不可分的關係。
+
+    讓我們從基礎開始，一步步建立起對財報的正確認知...
+  `;
+
+  const handleSubmitQuestion = () => {
+    if (newQuestion.trim()) {
+      const newQA: QAItem = {
+        id: qaItems.length + 1,
+        question: newQuestion.trim(),
+        author: "學員 您",
+        timestamp: "剛剛",
+        likes: 0
+      };
+      setQaItems([newQA, ...qaItems]);
+      setNewQuestion('');
+    }
+  };
+
+  const handleLike = (id: number) => {
+    setQaItems(prev => 
+      prev.map(item => 
+        item.id === id ? { ...item, likes: item.likes + 1 } : item
+      )
+    );
+  };
 
   const toggleChapter = (chapterId: number) => {
     setExpandedChapters(prev => 
@@ -102,140 +171,256 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     return globalIndex + lessonIndex;
   };
 
-  const QASection = () => (
-    <div className="space-y-4">
-      {mockQAs.map(qa => (
-        <div key={qa.id} className="border border-yutime-neutral/20 rounded-lg p-3">
-          <div className="font-medium text-yutime-text">{qa.question}</div>
-          <div className="text-sm text-yutime-text/80 mt-1">{qa.answer}</div>
-          <div className="mt-2 space-y-1">
-            {qa.replies.map(reply => (
-              <div key={reply.id} className="text-xs text-yutime-text/70 pl-2">
-                <span className="font-semibold">{reply.author}:</span> {reply.text}
-              </div>
-            ))}
+  const getCurrentLessonChapterAndIndex = () => {
+    let globalIndex = 0;
+    for (let chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
+      const chapter = chapters[chapterIndex];
+      if (globalIndex + chapter.lessons.length > currentLesson) {
+        return { chapterIndex, lessonIndex: currentLesson - globalIndex };
+      }
+      globalIndex += chapter.lessons.length;
+    }
+    return { chapterIndex: 0, lessonIndex: 0 };
+  };
+
+  // Sort Q&A items based on selected criteria
+  const sortedQaItems = [...qaItems].sort((a, b) => {
+    switch (qaSortBy) {
+      case 'oldest':
+        return a.id - b.id; // Assuming lower ID means older
+      case 'most-liked':
+        return b.likes - a.likes;
+      case 'newest':
+      default:
+        return b.id - a.id; // Assuming higher ID means newer
+    }
+  });
+
+  // Sidebar content component
+  const SidebarContent = () => (
+    <div className="h-full flex flex-col">
+      {/* Header */}
+      <div className="p-4 md:p-6 border-b border-yutime-neutral/30 flex-shrink-0">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-base md:text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
+          <div className="text-xs md:text-sm text-yutime-text/80 font-medium">
+            {totalLessons} 個單元・635 分鐘
           </div>
         </div>
-      ))}
-    </div>
-  );
-
-  const TranscriptSection = () => (
-    <div className="space-y-2">
-      <p className="text-sm text-yutime-text">
-        {lesson.description}
-      </p>
-    </div>
-  );
-
-  const ContentSection = () => (
-    <div className="space-y-2">
-      <h3 className="font-medium text-yutime-text text-sm leading-tight">{lesson.title}</h3>
-      <p className="text-sm text-yutime-text">
-        {lesson.description}
-      </p>
-    </div>
-  );
-
-  const CourseContentSection = () => (
-    <div className="space-y-2">
-      {chapters.map((chapter, chapterIdx) => (
-        <div key={chapter.id} className="border border-yutime-neutral/20 rounded-lg overflow-hidden">
-          <div
-            onClick={() => toggleChapter(chapter.id)}
-            className="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50 transition-colors bg-gray-50/50"
-          >
-            <div className="flex items-center space-x-2">
-              {expandedChapters.includes(chapter.id) ? (
-                <ChevronDown size={16} className="text-yutime-text" />
-              ) : (
-                <ChevronRight size={16} className="text-yutime-text" />
-              )}
-              <div>
-                <h3 className="font-medium text-yutime-text text-sm leading-tight">{chapter.title}</h3>
-                <div className="text-xs text-yutime-text/60 mt-0.5">{chapter.duration}</div>
+        <div className="text-xs md:text-sm text-yutime-text font-medium">
+          已完成: {completedLessons}/{totalLessons}
+        </div>
+      </div>
+      
+      {/* Chapters and Lessons */}
+      <div className="flex-1 overflow-y-auto">
+        {chapters.map((chapter, chapterIdx) => (
+          <div key={chapter.id} className="border-b border-yutime-neutral/20">
+            {/* Chapter Header */}
+            <div
+              onClick={() => toggleChapter(chapter.id)}
+              className={`flex items-center justify-between p-3 md:p-4 cursor-pointer hover:bg-gray-100 transition-colors 
+                bg-gray-50
+                ${chapterIdx === 0 ? 'border-t border-gray-200' : ''}`}
+            >
+              <div className="flex items-center space-x-2 md:space-x-3">
+                {expandedChapters.includes(chapter.id) ? (
+                  <ChevronDown size={14} className="text-yutime-text flex-shrink-0" />
+                ) : (
+                  <ChevronRight size={14} className="text-yutime-text flex-shrink-0" />
+                )}
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-yutime-text text-sm md:text-base leading-tight">{chapter.title}</h3>
+                  <div className="text-xs text-yutime-text/70 mt-1">{chapter.duration}</div>
+                </div>
               </div>
             </div>
-          </div>
-          
-          {expandedChapters.includes(chapter.id) && (
-            <div className="bg-white">
-              {chapter.lessons.map((lesson, lessonIdx) => {
-                const globalIndex = getLessonGlobalIndex(chapterIdx, lessonIdx);
-                const isCurrentLesson = globalIndex === currentLesson;
-                
-                return (
-                  <div
-                    key={lesson.id}
-                    onClick={() => onLessonSelect(globalIndex)}
-                    className={`flex items-center justify-between p-3 pl-8 cursor-pointer transition-colors border-t border-yutime-neutral/10 ${
-                      isCurrentLesson 
-                        ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
-                        : 'hover:bg-yutime-neutral/30'
-                    }`}
-                  >
-                    <div className="flex items-center space-x-2 flex-1">
-                      <div className="flex-shrink-0">
-                        {lesson.completed ? (
-                          <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
-                            <CheckCircle size={12} className="text-white" fill="currentColor" />
-                          </div>
-                        ) : isCurrentLesson ? (
-                          <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
-                            <Play size={10} className="text-white" fill="currentColor" />
-                          </div>
-                        ) : (
-                          <Circle size={14} className="text-yutime-text/40" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className={`text-xs font-medium leading-tight ${
-                          isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
-                        }`}>
-                          {lesson.title}
-                        </p>
-                      </div>
-                      <div className="text-xs text-yutime-text/50 ml-auto">
-                        {lesson.duration}
+            
+            {/* Lessons */}
+            {expandedChapters.includes(chapter.id) && (
+              <div className="bg-white">
+                {chapter.lessons.map((lesson, lessonIdx) => {
+                  const globalIndex = getLessonGlobalIndex(chapterIdx, lessonIdx);
+                  const isCurrentLesson = globalIndex === currentLesson;
+                  
+                  return (
+                    <div
+                      key={lesson.id}
+                      onClick={() => onLessonSelect(globalIndex)}
+                      className={`flex items-center justify-between p-3 md:p-4 pl-8 md:pl-12 cursor-pointer transition-colors ${
+                        isCurrentLesson 
+                          ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
+                          : 'hover:bg-yutime-neutral/40'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-2 md:space-x-3 flex-1 min-w-0">
+                        <div className="flex-shrink-0">
+                          {lesson.completed ? (
+                            <div className="w-4 h-4 rounded-full bg-yutime-secondary flex items-center justify-center">
+                              <CheckCircle size={10} className="text-white" />
+                            </div>
+                          ) : isCurrentLesson ? (
+                            <Play size={14} className="text-yutime-secondary" />
+                          ) : (
+                            <Circle size={14} className="text-yutime-text/40" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className={`text-xs md:text-sm font-medium leading-tight ${
+                            isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                          }`}>
+                            {lesson.title}
+                          </p>
+                        </div>
+                        <div className="text-xs text-yutime-text/60 ml-auto flex-shrink-0">
+                          {lesson.duration}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      ))}
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 
   return (
-    <div className="bg-white border-t border-yutime-neutral/30">
-      {/* Desktop Version */}
-      {!isMobile && (
-        <div className="grid grid-cols-4">
-          <div className="col-span-3 p-8">
-            <h2 className="text-lg font-serif font-medium text-yutime-primary mb-4">{lesson.title}</h2>
-            <p className="text-sm text-yutime-text">{lesson.description}</p>
-            <div className="mt-6">
-              <Tabs defaultValue="content" className="w-full">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="content">本節內容</TabsTrigger>
-                  <TabsTrigger value="transcript">字幕稿</TabsTrigger>
-                  <TabsTrigger value="qa">討論</TabsTrigger>
-                </TabsList>
-                <TabsContent value="content">
-                  <ContentSection />
-                </TabsContent>
-                <TabsContent value="transcript">
-                  <TranscriptSection />
-                </TabsContent>
-                <TabsContent value="qa">
+    <TooltipProvider>
+      <div className="bg-yutime-neutral/50 min-h-96">
+        <div className="max-w-6xl mx-auto p-3 md:p-6">
+          <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
+            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-5' : 'grid-cols-4'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
+              {isMobile && (
+                <TabsTrigger 
+                  value="sidebar"
+                  className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
+                >
+                  課程內容
+                </TabsTrigger>
+              )}
+              <TabsTrigger 
+                value="overview" 
+                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
+              >
+                課程概要
+              </TabsTrigger>
+              <TabsTrigger 
+                value="resources"
+                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
+              >
+                教材資源
+              </TabsTrigger>
+              <TabsTrigger 
+                value="qa"
+                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
+              >
+                課程問答
+              </TabsTrigger>
+              <TabsTrigger 
+                value="transcript"
+                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground px-1"
+              >
+                課程逐字稿
+              </TabsTrigger>
+            </TabsList>
+
+            {isMobile && (
+              <TabsContent value="sidebar" className="space-y-0 mt-0">
+                <Card className="shadow-soft border-yutime-neutral/30 h-[500px]">
+                  <SidebarContent />
+                </Card>
+              </TabsContent>
+            )}
+
+            <TabsContent value="overview" className="space-y-0 mt-0">
+              <Card className="shadow-soft border-yutime-neutral/30">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg text-yutime-primary font-serif">關於本課程</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-yutime-text/70 leading-relaxed text-sm md:text-base">
+                    {lesson.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="resources" className="space-y-0 mt-0">
+              <Card className="shadow-soft border-yutime-neutral/30">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg text-yutime-primary font-serif">教材下載</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {mockResources.map((resource, index) => (
+                      <div 
+                        key={index}
+                        className="flex items-center justify-between p-3 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                      >
+                        <div className="flex items-center space-x-3">
+                          {getResourceIcon(resource.type)}
+                          <div>
+                            <p className="font-medium text-yutime-text text-sm md:text-base">{resource.name}</p>
+                            <p className="text-xs md:text-sm text-yutime-text/60">{resource.type}</p>
+                          </div>
+                        </div>
+                        <Button
+                          onClick={() => window.open(resource.url, '_blank')}
+                          className="btn-primary text-sm md:text-base font-medium min-w-[44px] min-h-[44px]"
+                          size={isMobile ? "sm" : "default"}
+                        >
+                          下載
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="qa" className="space-y-0 mt-0">
+              <Card className="shadow-soft border-yutime-neutral/30">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg text-yutime-primary font-serif flex items-center space-x-2">
+                    <MessageCircle size={20} />
+                    <span>課程問答</span>
+                  </CardTitle>
+                  <p className="text-xs md:text-sm text-yutime-text/60 mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
+                </CardHeader>
+                <CardContent className="space-y-4 md:space-y-6">
+                  {/* Submit Question Form */}
+                  <div className="bg-yutime-neutral/20 p-3 md:p-4 rounded-xl border border-yutime-neutral/30">
+                    <h3 className="font-medium text-yutime-text mb-3 text-sm md:text-base">提出問題</h3>
+                    <div className="space-y-3">
+                      <Textarea
+                        placeholder="請在這裡輸入您的問題，講師會盡快回覆..."
+                        value={newQuestion}
+                        onChange={(e) => setNewQuestion(e.target.value)}
+                        className="min-h-[80px] md:min-h-[100px] text-sm md:text-base border-yutime-neutral/40 focus:border-yutime-secondary/50 focus:ring-yutime-secondary/20"
+                      />
+                      <div className="flex justify-end">
+                        <Button
+                          onClick={handleSubmitQuestion}
+                          disabled={!newQuestion.trim()}
+                          className="btn-primary flex items-center space-x-2 text-sm md:text-base font-medium min-w-[44px] min-h-[44px]"
+                          size={isMobile ? "sm" : "default"}
+                        >
+                          <Send size={14} />
+                          <span>發布問題</span>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Q&A List with sorting */}
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-serif font-medium text-yutime-primary">課程討論</h3>
-                      <Select value={sortOrder} onValueChange={setSortOrder}>
-                        <SelectTrigger className="w-32">
+                      <h3 className="font-medium text-yutime-text text-sm md:text-base">課程討論 ({qaItems.length})</h3>
+                      <Select value={qaSortBy} onValueChange={(value: 'newest' | 'oldest' | 'most-liked') => setQaSortBy(value)}>
+                        <SelectTrigger className="w-28 md:w-32 h-8 text-xs md:text-sm">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -245,95 +430,97 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                         </SelectContent>
                       </Select>
                     </div>
-                    <QASection />
+                    
+                    {sortedQaItems.map((item) => (
+                      <div key={item.id} className="bg-white p-3 md:p-4 rounded-xl border border-yutime-neutral/30 shadow-soft">
+                        {/* Question */}
+                        <div className="mb-4">
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex items-center space-x-2 text-xs md:text-sm text-yutime-text/60">
+                              <span className="font-medium">{item.author}</span>
+                              <span>•</span>
+                              <span className="flex items-center space-x-1">
+                                <Clock size={10} />
+                                <span>{item.timestamp}</span>
+                              </span>
+                            </div>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleLike(item.id)}
+                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-yutime-secondary hover:bg-yutime-secondary/10 min-w-[44px] min-h-[44px] p-1"
+                                >
+                                  <ThumbsUp size={12} />
+                                  <span className="text-xs">{item.likes}</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>覺得這個問題有幫助</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                          <p className="text-yutime-text leading-relaxed text-sm md:text-base">{item.question}</p>
+                        </div>
+
+                        {/* Answer */}
+                        {item.answer && (
+                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-secondary/30 bg-yutime-secondary/5 p-3 rounded-r-lg">
+                            <div className="flex items-center space-x-2 mb-2 text-xs md:text-sm">
+                              <span className={`font-medium ${item.answer.isInstructor ? 'text-yutime-secondary' : 'text-yutime-text/60'}`}>
+                                {item.answer.author}
+                                {item.answer.isInstructor && (
+                                  <span className="ml-1 bg-yutime-secondary text-white px-2 py-0.5 rounded-full text-xs">講師</span>
+                                )}
+                              </span>
+                              <span className="text-yutime-text/60">•</span>
+                              <span className="text-yutime-text/60 flex items-center space-x-1">
+                                <Clock size={10} />
+                                <span>{item.answer.timestamp}</span>
+                              </span>
+                            </div>
+                            <p className="text-yutime-text leading-relaxed text-sm md:text-base">{item.answer.content}</p>
+                          </div>
+                        )}
+
+                        {/* No Answer Yet */}
+                        {!item.answer && (
+                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-neutral/30 bg-yutime-neutral/10 p-3 rounded-r-lg">
+                            <p className="text-yutime-text/60 text-xs md:text-sm italic">講師尚未回覆，請耐心等候...</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-          <div className="col-span-1 p-8 border-l border-yutime-neutral/30">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
-              <div className="text-sm text-yutime-text/80 font-medium">
-                {totalLessons} 個單元・635 分鐘
-              </div>
-            </div>
-            <div className="text-sm text-yutime-text font-medium mb-4">
-              已完成: {completedLessons}/{totalLessons}
-            </div>
-            <CourseContentSection />
-            <div className="sticky bottom-4 bg-white py-4">
-              <div className="flex justify-between">
-                <Button variant="outline" size="sm" onClick={onPrevious} disabled={!canGoPrevious}>
-                  <ChevronLeft size={16} className="mr-2" />
-                  上一個
-                </Button>
-                <Button size="sm" onClick={onNext} disabled={!canGoNext}>
-                  下一個
-                  <ChevronRight size={16} className="ml-2" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Mobile Version */}
-      {isMobile && (
-        <div className="p-4">
-          <Tabs defaultValue="lesson" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-4">
-              <TabsTrigger value="lesson" className="text-xs">課程內容</TabsTrigger>
-              <TabsTrigger value="content" className="text-xs">本節內容</TabsTrigger>
-              <TabsTrigger value="transcript" className="text-xs">字幕稿</TabsTrigger>
-              <TabsTrigger value="qa" className="text-xs">討論</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="lesson" className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
-                <div className="text-sm text-yutime-text/80 font-medium">
-                  {totalLessons} 個單元・635 分鐘
-                </div>
-              </div>
-              <div className="text-sm text-yutime-text font-medium mb-4">
-                已完成: {completedLessons}/{totalLessons}
-              </div>
-              <div className="max-h-[50vh] overflow-y-auto">
-                <CourseContentSection />
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="content" className="space-y-4">
-              <h2 className="text-lg font-serif font-medium text-yutime-primary mb-4">本節內容</h2>
-              <ContentSection />
+                </CardContent>
+              </Card>
             </TabsContent>
 
-            <TabsContent value="transcript" className="space-y-4">
-              <h2 className="text-lg font-serif font-medium text-yutime-primary mb-4">字幕稿</h2>
-              <TranscriptSection />
-            </TabsContent>
-
-            <TabsContent value="qa" className="space-y-4">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-serif font-medium text-yutime-primary">課程討論</h2>
-                <Select value={sortOrder} onValueChange={setSortOrder}>
-                  <SelectTrigger className="w-24 text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="newest">最新</SelectItem>
-                    <SelectItem value="oldest">最舊</SelectItem>
-                    <SelectItem value="most-liked">最多讚</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <QASection />
+            <TabsContent value="transcript" className="space-y-0 mt-0">
+              <Card className="shadow-soft border-yutime-neutral/30">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg text-yutime-primary font-serif">課程逐字稿</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="bg-yutime-neutral/30 p-3 md:p-4 rounded-lg">
+                    <div className="prose prose-sm max-w-none text-yutime-text/80">
+                      {mockTranscript.split('\n').map((paragraph, index) =>
+                        paragraph.trim() && (
+                          <p key={index} className="mb-3 leading-relaxed text-sm md:text-base">
+                            {paragraph.trim()}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
-      )}
-    </div>
+      </div>
+    </TooltipProvider>
   );
 };
 

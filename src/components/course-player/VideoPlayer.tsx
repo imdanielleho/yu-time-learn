@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw, Subtitles } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -50,7 +50,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoKey, setVideoKey] = useState(0);
-  const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -254,10 +253,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }, 3000);
   };
 
-  const toggleSubtitles = () => {
-    setSubtitlesEnabled(!subtitlesEnabled);
-  };
-
   return (
     <TooltipProvider>
       <div className="relative bg-black w-full group h-[73vh]"
@@ -415,24 +410,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>下一個課程</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleSubtitles}
-                    className={`text-white hover:bg-white/20 min-w-[44px] min-h-[44px] ${
-                      subtitlesEnabled ? 'bg-white/20' : ''
-                    }`}
-                  >
-                    <Subtitles size={24} />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{subtitlesEnabled ? '關閉字幕' : '開啟字幕'}</p>
                 </TooltipContent>
               </Tooltip>
 
