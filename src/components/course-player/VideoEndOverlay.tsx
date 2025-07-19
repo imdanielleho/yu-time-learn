@@ -26,6 +26,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    console.log('VideoEndOverlay show state changed:', show, 'canGoNext:', canGoNext);
     if (show && canGoNext) {
       setCountdown(countdownSeconds);
       setIsActive(true);
@@ -38,9 +39,12 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
     let interval: NodeJS.Timeout | null = null;
     
     if (isActive && countdown > 0) {
+      console.log('Starting countdown:', countdown);
       interval = setInterval(() => {
         setCountdown((prev) => {
+          console.log('Countdown tick:', prev);
           if (prev <= 1) {
+            console.log('Countdown finished, calling onNext');
             setIsActive(false);
             onNext();
             return 0;
@@ -55,11 +59,21 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
     };
   }, [isActive, countdown, onNext]);
 
-  if (!show || !canGoNext) return null;
+  console.log('VideoEndOverlay render - show:', show, 'canGoNext:', canGoNext, 'isActive:', isActive, 'countdown:', countdown);
+
+  if (!show) {
+    console.log('VideoEndOverlay not showing - show is false');
+    return null;
+  }
+
+  if (!canGoNext) {
+    console.log('VideoEndOverlay not showing - canGoNext is false');
+    return null;
+  }
 
   return (
-    <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-md mx-4 text-center animate-scale-in">
+    <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-[60]">
+      <div className="bg-white rounded-lg p-6 max-w-md mx-4 text-center animate-in fade-in-0 zoom-in-95 duration-300">
         <div className="mb-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             課程已結束
@@ -70,7 +84,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
         </div>
 
         <div className="mb-6">
-          <div className="text-3xl font-bold text-yutime-secondary mb-2">
+          <div className="text-4xl font-bold text-blue-600 mb-2">
             {countdown}
           </div>
           <p className="text-gray-500 text-sm">
@@ -90,7 +104,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
           
           <Button
             onClick={onNext}
-            className="bg-yutime-secondary hover:bg-yutime-secondary/90"
+            className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             立即播放下一個
           </Button>

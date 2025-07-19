@@ -99,8 +99,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
 
     const handleEnded = () => {
+      console.log('Video ended - setting overlay to show');
       setIsPlaying(false);
-      setShowEndOverlay(true);
+      if (canGoNext) {
+        setShowEndOverlay(true);
+        console.log('End overlay should now be visible');
+      }
     };
 
     const handleError = (e: any) => {
@@ -130,7 +134,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('loadstart', handleLoadStart);
     };
-  }, [lesson.id, setProgress]);
+  }, [lesson.id, setProgress, canGoNext]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -261,15 +265,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   const handleAutoAdvanceNext = () => {
+    console.log('Auto advance next clicked');
     setShowEndOverlay(false);
     onNext();
   };
 
   const handleCancelAutoAdvance = () => {
+    console.log('Cancel auto advance clicked');
     setShowEndOverlay(false);
   };
 
   const handleWatchAgain = () => {
+    console.log('Watch again clicked');
     setShowEndOverlay(false);
     const video = videoRef.current;
     if (video) {
@@ -287,12 +294,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return undefined;
   };
 
+  const handleTestOverlay = () => {
+    console.log('Test overlay button clicked');
+    setShowEndOverlay(true);
+  };
+
   return (
     <TooltipProvider>
       <div className="relative bg-black w-full group h-[73vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
+        <button 
+          onClick={handleTestOverlay}
+          className="absolute top-4 right-4 z-50 bg-red-500 text-white px-2 py-1 text-xs rounded"
+        >
+          Test Overlay
+        </button>
+
         <video
           key={videoKey}
           ref={videoRef}
