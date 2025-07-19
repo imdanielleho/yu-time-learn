@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -233,6 +234,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     setProgress(progressPercent);
   };
 
+  const handleSkipBackward = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Skip backward button clicked');
+    skip5Seconds(false);
+  };
+
+  const handleSkipForward = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Skip forward button clicked');
+    skip5Seconds(true);
+  };
+
   const handleMouseMove = () => {
     setShowControls(true);
     if (controlsTimeoutRef.current) {
@@ -247,7 +262,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group h-[66vh]"
+      <div className="relative bg-black w-full group h-[73vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
@@ -269,7 +284,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => skip5Seconds(false)}
+            onClick={handleSkipBackward}
             className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
@@ -285,7 +300,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => skip5Seconds(true)}
+            onClick={handleSkipForward}
             className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
