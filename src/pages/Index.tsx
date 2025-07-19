@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -27,12 +26,11 @@ const Index = () => {
     setIsLoginModalOpen(false);
     
     // Check if user has purchased courses and redirect appropriately
-    // Use a small delay to ensure the auth context has updated
     setTimeout(() => {
       if (hasPurchasedCourses) {
         navigate("/dashboard");
       }
-    }, 1100); // Increased delay to ensure auth state is fully updated
+    }, 1200); // Increased delay to ensure auth state is fully updated
   };
 
   const handleLogout = () => {

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from '@/contexts/CartContext';
@@ -55,12 +54,11 @@ const useNavbarState = () => {
     setIsLoginModalOpen(false);
     
     // Check if user has purchased courses and redirect appropriately
-    // Use a small delay to ensure the auth context has updated
     setTimeout(() => {
       if (hasPurchasedCourses) {
         navigate("/dashboard");
       }
-    }, 100);
+    }, 1200); // Increased delay to ensure auth state is fully updated
   };
 
   const handleLoginSignupClick = () => {
