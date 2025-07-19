@@ -135,7 +135,9 @@ const CoursePlayer = () => {
       />
       
       <div className="flex flex-1 overflow-hidden">
-        <div className={`flex-1 flex flex-col ${sidebarOpen ? 'mr-80' : ''} transition-all duration-300`}>
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${
+          sidebarOpen ? 'mr-80' : ''
+        }`}>
           <VideoPlayer 
             lesson={lessons[currentLesson]}
             isPlaying={isPlaying}
@@ -147,6 +149,8 @@ const CoursePlayer = () => {
             onVideoEnd={handleVideoEnd}
             canGoNext={currentLesson < lessons.length - 1}
             canGoPrevious={currentLesson > 0}
+            lessons={lessons}
+            currentLesson={currentLesson}
           />
           
           <SessionContent 

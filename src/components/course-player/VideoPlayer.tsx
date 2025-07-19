@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Maximize, Settings } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 interface Lesson {
   id: number;
@@ -24,6 +25,8 @@ interface VideoPlayerProps {
   onVideoEnd: () => void;
   canGoNext: boolean;
   canGoPrevious: boolean;
+  lessons: Lesson[];
+  currentLesson: number;
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
@@ -36,7 +39,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   onPrevious,
   onVideoEnd,
   canGoNext,
-  canGoPrevious
+  canGoPrevious,
+  lessons,
+  currentLesson
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -103,27 +108,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           );
         }
         break;
-      case 'ArrowUp':
-        e.preventDefault();
-        if (videoRef.current) {
-          videoRef.current.volume = Math.min(1, videoRef.current.volume + 0.1);
-        }
-        break;
-      case 'ArrowDown':
-        e.preventDefault();
-        if (videoRef.current) {
-          videoRef.current.volume = Math.max(0, videoRef.current.volume - 0.1);
-        }
-        break;
     }
   };
 
+  const completedLessons = lessons.filter(lesson => lesson.completed).length;
+  const progressPercentage = (completedLessons / lessons.length) * 100;
+
   return (
-    <div className="flex-1 flex flex-col bg-yutime-charcoal" onKeyDown={handleKeyDown} tabIndex={0}>
-      <div className="flex-1 relative">
+    <div className="flex flex-col bg-yutime-charcoal" onKeyDown={handleKeyDown} tabIndex={0}>
+      {/* Video Container with 16:9 aspect ratio */}
+      <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
         <video
           ref={videoRef}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain bg-black"
           onTimeUpdate={handleTimeUpdate}
           onEnded={handleVideoEnded}
           src="https://www.w3schools.com/html/mov_bbb.mp4"
@@ -143,9 +140,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </Button>
         </div>
       </div>
+
+      {/* Progress bar directly below video */}
+      <div className="bg-yutime-charcoal px-6 py-4">
+        <div className="space-y-3">
+          <div className="flex justify-between text-sm text-white/70 font-medium">
+            <span>{completedLessons}/{lessons.length} lessons completed</span>
+            <span>{Math.round(progressPercentage)}%</span>
+          </div>
+          <Progress value={progressPercentage} className="h-2" />
+        </div>
+      </div>
       
       {/* Video controls */}
-      <div className="bg-yutime-charcoal p-6 space-y-4">
+      <div className="bg-yutime-charcoal px-6 pb-6 space-y-4">
         <div className="flex items-center space-x-4">
           <h3 className="text-white font-heading font-semibold text-lg">{lesson.title}</h3>
         </div>

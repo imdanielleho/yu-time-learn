@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Download, FileText, Image, Eye, EyeOff } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Lesson {
   id: number;
@@ -31,7 +31,6 @@ const SessionContent: React.FC<SessionContentProps> = ({
   canGoPrevious
 }) => {
   const [showTranscript, setShowTranscript] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
 
   const getResourceIcon = (type: string) => {
     switch (type.toLowerCase()) {
@@ -84,33 +83,32 @@ const SessionContent: React.FC<SessionContentProps> = ({
           </Button>
         </div>
 
-        {/* Session Description */}
-        <Card className="mb-8 border-yutime-neutral/20 shadow-soft">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-xl font-heading text-yutime-charcoal">About This Lesson</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-yutime-text leading-relaxed text-base">{lesson.description}</p>
-          </CardContent>
-        </Card>
+        {/* Tabs Layout */}
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="resources">Resources ({lesson.resources.length})</TabsTrigger>
+            <TabsTrigger value="transcript">Transcript</TabsTrigger>
+          </TabsList>
 
-        {/* Downloadable Resources */}
-        {lesson.resources.length > 0 && (
-          <Card className="mb-8 border-yutime-neutral/20 shadow-soft">
-            <Collapsible open={resourcesOpen} onOpenChange={setResourcesOpen}>
-              <CollapsibleTrigger asChild>
-                <CardHeader className="cursor-pointer hover:bg-yutime-neutral/30 transition-colors rounded-t-xl">
-                  <CardTitle className="text-xl font-heading text-yutime-charcoal flex items-center justify-between">
-                    <span>Downloadable Resources ({lesson.resources.length})</span>
-                    <ChevronRight 
-                      size={20} 
-                      className={`transition-transform text-yutime-primary ${resourcesOpen ? 'rotate-90' : ''}`}
-                    />
-                  </CardTitle>
-                </CardHeader>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <CardContent className="pt-0">
+          <TabsContent value="overview" className="space-y-0">
+            <Card className="border-yutime-neutral/20 shadow-soft">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-heading text-yutime-charcoal">About This Lesson</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-yutime-text leading-relaxed text-base">{lesson.description}</p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="resources" className="space-y-0">
+            <Card className="border-yutime-neutral/20 shadow-soft">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-heading text-yutime-charcoal">Downloadable Resources</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {lesson.resources.length > 0 ? (
                   <div className="space-y-4">
                     {lesson.resources.map((resource, index) => (
                       <div 
@@ -136,46 +134,38 @@ const SessionContent: React.FC<SessionContentProps> = ({
                       </div>
                     ))}
                   </div>
-                </CardContent>
-              </CollapsibleContent>
-            </Collapsible>
-          </Card>
-        )}
-
-        {/* Transcript Toggle */}
-        {lesson.hasTranscript && (
-          <Card className="border-yutime-neutral/20 shadow-soft">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-heading text-yutime-charcoal">Video Transcript</CardTitle>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowTranscript(!showTranscript)}
-                  className="flex items-center space-x-2 h-10 px-4 border-yutime-primary/40 text-yutime-primary hover:bg-yutime-primary hover:text-white transition-colors"
-                >
-                  {showTranscript ? <EyeOff size={16} /> : <Eye size={16} />}
-                  <span className="font-medium">{showTranscript ? 'Hide' : 'Show'} Transcript</span>
-                </Button>
-              </div>
-            </CardHeader>
-            {showTranscript && (
-              <CardContent>
-                <div className="bg-yutime-neutral/50 p-6 rounded-xl border border-yutime-neutral/20">
-                  <div className="prose prose-sm max-w-none text-yutime-text">
-                    {mockTranscript.split('\n').map((paragraph, index) => 
-                      paragraph.trim() && (
-                        <p key={index} className="mb-4 leading-relaxed text-base">
-                          {paragraph.trim()}
-                        </p>
-                      )
-                    )}
-                  </div>
-                </div>
+                ) : (
+                  <p className="text-yutime-text/70 text-center py-8">No resources available for this lesson.</p>
+                )}
               </CardContent>
-            )}
-          </Card>
-        )}
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="transcript" className="space-y-0">
+            <Card className="border-yutime-neutral/20 shadow-soft">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-heading text-yutime-charcoal">Video Transcript</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {lesson.hasTranscript ? (
+                  <div className="bg-yutime-neutral/50 p-6 rounded-xl border border-yutime-neutral/20">
+                    <div className="prose prose-sm max-w-none text-yutime-text">
+                      {mockTranscript.split('\n').map((paragraph, index) => 
+                        paragraph.trim() && (
+                          <p key={index} className="mb-4 leading-relaxed text-base">
+                            {paragraph.trim()}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-yutime-text/70 text-center py-8">No transcript available for this lesson.</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

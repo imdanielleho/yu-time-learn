@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { CheckCircle, Circle, Play, Clock, FileText } from 'lucide-react';
+import { CheckCircle, Circle, Play, Clock } from 'lucide-react';
 import { Course } from '@/data/courses';
-import { Progress } from "@/components/ui/progress";
 
 interface Lesson {
   id: number;
@@ -29,21 +28,29 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   onLessonSelect,
   isOpen
 }) => {
-  const completedLessons = lessons.filter(lesson => lesson.completed).length;
-  const progressPercentage = (completedLessons / lessons.length) * 100;
+  // Calculate total duration
+  const totalDuration = lessons.reduce((total, lesson) => {
+    const [minutes, seconds] = lesson.duration.split(':').map(Number);
+    return total + minutes + (seconds / 60);
+  }, 0);
+  
+  const totalHours = Math.floor(totalDuration / 60);
+  const totalMinutes = Math.round(totalDuration % 60);
+  const formattedDuration = totalHours > 0 
+    ? `${totalHours}h ${totalMinutes}m`
+    : `${totalMinutes}m`;
 
   return (
     <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/20 transform transition-transform duration-300 ${
       isOpen ? 'translate-x-0' : 'translate-x-full'
     } z-10 shadow-wellness`}>
       <div className="p-6 border-b border-yutime-neutral/20 bg-yutime-neutral/5">
-        <h2 className="text-xl font-heading font-semibold text-yutime-charcoal mb-3">Course Content</h2>
-        <div className="space-y-3">
-          <div className="flex justify-between text-sm text-yutime-text/70 font-medium">
-            <span>{completedLessons}/{lessons.length} lessons completed</span>
-            <span>{Math.round(progressPercentage)}%</span>
-          </div>
-          <Progress value={progressPercentage} className="h-2" />
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-heading font-semibold text-yutime-charcoal">Course Content</h2>
+        </div>
+        <div className="flex justify-between text-sm text-yutime-text/70 font-medium">
+          <span>{lessons.length} lessons</span>
+          <span>{formattedDuration}</span>
         </div>
       </div>
       
@@ -84,23 +91,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                   }`}>
                     {lesson.title}
                   </h3>
-                  <div className="flex items-center justify-between text-xs text-yutime-text/60 mb-2 font-medium">
-                    <div className="flex items-center">
-                      <Clock size={12} className="mr-1" />
-                      {lesson.duration}
-                    </div>
-                    {lesson.resources.length > 0 && (
-                      <div className="flex items-center">
-                        <FileText size={12} className="mr-1" />
-                        {lesson.resources.length} resources
-                      </div>
-                    )}
+                  <div className="flex items-center text-xs text-yutime-text/60 font-medium">
+                    <Clock size={12} className="mr-1" />
+                    {lesson.duration}
                   </div>
-                  {currentLesson === index && (
-                    <p className="text-sm text-yutime-text/70 line-clamp-2 leading-relaxed">
-                      {lesson.description}
-                    </p>
-                  )}
                 </div>
               </div>
             </div>
