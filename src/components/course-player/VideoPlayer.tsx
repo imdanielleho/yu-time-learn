@@ -226,14 +226,33 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         <video
           ref={videoRef}
           className="w-full h-full object-cover"
-          src={getVideoSource(lesson.id)}
-          poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
           preload="metadata"
           crossOrigin="anonymous"
-        />
+          playsInline
+          controls={false}
+        >
+          <source src={getVideoSource(lesson.id)} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
-        {/* Play/Pause Overlay */}
+        {/* Play/Pause Overlay with Skip Buttons */}
         <div className="absolute inset-0 flex items-center justify-center">
+          {/* Backward 5s Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => skip5Seconds(false)}
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all mr-4 group ${
+              showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <RotateCcw size={24} />
+            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+              -5s
+            </span>
+          </Button>
+
+          {/* Main Play/Pause Button */}
           <Button
             variant="ghost"
             size="icon"
@@ -243,6 +262,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             }`}
           >
             {isPlaying ? <Pause size={32} /> : <Play size={32} />}
+          </Button>
+
+          {/* Forward 5s Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => skip5Seconds(true)}
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all ml-4 group ${
+              showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <RotateCw size={24} />
+            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+              +5s
+            </span>
           </Button>
         </div>
 

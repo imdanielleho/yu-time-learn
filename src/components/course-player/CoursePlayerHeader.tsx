@@ -53,10 +53,16 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           <div className="flex items-center justify-between flex-1">
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
-              {/* Progress Percentage */}
+              {/* Progress Bar */}
               <div className="flex items-center gap-2">
-                <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                <span className="text-sm text-yutime-text font-medium whitespace-nowrap">
                   上課進度 {Math.round(progressPercentage)}%
+                </span>
+                <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-yutime-secondary transition-all duration-300 ease-out"
+                    style={{ width: `${progressPercentage}%` }}
+                  />
                 </div>
               </div>
             </div>
