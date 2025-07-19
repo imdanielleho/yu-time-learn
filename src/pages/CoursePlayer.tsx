@@ -14,7 +14,7 @@ const CoursePlayer = () => {
   
   const [currentLesson, setCurrentLesson] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(9); // 9% as shown in the image
+  const [progress, setProgress] = useState(9);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [autoAdvance, setAutoAdvance] = useState(true);
 
@@ -150,7 +150,7 @@ const CoursePlayer = () => {
       
       <div className="flex flex-1 overflow-hidden">
         <div className={`flex-1 flex flex-col transition-all duration-300 ${
-          sidebarOpen ? 'mr-96' : ''
+          sidebarOpen ? 'mr-80' : ''
         }`}>
           <VideoPlayer 
             lesson={allLessons[currentLesson]}

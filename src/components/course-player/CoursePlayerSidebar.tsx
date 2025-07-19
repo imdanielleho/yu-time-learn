@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { CheckCircle, Circle, Play, Clock, ChevronDown, ChevronRight } from 'lucide-react';
+import { CheckCircle, Circle, Play, ChevronDown, ChevronRight } from 'lucide-react';
 import { Course } from '@/data/courses';
 
 interface Lesson {
@@ -38,7 +38,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   totalLessons,
   completedLessons
 }) => {
-  const [expandedChapters, setExpandedChapters] = useState<number[]>([1]); // First chapter expanded by default
+  const [expandedChapters, setExpandedChapters] = useState<number[]>([1]);
 
   const toggleChapter = (chapterId: number) => {
     setExpandedChapters(prev => 
@@ -71,24 +71,16 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   const { chapterIndex: currentChapterIndex, lessonIndex: currentLessonIndex } = getCurrentLessonChapterAndIndex();
 
   return (
-    <div className={`fixed right-0 top-0 h-full w-96 bg-white border-l border-gray-200 transform transition-transform duration-300 ${
+    <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-gray-200 transform transition-transform duration-300 ${
       isOpen ? 'translate-x-0' : 'translate-x-full'
-    } z-10`}>
+    } z-10 flex flex-col`}>
       {/* Header */}
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-gray-200 flex-shrink-0">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-semibold text-gray-900">課程單元</h2>
           <div className="text-sm text-gray-500">
             {totalLessons} 個單元・635 分鐘
           </div>
-        </div>
-        
-        {/* Pre-class preparation */}
-        <div className="flex items-center space-x-2 text-sm text-gray-600 mb-4">
-          <div className="w-4 h-4 border border-gray-300 rounded flex items-center justify-center">
-            <span className="text-xs">📄</span>
-          </div>
-          <span>課前準備</span>
         </div>
       </div>
       
