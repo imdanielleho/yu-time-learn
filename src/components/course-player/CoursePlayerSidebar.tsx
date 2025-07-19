@@ -92,7 +92,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
     }
   };
 
-  const handleResourceDownload = (url: string) => {
+  const handleResourceDownload = (url: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     window.open(url, '_blank');
   };
 
@@ -226,15 +228,18 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      <Button
                                        variant="outline"
                                        size="sm"
-                                       className="h-7 px-1.5 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
-                                       onClick={(e) => e.stopPropagation()}
+                                       className="h-7 px-1.5 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md touch-manipulation"
+                                       onClick={(e) => {
+                                         e.preventDefault();
+                                         e.stopPropagation();
+                                       }}
                                      >
                                        <Folder size={12} className="text-yutime-secondary pr-1" />
                                        <span className="text-xs font-medium">課程資源</span>
                                        <ChevronDown size={10} className="text-yutime-secondary" />
                                      </Button>
                                    </PopoverTrigger>
-                                    <PopoverContent className="w-64 p-3" align="end">
+                                    <PopoverContent className="w-64 p-3" align="end" side="left" sideOffset={8}>
                                       <div className="space-y-2">
                                         {lesson.resources.map((resource, index) => (
                                            <div 
@@ -249,8 +254,8 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                                </div>
                                              </div>
                                              <Button
-                                               onClick={() => handleResourceDownload(resource.url)}
-                                               className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                               onClick={(e) => handleResourceDownload(resource.url, e)}
+                                               className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80 touch-manipulation"
                                                size="sm"
                                              >
                                                <Download size={12} className="text-white" />

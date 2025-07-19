@@ -56,6 +56,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [showEndOverlay, setShowEndOverlay] = useState(false);
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
   const getVideoSource = (lessonId: number) => {
@@ -243,14 +244,39 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   };
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = async () => {
+    const container = containerRef.current;
     const video = videoRef.current;
-    if (!video) return;
     
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      video.requestFullscreen();
+    if (!container || !video) return;
+    
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        // Try to request fullscreen on container first, fallback to video
+        if (container.requestFullscreen) {
+          await container.requestFullscreen();
+        } else if (video.requestFullscreen) {
+          await video.requestFullscreen();
+        } else if ((video as any).webkitRequestFullscreen) {
+          // Safari support
+          (video as any).webkitRequestFullscreen();
+        } else if ((video as any).webkitEnterFullscreen) {
+          // iOS Safari support
+          (video as any).webkitEnterFullscreen();
+        }
+      }
+    } catch (error) {
+      console.log('Fullscreen request failed:', error);
+      // Fallback for mobile devices that don't support container fullscreen
+      try {
+        if ((video as any).webkitEnterFullscreen) {
+          (video as any).webkitEnterFullscreen();
+        }
+      } catch (fallbackError) {
+        console.log('Video fullscreen fallback failed:', fallbackError);
+      }
     }
   };
 
@@ -329,9 +355,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
-           onMouseMove={handleMouseMove}
-           onMouseLeave={() => isPlaying && setShowControls(false)}>
+      <div 
+        ref={containerRef}
+        className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => isPlaying && setShowControls(false)}
+      >
         
         <video
           key={videoKey}
@@ -351,7 +380,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleSkipBackward}
-            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group touch-manipulation ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -367,7 +396,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleSkipForward}
-            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group touch-manipulation ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -384,7 +413,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={() => setIsPlaying(!isPlaying)}
-            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all ${
+            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all touch-manipulation ${
               showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -419,7 +448,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] touch-manipulation"
                   >
                     {isPlaying ? <Pause size={16} className="md:w-6 md:h-6" /> : <Play size={16} className="md:w-6 md:h-6" />}
                   </Button>
@@ -435,7 +464,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleMute}
-                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] touch-manipulation"
                   >
                     {isMuted ? <VolumeX size={16} className="md:w-6 md:h-6" /> : <Volume2 size={16} className="md:w-6 md:h-6" />}
                   </Button>
@@ -463,7 +492,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={onPrevious}
                     disabled={!canGoPrevious}
-                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px] touch-manipulation"
                   >
                     <SkipBack size={16} className="md:w-6 md:h-6" />
                   </Button>
@@ -480,7 +509,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={onNext}
                     disabled={!canGoNext}
-                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px] touch-manipulation"
                   >
                     <SkipForward size={16} className="md:w-6 md:h-6" />
                   </Button>
@@ -496,7 +525,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleCaptions}
-                    className={`text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] ${
+                    className={`text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] touch-manipulation ${
                       captionsEnabled ? 'bg-white/20' : ''
                     }`}
                   >
@@ -513,7 +542,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="hidden md:flex text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="hidden md:flex text-white hover:bg-white/20 min-w-[44px] min-h-[44px] touch-manipulation"
                   >
                     <Settings size={24} />
                   </Button>
@@ -529,7 +558,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleFullscreen}
-                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] touch-manipulation"
                   >
                     <Maximize size={16} className="md:w-6 md:h-6" />
                   </Button>
