@@ -99,12 +99,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       const currentVideoTime = video.currentTime;
       const videoDuration = video.duration;
       
-      setCurrentTime(currentVideoTime);
-      
       if (videoDuration > 0) {
+        setCurrentTime(currentVideoTime);
         const progressPercent = (currentVideoTime / videoDuration) * 100;
         setProgress(progressPercent);
-        console.log('Time update - current:', currentVideoTime, 'duration:', videoDuration, 'progress:', progressPercent);
       }
     };
 
@@ -209,7 +207,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     video.currentTime = newTime;
     setCurrentTime(newTime);
     setProgress(value[0]);
-    console.log('Progress changed to:', value[0], 'time:', newTime);
   };
 
   const handleVolumeChange = (value: number[]) => {

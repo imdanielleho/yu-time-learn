@@ -166,15 +166,15 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                       <div
                         key={lesson.id}
                         onClick={() => onLessonSelect(globalIndex)}
-                        className={`p-4 pl-12 cursor-pointer transition-colors ${
+                        className={`p-4 cursor-pointer transition-colors ${
                           isCurrentLesson 
                             ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                             : 'hover:bg-yutime-neutral/40'
                         }`}
                       >
                         <div className="flex items-start space-x-3">
-                          {/* Completion Status Icon */}
-                          <div className="flex-shrink-0 mt-1">
+                          {/* Completion Status Icon - aligned with chapter chevron */}
+                          <div className="flex-shrink-0 mt-1 ml-7">
                             {lesson.completed ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
                                 <Check size={10} className="text-white font-bold" strokeWidth={3} />
@@ -216,6 +216,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      >
                                        <Folder size={14} className="text-yutime-secondary" />
                                        <span className="text-xs font-medium">課程資源</span>
+                                       <ChevronDown size={12} className="text-yutime-secondary" />
                                      </Button>
                                    </PopoverTrigger>
                                     <PopoverContent className="w-64 p-3" align="end">
