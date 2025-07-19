@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { X, RotateCcw } from 'lucide-react';
@@ -87,7 +86,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
           <Button
             variant="outline"
             onClick={onWatchAgain}
-            className="flex items-center gap-2 px-6 py-3 border-2 border-yutime-neutral/30 text-yutime-text hover:bg-yutime-secondary hover:text-white hover:border-yutime-secondary transition-all duration-200"
+            className="flex items-center gap-2 px-6 py-3 border-2 border-yutime-neutral/30 text-yutime-text hover:bg-yutime-secondary hover:text-white hover:border-yutime-secondary transition-all duration-200 sm:pl-8"
           >
             <RotateCcw size={18} />
             重新觀看
@@ -103,7 +102,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
           
           <Button
             onClick={onNext}
-            className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white px-6 py-3 font-medium shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
+            className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white px-6 py-3 font-medium shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] sm:pr-8"
           >
             立即前往下一課
           </Button>

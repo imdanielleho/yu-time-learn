@@ -312,7 +312,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                   <Button
                                     variant="outline"
                                     size="sm"
-                                    onClick={(e) => e.stopPropagation()}
                                     className={`${
                                       isMobile 
                                         ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
