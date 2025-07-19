@@ -76,9 +76,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   return (
     <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-gray-200 transform transition-transform duration-300 ${
       isOpen ? 'translate-x-0' : 'translate-x-full'
-    } z-10 flex flex-col`}>
+    } z-20 flex flex-col`}>
       {/* Toggle button at top */}
-      <div className="absolute top-4 left-4 z-20">
+      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         <Button
           variant="outline"
           size="sm"
@@ -91,7 +91,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
       </div>
 
       {/* Header */}
-      <div className="p-6 pt-16 border-b border-gray-200 flex-shrink-0">
+      <div className="p-6 border-b border-gray-200 flex-shrink-0">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-semibold text-gray-900">課程單元</h2>
           <div className="text-sm text-gray-500">

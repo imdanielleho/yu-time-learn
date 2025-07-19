@@ -22,7 +22,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   setAutoAdvance
 }) => {
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between relative z-20">
+    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between relative z-10">
       <div className="flex items-center space-x-4">
         <Button
           variant="ghost"
