@@ -274,7 +274,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   return (
                     <div
                       key={lesson.id}
-                      className={`p-3 md:p-4 transition-colors cursor-pointer ${
+                      className={`p-3 md:p-4 transition-colors cursor-pointer border-t border-b border-yutime-neutral/20 ${
                         isCurrentLesson 
                           ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                           : 'hover:bg-yutime-neutral/40'
@@ -455,7 +455,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                 return (
                                   <div
                                     key={lesson.id}
-                                    className={`p-3 md:p-4 transition-colors cursor-pointer ${
+                                    className={`p-3 md:p-4 transition-colors cursor-pointer border-t border-b border-yutime-neutral/20 ${
                                       isCurrentLesson 
                                         ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                                         : 'hover:bg-yutime-neutral/40'
