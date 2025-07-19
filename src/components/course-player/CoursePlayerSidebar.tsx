@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X } from 'lucide-react';
+import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Course } from '@/data/courses';
@@ -12,6 +12,7 @@ interface Lesson {
   completed: boolean;
   description: string;
   hasTranscript: boolean;
+  hasResources?: boolean; // Add resources indicator
 }
 
 interface Chapter {
@@ -157,9 +158,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                         <div className="flex items-center space-x-3 flex-1">
                           <div className="flex-shrink-0">
                             {lesson.completed ? (
-                              <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
-                                <CheckCircle size={12} className="text-white" />
-                              </div>
+                              <CheckCircle size={16} className="text-yutime-secondary font-bold" strokeWidth={3} />
                             ) : isCurrentLesson ? (
                               <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
                                 <Play size={10} className="text-white ml-0.5" />
@@ -169,11 +168,16 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                             )}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className={`text-sm font-medium leading-tight ${
-                              isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
-                            }`}>
-                              {lesson.title}
-                            </p>
+                            <div className="flex items-center gap-2">
+                              <p className={`text-sm font-medium leading-tight ${
+                                isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                              }`}>
+                                {lesson.title}
+                              </p>
+                              {lesson.hasResources && (
+                                <Folder size={14} className="text-yutime-text/60 flex-shrink-0" />
+                              )}
+                            </div>
                           </div>
                           <div className="text-xs text-yutime-text/60 ml-auto">
                             {lesson.duration}

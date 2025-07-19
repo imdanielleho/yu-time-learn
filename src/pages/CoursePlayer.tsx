@@ -33,7 +33,8 @@ const CoursePlayer = () => {
           duration: "16min 35s", 
           completed: true,
           description: "Learn the fundamentals of financial reports and their connection to strategy and planning.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 2, 
@@ -41,7 +42,8 @@ const CoursePlayer = () => {
           duration: "13min 52s", 
           completed: true,
           description: "Discover how to apply financial report knowledge in your daily life.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         },
         { 
           id: 3, 
@@ -49,7 +51,8 @@ const CoursePlayer = () => {
           duration: "8min 33s", 
           completed: true,
           description: "Understand that you know more about financial reports than you think.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 4, 
@@ -57,7 +60,8 @@ const CoursePlayer = () => {
           duration: "9min 1s", 
           completed: false,
           description: "Practice with the three major financial statement categories.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 5, 
@@ -65,7 +69,8 @@ const CoursePlayer = () => {
           duration: "12min 20s", 
           completed: false,
           description: "Understanding the basic structure and logic of financial statements.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         },
         { 
           id: 6, 
@@ -73,7 +78,8 @@ const CoursePlayer = () => {
           duration: "8min 10s", 
           completed: false,
           description: "Learn how to interpret key financial ratios.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 12, 
@@ -81,7 +87,8 @@ const CoursePlayer = () => {
           duration: "11min 45s", 
           completed: false,
           description: "Learn techniques for assessing financial risks.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         },
         { 
           id: 13, 
@@ -89,7 +96,8 @@ const CoursePlayer = () => {
           duration: "15min 22s", 
           completed: false,
           description: "Methods for analyzing investment portfolios.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 14, 
@@ -97,7 +105,8 @@ const CoursePlayer = () => {
           duration: "14min 8s", 
           completed: false,
           description: "In-depth analysis of cash flow statements.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         },
         { 
           id: 15, 
@@ -105,7 +114,8 @@ const CoursePlayer = () => {
           duration: "17min 30s", 
           completed: false,
           description: "Basics of company valuation.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 16, 
@@ -113,7 +123,8 @@ const CoursePlayer = () => {
           duration: "13min 55s", 
           completed: false,
           description: "Comparative analysis of financial statements.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         }
       ]
     },
@@ -128,7 +139,8 @@ const CoursePlayer = () => {
           duration: "12min 15s", 
           completed: false,
           description: "Basic concepts of profit and loss statements.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 8, 
@@ -136,7 +148,8 @@ const CoursePlayer = () => {
           duration: "18min 30s", 
           completed: false,
           description: "Techniques for analyzing revenue streams.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         },
         { 
           id: 9, 
@@ -144,7 +157,8 @@ const CoursePlayer = () => {
           duration: "14min 35s", 
           completed: false,
           description: "Strategies for effective cost control.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         },
         { 
           id: 10, 
@@ -152,7 +166,8 @@ const CoursePlayer = () => {
           duration: "16min 25s", 
           completed: false,
           description: "Analyzing gross and net profit margins.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: false
         },
         { 
           id: 11, 
@@ -160,7 +175,8 @@ const CoursePlayer = () => {
           duration: "13min 15s", 
           completed: false,
           description: "Comparing quarterly and annual earnings.",
-          hasTranscript: true
+          hasTranscript: true,
+          hasResources: true
         }
       ]
     }
