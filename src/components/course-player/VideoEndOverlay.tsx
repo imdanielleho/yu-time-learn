@@ -72,7 +72,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
   }
 
   return (
-    <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-[60] px-4 md:px-8">
+    <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-[60] px-8 md:px-12 lg:px-16">
       <div className="bg-white rounded-2xl p-6 md:p-8 max-w-md mx-4 text-center animate-in fade-in-0 zoom-in-95 duration-300 shadow-2xl">
         <div className="mb-6">
           <h3 className="text-xl font-bold text-yutime-primary mb-3">
@@ -87,7 +87,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
           <Button
             variant="outline"
             onClick={onWatchAgain}
-            className="flex items-center gap-2 px-6 py-3 border-2 border-yutime-neutral/30 text-yutime-text hover:bg-yutime-neutral/10 hover:border-yutime-secondary/50 transition-all duration-200"
+            className="flex items-center gap-2 px-6 py-3 border-2 border-yutime-neutral/30 text-yutime-text hover:bg-yutime-secondary hover:text-white hover:border-yutime-secondary transition-all duration-200"
           >
             <RotateCcw size={18} />
             重新觀看
@@ -96,7 +96,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
           <Button
             variant="outline"
             onClick={onCancel}
-            className="px-6 py-3 border-2 border-yutime-neutral/30 text-yutime-text hover:bg-yutime-neutral/10 hover:border-red-400/50 transition-all duration-200"
+            className="px-6 py-3 border-2 border-yutime-neutral/30 text-yutime-text hover:bg-red-500 hover:text-white hover:border-red-500 transition-all duration-200"
           >
             取消自動播放
           </Button>
