@@ -239,27 +239,45 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           crossOrigin="anonymous"
           playsInline
           controls={false}
+          poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
           src={getVideoSource(lesson.id)}
         />
 
-        {/* Play/Pause Overlay with Skip Buttons */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* Backward 5s Button */}
+        {/* Skip Buttons on Left and Right Edges */}
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => skip5Seconds(false)}
-            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all mr-4 group ${
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <RotateCcw size={24} />
-            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-              -5s
-            </span>
+            <div className="flex flex-col items-center">
+              <RotateCcw size={20} />
+              <span className="text-xs mt-1">5s</span>
+            </div>
           </Button>
+        </div>
 
-          {/* Main Play/Pause Button */}
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => skip5Seconds(true)}
+            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+              showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="flex flex-col items-center">
+              <RotateCw size={20} />
+              <span className="text-xs mt-1">5s</span>
+            </div>
+          </Button>
+        </div>
+
+        {/* Play/Pause Button in Center */}
+        <div className="absolute inset-0 flex items-center justify-center">
           <Button
             variant="ghost"
             size="icon"
@@ -269,21 +287,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             }`}
           >
             {isPlaying ? <Pause size={32} /> : <Play size={32} />}
-          </Button>
-
-          {/* Forward 5s Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => skip5Seconds(true)}
-            className={`w-16 h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all ml-4 group ${
-              showControls ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <RotateCw size={24} />
-            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-              +5s
-            </span>
           </Button>
         </div>
 

@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { ArrowLeft, Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Course } from '@/data/courses';
 
 interface CoursePlayerHeaderProps {
@@ -27,7 +27,9 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   totalLessons,
   completedLessons
 }) => {
+  const isMobile = useIsMobile();
   const progressPercentage = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
+  
   return (
     <TooltipProvider>
       <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300 ${
@@ -51,7 +53,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           </Tooltip>
           
           <div className="flex items-center justify-between flex-1">
-            <div className="flex items-center justify-between w-full">
+            <div className={`flex ${isMobile ? 'flex-col items-start' : 'items-center justify-between'} w-full ${isMobile ? 'gap-3' : ''}`}>
               <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
               {/* Progress Bar */}
               <div className="flex items-center gap-2">
