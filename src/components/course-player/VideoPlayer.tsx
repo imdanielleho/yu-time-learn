@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -96,16 +96,25 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       onVideoEnd();
     };
 
-    const handleError = (e) => {
+    const handleError = (e: any) => {
       console.error('Video error:', e);
-      // Try to reload the video source
-      video.load();
+      // Force reload after a short delay
+      setTimeout(() => {
+        if (video.src) {
+          video.load();
+        }
+      }, 1000);
+    };
+
+    const handleCanPlay = () => {
+      console.log('Video can play');
     };
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('error', handleError);
+    video.addEventListener('canplay', handleCanPlay);
 
     // Load the video source
     video.src = getVideoSource(lesson.id);
@@ -116,6 +125,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('error', handleError);
+      video.removeEventListener('canplay', handleCanPlay);
     };
   }, [lesson.id, setProgress, onVideoEnd]);
 
@@ -180,6 +190,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     }
   };
 
+  const skip5Seconds = (forward: boolean) => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    const newTime = forward 
+      ? Math.min(video.currentTime + 5, duration)
+      : Math.max(video.currentTime - 5, 0);
+    
+    video.currentTime = newTime;
+    setCurrentTime(newTime);
+    const progressPercent = (newTime / duration) * 100;
+    setProgress(progressPercent);
+  };
+
   const handleMouseMove = () => {
     setShowControls(true);
     if (controlsTimeoutRef.current) {
@@ -194,7 +218,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black aspect-video w-full group"
+      <div className="relative bg-black w-full group h-[60vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
@@ -293,6 +317,22 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   <Button
                     variant="ghost"
                     size="icon"
+                    onClick={() => skip5Seconds(false)}
+                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                  >
+                    <RotateCcw size={20} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>倒退5秒</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     onClick={onPrevious}
                     disabled={!canGoPrevious}
                     className="px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]"
@@ -319,6 +359,22 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>下一個課程</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => skip5Seconds(true)}
+                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                  >
+                    <RotateCw size={20} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>快進5秒</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -356,13 +412,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </div>
         </div>
 
-        {/* Lesson Info Overlay */}
-        <div className={`absolute top-4 left-4 bg-black/60 text-white px-3 py-2 rounded-lg transition-opacity duration-300 ${
-          showControls ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <div className="text-sm font-medium">{lesson.title}</div>
-          <div className="text-xs opacity-80">課程 {currentLesson + 1} / {lessons.length}</div>
-        </div>
       </div>
     </TooltipProvider>
   );
