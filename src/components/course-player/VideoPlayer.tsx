@@ -1,6 +1,5 @@
-
 import React, { useRef, useEffect, useState } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, Settings, ChevronLeft, ChevronRight, RotateCcw, ClosedCaptioning } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, Settings, ChevronLeft, ChevronRight, RotateCcw, Captions } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -396,7 +395,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 }}
                 className={`text-white hover:bg-white/20 ${showCaptions ? 'bg-white/20' : ''}`}
               >
-                <ClosedCaptioning size={16} />
+                <Captions size={16} />
               </Button>
 
               {/* Settings Menu */}
