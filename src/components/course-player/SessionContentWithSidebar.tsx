@@ -9,6 +9,24 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Course } from '@/data/courses';
 
+// Mock transcript data
+const mockTranscript = `
+歡迎來到財報分析的入門課程。在今天的課程中，我們將探討財務報表的基礎概念，以及如何將這些知識應用在日常生活中。
+
+首先，讓我們了解什麼是財務報表。財務報表是一家公司財務狀況的完整記錄，包含了公司的資產、負債、收入和支出等重要資訊。
+
+對於一般投資者來說，最重要的三大財務報表分別是：
+1. 資產負債表 - 顯示公司在特定時點的財務狀況
+2. 損益表 - 反映公司在一段期間內的營運績效
+3. 現金流量表 - 追蹤公司現金的流入和流出
+
+即使您不是企業老闆或高階主管，財報知識依然對您的投資決策和財務規劃非常有幫助。透過分析公司的財務數據，您可以更好地評估投資機會，做出明智的理財選擇。
+
+在接下來的課程中，我們將深入探討每一張財務報表的細節，學習如何解讀關鍵的財務比率，以及如何運用這些知識來評估公司的投資價值。
+
+記住，財報分析不是一門艱深的學問，而是一套實用的工具。只要掌握了基本概念，任何人都可以學會閱讀和分析財務報表。
+`;
+
 interface Lesson {
   id: number;
   title: string;
