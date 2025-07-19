@@ -229,7 +229,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             上一堂
           </Button>
           <Button 
-            variant="primary"
+            variant="default"
             onClick={onNext}
             disabled={!canGoNext}
           >
