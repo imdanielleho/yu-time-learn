@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { courses } from '@/data/courses';
@@ -15,7 +14,7 @@ const CoursePlayer = () => {
   const [currentLesson, setCurrentLesson] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(9);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [autoAdvance, setAutoAdvance] = useState(true);
 
   // Enhanced lessons data organized by chapters with additional lessons
@@ -223,7 +222,9 @@ const CoursePlayer = () => {
       />
       
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 flex flex-col">
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${
+          sidebarOpen ? 'mr-80' : ''
+        }`}>
           <VideoPlayer 
             lesson={allLessons[currentLesson]}
             isPlaying={isPlaying}
@@ -246,14 +247,19 @@ const CoursePlayer = () => {
             onPrevious={handlePreviousLesson}
             canGoNext={currentLesson < allLessons.length - 1}
             canGoPrevious={currentLesson > 0}
-            course={course}
-            chapters={chapters}
-            currentLesson={currentLesson}
-            onLessonSelect={handleLessonSelect}
-            totalLessons={totalLessons}
-            completedLessons={completedLessons}
           />
         </div>
+        
+        <CoursePlayerSidebar 
+          course={course}
+          chapters={chapters}
+          currentLesson={currentLesson}
+          onLessonSelect={handleLessonSelect}
+          isOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          totalLessons={totalLessons}
+          completedLessons={completedLessons}
+        />
       </div>
     </div>
   );

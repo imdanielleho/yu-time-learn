@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -33,7 +32,9 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   
   return (
     <TooltipProvider>
-      <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-1.5 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300`}>
+      <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-2 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300 ${
+        sidebarOpen ? 'mr-80' : ''
+      }`}>
         <div className="flex items-center space-x-4 flex-1">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -46,7 +47,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
                 <ArrowLeft size={20} />
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="bottom">
+            <TooltipContent>
               <p>返回課程列表</p>
             </TooltipContent>
           </Tooltip>
@@ -68,6 +69,28 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
               </div>
             </div>
           </div>
+        </div>
+        
+        {/* Sidebar Toggle - Only show when sidebar is closed */}
+        <div className="flex items-center space-x-4">
+          {!sidebarOpen && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setSidebarOpen(true)}
+                  className="text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
+                  aria-label="Open sidebar"
+                >
+                  <Menu size={20} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>顯示課程內容</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
         </div>
       </header>
     </TooltipProvider>

@@ -132,22 +132,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
   }, [lesson.id, setProgress, onVideoEnd, videoKey]);
 
-  const skip5Seconds = (forward: boolean) => {
-    const video = videoRef.current;
-    if (!video || !duration) return;
-    
-    console.log(`Skipping ${forward ? 'forward' : 'backward'} 5 seconds`);
-    
-    const newTime = forward 
-      ? Math.min(video.currentTime + 5, duration)
-      : Math.max(video.currentTime - 5, 0);
-    
-    video.currentTime = newTime;
-    setCurrentTime(newTime);
-    const progressPercent = (newTime / duration) * 100;
-    setProgress(progressPercent);
-  };
-
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -232,6 +216,22 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     } else {
       video.requestFullscreen();
     }
+  };
+
+  const skip5Seconds = (forward: boolean) => {
+    const video = videoRef.current;
+    if (!video || !duration) return;
+    
+    console.log(`Skipping ${forward ? 'forward' : 'backward'} 5 seconds`);
+    
+    const newTime = forward 
+      ? Math.min(video.currentTime + 5, duration)
+      : Math.max(video.currentTime - 5, 0);
+    
+    video.currentTime = newTime;
+    setCurrentTime(newTime);
+    const progressPercent = (newTime / duration) * 100;
+    setProgress(progressPercent);
   };
 
   const handleSkipBackward = (e: React.MouseEvent) => {
