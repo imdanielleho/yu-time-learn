@@ -104,7 +104,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
         <div className="p-6 border-b border-yutime-neutral/30 flex-shrink-0">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
-            <div className="text-sm text-yutime-text/60">
+            <div className="text-sm text-yutime-text/80 font-medium">
               {totalLessons} 個單元・635 分鐘
             </div>
           </div>
@@ -120,8 +120,8 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               {/* Chapter Header with background shading */}
               <div
                 onClick={() => toggleChapter(chapter.id)}
-                className={`flex items-center justify-between p-4 cursor-pointer hover:bg-gray-200 transition-colors 
-                  bg-gray-100
+                className={`flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100 transition-colors 
+                  bg-gray-50
                   ${chapterIdx === 0 ? 'border-t border-gray-200' : ''}`}
               >
                 <div className="flex items-center space-x-3">

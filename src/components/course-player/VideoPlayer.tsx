@@ -49,12 +49,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [showControls, setShowControls] = useState(true);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [videoKey, setVideoKey] = useState(0); // Force re-render
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Updated video sources for different lessons
   const getVideoSource = (lessonId: number) => {
-    // Using publicly available sample videos that should work
     const videoSources = {
       1: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       2: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", 
@@ -78,10 +78,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   useEffect(() => {
+    // Force video re-creation when lesson changes
+    setVideoKey(prev => prev + 1);
+  }, [lesson.id]);
+
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleLoadedMetadata = () => {
+      console.log('Video metadata loaded');
       setDuration(video.duration);
     };
 
@@ -98,16 +104,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     const handleError = (e: any) => {
       console.error('Video error:', e);
-      // Force reload after a short delay
-      setTimeout(() => {
-        if (video.src) {
-          video.load();
-        }
-      }, 1000);
     };
 
     const handleCanPlay = () => {
       console.log('Video can play');
+    };
+
+    const handleLoadStart = () => {
+      console.log('Video load started');
     };
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -115,10 +119,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     video.addEventListener('ended', handleEnded);
     video.addEventListener('error', handleError);
     video.addEventListener('canplay', handleCanPlay);
-
-    // Load the video source
-    video.src = getVideoSource(lesson.id);
-    video.load();
+    video.addEventListener('loadstart', handleLoadStart);
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
@@ -126,19 +127,26 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('error', handleError);
       video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('loadstart', handleLoadStart);
     };
-  }, [lesson.id, setProgress, onVideoEnd]);
+  }, [lesson.id, setProgress, onVideoEnd, videoKey]);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     if (isPlaying) {
-      video.play();
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error('Error playing video:', error);
+          setIsPlaying(false);
+        });
+      }
     } else {
       video.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, setIsPlaying]);
 
   const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -222,18 +230,17 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
-        {/* Video Element */}
+        {/* Video Element - Force re-creation with key */}
         <video
+          key={videoKey}
           ref={videoRef}
           className="w-full h-full object-cover"
           preload="metadata"
           crossOrigin="anonymous"
           playsInline
           controls={false}
-        >
-          <source src={getVideoSource(lesson.id)} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          src={getVideoSource(lesson.id)}
+        />
 
         {/* Play/Pause Overlay with Skip Buttons */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -351,25 +358,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => skip5Seconds(false)}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px] group relative"
-                  >
-                    <RotateCcw size={20} />
-                    <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                      -5s
-                    </span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>倒退5秒</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
                     onClick={onPrevious}
                     disabled={!canGoPrevious}
                     className="px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed min-w-[44px] min-h-[44px]"
@@ -396,25 +384,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>下一個課程</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => skip5Seconds(true)}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px] group relative"
-                  >
-                    <RotateCw size={20} />
-                    <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                      +5s
-                    </span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>快進5秒</p>
                 </TooltipContent>
               </Tooltip>
 
