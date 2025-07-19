@@ -400,8 +400,8 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             </TabsList>
 
             {isMobile && (
-              <TabsContent value="sidebar" className="space-y-0 mt-0">
-                <Card className="shadow-soft border-yutime-neutral/30 h-[70vh] overflow-hidden">
+              <TabsContent value="sidebar" className="space-y-0 mt-0 h-[70vh]">
+                <Card className="shadow-soft border-yutime-neutral/30 h-full flex flex-col">
                   <SidebarContent />
                 </Card>
               </TabsContent>
