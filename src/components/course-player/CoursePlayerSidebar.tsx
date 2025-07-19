@@ -107,6 +107,11 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
     // The VideoPlayer will handle autoplay when lesson changes
   };
 
+  const handleResourceClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
     <TooltipProvider>
       <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/30 transform transition-transform duration-300 ${
@@ -180,8 +185,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     return (
                       <div
                         key={lesson.id}
-                        onClick={() => handleLessonClick(globalIndex)}
-                        className={`p-4 cursor-pointer transition-colors ${
+                        className={`p-4 transition-colors ${
                           isCurrentLesson 
                             ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                             : 'hover:bg-yutime-neutral/40'
@@ -206,7 +210,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                           {/* Lesson Content */}
                           <div className="flex-1 min-w-0">
                             {/* First Row - Full width lesson title */}
-                            <div className="w-full">
+                            <div 
+                              className="w-full cursor-pointer"
+                              onClick={() => handleLessonClick(globalIndex)}
+                            >
                               <p className={`text-sm font-medium leading-tight ${
                                 isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                               }`}>
@@ -226,6 +233,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                     <Button
                                       variant="outline"
                                       size="sm"
+                                      onClick={handleResourceClick}
                                       className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                     >
                                       <Folder size={12} className="text-yutime-secondary" />

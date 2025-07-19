@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown, Folder, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -223,6 +224,11 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     }
   };
 
+  const handleResourceClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   const SidebarContent = () => (
     <div className="h-full flex flex-col">
       <div className="p-4 md:p-6 border-b border-yutime-neutral/30 flex-shrink-0">
@@ -268,8 +274,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   return (
                     <div
                       key={lesson.id}
-                      onClick={() => handleLessonClick(globalIndex)}
-                      className={`p-3 md:p-4 cursor-pointer transition-colors ${
+                      className={`p-3 md:p-4 transition-colors ${
                         isCurrentLesson 
                           ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                           : 'hover:bg-yutime-neutral/40'
@@ -291,7 +296,10 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                          <div className="w-full">
+                          <div 
+                            className="w-full cursor-pointer"
+                            onClick={() => handleLessonClick(globalIndex)}
+                          >
                             <p className={`text-sm font-medium leading-tight ${
                               isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                             }`}>
@@ -310,6 +318,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     <Button
                                       variant="outline"
                                       size="sm"
+                                      onClick={handleResourceClick}
                                       className={`${
                                         isMobile 
                                           ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
@@ -366,7 +375,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     <TooltipProvider>
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 md:p-6">
-          <Tabs defaultValue={isMobile ? "sidebar" : "overview"} className="w-full">
+          <Tabs defaultValue="sidebar" className="w-full">
             <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
               {isMobile && (
                 <TabsTrigger 
@@ -398,7 +407,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
 
             {isMobile && (
               <TabsContent value="sidebar" className="space-y-0 mt-0">
-                <Card className="shadow-soft border-yutime-neutral/30 h-[500px]">
+                <Card className="shadow-soft border-yutime-neutral/30 h-[70vh] overflow-hidden">
                   <SidebarContent />
                 </Card>
               </TabsContent>
