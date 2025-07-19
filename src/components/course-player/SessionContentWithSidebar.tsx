@@ -306,7 +306,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                           </div>
                           
                           <div className="flex items-center justify-between mt-2">
-                            <div className="text-xs text-yutime-text/60">
+                            <div className="text-xs text-yutime-text/60 pointer-events-none">
                               {lesson.duration}
                             </div>
                             
@@ -487,7 +487,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                         </div>
                                         
                                         <div className="flex items-center justify-between mt-2">
-                                          <div className="text-xs text-yutime-text/60">
+                                          <div className="text-xs text-yutime-text/60 pointer-events-none">
                                             {lesson.duration}
                                           </div>
                                           
