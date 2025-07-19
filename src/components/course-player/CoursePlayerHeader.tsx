@@ -32,7 +32,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
   
   return (
     <TooltipProvider>
-      <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300 ${
+      <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-2 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300 ${
         sidebarOpen ? 'mr-80' : ''
       }`}>
         <div className="flex items-center space-x-4 flex-1">

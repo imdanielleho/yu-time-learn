@@ -131,6 +131,25 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
   }, [lesson.id, setProgress, onVideoEnd, videoKey]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        skip5Seconds(false);
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        skip5Seconds(true);
+      } else if (e.code === 'Space') {
+        e.preventDefault();
+        setIsPlaying(!isPlaying);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, [isPlaying, setIsPlaying]);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -200,7 +219,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   const skip5Seconds = (forward: boolean) => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !duration) return;
+    
+    console.log(`Skipping ${forward ? 'forward' : 'backward'} 5 seconds`);
     
     const newTime = forward 
       ? Math.min(video.currentTime + 5, duration)
@@ -226,7 +247,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group h-[60vh]"
+      <div className="relative bg-black w-full group h-[66vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         

@@ -134,28 +134,28 @@ const SessionContent: React.FC<SessionContentProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-6">
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6 bg-white">
+            <TabsList className="grid w-full grid-cols-4 mb-6 bg-gray-50">
               <TabsTrigger 
                 value="overview" 
-                className="text-base font-medium data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:font-semibold"
+                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
               >
                 課程概要
               </TabsTrigger>
               <TabsTrigger 
                 value="resources"
-                className="text-base font-medium data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:font-semibold"
+                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
               >
                 教材資源
               </TabsTrigger>
               <TabsTrigger 
                 value="qa"
-                className="text-base font-medium data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:font-semibold"
+                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
               >
                 課程問答
               </TabsTrigger>
               <TabsTrigger 
                 value="transcript"
-                className="text-base font-medium data-[state=active]:bg-yutime-secondary data-[state=active]:text-white data-[state=active]:font-semibold"
+                className="text-base font-medium data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-yutime-secondary data-[state=active]:text-yutime-secondary"
               >
                 課程逐字稿
               </TabsTrigger>
