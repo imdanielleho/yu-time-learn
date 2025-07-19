@@ -24,7 +24,9 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
 }) => {
   return (
     <TooltipProvider>
-      <header className="bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft">
+      <header className={`bg-white border-b border-yutime-neutral/30 px-6 py-4 flex items-center justify-between relative z-10 shadow-soft transition-all duration-300 ${
+        sidebarOpen ? 'mr-80' : ''
+      }`}>
         <div className="flex items-center space-x-4 flex-1">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -32,7 +34,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
                 variant="ghost"
                 size="icon"
                 onClick={onBack}
-                className="text-yutime-text hover:bg-yutime-neutral/50 transition-colors min-w-[44px] min-h-[44px]"
+                className="text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
               >
                 <ArrowLeft size={20} />
               </Button>
@@ -43,8 +45,10 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
           </Tooltip>
           
           <div className="flex items-center justify-between flex-1">
-            <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
-            <p className="text-sm text-yutime-text/60">by {course.instructor}</p>
+            <div className="flex items-center justify-between w-full">
+              <h1 className="text-lg font-serif font-medium text-yutime-primary">{course.title}</h1>
+              <p className="text-sm text-yutime-text/60">by {course.instructor}</p>
+            </div>
           </div>
         </div>
         
@@ -55,7 +59,7 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
                 variant="ghost"
                 size="icon"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-text transition-colors min-w-[44px] min-h-[44px]"
+                className="text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
                 aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
               >
                 <Menu size={20} />

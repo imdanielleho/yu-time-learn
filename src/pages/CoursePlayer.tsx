@@ -71,6 +71,46 @@ const CoursePlayer = () => {
           completed: false,
           description: "Learn how to interpret key financial ratios.",
           hasTranscript: true
+        },
+        { 
+          id: 12, 
+          title: "7. 財務風險評估技巧", 
+          duration: "11min 45s", 
+          completed: false,
+          description: "Learn techniques for assessing financial risks.",
+          hasTranscript: true
+        },
+        { 
+          id: 13, 
+          title: "8. 投資組合分析方法", 
+          duration: "15min 22s", 
+          completed: false,
+          description: "Methods for analyzing investment portfolios.",
+          hasTranscript: true
+        },
+        { 
+          id: 14, 
+          title: "9. 現金流量表深度解析", 
+          duration: "14min 8s", 
+          completed: false,
+          description: "In-depth analysis of cash flow statements.",
+          hasTranscript: true
+        },
+        { 
+          id: 15, 
+          title: "10. 企業價值評估基礎", 
+          duration: "17min 30s", 
+          completed: false,
+          description: "Basics of company valuation.",
+          hasTranscript: true
+        },
+        { 
+          id: 16, 
+          title: "11. 財務報表比較分析", 
+          duration: "13min 55s", 
+          completed: false,
+          description: "Comparative analysis of financial statements.",
+          hasTranscript: true
         }
       ]
     },

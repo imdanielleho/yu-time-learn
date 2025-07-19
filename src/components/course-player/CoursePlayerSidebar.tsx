@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -42,7 +41,8 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
   totalLessons,
   completedLessons
 }) => {
-  const [expandedChapters, setExpandedChapters] = useState<number[]>([1]);
+  // Expand all chapters by default
+  const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
 
   const toggleChapter = (chapterId: number) => {
     setExpandedChapters(prev => 
@@ -87,7 +87,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => setSidebarOpen(!isOpen)}
-                className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-text min-w-[44px] min-h-[44px]"
+                className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
               >
                 <X size={16} />
                 <span>隱藏課程內容</span>
@@ -107,6 +107,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               {totalLessons} 個單元・635 分鐘
             </div>
           </div>
+          <div className="text-sm text-yutime-text font-medium">
+            上課進度: {completedLessons}/{totalLessons}
+          </div>
         </div>
         
         {/* Chapters and Lessons - Independently scrollable */}
@@ -116,7 +119,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               {/* Chapter Header */}
               <div
                 onClick={() => toggleChapter(chapter.id)}
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/30 transition-colors bg-yutime-neutral/10"
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/30 transition-colors bg-yutime-neutral/20"
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (
