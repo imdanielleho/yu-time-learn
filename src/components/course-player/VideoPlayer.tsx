@@ -89,8 +89,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <div className="flex flex-col bg-white">
-      {/* Video Container with 16:9 aspect ratio */}
-      <div className="relative w-full bg-black" style={{ aspectRatio: '16/9' }}>
+      {/* Video Container with reduced height */}
+      <div className="relative w-full bg-black" style={{ height: '60vh' }}>
         <video
           ref={videoRef}
           className="w-full h-full object-contain"

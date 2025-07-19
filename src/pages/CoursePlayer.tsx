@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { courses } from '@/data/courses';
@@ -183,6 +182,7 @@ const CoursePlayer = () => {
           currentLesson={currentLesson}
           onLessonSelect={handleLessonSelect}
           isOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
           totalLessons={totalLessons}
           completedLessons={completedLessons}
         />
