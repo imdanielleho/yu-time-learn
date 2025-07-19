@@ -107,12 +107,6 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
     // The VideoPlayer will handle autoplay when lesson changes
   };
 
-  const handleResourceButtonClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // The Popover component will handle the open/close state internally
-  };
-
   return (
     <TooltipProvider>
       <div className={`fixed right-0 top-0 h-full w-80 bg-white border-l border-yutime-neutral/30 transform transition-transform duration-300 ${
@@ -232,8 +226,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                     <Button
                                       variant="outline"
                                       size="sm"
-                                      className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md md:min-w-0 md:min-h-0 touch-manipulation"
-                                      onClick={handleResourceButtonClick}
+                                      className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                     >
                                       <Folder size={12} className="text-yutime-secondary" />
                                       <span className="text-xs font-medium">課程資源</span>
