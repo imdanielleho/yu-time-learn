@@ -73,22 +73,13 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
 
   return (
     <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-[60]">
-      <div className="bg-white rounded-lg p-6 max-w-md mx-4 text-center animate-in fade-in-0 zoom-in-95 duration-300">
-        <div className="mb-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            課程已結束
-          </h3>
-          <p className="text-gray-600 text-sm">
-            {nextLessonTitle ? `下一個課程：${nextLessonTitle}` : '下一個課程即將開始'}
-          </p>
-        </div>
-
+      <div className="bg-white rounded-2xl p-8 max-w-md mx-4 text-center animate-in fade-in-0 zoom-in-95 duration-300 shadow-2xl">
         <div className="mb-6">
-          <div className="text-4xl font-bold text-blue-600 mb-2">
-            {countdown}
-          </div>
-          <p className="text-gray-500 text-sm">
-            秒後自動播放下一個課程
+          <h3 className="text-xl font-bold text-gray-900 mb-3">
+            課程即將切換
+          </h3>
+          <p className="text-gray-600 text-base">
+            下一個課程將在 <span className="text-blue-600 font-bold text-lg">{countdown}</span> 秒後開始...
           </p>
         </div>
 
@@ -96,26 +87,25 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
           <Button
             variant="outline"
             onClick={onWatchAgain}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 px-6 py-3 border-2 hover:bg-gray-50"
           >
-            <RotateCcw size={16} />
+            <RotateCcw size={18} />
             重新觀看
           </Button>
           
           <Button
-            onClick={onNext}
-            className="bg-blue-600 hover:bg-blue-700 text-white"
+            variant="outline"
+            onClick={onCancel}
+            className="px-6 py-3 border-2 hover:bg-gray-50"
           >
-            立即播放下一個
+            取消自動播放
           </Button>
           
           <Button
-            variant="ghost"
-            onClick={onCancel}
-            className="flex items-center gap-2"
+            onClick={onNext}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 font-medium"
           >
-            <X size={16} />
-            取消
+            立即前往下一課
           </Button>
         </div>
       </div>

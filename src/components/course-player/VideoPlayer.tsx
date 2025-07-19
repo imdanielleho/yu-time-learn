@@ -81,6 +81,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     setVideoKey(prev => prev + 1);
+    setShowEndOverlay(false); // Reset overlay when lesson changes
   }, [lesson.id]);
 
   useEffect(() => {
@@ -99,11 +100,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
 
     const handleEnded = () => {
-      console.log('Video ended - setting overlay to show');
+      console.log('Video ended - canGoNext:', canGoNext);
       setIsPlaying(false);
+      
+      // Only show overlay if we can go to next lesson
       if (canGoNext) {
+        console.log('Setting showEndOverlay to true');
         setShowEndOverlay(true);
-        console.log('End overlay should now be visible');
+      } else {
+        console.log('Cannot go to next lesson, not showing overlay');
       }
     };
 
@@ -118,6 +123,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleLoadStart = () => {
       console.log('Video load started');
     };
+
+    // Ensure video is ready before adding event listeners
+    if (video.readyState >= 1) {
+      setDuration(video.duration);
+    }
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
@@ -305,13 +315,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
-        <button 
-          onClick={handleTestOverlay}
-          className="absolute top-4 right-4 z-50 bg-red-500 text-white px-2 py-1 text-xs rounded"
-        >
-          Test Overlay
-        </button>
-
         <video
           key={videoKey}
           ref={videoRef}
