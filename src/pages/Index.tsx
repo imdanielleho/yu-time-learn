@@ -19,12 +19,20 @@ import { useNavigate } from 'react-router-dom';
 const Index = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const isMobile = useIsMobile();
-  const { login, logout, isLoggedIn } = useAuth();
+  const { login, logout, isLoggedIn, hasPurchasedCourses } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = (email: string, password: string) => {
     login(email, password);
     setIsLoginModalOpen(false);
+    
+    // Check if user has purchased courses and redirect appropriately
+    // Use a small delay to ensure the auth context has updated
+    setTimeout(() => {
+      if (hasPurchasedCourses) {
+        navigate("/dashboard");
+      }
+    }, 1100); // Increased delay to ensure auth state is fully updated
   };
 
   const handleLogout = () => {

@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw, Captions } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -56,6 +55,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [showEndOverlay, setShowEndOverlay] = useState(false);
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
   const [wasPlayingBeforeFullscreen, setWasPlayingBeforeFullscreen] = useState(false);
+  const [isInFullscreen, setIsInFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -149,17 +149,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     const handleFullscreenChange = () => {
       const doc = document as any;
-      const isFullscreen = !!(doc.fullscreenElement || doc.webkitFullscreenElement);
+      const isCurrentlyFullscreen = !!(doc.fullscreenElement || doc.webkitFullscreenElement);
       
-      if (!isFullscreen && wasPlayingBeforeFullscreen) {
-        // Resume playback after exiting fullscreen
-        setTimeout(() => {
-          if (video && !video.paused) {
+      console.log('Fullscreen change:', { isCurrentlyFullscreen, wasPlayingBeforeFullscreen });
+      
+      if (isCurrentlyFullscreen) {
+        // Entering fullscreen - store current playing state
+        setIsInFullscreen(true);
+        setWasPlayingBeforeFullscreen(isPlaying);
+      } else {
+        // Exiting fullscreen - restore playing state
+        setIsInFullscreen(false);
+        if (wasPlayingBeforeFullscreen) {
+          console.log('Resuming playback after fullscreen exit');
+          // Small delay to ensure DOM is ready
+          setTimeout(() => {
             setIsPlaying(true);
-          } else if (video && wasPlayingBeforeFullscreen) {
-            setIsPlaying(true);
-          }
-        }, 100);
+          }, 100);
+        }
       }
     };
 
@@ -182,7 +189,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
       document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
     };
-  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying, wasPlayingBeforeFullscreen]);
+  }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying, wasPlayingBeforeFullscreen, isPlaying]);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -273,18 +280,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       const videoEl = video as any;
       
       if (doc.fullscreenElement || doc.webkitFullscreenElement) {
-        // Store playing state before exiting fullscreen
-        setWasPlayingBeforeFullscreen(isPlaying);
-        
+        // Exiting fullscreen
         if (doc.exitFullscreen) {
           doc.exitFullscreen();
         } else if (doc.webkitExitFullscreen) {
           doc.webkitExitFullscreen();
         }
       } else {
-        // Store playing state before entering fullscreen
-        setWasPlayingBeforeFullscreen(isPlaying);
-        
+        // Entering fullscreen
         if (videoEl.requestFullscreen) {
           videoEl.requestFullscreen();
         } else if (videoEl.webkitRequestFullscreen) {
