@@ -55,6 +55,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [showEndOverlay, setShowEndOverlay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
+  const animationFrameRef = useRef<number>();
 
   const getVideoSource = (lessonId: number) => {
     const videoSources = {
@@ -90,27 +91,55 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const video = videoRef.current;
     if (!video) return;
 
+    const updateTime = () => {
+      if (video && !video.paused && video.duration > 0) {
+        const currentVideoTime = video.currentTime;
+        const videoDuration = video.duration;
+        
+        setCurrentTime(currentVideoTime);
+        
+        if (videoDuration > 0) {
+          const progressPercent = (currentVideoTime / videoDuration) * 100;
+          setProgress(progressPercent);
+        }
+        
+        // Continue updating if video is playing
+        if (!video.paused) {
+          animationFrameRef.current = requestAnimationFrame(updateTime);
+        }
+      }
+    };
+
     const handleLoadedMetadata = () => {
       console.log('Video metadata loaded, duration:', video.duration);
       setDuration(video.duration);
     };
 
     const handleTimeUpdate = () => {
-      const currentVideoTime = video.currentTime;
-      const videoDuration = video.duration;
-      
-      setCurrentTime(currentVideoTime);
-      
-      if (videoDuration > 0) {
-        const progressPercent = (currentVideoTime / videoDuration) * 100;
-        setProgress(progressPercent);
-        console.log('Time update - current:', currentVideoTime, 'duration:', videoDuration, 'progress:', progressPercent);
+      if (!animationFrameRef.current) {
+        updateTime();
+      }
+    };
+
+    const handlePlay = () => {
+      updateTime();
+    };
+
+    const handlePause = () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = undefined;
       }
     };
 
     const handleEnded = () => {
       console.log('Video ended - canGoNext:', canGoNext);
       setIsPlaying(false);
+      
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = undefined;
+      }
       
       if (canGoNext) {
         console.log('Setting showEndOverlay to true');
@@ -144,14 +173,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('error', handleError);
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('loadstart', handleLoadStart);
 
     return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('error', handleError);
       video.removeEventListener('canplay', handleCanPlay);
@@ -321,7 +357,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
+      <div className="relative bg-black w-full group h-[40vh] sm:h-[50vh] md:h-[73vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         

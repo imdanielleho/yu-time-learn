@@ -142,15 +142,17 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                   bg-gray-50
                   ${chapterIdx === 0 ? 'border-t border-gray-200' : ''}`}
               >
-                <div className="flex items-center space-x-3">
-                  {expandedChapters.includes(chapter.id) ? (
-                    <ChevronDown size={16} className="text-yutime-text" />
-                  ) : (
-                    <ChevronRight size={16} className="text-yutime-text" />
-                  )}
-                  <div>
-                    <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
-                    <div className="text-xs text-yutime-text/70 mt-1">{chapter.duration}</div>
+                <div className="flex items-center space-x-3 flex-1">
+                  <div className="flex items-center space-x-3">
+                    {expandedChapters.includes(chapter.id) ? (
+                      <ChevronDown size={16} className="text-yutime-text" />
+                    ) : (
+                      <ChevronRight size={16} className="text-yutime-text" />
+                    )}
+                    <div>
+                      <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
+                      <div className="text-xs text-yutime-text/70 mt-1">{chapter.duration}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,6 +218,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                      >
                                        <Folder size={14} className="text-yutime-secondary" />
                                        <span className="text-xs font-medium">課程資源</span>
+                                       <ChevronDown size={12} className="text-yutime-secondary ml-1" />
                                      </Button>
                                    </PopoverTrigger>
                                     <PopoverContent className="w-64 p-3" align="end">
