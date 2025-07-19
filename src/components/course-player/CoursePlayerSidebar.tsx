@@ -157,9 +157,13 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                         <div className="flex items-center space-x-3 flex-1">
                           <div className="flex-shrink-0">
                             {lesson.completed ? (
-                              <CheckCircle size={16} className="text-yutime-secondary" />
+                              <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                                <CheckCircle size={12} className="text-white" />
+                              </div>
                             ) : isCurrentLesson ? (
-                              <Play size={16} className="text-yutime-secondary" />
+                              <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                                <Play size={10} className="text-white ml-0.5" />
+                              </div>
                             ) : (
                               <Circle size={16} className="text-yutime-text/40" />
                             )}

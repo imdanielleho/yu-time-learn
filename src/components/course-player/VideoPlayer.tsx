@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw, Captions } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -50,6 +50,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoKey, setVideoKey] = useState(0);
+  const [captionsEnabled, setCaptionsEnabled] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
@@ -213,6 +214,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     } else {
       video.requestFullscreen();
     }
+  };
+
+  const toggleCaptions = () => {
+    setCaptionsEnabled(!captionsEnabled);
+    console.log('Captions toggled:', !captionsEnabled);
   };
 
   const skip5Seconds = (forward: boolean) => {
@@ -410,6 +416,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>下一個課程</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleCaptions}
+                    className={`text-white hover:bg-white/20 min-w-[44px] min-h-[44px] ${
+                      captionsEnabled ? 'bg-white/20' : ''
+                    }`}
+                  >
+                    <Captions size={24} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{captionsEnabled ? '關閉字幕' : '開啟字幕'}</p>
                 </TooltipContent>
               </Tooltip>
 
