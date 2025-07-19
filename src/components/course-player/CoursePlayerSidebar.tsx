@@ -102,11 +102,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
       return;
     }
     
-    // If clicking on a different lesson, select it and autoplay
+    // If clicking on a different lesson, select it and ensure it will autoplay
     onLessonSelect(globalIndex);
-    if (setIsPlaying) {
-      setIsPlaying(true);
-    }
+    // The VideoPlayer will handle autoplay when lesson changes
   };
 
   return (
@@ -115,6 +113,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
         isOpen ? 'translate-x-0' : 'translate-x-full'
       } z-20 flex flex-col shadow-wellness`}>
         
+        {/* Header Section */}
         <div className="p-4 border-b border-yutime-neutral/30 flex items-center justify-between">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -134,6 +133,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
           </Tooltip>
         </div>
 
+        {/* Course Info Section */}
         <div className="p-6 border-b border-yutime-neutral/30 flex-shrink-0">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>

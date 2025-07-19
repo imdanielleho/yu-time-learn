@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward, Settings, RotateCcw, RotateCw, Captions } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -80,13 +81,17 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return videoSources[lessonId] || videoSources[1];
   };
 
+  // Reset video when lesson changes
   useEffect(() => {
+    console.log('Lesson changed to:', lesson.id);
     setVideoKey(prev => prev + 1);
     setShowEndOverlay(false);
     setCurrentTime(0);
     setProgress(0);
+    setHasAutoPlayed(false);
   }, [lesson.id]);
 
+  // Handle video events
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -95,7 +100,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       console.log('Video metadata loaded, duration:', video.duration);
       setDuration(video.duration || 0);
       
+      // Auto-play new videos
       if (!hasAutoPlayed) {
+        console.log('Auto-playing video');
         setIsPlaying(true);
         setHasAutoPlayed(true);
       }
@@ -156,6 +163,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     };
   }, [lesson.id, setProgress, canGoNext, hasAutoPlayed, setIsPlaying]);
 
+  // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.code === 'ArrowLeft') {
@@ -174,6 +182,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [isPlaying, setIsPlaying]);
 
+  // Sync video play/pause state
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -336,6 +345,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           src={getVideoSource(lesson.id)}
         />
 
+        {/* Skip buttons */}
         <div className="absolute left-2 md:left-8 top-1/2 transform -translate-y-1/2">
           <Button
             variant="ghost"
@@ -368,6 +378,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </Button>
         </div>
 
+        {/* Play/Pause button */}
         <div className="absolute inset-0 flex items-center justify-center">
           <Button
             variant="ghost"
@@ -381,6 +392,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </Button>
         </div>
 
+        {/* Controls */}
         <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 md:p-4 transition-opacity duration-300 ${
           showControls ? 'opacity-100' : 'opacity-0'
         }`}>
