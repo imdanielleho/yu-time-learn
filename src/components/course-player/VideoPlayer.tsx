@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Slider } from "@/components/ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Lesson {
   id: number;
@@ -244,270 +245,320 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return videoRef.current ? formatTime(videoRef.current.currentTime) : '00:00';
   };
 
+  const getDuration = () => {
+    return videoRef.current ? formatTime(videoRef.current.duration) : '00:00';
+  };
+
   return (
-    <div className="flex flex-col bg-white">
-      {/* Video Container */}
-      <div 
-        ref={containerRef}
-        className={`relative w-full bg-black cursor-pointer overflow-hidden ${isFullscreen ? 'h-screen' : ''}`} 
-        style={!isFullscreen ? { height: '50vh' } : {}}
-        onClick={handleVideoClick}
-        onMouseMove={handleMouseMove}
-      >
-        <video
-          ref={videoRef}
-          className="w-full h-full object-contain"
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={handleVideoEnded}
-          src="https://www.w3schools.com/html/mov_bbb.mp4"
-          aria-label={`Video: ${lesson.title}`}
-        />
-        
-        {/* Auto-advance overlay */}
-        {showAutoAdvance && (
-          <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
-            <div className="bg-white rounded-xl p-6 max-w-md mx-4 text-center shadow-wellness">
-              <h3 className="text-lg font-serif font-medium text-yutime-primary mb-4">課程即將切換</h3>
-              <p className="text-yutime-text/70 mb-4">
-                下一個課程將在 <span className="font-medium text-yutime-secondary">{countdown}</span> 秒後開始...
-              </p>
-              <div className="flex space-x-3 justify-center">
+    <TooltipProvider>
+      <div className="flex flex-col bg-white">
+        {/* Video Container */}
+        <div 
+          ref={containerRef}
+          className={`relative w-full bg-black cursor-pointer overflow-hidden ${isFullscreen ? 'h-screen' : ''}`} 
+          style={!isFullscreen ? { height: '60vh' } : {}}
+          onClick={handleVideoClick}
+          onMouseMove={handleMouseMove}
+        >
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover"
+            onTimeUpdate={handleTimeUpdate}
+            onEnded={handleVideoEnded}
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            aria-label={`Video: ${lesson.title}`}
+          />
+          
+          {/* Auto-advance overlay */}
+          {showAutoAdvance && (
+            <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-30">
+              <div className="bg-white rounded-xl p-6 max-w-md mx-4 text-center shadow-wellness">
+                <h3 className="text-lg font-serif font-medium text-yutime-primary mb-4">課程即將切換</h3>
+                <p className="text-yutime-text/70 mb-4">
+                  下一個課程將在 <span className="font-medium text-yutime-secondary">{countdown}</span> 秒後開始...
+                </p>
+                <div className="flex space-x-3 justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={handleWatchAgain}
+                    className="flex items-center space-x-2"
+                  >
+                    <RotateCcw size={16} />
+                    <span>重新觀看</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={handleCancelAutoAdvance}
+                  >
+                    取消自動播放
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      handleCancelAutoAdvance();
+                      onNext();
+                    }}
+                    className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white"
+                  >
+                    立即前往下一課
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* Play/Pause Feedback Icon */}
+          {showPlayPauseIcon && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+              <div className="bg-black/70 rounded-full p-6 animate-scale-in">
+                {playPauseIconType === 'play' ? 
+                  <Play size={48} className="text-white fill-white" /> : 
+                  <Pause size={48} className="text-white fill-white" />
+                }
+              </div>
+            </div>
+          )}
+
+          {/* Enhanced Navigation buttons */}
+          <div className="absolute left-6 top-1/2 transform -translate-y-1/2">
+            <Tooltip>
+              <TooltipTrigger asChild>
                 <Button
-                  variant="outline"
-                  onClick={handleWatchAgain}
-                  className="flex items-center space-x-2"
+                  variant="secondary"
+                  size="lg"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onPrevious();
+                  }}
+                  disabled={!canGoPrevious}
+                  className={`bg-yutime-primary/80 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-12 px-2 ${
+                    showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
+                  } disabled:opacity-30 disabled:cursor-not-allowed`}
                 >
-                  <RotateCcw size={16} />
-                  <span>重新觀看</span>
+                  <ChevronLeft size={28} />
                 </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>上一課</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
+            <Tooltip>
+              <TooltipTrigger asChild>
                 <Button
-                  variant="outline"
-                  onClick={handleCancelAutoAdvance}
-                >
-                  取消自動播放
-                </Button>
-                <Button
-                  onClick={() => {
-                    handleCancelAutoAdvance();
+                  variant="secondary"
+                  size="lg"
+                  onClick={(e) => {
+                    e.stopPropagation();
                     onNext();
                   }}
-                  className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white"
+                  disabled={!canGoNext}
+                  className={`bg-yutime-primary/80 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-12 px-2 ${
+                    showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
+                  } disabled:opacity-30 disabled:cursor-not-allowed`}
                 >
-                  立即前往下一課
+                  <ChevronRight size={28} />
                 </Button>
-              </div>
-            </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>下一課</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
-        )}
-        
-        {/* Play/Pause Feedback Icon */}
-        {showPlayPauseIcon && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-            <div className="bg-black/70 rounded-full p-6 animate-scale-in">
-              {playPauseIconType === 'play' ? 
-                <Play size={48} className="text-white fill-white" /> : 
-                <Pause size={48} className="text-white fill-white" />
-              }
-            </div>
-          </div>
-        )}
-
-        {/* Enhanced Navigation buttons */}
-        <div className="absolute left-6 top-1/2 transform -translate-y-1/2">
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={(e) => {
-              e.stopPropagation();
-              onPrevious();
-            }}
-            disabled={!canGoPrevious}
-            className={`bg-yutime-primary/70 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-14 ${
-              showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
-            } disabled:opacity-30 disabled:cursor-not-allowed`}
-          >
-            <ChevronLeft size={28} />
-          </Button>
-        </div>
-
-        <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNext();
-            }}
-            disabled={!canGoNext}
-            className={`bg-yutime-primary/70 text-white hover:bg-yutime-primary border-2 border-white/20 shadow-wellness transition-all duration-200 h-14 w-14 ${
-              showControls ? 'opacity-100 scale-100' : 'opacity-0 scale-90 hover:opacity-100 hover:scale-100'
-            } disabled:opacity-30 disabled:cursor-not-allowed`}
-          >
-            <ChevronRight size={28} />
-          </Button>
-        </div>
-        
-        {/* Video controls overlay */}
-        <div className={`video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300 ${
-          showControls ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePlayPause();
-              }}
-              className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
-              title={isPlaying ? "暫停播放" : "開始播放"}
-            >
-              {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-            </Button>
-            
-            <div className="flex-1 flex items-center space-x-2">
-              <span className="text-white text-sm">{getCurrentTime()}</span>
-              <div 
-                className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleProgressClick(e);
-                }}
-              >
-                <div 
-                  className="h-1 bg-white rounded-full transition-all duration-150"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-               <span className="text-white text-sm">{lesson.duration}</span>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              {/* Volume Control */}
-              <Popover>
-                <PopoverTrigger asChild>
+          
+          {/* Video controls overlay */}
+          <div className={`video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300 ${
+            showControls ? 'opacity-100' : 'opacity-0'
+          }`}>
+            <div className="flex items-center space-x-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleVolumeToggle();
+                      handlePlayPause();
                     }}
                     className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
-                    title={isMuted ? "取消靜音" : "靜音"}
                   >
-                    {isMuted || volume === 0 ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                    {isPlaying ? <Pause size={24} /> : <Play size={24} />}
                   </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-32 p-2" onClick={(e) => e.stopPropagation()}>
-                  <Slider
-                    value={[isMuted ? 0 : volume]}
-                    onValueChange={handleVolumeChange}
-                    max={1}
-                    step={0.1}
-                    className="w-full"
-                  />
-                </PopoverContent>
-              </Popover>
-
-              {/* Closed Captions */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowCaptions(!showCaptions);
-                }}
-                className={`text-white hover:bg-white/20 min-w-[44px] min-h-[44px] ${showCaptions ? 'bg-white/20' : ''}`}
-                title={showCaptions ? "關閉字幕" : "開啟字幕"}
-              >
-                <Captions size={20} />
-              </Button>
-
-              {/* Settings Menu */}
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => e.stopPropagation()}
-                    className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
-                    title="播放設定"
-                  >
-                    <Settings size={20} />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-48 p-2" onClick={(e) => e.stopPropagation()}>
-                  <div className="space-y-2">
-                    <div>
-                      <label className="text-sm font-medium">播放速度</label>
-                      <div className="grid grid-cols-4 gap-1 mt-1">
-                        {playbackSpeeds.map((speed) => (
-                          <Button
-                            key={speed}
-                            variant={playbackSpeed === speed ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setPlaybackSpeed(speed)}
-                            className="text-xs"
-                          >
-                            {speed}x
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium">畫質</label>
-                      <div className="space-y-1 mt-1">
-                        {qualityOptions.map((quality) => (
-                          <Button
-                            key={quality}
-                            variant="ghost"
-                            size="sm"
-                            className="w-full justify-start text-xs"
-                          >
-                            {quality}
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </PopoverContent>
-              </Popover>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleFullscreen();
-                }}
-                className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
-                title={isFullscreen ? "退出全螢幕" : "全螢幕播放"}
-              >
-                <Maximize size={20} />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Progress section below video */}
-      {!isFullscreen && (
-        <div className="bg-white p-6 border-b border-yutime-neutral/30">
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-yutime-secondary font-medium">上課進度 {overallProgress}%</span>
-            <div className="flex-1">
-              <Progress value={overallProgress} className="h-2 bg-yutime-neutral">
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{isPlaying ? "暫停播放" : "開始播放"}</p>
+                </TooltipContent>
+              </Tooltip>
+              
+              <div className="flex-1 flex items-center space-x-2">
+                <span className="text-white text-sm">{getCurrentTime()}</span>
                 <div 
-                  className="h-full bg-yutime-secondary rounded-full transition-all duration-300"
-                  style={{ width: `${overallProgress}%` }}
-                />
-              </Progress>
+                  className="flex-1 h-1 bg-white/30 rounded-full cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleProgressClick(e);
+                  }}
+                >
+                  <div 
+                    className="h-1 bg-white rounded-full transition-all duration-150"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <span className="text-white text-sm">{getDuration()}</span>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                {/* Volume Control */}
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleVolumeToggle();
+                          }}
+                          className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                        >
+                          {isMuted || volume === 0 ? <VolumeX size={24} /> : <Volume2 size={24} />}
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{isMuted ? "取消靜音" : "靜音"}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-32 p-2" onClick={(e) => e.stopPropagation()}>
+                    <Slider
+                      value={[isMuted ? 0 : volume]}
+                      onValueChange={handleVolumeChange}
+                      max={1}
+                      step={0.1}
+                      className="w-full"
+                    />
+                  </PopoverContent>
+                </Popover>
+
+                {/* Closed Captions */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowCaptions(!showCaptions);
+                      }}
+                      className={`text-white hover:bg-white/20 min-w-[44px] min-h-[44px] ${showCaptions ? 'bg-white/20' : ''}`}
+                    >
+                      <Captions size={24} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{showCaptions ? "關閉字幕" : "開啟字幕"}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {/* Settings Menu */}
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                        >
+                          <Settings size={24} />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>播放設定</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-48 p-2" onClick={(e) => e.stopPropagation()}>
+                    <div className="space-y-2">
+                      <div>
+                        <label className="text-sm font-medium">播放速度</label>
+                        <div className="grid grid-cols-4 gap-1 mt-1">
+                          {playbackSpeeds.map((speed) => (
+                            <Button
+                              key={speed}
+                              variant={playbackSpeed === speed ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => setPlaybackSpeed(speed)}
+                              className="text-xs"
+                            >
+                              {speed}x
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium">畫質</label>
+                        <div className="space-y-1 mt-1">
+                          {qualityOptions.map((quality) => (
+                            <Button
+                              key={quality}
+                              variant="ghost"
+                              size="sm"
+                              className="w-full justify-start text-xs"
+                            >
+                              {quality}
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleFullscreen();
+                      }}
+                      className="text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    >
+                      <Maximize size={24} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{isFullscreen ? "退出全螢幕" : "全螢幕播放"}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
             </div>
           </div>
         </div>
-      )}
-    </div>
+
+        {/* Progress section below video */}
+        {!isFullscreen && (
+          <div className="bg-white p-6 border-b border-yutime-neutral/30">
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-yutime-secondary font-medium">上課進度 {overallProgress}%</span>
+              <div className="flex-1">
+                <Progress value={overallProgress} className="h-2 bg-yutime-neutral">
+                  <div 
+                    className="h-full bg-yutime-secondary rounded-full transition-all duration-300"
+                    style={{ width: `${overallProgress}%` }}
+                  />
+                </Progress>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </TooltipProvider>
   );
 };
 

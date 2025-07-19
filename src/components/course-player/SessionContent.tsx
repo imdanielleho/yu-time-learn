@@ -97,9 +97,8 @@ const SessionContent: React.FC<SessionContentProps> = ({
                         </div>
                       </div>
                       <Button
-                        variant="outline"
-                        size="sm"
                         onClick={() => window.open(resource.url, '_blank')}
+                        className="bg-yutime-secondary hover:bg-yutime-secondary/90 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-soft"
                       >
                         下載
                       </Button>
