@@ -377,21 +377,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
+      <div className="relative bg-black w-full group h-[50vh] md:h-[73vh] flex items-center justify-center"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
         
-        <video
-          key={videoKey}
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          preload="metadata"
-          crossOrigin="anonymous"
-          playsInline
-          controls={false}
-          poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
-          src={getVideoSource(lesson.id)}
-        />
+        <div className="w-full aspect-video max-h-full">
+          <video
+            key={videoKey}
+            ref={videoRef}
+            className="w-full h-full object-contain"
+            preload="metadata"
+            crossOrigin="anonymous"
+            playsInline
+            controls={false}
+            poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
+            src={getVideoSource(lesson.id)}
+          />
+        </div>
 
         {/* Skip buttons */}
         <div className="absolute left-2 md:left-8 top-1/2 transform -translate-y-1/2">
