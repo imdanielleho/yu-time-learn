@@ -401,13 +401,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleSkipBackward}
-            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-yutime-primary/80 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <div className="flex flex-col items-center">
               <RotateCcw size={16} className="md:w-5 md:h-5" />
-              <span className="text-xs mt-1">5s</span>
+              <span className="text-xs mt-1 font-medium">5s</span>
             </div>
           </Button>
         </div>
@@ -417,13 +417,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={handleSkipForward}
-            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all group ${
+            className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/50 text-white hover:bg-yutime-primary/80 transition-all group ${
               showControls ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <div className="flex flex-col items-center">
               <RotateCw size={16} className="md:w-5 md:h-5" />
-              <span className="text-xs mt-1">5s</span>
+              <span className="text-xs mt-1 font-medium">5s</span>
             </div>
           </Button>
         </div>
@@ -434,7 +434,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             variant="ghost"
             size="icon"
             onClick={() => setIsPlaying(!isPlaying)}
-            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all ${
+            className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/50 text-white hover:bg-yutime-primary/80 hover:scale-105 transition-all ${
               showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -455,7 +455,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
               step={0.1}
               className="w-full"
             />
-            <div className="flex justify-between text-xs text-white/80 mt-1">
+            <div className="flex justify-between text-xs text-white/80 mt-1 font-medium">
               <span>{formatTime(currentTime)}</span>
               <span>{formatTime(duration)}</span>
             </div>
@@ -469,13 +469,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="text-white hover:bg-yutime-primary/30 hover:text-white w-8 h-8 md:min-w-[44px] md:min-h-[44px] transition-colors"
                   >
                     {isPlaying ? <Pause size={16} className="md:w-6 md:h-6" /> : <Play size={16} className="md:w-6 md:h-6" />}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>{isPlaying ? '暫停' : '播放'}</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">{isPlaying ? '暫停' : '播放'}</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -485,13 +485,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleMute}
-                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="text-white hover:bg-yutime-primary/30 hover:text-white w-8 h-8 md:min-w-[44px] md:min-h-[44px] transition-colors"
                   >
                     {isMuted ? <VolumeX size={16} className="md:w-6 md:h-6" /> : <Volume2 size={16} className="md:w-6 md:h-6" />}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>{isMuted ? '取消靜音' : '靜音'}</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">{isMuted ? '取消靜音' : '靜音'}</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -513,13 +513,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={onPrevious}
                     disabled={!canGoPrevious}
-                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="px-1 md:px-2 text-white hover:bg-yutime-primary/30 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px] transition-colors"
                   >
                     <SkipBack size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>上一個課程</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">上一個課程</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -530,13 +530,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     size="icon"
                     onClick={onNext}
                     disabled={!canGoNext}
-                    className="px-1 md:px-2 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="px-1 md:px-2 text-white hover:bg-yutime-primary/30 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed w-8 h-8 md:min-w-[44px] md:min-h-[44px] transition-colors"
                   >
                     <SkipForward size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>下一個課程</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">下一個課程</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -546,15 +546,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleCaptions}
-                    className={`text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px] ${
-                      captionsEnabled ? 'bg-white/20' : ''
+                    className={`text-white hover:bg-yutime-primary/30 hover:text-white w-8 h-8 md:min-w-[44px] md:min-h-[44px] transition-colors ${
+                      captionsEnabled ? 'bg-yutime-primary/20' : ''
                     }`}
                   >
                     <Captions size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>{captionsEnabled ? '關閉字幕' : '開啟字幕'}</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">{captionsEnabled ? '關閉字幕' : '開啟字幕'}</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -563,13 +563,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="hidden md:flex text-white hover:bg-white/20 min-w-[44px] min-h-[44px]"
+                    className="hidden md:flex text-white hover:bg-yutime-primary/30 hover:text-white min-w-[44px] min-h-[44px] transition-colors"
                   >
                     <Settings size={24} />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>設定</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">設定</p>
                 </TooltipContent>
               </Tooltip>
 
@@ -579,13 +579,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     variant="ghost"
                     size="icon"
                     onClick={toggleFullscreen}
-                    className="text-white hover:bg-white/20 w-8 h-8 md:min-w-[44px] md:min-h-[44px]"
+                    className="text-white hover:bg-yutime-primary/30 hover:text-white w-8 h-8 md:min-w-[44px] md:min-h-[44px] transition-colors"
                   >
                     <Maximize size={16} className="md:w-6 md:h-6" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <p>全螢幕</p>
+                <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+                  <p className="font-medium">全螢幕</p>
                 </TooltipContent>
               </Tooltip>
             </div>

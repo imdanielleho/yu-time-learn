@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -89,7 +90,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
       case 'image':
         return <Image size={16} className="text-blue-500" />;
       default:
-        return <Download size={16} className="text-gray-500" />;
+        return <Download size={16} className="text-yutime-text/60" />;
     }
   };
 
@@ -125,19 +126,19 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                 className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
               >
                 <X size={16} />
-                <span>隱藏課程內容</span>
+                <span className="font-medium">隱藏課程內容</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
-              <p>隱藏課程內容</p>
+            <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
+              <p className="font-medium">隱藏課程內容</p>
             </TooltipContent>
           </Tooltip>
         </div>
 
         {/* Course Info Section */}
-        <div className="p-6 border-b border-gray-200 flex-shrink-0">
+        <div className="p-6 border-b border-yutime-neutral/20 flex-shrink-0">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-serif font-medium text-yutime-primary">課程單元</h2>
+            <h2 className="text-lg font-heading font-semibold text-yutime-primary">課程單元</h2>
             <div className="text-sm text-yutime-text/80 font-medium">
               {totalLessons} 個單元・635 分鐘
             </div>
@@ -154,7 +155,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               {/* Chapter Header with background shading */}
               <div
                 onClick={() => toggleChapter(chapter.id)}
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100 transition-colors border-b border-gray-200 bg-gray-50"
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-yutime-neutral/50 transition-colors border-b border-yutime-neutral/20 bg-yutime-neutral/30"
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (
@@ -163,8 +164,8 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     <ChevronRight size={18} className="text-yutime-text" strokeWidth={3} />
                   )}
                   <div>
-                    <h3 className="font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
-                    <div className="text-xs text-yutime-text/70 mt-1">{chapter.duration}</div>
+                    <h3 className="font-heading font-semibold text-yutime-text text-base leading-tight">{chapter.title}</h3>
+                    <div className="text-xs text-yutime-text/70 mt-1 font-medium">{chapter.duration}</div>
                   </div>
                 </div>
               </div>
@@ -179,7 +180,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     return (
                       <div
                         key={lesson.id}
-                        className={`p-4 transition-colors border-b border-gray-200 cursor-pointer ${
+                        className={`p-4 transition-colors border-b border-yutime-neutral/20 cursor-pointer ${
                           isCurrentLesson 
                             ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                             : 'hover:bg-yutime-neutral/40'
@@ -215,7 +216,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                             
                             {/* Second Row - Duration left, Resources right */}
                             <div className="flex items-center justify-between mt-2">
-                              <div className="text-xs text-yutime-text/60">
+                              <div className="text-xs text-yutime-text/60 font-medium">
                                 {lesson.duration}
                               </div>
                               
@@ -247,7 +248,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                       <ChevronDown size={10} className="text-yutime-secondary" />
                                     </Button>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-64 p-3 z-50" align="end">
+                                  <PopoverContent className="w-64 p-3 z-50 bg-white border border-yutime-neutral/30 shadow-wellness" align="end">
                                     <div className="space-y-2">
                                       {lesson.resources.map((resource, index) => (
                                         <div 
@@ -268,7 +269,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                               handleResourceDownload(resource.url);
                                               setOpenResourcePopover(null);
                                             }}
-                                            className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                            className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80 transition-colors"
                                             size="sm"
                                           >
                                             <Download size={12} className="text-white" />
