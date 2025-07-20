@@ -48,20 +48,20 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
                 <ArrowLeft size={18} />
               </Button>
             </TooltipTrigger>
-            <TooltipContent className="bg-yutime-charcoal text-white border-yutime-primary/30">
-              <p className="font-medium">返回課程列表</p>
+            <TooltipContent>
+              <p>返回課程列表</p>
             </TooltipContent>
           </Tooltip>
           
           <div className="flex items-center justify-between flex-1">
             <div className={`flex ${isMobile ? 'flex-col items-start' : 'items-center justify-between'} w-full ${isMobile ? 'gap-2' : ''}`}>
-              <h1 className="text-base md:text-lg font-heading font-semibold text-yutime-primary truncate">{course.title}</h1>
+              <h1 className="text-base md:text-lg font-serif font-medium text-yutime-primary truncate">{course.title}</h1>
               {/* Progress Bar */}
               <div className="flex items-center gap-2">
-                <span className="text-xs md:text-sm text-yutime-text/80 font-medium whitespace-nowrap">
+                <span className="text-xs md:text-sm text-yutime-text font-medium whitespace-nowrap">
                   上課進度 {Math.round(progressPercentage)}%
                 </span>
-                <div className="w-24 md:w-32 h-2 bg-yutime-neutral rounded-full overflow-hidden">
+                <div className="w-24 md:w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-yutime-secondary transition-all duration-300 ease-out"
                     style={{ width: `${progressPercentage}%` }}
@@ -87,8 +87,8 @@ const CoursePlayerHeader: React.FC<CoursePlayerHeaderProps> = ({
                   <Menu size={20} />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="left" sideOffset={8} className="bg-yutime-charcoal text-white border-yutime-primary/30">
-                <p className="font-medium">顯示課程內容</p>
+              <TooltipContent side="left" sideOffset={8}>
+                <p>顯示課程內容</p>
               </TooltipContent>
             </Tooltip>
           )}
