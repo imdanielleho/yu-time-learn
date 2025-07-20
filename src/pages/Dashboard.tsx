@@ -117,16 +117,10 @@ const Dashboard = () => {
                 </div>
 
                 {/* Course Header Info */}
-                <div className="flex-1 flex items-start justify-between">
+                <div className="flex-1">
                   <div>
                     <h3 className="font-semibold text-yutime-navy text-lg mb-2">{course.title}</h3>
-                    <p className="text-sm text-gray-500">{course.session}</p>
                   </div>
-                  {course.accessType === 'limited' && course.expiryDate && (
-                    <div className="ml-3 flex-shrink-0">
-                      <ExpiryCountdown expiryDate={course.expiryDate} />
-                    </div>
-                  )}
                 </div>
               </div>
 
@@ -143,6 +137,18 @@ const Dashboard = () => {
                   ></div>
                 </div>
               </div>
+
+              {/* Session Name */}
+              <div className="mb-2">
+                <p className="text-sm text-gray-500">{course.session}</p>
+              </div>
+
+              {/* Countdown */}
+              {course.accessType === 'limited' && course.expiryDate && (
+                <div className="mb-4">
+                  <ExpiryCountdown expiryDate={course.expiryDate} />
+                </div>
+              )}
 
               {/* Action Button */}
               <div className="flex justify-end">
