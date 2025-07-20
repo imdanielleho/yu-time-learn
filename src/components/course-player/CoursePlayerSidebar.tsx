@@ -50,6 +50,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
 }) => {
   // Expand all chapters by default
   const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
+  const [openResourcePopover, setOpenResourcePopover] = useState<string | null>(null);
 
   const toggleChapter = (chapterId: number) => {
     setExpandedChapters(prev => 
@@ -219,12 +220,26 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                               </div>
                               
                               {lesson.hasResources && lesson.resources && (
-                                <Popover>
+                                <Popover 
+                                  open={openResourcePopover === `${chapterIdx}-${lessonIdx}`} 
+                                  onOpenChange={(open) => {
+                                    setOpenResourcePopover(open ? `${chapterIdx}-${lessonIdx}` : null);
+                                  }}
+                                >
                                   <PopoverTrigger asChild>
                                     <Button
                                       variant="outline"
                                       size="sm"
-                                      onClick={(e) => e.stopPropagation()}
+                                      onMouseDown={(e) => e.stopPropagation()}
+                                      onTouchStart={(e) => e.stopPropagation()}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        const popoverId = `${chapterIdx}-${lessonIdx}`;
+                                        setOpenResourcePopover(
+                                          openResourcePopover === popoverId ? null : popoverId
+                                        );
+                                      }}
                                       className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                     >
                                       <Folder size={12} className="text-yutime-secondary" />
@@ -232,7 +247,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                       <ChevronDown size={10} className="text-yutime-secondary" />
                                     </Button>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-64 p-3" align="end">
+                                  <PopoverContent className="w-64 p-3 z-50" align="end">
                                     <div className="space-y-2">
                                       {lesson.resources.map((resource, index) => (
                                         <div 
@@ -248,8 +263,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                           </div>
                                           <Button
                                             onClick={(e) => {
+                                              e.preventDefault();
                                               e.stopPropagation();
                                               handleResourceDownload(resource.url);
+                                              setOpenResourcePopover(null);
                                             }}
                                             className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                             size="sm"
