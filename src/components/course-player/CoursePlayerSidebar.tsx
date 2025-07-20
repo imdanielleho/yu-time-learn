@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -122,13 +123,13 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => setSidebarOpen(!isOpen)}
-                className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
+                className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[36px] min-h-[36px] text-xs px-2"
               >
-                <X size={16} />
+                <X size={14} />
                 <span>隱藏課程內容</span>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className="text-xs px-2 py-1">
               <p>隱藏課程內容</p>
             </TooltipContent>
           </Tooltip>
@@ -214,9 +215,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                               </p>
                             </div>
                             
-                            {/* Second Row - Duration left, Resources right */}
-                            <div className="flex items-center justify-between mt-2">
-                              <div className="text-xs text-yutime-text/60">
+                            {/* Second Row - Duration left, Resources right - aligned to top */}
+                            <div className="flex items-start justify-between mt-2">
+                              <div className="text-xs text-yutime-text/60 mt-0.5">
                                 {lesson.duration}
                               </div>
                               
@@ -241,11 +242,11 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                           openResourcePopover === popoverId ? null : popoverId
                                         );
                                       }}
-                                      className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-transparent transition-all duration-200 shadow-sm hover:shadow-md"
+                                      className="h-6 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-transparent transition-all duration-200 shadow-sm hover:shadow-md"
                                     >
-                                      <Folder size={12} className="text-yutime-secondary" />
+                                      <Folder size={10} className="text-yutime-secondary" />
                                       <span className="text-xs font-medium">課程資源</span>
-                                      <ChevronDown size={10} className="text-yutime-secondary" />
+                                      <ChevronDown size={8} className="text-yutime-secondary" />
                                     </Button>
                                   </PopoverTrigger>
                                   <PopoverContent className="w-64 p-3 z-50" align="end">
