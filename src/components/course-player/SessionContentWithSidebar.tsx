@@ -96,7 +96,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
   const [expandedChapters, setExpandedChapters] = useState<number[]>(chapters.map(chapter => chapter.id));
   const [qaSortBy, setQaSortBy] = useState<'newest' | 'oldest' | 'most-liked'>('newest');
   const [activeTab, setActiveTab] = useState(isMobile ? "sidebar" : "overview");
-  const [openPopovers, setOpenPopovers] = useState<{ [key: string]: boolean }>({});
   
   // Update active tab when mobile state changes
   useEffect(() => {
@@ -230,13 +229,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
     }
   };
 
-  const handlePopoverOpen = (lessonId: number, open: boolean) => {
-    setOpenPopovers(prev => ({
-      ...prev,
-      [lessonId]: open
-    }));
-  };
-
   const SidebarContent = () => (
     <div className="h-full flex flex-col">
       <div className="p-4 md:p-6 border-b border-yutime-neutral/30 flex-shrink-0">
@@ -282,7 +274,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                   return (
                     <div
                       key={lesson.id}
-                      className={`p-3 md:p-4 transition-colors cursor-pointer border-b border-gray-200 ${
+                      className={`p-3 md:p-4 transition-colors cursor-pointer ${
                         isCurrentLesson 
                           ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                           : 'hover:bg-yutime-neutral/40'
@@ -319,10 +311,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                             </div>
                             
                             {lesson.hasResources && lesson.resources && (
-                              <Popover 
-                                open={openPopovers[lesson.id] || false} 
-                                onOpenChange={(open) => handlePopoverOpen(lesson.id, open)}
-                              >
+                              <Popover>
                                 <PopoverTrigger asChild>
                                   <Button
                                     variant="outline"
@@ -359,7 +348,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                           onClick={(e) => {
                                             e.stopPropagation();
                                             handleResourceDownload(resource.url);
-                                            handlePopoverOpen(lesson.id, false);
                                           }}
                                           className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                           size="sm"
@@ -467,7 +455,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                 return (
                                   <div
                                     key={lesson.id}
-                                    className={`p-3 md:p-4 transition-colors cursor-pointer border-b border-gray-200 ${
+                                    className={`p-3 md:p-4 transition-colors cursor-pointer ${
                                       isCurrentLesson 
                                         ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                                         : 'hover:bg-yutime-neutral/40'
@@ -504,10 +492,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                           </div>
                                           
                           {lesson.hasResources && lesson.resources && (
-                            <Popover 
-                              open={openPopovers[lesson.id] || false} 
-                              onOpenChange={(open) => handlePopoverOpen(lesson.id, open)}
-                            >
+                            <Popover>
                               <PopoverTrigger asChild>
                                 <Button
                                   variant="outline"
@@ -544,7 +529,6 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                         onClick={(e) => {
                                           e.stopPropagation();
                                           handleResourceDownload(resource.url);
-                                          handlePopoverOpen(lesson.id, false);
                                         }}
                                         className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                         size="sm"
