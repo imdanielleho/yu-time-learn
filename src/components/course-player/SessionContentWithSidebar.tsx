@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Download, FileText, Image, MessageCircle, Send, ThumbsUp, Clock, CheckCircle, Circle, Play, ChevronDown, ArrowUpDown, Folder, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -324,24 +323,24 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                       isMobile 
                                         ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
                                         : 'h-6 px-2'
-                                    } flex items-center gap-1 border-yutime-neutral/40 text-yutime-text bg-white hover:bg-yutime-neutral/30 hover:text-yutime-primary hover:border-[#2a9d8f]/50 transition-all duration-200 shadow-sm hover:shadow-md`}
+                                    } flex items-center gap-1 hover:bg-[#2a9d8f]/10 border border-[#2a9d8f]/40 hover:border-[#2a9d8f] text-[#2a9d8f] hover:text-[#2a9d8f] bg-[#2a9d8f]/5 transition-all duration-200 shadow-sm hover:shadow-md`}
                                   >
                                     <Folder size={12} className="text-[#2a9d8f]" />
                                     <span className="text-xs font-medium">課程資源</span>
                                     <ChevronDown size={10} className="text-[#2a9d8f]" />
                                   </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-64 p-3 bg-white border shadow-lg z-50" align="end">
+                                <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
                                   <div className="space-y-2">
                                     {lesson.resources.map((resource, index) => (
                                       <div 
                                         key={index}
-                                        className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/10 hover:border-[#2a9d8f]/50 transition-all duration-200 group"
+                                        className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
                                       >
                                         <div className="flex items-center space-x-2">
                                           {getResourceIcon(resource.type)}
                                           <div>
-                                            <p className="font-medium text-yutime-text text-xs group-hover:text-[#2a9d8f] transition-colors">{resource.name}</p>
+                                            <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
                                             <p className="text-xs text-yutime-text/60">{resource.type}</p>
                                           </div>
                                         </div>
@@ -493,24 +492,24 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     isMobile 
                                       ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
                                       : 'h-6 px-2'
-                                  } flex items-center gap-1 border-yutime-neutral/40 text-yutime-text bg-white hover:bg-yutime-neutral/30 hover:text-yutime-primary hover:border-[#2a9d8f]/50 transition-all duration-200 shadow-sm hover:shadow-md`}
+                                  } flex items-center gap-1 hover:bg-[#2a9d8f]/10 border border-[#2a9d8f]/40 hover:border-[#2a9d8f] text-[#2a9d8f] hover:text-[#2a9d8f] bg-[#2a9d8f]/5 transition-all duration-200 shadow-sm hover:shadow-md`}
                                 >
                                   <Folder size={12} className="text-[#2a9d8f]" />
                                   <span className="text-xs font-medium">課程資源</span>
                                   <ChevronDown size={10} className="text-[#2a9d8f]" />
                                 </Button>
                               </PopoverTrigger>
-                              <PopoverContent className="w-64 p-3 bg-white border shadow-lg z-50" align="end">
+                              <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
                                 <div className="space-y-2">
                                   {lesson.resources.map((resource, index) => (
                                     <div 
                                       key={index}
-                                      className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/10 hover:border-[#2a9d8f]/50 transition-all duration-200 group"
+                                      className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
                                     >
                                       <div className="flex items-center space-x-2">
                                         {getResourceIcon(resource.type)}
                                         <div>
-                                          <p className="font-medium text-yutime-text text-xs group-hover:text-[#2a9d8f] transition-colors">{resource.name}</p>
+                                          <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
                                           <p className="text-xs text-yutime-text/60">{resource.type}</p>
                                         </div>
                                       </div>
@@ -596,13 +595,13 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium text-yutime-text text-sm md:text-base">課程討論 ({qaItems.length})</h3>
                       <Select value={qaSortBy} onValueChange={(value: 'newest' | 'oldest' | 'most-liked') => setQaSortBy(value)}>
-                        <SelectTrigger className="w-28 md:w-32 h-8 text-xs md:text-sm border-yutime-neutral/40 focus:border-[#2a9d8f]/50 focus:ring-[#2a9d8f]/20 bg-white">
+                        <SelectTrigger className="w-28 md:w-32 h-8 text-xs md:text-sm border-yutime-neutral/40 focus:border-[#2a9d8f]/50 focus:ring-[#2a9d8f]/20">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent className="bg-white border shadow-lg z-50">
-                          <SelectItem value="newest">最新</SelectItem>
-                          <SelectItem value="oldest">最舊</SelectItem>
-                          <SelectItem value="most-liked">最多讚</SelectItem>
+                        <SelectContent className="bg-white border shadow-lg">
+                          <SelectItem value="newest" className="hover:bg-[#2a9d8f]/10 focus:bg-[#2a9d8f]/10">最新</SelectItem>
+                          <SelectItem value="oldest" className="hover:bg-[#2a9d8f]/10 focus:bg-[#2a9d8f]/10">最舊</SelectItem>
+                          <SelectItem value="most-liked" className="hover:bg-[#2a9d8f]/10 focus:bg-[#2a9d8f]/10">最多讚</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

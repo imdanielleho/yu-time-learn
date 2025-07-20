@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Play, ChevronDown, ChevronRight, X, Folder, Download, FileText, Image, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -123,7 +122,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => setSidebarOpen(!isOpen)}
-                className="flex items-center space-x-2 border-yutime-neutral/40 text-yutime-text bg-white hover:bg-yutime-neutral/30 hover:text-yutime-primary hover:border-[#2a9d8f]/50 transition-all duration-200 min-w-[44px] min-h-[44px] shadow-sm hover:shadow-md"
+                className="flex items-center space-x-2 border-yutime-neutral/50 text-yutime-text hover:bg-yutime-neutral/50 hover:text-yutime-primary transition-colors min-w-[44px] min-h-[44px]"
               >
                 <X size={16} />
                 <span>隱藏課程內容</span>
@@ -241,24 +240,24 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                           openResourcePopover === popoverId ? null : popoverId
                                         );
                                       }}
-                                      className="h-7 px-2 flex items-center gap-1 border-yutime-neutral/40 text-yutime-text bg-white hover:bg-yutime-neutral/30 hover:text-yutime-primary hover:border-[#2a9d8f]/50 transition-all duration-200 shadow-sm hover:shadow-md"
+                                      className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                     >
                                       <Folder size={12} className="text-yutime-secondary" />
                                       <span className="text-xs font-medium">課程資源</span>
                                       <ChevronDown size={10} className="text-yutime-secondary" />
                                     </Button>
                                   </PopoverTrigger>
-                                  <PopoverContent className="w-64 p-3 z-50 bg-white border shadow-lg" align="end">
+                                  <PopoverContent className="w-64 p-3 z-50" align="end">
                                     <div className="space-y-2">
                                       {lesson.resources.map((resource, index) => (
                                         <div 
                                           key={index}
-                                          className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/10 hover:border-[#2a9d8f]/50 transition-all duration-200 group"
+                                          className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
                                         >
                                           <div className="flex items-center space-x-2">
                                             {getResourceIcon(resource.type)}
                                             <div>
-                                              <p className="font-medium text-yutime-text text-xs group-hover:text-[#2a9d8f] transition-colors">{resource.name}</p>
+                                              <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
                                               <p className="text-xs text-yutime-text/60">{resource.type}</p>
                                             </div>
                                           </div>
@@ -269,7 +268,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                               handleResourceDownload(resource.url);
                                               setOpenResourcePopover(null);
                                             }}
-                                            className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80 transition-colors"
+                                            className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                             size="sm"
                                           >
                                             <Download size={12} className="text-white" />
