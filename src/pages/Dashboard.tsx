@@ -101,7 +101,7 @@ const Dashboard = () => {
 
       <div data-tour="course-cards">
         <h2 className="text-lg md:text-xl font-bold text-yutime-navy mb-4">In Progress Courses</h2>
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {mockCourses.map((course) => (
             <div key={course.id} className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex flex-col space-y-3">
