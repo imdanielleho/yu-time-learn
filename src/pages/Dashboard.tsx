@@ -107,7 +107,7 @@ const Dashboard = () => {
               <div className="flex flex-col space-y-3">
                 <div className="flex gap-3">
                   {/* Course Thumbnail */}
-                  <div className="flex-shrink-0 w-28 h-20">
+                  <div className="flex-shrink-0 w-28 h-full">
                     <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
                       <img 
                         src={course.thumbnail} 
