@@ -134,29 +134,17 @@ const SessionContent: React.FC<SessionContentProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-6">
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6 bg-background/50 border border-border rounded-lg p-1">
-              <TabsTrigger 
-                value="overview" 
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+            <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsTrigger value="overview">
                 課程概要
               </TabsTrigger>
-              <TabsTrigger 
-                value="resources"
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+              <TabsTrigger value="resources">
                 教材資源
               </TabsTrigger>
-              <TabsTrigger 
-                value="qa"
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+              <TabsTrigger value="qa">
                 課程問答
               </TabsTrigger>
-              <TabsTrigger 
-                value="transcript"
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+              <TabsTrigger value="transcript">
                 課程逐字稿
               </TabsTrigger>
             </TabsList>

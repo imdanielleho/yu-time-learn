@@ -379,31 +379,19 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 md:p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
+            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6`}>
               {isMobile && (
-                <TabsTrigger 
-                  value="sidebar"
-                  className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-                >
+                <TabsTrigger value="sidebar">
                   課程內容
                 </TabsTrigger>
               )}
-              <TabsTrigger 
-                value="overview" 
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
+              <TabsTrigger value="overview">
                 課程概要
               </TabsTrigger>
-              <TabsTrigger 
-                value="qa"
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
+              <TabsTrigger value="qa">
                 課程問答
               </TabsTrigger>
-              <TabsTrigger 
-                value="transcript"
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
+              <TabsTrigger value="transcript">
                 課程逐字稿
               </TabsTrigger>
             </TabsList>
