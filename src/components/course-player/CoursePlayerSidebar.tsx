@@ -180,11 +180,12 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                     return (
                       <div
                         key={lesson.id}
-                        className={`p-4 transition-colors border-b border-gray-200 ${
+                        className={`p-4 transition-colors border-b border-gray-200 cursor-pointer ${
                           isCurrentLesson 
                             ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
                             : 'hover:bg-yutime-neutral/40'
                         }`}
+                        onClick={() => handleLessonClick(globalIndex)}
                       >
                         <div className="flex items-start space-x-3">
                           {/* Completion Status Icon - aligned with chapter chevron */}
@@ -205,10 +206,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                           {/* Lesson Content */}
                           <div className="flex-1 min-w-0">
                             {/* First Row - Full width lesson title */}
-                            <div 
-                              className="w-full cursor-pointer"
-                              onClick={() => handleLessonClick(globalIndex)}
-                            >
+                            <div className="w-full">
                               <p className={`text-sm font-medium leading-tight ${
                                 isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
                               }`}>
@@ -251,7 +249,10 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                             </div>
                                           </div>
                                           <Button
-                                            onClick={() => handleResourceDownload(resource.url)}
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleResourceDownload(resource.url);
+                                            }}
                                             className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                             size="sm"
                                           >
