@@ -253,27 +253,29 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                       {lesson.resources.map((resource, index) => (
                                         <div 
                                           key={index}
-                                          className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-gray-200 hover:border-yutime-neutral/60 transition-colors"
+                                          className="flex items-center justify-between border border-yutime-neutral/40 rounded-lg hover:bg-gray-100 hover:border-yutime-neutral/60 transition-colors"
                                         >
-                                          <div className="flex items-center space-x-2">
-                                            {getResourceIcon(resource.type)}
-                                            <div>
-                                              <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
-                                              <p className="text-xs text-yutime-text/60">{resource.type}</p>
-                                            </div>
-                                          </div>
-                                          <Button
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              e.stopPropagation();
-                                              handleResourceDownload(resource.url);
-                                              setOpenResourcePopover(null);
-                                            }}
-                                            className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
-                                            size="sm"
-                                          >
-                                            <Download size={12} className="text-white" />
-                                          </Button>
+                                           <div className="flex items-center space-x-2 p-2">
+                                             {getResourceIcon(resource.type)}
+                                             <div>
+                                               <p className="font-medium text-yutime-text text-xs">{resource.name}</p>
+                                               <p className="text-xs text-yutime-text/60">{resource.type}</p>
+                                             </div>
+                                           </div>
+                                           <div className="p-2">
+                                             <Button
+                                               onClick={(e) => {
+                                                 e.preventDefault();
+                                                 e.stopPropagation();
+                                                 handleResourceDownload(resource.url);
+                                                 setOpenResourcePopover(null);
+                                               }}
+                                               className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                               size="sm"
+                                             >
+                                               <Download size={12} className="text-white" />
+                                             </Button>
+                                           </div>
                                         </div>
                                       ))}
                                     </div>
