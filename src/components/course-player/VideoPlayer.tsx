@@ -377,16 +377,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="relative bg-black w-full group flex justify-center items-center h-[50vh] md:h-[73vh]"
+      <div className="relative bg-black w-full group h-[50vh] md:h-[73vh]"
            onMouseMove={handleMouseMove}
            onMouseLeave={() => isPlaying && setShowControls(false)}>
-        
-        <div className="relative w-full max-w-none aspect-video bg-black group">
         
         <video
           key={videoKey}
           ref={videoRef}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
           preload="metadata"
           crossOrigin="anonymous"
           playsInline
@@ -602,7 +600,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           countdownSeconds={10}
         />
 
-        </div>
       </div>
     </TooltipProvider>
   );
