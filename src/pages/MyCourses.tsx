@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BookOpen, Clock, Trophy, Eye } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,8 @@ const MyCourses = () => {
       expirationDate: new Date('2024-12-15'),
       purchaseDate: new Date('2023-12-15'),
       lastActivity: new Date('2024-06-03'),
-      status: 'active'
+      status: 'active',
+      thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 2,
@@ -31,7 +31,8 @@ const MyCourses = () => {
       expirationDate: new Date('2025-06-20'),
       purchaseDate: new Date('2024-06-20'),
       lastActivity: new Date('2024-06-02'),
-      status: 'active'
+      status: 'active',
+      thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 3,
@@ -46,7 +47,8 @@ const MyCourses = () => {
       expirationDate: new Date('2025-03-10'),
       purchaseDate: new Date('2024-03-10'),
       completionDate: new Date('2024-03-15'),
-      status: 'completed'
+      status: 'completed',
+      thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 4,
@@ -60,7 +62,8 @@ const MyCourses = () => {
       expirationDate: new Date('2023-01-15'),
       purchaseDate: new Date('2022-01-15'),
       lastActivity: new Date('2022-12-20'),
-      status: 'expired'
+      status: 'expired',
+      thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     }
   ];
 
@@ -112,14 +115,28 @@ const MyCourses = () => {
     
     return (
       <div key={course.id} className="bg-white rounded-lg p-6 shadow-sm border">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <h3 className="font-semibold text-yutime-navy text-lg mb-2">{course.title}</h3>
-            <p className="text-sm text-gray-500">{course.sessionTitle}</p>
+        <div className="flex gap-4 mb-4">
+          {/* Course Thumbnail */}
+          <div className="flex-shrink-0 w-32 h-20">
+            <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+              <img 
+                src={course.thumbnail} 
+                alt={course.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-          {course.progress === 100 && (
-            <Trophy className="h-6 w-6 text-yutime-gold" />
-          )}
+
+          {/* Course Header Info */}
+          <div className="flex-1 flex items-start justify-between">
+            <div>
+              <h3 className="font-semibold text-yutime-navy text-lg mb-2">{course.title}</h3>
+              <p className="text-sm text-gray-500">{course.sessionTitle}</p>
+            </div>
+            {course.progress === 100 && (
+              <Trophy className="h-6 w-6 text-yutime-gold" />
+            )}
+          </div>
         </div>
         
         <div className="mb-4">
