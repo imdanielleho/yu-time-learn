@@ -134,40 +134,28 @@ const SessionContent: React.FC<SessionContentProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-6">
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6 bg-background/50 border border-border rounded-lg p-1">
-              <TabsTrigger 
-                value="overview" 
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+            <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsTrigger value="overview">
                 課程概要
               </TabsTrigger>
-              <TabsTrigger 
-                value="resources"
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+              <TabsTrigger value="resources">
                 教材資源
               </TabsTrigger>
-              <TabsTrigger 
-                value="qa"
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+              <TabsTrigger value="qa">
                 課程問答
               </TabsTrigger>
-              <TabsTrigger 
-                value="transcript"
-                className="text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground"
-              >
+              <TabsTrigger value="transcript">
                 課程逐字稿
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif">關於本課程</CardTitle>
+                  <CardTitle className="text-lg font-serif">關於本課程</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-yutime-text/70 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     {lesson.description}
                   </p>
                 </CardContent>
@@ -175,28 +163,25 @@ const SessionContent: React.FC<SessionContentProps> = ({
             </TabsContent>
 
             <TabsContent value="resources" className="space-y-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif">教材下載</CardTitle>
+                  <CardTitle className="text-lg font-serif">教材下載</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     {mockResources.map((resource, index) => (
                       <div 
                         key={index}
-                        className="flex items-center justify-between p-3 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                        className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50 transition-colors"
                       >
                         <div className="flex items-center space-x-3">
                           {getResourceIcon(resource.type)}
                           <div>
-                            <p className="font-medium text-yutime-text">{resource.name}</p>
-                            <p className="text-sm text-yutime-text/60">{resource.type}</p>
+                            <p className="font-medium">{resource.name}</p>
+                            <p className="text-sm text-muted-foreground">{resource.type}</p>
                           </div>
                         </div>
-                        <Button
-                          onClick={() => window.open(resource.url, '_blank')}
-                          className="btn-primary text-base font-medium min-w-[44px] min-h-[44px]"
-                        >
+                        <Button className="min-w-[44px] min-h-[44px]">
                           下載
                         </Button>
                       </div>
@@ -207,30 +192,30 @@ const SessionContent: React.FC<SessionContentProps> = ({
             </TabsContent>
 
             <TabsContent value="qa" className="space-y-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif flex items-center space-x-2">
+                  <CardTitle className="text-lg font-serif flex items-center space-x-2">
                     <MessageCircle size={20} />
                     <span>課程問答</span>
                   </CardTitle>
-                  <p className="text-sm text-yutime-text/60 mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
+                  <p className="text-sm text-muted-foreground mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Submit Question Form */}
-                  <div className="bg-yutime-neutral/20 p-4 rounded-xl border border-yutime-neutral/30">
-                    <h3 className="font-medium text-yutime-text mb-3">提出問題</h3>
+                  <div className="bg-muted/30 p-4 rounded-xl border">
+                    <h3 className="font-medium mb-3">提出問題</h3>
                     <div className="space-y-3">
                       <Textarea
                         placeholder="請在這裡輸入您的問題，講師會盡快回覆..."
                         value={newQuestion}
                         onChange={(e) => setNewQuestion(e.target.value)}
-                        className="min-h-[100px] text-base border-yutime-neutral/40 focus:border-yutime-secondary/50 focus:ring-yutime-secondary/20"
+                        className="min-h-[100px]"
                       />
                       <div className="flex justify-end">
                         <Button
                           onClick={handleSubmitQuestion}
                           disabled={!newQuestion.trim()}
-                          className="btn-primary flex items-center space-x-2 text-base font-medium min-w-[44px] min-h-[44px]"
+                          className="flex items-center space-x-2 min-w-[44px] min-h-[44px]"
                         >
                           <Send size={16} />
                           <span>發布問題</span>
@@ -241,13 +226,13 @@ const SessionContent: React.FC<SessionContentProps> = ({
 
                   {/* Q&A List */}
                   <div className="space-y-4">
-                    <h3 className="font-medium text-yutime-text">課程討論 ({qaItems.length})</h3>
+                    <h3 className="font-medium">課程討論 ({qaItems.length})</h3>
                     {qaItems.map((item) => (
-                      <div key={item.id} className="bg-white p-4 rounded-xl border border-yutime-neutral/30 shadow-soft">
+                      <div key={item.id} className="bg-card p-4 rounded-xl border">
                         {/* Question */}
                         <div className="mb-4">
                           <div className="flex items-start justify-between mb-2">
-                            <div className="flex items-center space-x-2 text-sm text-yutime-text/60">
+                            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                               <span className="font-medium">{item.author}</span>
                               <span>•</span>
                               <span className="flex items-center space-x-1">
@@ -261,7 +246,7 @@ const SessionContent: React.FC<SessionContentProps> = ({
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => handleLike(item.id)}
-                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-yutime-secondary hover:bg-yutime-secondary/10 min-w-[44px] min-h-[44px]"
+                                  className="flex items-center space-x-1 min-w-[44px] min-h-[44px]"
                                 >
                                   <ThumbsUp size={14} />
                                   <span className="text-sm">{item.likes}</span>
@@ -272,33 +257,33 @@ const SessionContent: React.FC<SessionContentProps> = ({
                               </TooltipContent>
                             </Tooltip>
                           </div>
-                          <p className="text-yutime-text leading-relaxed text-base">{item.question}</p>
+                          <p className="leading-relaxed">{item.question}</p>
                         </div>
 
                         {/* Answer */}
                         {item.answer && (
-                          <div className="ml-4 pl-4 border-l-2 border-yutime-secondary/30 bg-yutime-secondary/5 p-3 rounded-r-lg">
+                          <div className="ml-4 pl-4 border-l-2 border-primary/30 bg-primary/5 p-3 rounded-r-lg">
                             <div className="flex items-center space-x-2 mb-2 text-sm">
-                              <span className={`font-medium ${item.answer.isInstructor ? 'text-yutime-secondary' : 'text-yutime-text/60'}`}>
+                              <span className={`font-medium ${item.answer.isInstructor ? 'text-primary' : 'text-muted-foreground'}`}>
                                 {item.answer.author}
                                 {item.answer.isInstructor && (
-                                  <span className="ml-1 bg-yutime-secondary text-white px-2 py-0.5 rounded-full text-xs">講師</span>
+                                  <span className="ml-1 bg-primary text-primary-foreground px-2 py-0.5 rounded-full text-xs">講師</span>
                                 )}
                               </span>
-                              <span className="text-yutime-text/60">•</span>
-                              <span className="text-yutime-text/60 flex items-center space-x-1">
+                              <span className="text-muted-foreground">•</span>
+                              <span className="text-muted-foreground flex items-center space-x-1">
                                 <Clock size={12} />
                                 <span>{item.answer.timestamp}</span>
                               </span>
                             </div>
-                            <p className="text-yutime-text leading-relaxed text-base">{item.answer.content}</p>
+                            <p className="leading-relaxed">{item.answer.content}</p>
                           </div>
                         )}
 
                         {/* No Answer Yet */}
                         {!item.answer && (
-                          <div className="ml-4 pl-4 border-l-2 border-yutime-neutral/30 bg-yutime-neutral/10 p-3 rounded-r-lg">
-                            <p className="text-yutime-text/60 text-sm italic">講師尚未回覆，請耐心等候...</p>
+                          <div className="ml-4 pl-4 border-l-2 border-muted bg-muted/30 p-3 rounded-r-lg">
+                            <p className="text-muted-foreground text-sm italic">講師尚未回覆，請耐心等候...</p>
                           </div>
                         )}
                       </div>
@@ -309,13 +294,13 @@ const SessionContent: React.FC<SessionContentProps> = ({
             </TabsContent>
 
             <TabsContent value="transcript" className="space-y-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif">課程逐字稿</CardTitle>
+                  <CardTitle className="text-lg font-serif">課程逐字稿</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-yutime-neutral/30 p-4 rounded-lg">
-                    <div className="prose prose-sm max-w-none text-yutime-text/80">
+                  <div className="bg-muted/30 p-4 rounded-lg">
+                    <div className="prose prose-sm max-w-none text-foreground/80">
                       {mockTranscript.split('\n').map((paragraph, index) =>
                         paragraph.trim() && (
                           <p key={index} className="mb-3 leading-relaxed">

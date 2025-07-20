@@ -379,31 +379,19 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
       <div className="bg-yutime-neutral/50 min-h-96">
         <div className="max-w-6xl mx-auto p-3 md:p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6 bg-background/50 border border-border rounded-lg p-1`}>
+            <TabsList className={`grid w-full ${isMobile ? 'grid-cols-4' : 'grid-cols-3'} mb-4 md:mb-6`}>
               {isMobile && (
-                <TabsTrigger 
-                  value="sidebar"
-                  className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-                >
+                <TabsTrigger value="sidebar" className="text-xs md:text-sm px-1">
                   課程內容
                 </TabsTrigger>
               )}
-              <TabsTrigger 
-                value="overview" 
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
+              <TabsTrigger value="overview" className="text-xs md:text-sm px-1">
                 課程概要
               </TabsTrigger>
-              <TabsTrigger 
-                value="qa"
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
+              <TabsTrigger value="qa" className="text-xs md:text-sm px-1">
                 課程問答
               </TabsTrigger>
-              <TabsTrigger 
-                value="transcript"
-                className="text-xs md:text-sm font-medium rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground px-1"
-              >
+              <TabsTrigger value="transcript" className="text-xs md:text-sm px-1">
                 課程逐字稿
               </TabsTrigger>
             </TabsList>
@@ -558,12 +546,12 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             )}
 
             <TabsContent value="overview" className="space-y-0 mt-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif">關於本課程</CardTitle>
+                  <CardTitle className="text-lg font-serif">關於本課程</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-yutime-text/70 leading-relaxed text-sm md:text-base">
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
                     {lesson.description}
                   </p>
                 </CardContent>
@@ -571,29 +559,29 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             </TabsContent>
 
             <TabsContent value="qa" className="space-y-0 mt-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif flex items-center space-x-2">
+                  <CardTitle className="text-lg font-serif flex items-center space-x-2">
                     <MessageCircle size={20} />
                     <span>課程問答</span>
                   </CardTitle>
-                  <p className="text-xs md:text-sm text-yutime-text/60 mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
+                  <p className="text-xs md:text-sm text-muted-foreground mt-2">與同學和講師一起討論課程內容，共同學習成長</p>
                 </CardHeader>
                 <CardContent className="space-y-4 md:space-y-6">
-                  <div className="bg-yutime-neutral/20 p-3 md:p-4 rounded-xl border border-yutime-neutral/30">
-                    <h3 className="font-medium text-yutime-text mb-3 text-sm md:text-base">提出問題</h3>
+                  <div className="bg-muted/30 p-3 md:p-4 rounded-xl border">
+                    <h3 className="font-medium mb-3 text-sm md:text-base">提出問題</h3>
                     <div className="space-y-3">
                       <Textarea
                         placeholder="請在這裡輸入您的問題，講師會盡快回覆..."
                         value={newQuestion}
                         onChange={(e) => setNewQuestion(e.target.value)}
-                        className="min-h-[80px] md:min-h-[100px] text-sm md:text-base border-yutime-neutral/40 focus:border-yutime-secondary/50 focus:ring-yutime-secondary/20"
+                        className="min-h-[80px] md:min-h-[100px] text-sm md:text-base"
                       />
                       <div className="flex justify-end">
                         <Button
                           onClick={handleSubmitQuestion}
                           disabled={!newQuestion.trim()}
-                          className="btn-primary flex items-center space-x-2 text-sm md:text-base font-medium min-w-[44px] min-h-[44px]"
+                          className="flex items-center space-x-2 min-w-[44px] min-h-[44px]"
                           size={isMobile ? "sm" : "default"}
                         >
                           <Send size={14} />
@@ -605,7 +593,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-medium text-yutime-text text-sm md:text-base">課程討論 ({qaItems.length})</h3>
+                      <h3 className="font-medium text-sm md:text-base">課程討論 ({qaItems.length})</h3>
                       <Select value={qaSortBy} onValueChange={(value: 'newest' | 'oldest' | 'most-liked') => setQaSortBy(value)}>
                         <SelectTrigger className="w-28 md:w-32 h-8 text-xs md:text-sm">
                           <SelectValue />
@@ -619,10 +607,10 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     </div>
                     
                     {sortedQaItems.map((item) => (
-                      <div key={item.id} className="bg-white p-3 md:p-4 rounded-xl border border-yutime-neutral/30 shadow-soft">
+                      <div key={item.id} className="bg-card p-3 md:p-4 rounded-xl border">
                         <div className="mb-4">
                           <div className="flex items-start justify-between mb-2">
-                            <div className="flex items-center space-x-2 text-xs md:text-sm text-yutime-text/60">
+                            <div className="flex items-center space-x-2 text-xs md:text-sm text-muted-foreground">
                               <span className="font-medium">{item.author}</span>
                               <span>•</span>
                               <span className="flex items-center space-x-1">
@@ -636,7 +624,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => handleLike(item.id)}
-                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-yutime-secondary hover:bg-yutime-secondary/10 min-w-[44px] min-h-[44px] p-1"
+                                  className="flex items-center space-x-1 min-w-[44px] min-h-[44px] p-1"
                                 >
                                   <ThumbsUp size={12} />
                                   <span className="text-xs">{item.likes}</span>
@@ -647,31 +635,31 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                               </TooltipContent>
                             </Tooltip>
                           </div>
-                          <p className="text-yutime-text leading-relaxed text-sm md:text-base">{item.question}</p>
+                          <p className="leading-relaxed text-sm md:text-base">{item.question}</p>
                         </div>
 
                         {item.answer && (
-                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-secondary/30 bg-yutime-secondary/5 p-3 rounded-r-lg">
+                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-primary/30 bg-primary/5 p-3 rounded-r-lg">
                             <div className="flex items-center space-x-2 mb-2 text-xs md:text-sm">
-                              <span className={`font-medium ${item.answer.isInstructor ? 'text-yutime-secondary' : 'text-yutime-text/60'}`}>
+                              <span className={`font-medium ${item.answer.isInstructor ? 'text-primary' : 'text-muted-foreground'}`}>
                                 {item.answer.author}
                                 {item.answer.isInstructor && (
-                                  <span className="ml-1 bg-yutime-secondary text-white px-2 py-0.5 rounded-full text-xs">講師</span>
+                                  <span className="ml-1 bg-primary text-primary-foreground px-2 py-0.5 rounded-full text-xs">講師</span>
                                 )}
                               </span>
-                              <span className="text-yutime-text/60">•</span>
-                              <span className="text-yutime-text/60 flex items-center space-x-1">
+                              <span className="text-muted-foreground">•</span>
+                              <span className="text-muted-foreground flex items-center space-x-1">
                                 <Clock size={10} />
                                 <span>{item.answer.timestamp}</span>
                               </span>
                             </div>
-                            <p className="text-yutime-text leading-relaxed text-sm md:text-base">{item.answer.content}</p>
+                            <p className="leading-relaxed text-sm md:text-base">{item.answer.content}</p>
                           </div>
                         )}
 
                         {!item.answer && (
-                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-neutral/30 bg-yutime-neutral/10 p-3 rounded-r-lg">
-                            <p className="text-yutime-text/60 text-xs md:text-sm italic">講師尚未回覆，請耐心等候...</p>
+                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-muted bg-muted/30 p-3 rounded-r-lg">
+                            <p className="text-muted-foreground text-xs md:text-sm italic">講師尚未回覆，請耐心等候...</p>
                           </div>
                         )}
                       </div>
@@ -682,13 +670,13 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
             </TabsContent>
 
             <TabsContent value="transcript" className="space-y-0 mt-0">
-              <Card className="shadow-soft border-yutime-neutral/30">
+              <Card>
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-lg text-yutime-primary font-serif">課程逐字稿</CardTitle>
+                  <CardTitle className="text-lg font-serif">課程逐字稿</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-yutime-neutral/30 p-3 md:p-4 rounded-lg">
-                    <div className="prose prose-sm max-w-none text-yutime-text/80">
+                  <div className="bg-muted/30 p-3 md:p-4 rounded-lg">
+                    <div className="prose prose-sm max-w-none text-foreground/80">
                       {mockTranscript.split('\n').map((paragraph, index) =>
                         paragraph.trim() && (
                           <p key={index} className="mb-3 leading-relaxed text-sm md:text-base">
