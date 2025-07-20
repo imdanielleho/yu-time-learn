@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ const Dashboard = () => {
       progress: 75,
       lessons: { completed: 9, total: 12 },
       accessType: 'unlimited' as const,
+      thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 2,
@@ -37,6 +39,7 @@ const Dashboard = () => {
       lessons: { completed: 6, total: 15 },
       accessType: 'limited' as const,
       expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+      thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     }
   ];
 
@@ -99,38 +102,57 @@ const Dashboard = () => {
 
       <div data-tour="course-cards">
         <h2 className="text-lg md:text-xl font-bold text-yutime-navy mb-4">In Progress Courses</h2>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {mockCourses.map((course) => (
-            <div key={course.id} className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-              <div className="mb-4">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-semibold text-yutime-navy">{course.title}</h3>
-                  {course.accessType === 'limited' && course.expiryDate && (
-                    <div className="hidden md:block">
-                      <ExpiryCountdown expiryDate={course.expiryDate} />
+            <div key={course.id} className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex gap-4">
+                {/* Course Thumbnail */}
+                <div className="flex-shrink-0">
+                  <div className="w-24 h-16 md:w-32 md:h-20 rounded-lg overflow-hidden bg-gray-100">
+                    <img 
+                      src={course.thumbnail} 
+                      alt={course.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* Course Info */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-yutime-navy text-sm md:text-base truncate">{course.title}</h3>
+                      <p className="text-xs md:text-sm text-gray-500 mb-2">{course.session}</p>
                     </div>
-                  )}
-                </div>
-                <p className="text-sm text-gray-500 mb-4">{course.session}</p>
-                <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-                  <span>{course.lessons.completed}/{course.lessons.total} lessons</span>
-                  <span className="font-medium">{course.progress}% complete</span>
+                    {course.accessType === 'limited' && course.expiryDate && (
+                      <div className="ml-4 flex-shrink-0">
+                        <ExpiryCountdown expiryDate={course.expiryDate} />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Progress Section */}
+                  <div className="mb-3">
+                    <div className="flex items-center justify-between text-xs md:text-sm text-gray-600 mb-2">
+                      <span>{course.lessons.completed}/{course.lessons.total} lessons</span>
+                      <span className="font-medium">{course.progress}% complete</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="bg-yutime-blue h-1.5 rounded-full transition-all duration-300" style={{ width: `${course.progress}%` }}></div>
+                    </div>
+                  </div>
+
+                  {/* Action Button */}
+                  <div className="flex justify-end">
+                    <Button 
+                      onClick={() => handleContinueLearning(course.id)}
+                      className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md"
+                    >
+                      Continue Learning
+                    </Button>
+                  </div>
                 </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-                <div className="bg-yutime-blue h-2 rounded-full" style={{ width: `${course.progress}%` }}></div>
-              </div>
-              {course.accessType === 'limited' && course.expiryDate && (
-                <div className="md:hidden mb-4">
-                  <ExpiryCountdown expiryDate={course.expiryDate} isMobile={true} />
-                </div>
-              )}
-              <Button 
-                onClick={() => handleContinueLearning(course.id)}
-                className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
-              >
-                Continue Learning
-              </Button>
             </div>
           ))}
         </div>
