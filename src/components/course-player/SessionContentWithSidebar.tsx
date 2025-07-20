@@ -276,7 +276,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                       key={lesson.id}
                       className={`p-3 md:p-4 transition-colors cursor-pointer ${
                         isCurrentLesson 
-                          ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
+                          ? 'bg-[#2a9d8f]/10 border-l-2 border-[#2a9d8f]' 
                           : 'hover:bg-yutime-neutral/40'
                       }`}
                       onClick={() => handleLessonClick(globalIndex)}
@@ -284,11 +284,11 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                       <div className="flex items-start space-x-3">
                         <div className="flex-shrink-0 mt-1">
                           {lesson.completed ? (
-                            <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                            <div className="w-4 h-4 bg-[#2a9d8f] rounded-full flex items-center justify-center">
                               <Check size={10} className="text-white font-bold" strokeWidth={3} />
                             </div>
                           ) : isCurrentLesson ? (
-                            <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                            <div className="w-4 h-4 bg-[#2a9d8f] rounded-full flex items-center justify-center">
                               <Play size={10} className="text-white" />
                             </div>
                           ) : (
@@ -299,7 +299,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                         <div className="flex-1 min-w-0">
                           <div className="w-full">
                             <p className={`text-sm font-medium leading-tight ${
-                              isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                              isCurrentLesson ? 'text-[#2a9d8f]' : 'text-yutime-text'
                             }`}>
                               {lesson.title}
                             </p>
@@ -323,11 +323,11 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                       isMobile 
                                         ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
                                         : 'h-6 px-2'
-                                    } flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md`}
+                                    } flex items-center gap-1 hover:bg-[#2a9d8f]/10 border border-[#2a9d8f]/40 hover:border-[#2a9d8f] text-[#2a9d8f] hover:text-[#2a9d8f] bg-[#2a9d8f]/5 transition-all duration-200 shadow-sm hover:shadow-md`}
                                   >
-                                    <Folder size={12} className="text-yutime-secondary" />
+                                    <Folder size={12} className="text-[#2a9d8f]" />
                                     <span className="text-xs font-medium">課程資源</span>
-                                    <ChevronDown size={10} className="text-yutime-secondary" />
+                                    <ChevronDown size={10} className="text-[#2a9d8f]" />
                                   </Button>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
@@ -349,7 +349,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                             e.stopPropagation();
                                             handleResourceDownload(resource.url);
                                           }}
-                                          className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                          className="h-6 w-6 p-0 bg-[#2a9d8f] hover:bg-[#2a9d8f]/80 transition-colors"
                                           size="sm"
                                         >
                                           <Download size={12} className="text-white" />
@@ -445,7 +445,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     key={lesson.id}
                                     className={`p-3 md:p-4 transition-colors cursor-pointer ${
                                       isCurrentLesson 
-                                        ? 'bg-yutime-secondary/10 border-l-2 border-yutime-secondary' 
+                                        ? 'bg-[#2a9d8f]/10 border-l-2 border-[#2a9d8f]' 
                                         : 'hover:bg-yutime-neutral/40'
                                     }`}
                                     onClick={() => handleLessonClick(globalIndex)}
@@ -453,11 +453,11 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     <div className="flex items-start space-x-3">
                                       <div className="flex-shrink-0 mt-1">
                                         {lesson.completed ? (
-                                          <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                                          <div className="w-4 h-4 bg-[#2a9d8f] rounded-full flex items-center justify-center">
                                             <Check size={10} className="text-white font-bold" strokeWidth={3} />
                                           </div>
                                         ) : isCurrentLesson ? (
-                                          <div className="w-4 h-4 bg-yutime-secondary rounded-full flex items-center justify-center">
+                                          <div className="w-4 h-4 bg-[#2a9d8f] rounded-full flex items-center justify-center">
                                             <Play size={10} className="text-white" />
                                           </div>
                                         ) : (
@@ -468,7 +468,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                       <div className="flex-1 min-w-0">
                                         <div className="w-full">
                                           <p className={`text-sm font-medium leading-tight ${
-                                            isCurrentLesson ? 'text-yutime-secondary' : 'text-yutime-text'
+                                            isCurrentLesson ? 'text-[#2a9d8f]' : 'text-yutime-text'
                                           }`}>
                                             {lesson.title}
                                           </p>
@@ -492,11 +492,11 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     isMobile 
                                       ? 'h-8 px-3 min-w-[44px] min-h-[44px] touch-manipulation' 
                                       : 'h-6 px-2'
-                                  } flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md`}
+                                  } flex items-center gap-1 hover:bg-[#2a9d8f]/10 border border-[#2a9d8f]/40 hover:border-[#2a9d8f] text-[#2a9d8f] hover:text-[#2a9d8f] bg-[#2a9d8f]/5 transition-all duration-200 shadow-sm hover:shadow-md`}
                                 >
-                                  <Folder size={12} className="text-yutime-secondary" />
+                                  <Folder size={12} className="text-[#2a9d8f]" />
                                   <span className="text-xs font-medium">課程資源</span>
-                                  <ChevronDown size={10} className="text-yutime-secondary" />
+                                  <ChevronDown size={10} className="text-[#2a9d8f]" />
                                 </Button>
                               </PopoverTrigger>
                               <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
@@ -518,7 +518,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                           e.stopPropagation();
                                           handleResourceDownload(resource.url);
                                         }}
-                                        className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
+                                        className="h-6 w-6 p-0 bg-[#2a9d8f] hover:bg-[#2a9d8f]/80 transition-colors"
                                         size="sm"
                                       >
                                         <Download size={12} className="text-white" />
@@ -575,13 +575,13 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                         placeholder="請在這裡輸入您的問題，講師會盡快回覆..."
                         value={newQuestion}
                         onChange={(e) => setNewQuestion(e.target.value)}
-                        className="min-h-[80px] md:min-h-[100px] text-sm md:text-base border-yutime-neutral/40 focus:border-yutime-secondary/50 focus:ring-yutime-secondary/20"
+                        className="min-h-[80px] md:min-h-[100px] text-sm md:text-base border-yutime-neutral/40 focus:border-[#2a9d8f]/50 focus:ring-[#2a9d8f]/20"
                       />
                       <div className="flex justify-end">
                         <Button
                           onClick={handleSubmitQuestion}
                           disabled={!newQuestion.trim()}
-                          className="btn-primary flex items-center space-x-2 text-sm md:text-base font-medium min-w-[44px] min-h-[44px]"
+                          className="bg-[#2a9d8f] hover:bg-[#2a9d8f]/90 text-white font-medium px-6 py-2 rounded-lg transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-[#2a9d8f]/20 flex items-center space-x-2 min-w-[44px] min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"
                           size={isMobile ? "sm" : "default"}
                         >
                           <Send size={14} />
@@ -595,13 +595,13 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium text-yutime-text text-sm md:text-base">課程討論 ({qaItems.length})</h3>
                       <Select value={qaSortBy} onValueChange={(value: 'newest' | 'oldest' | 'most-liked') => setQaSortBy(value)}>
-                        <SelectTrigger className="w-28 md:w-32 h-8 text-xs md:text-sm">
+                        <SelectTrigger className="w-28 md:w-32 h-8 text-xs md:text-sm border-yutime-neutral/40 focus:border-[#2a9d8f]/50 focus:ring-[#2a9d8f]/20">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="newest">最新</SelectItem>
-                          <SelectItem value="oldest">最舊</SelectItem>
-                          <SelectItem value="most-liked">最多讚</SelectItem>
+                        <SelectContent className="bg-white border shadow-lg">
+                          <SelectItem value="newest" className="hover:bg-[#2a9d8f]/10 focus:bg-[#2a9d8f]/10">最新</SelectItem>
+                          <SelectItem value="oldest" className="hover:bg-[#2a9d8f]/10 focus:bg-[#2a9d8f]/10">最舊</SelectItem>
+                          <SelectItem value="most-liked" className="hover:bg-[#2a9d8f]/10 focus:bg-[#2a9d8f]/10">最多讚</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -624,7 +624,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => handleLike(item.id)}
-                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-yutime-secondary hover:bg-yutime-secondary/10 min-w-[44px] min-h-[44px] p-1"
+                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-[#2a9d8f] hover:bg-[#2a9d8f]/10 min-w-[44px] min-h-[44px] p-1 transition-colors"
                                 >
                                   <ThumbsUp size={12} />
                                   <span className="text-xs">{item.likes}</span>
@@ -639,12 +639,12 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                         </div>
 
                         {item.answer && (
-                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-yutime-secondary/30 bg-yutime-secondary/5 p-3 rounded-r-lg">
+                          <div className="ml-2 md:ml-4 pl-3 md:pl-4 border-l-2 border-[#2a9d8f]/30 bg-[#2a9d8f]/5 p-3 rounded-r-lg">
                             <div className="flex items-center space-x-2 mb-2 text-xs md:text-sm">
-                              <span className={`font-medium ${item.answer.isInstructor ? 'text-yutime-secondary' : 'text-yutime-text/60'}`}>
+                              <span className={`font-medium ${item.answer.isInstructor ? 'text-[#2a9d8f]' : 'text-yutime-text/60'}`}>
                                 {item.answer.author}
                                 {item.answer.isInstructor && (
-                                  <span className="ml-1 bg-yutime-secondary text-white px-2 py-0.5 rounded-full text-xs">講師</span>
+                                  <span className="ml-1 bg-[#2a9d8f] text-white px-2 py-0.5 rounded-full text-xs">講師</span>
                                 )}
                               </span>
                               <span className="text-yutime-text/60">•</span>

@@ -183,7 +183,7 @@ const SessionContent: React.FC<SessionContentProps> = ({
                         </div>
                         <Button
                           onClick={() => window.open(resource.url, '_blank')}
-                          className="btn-primary text-base font-medium min-w-[44px] min-h-[44px]"
+                          className="bg-[#2a9d8f] hover:bg-[#2a9d8f]/90 text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-[#2a9d8f]/20 min-w-[44px] min-h-[44px]"
                         >
                           下載
                         </Button>
@@ -212,13 +212,13 @@ const SessionContent: React.FC<SessionContentProps> = ({
                         placeholder="請在這裡輸入您的問題，講師會盡快回覆..."
                         value={newQuestion}
                         onChange={(e) => setNewQuestion(e.target.value)}
-                        className="min-h-[100px] text-base border-yutime-neutral/40 focus:border-yutime-secondary/50 focus:ring-yutime-secondary/20"
+                        className="min-h-[100px] text-base border-yutime-neutral/40 focus:border-[#2a9d8f]/50 focus:ring-[#2a9d8f]/20"
                       />
                       <div className="flex justify-end">
                         <Button
                           onClick={handleSubmitQuestion}
                           disabled={!newQuestion.trim()}
-                          className="btn-primary flex items-center space-x-2 text-base font-medium min-w-[44px] min-h-[44px]"
+                          className="bg-[#2a9d8f] hover:bg-[#2a9d8f]/90 text-white font-medium px-6 py-2 rounded-lg transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-[#2a9d8f]/20 flex items-center space-x-2 min-w-[44px] min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Send size={16} />
                           <span>發布問題</span>
@@ -249,7 +249,7 @@ const SessionContent: React.FC<SessionContentProps> = ({
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => handleLike(item.id)}
-                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-yutime-secondary hover:bg-yutime-secondary/10 min-w-[44px] min-h-[44px]"
+                                  className="flex items-center space-x-1 text-yutime-text/60 hover:text-[#2a9d8f] hover:bg-[#2a9d8f]/10 min-w-[44px] min-h-[44px] transition-colors"
                                 >
                                   <ThumbsUp size={14} />
                                   <span className="text-sm">{item.likes}</span>
@@ -265,12 +265,12 @@ const SessionContent: React.FC<SessionContentProps> = ({
 
                         {/* Answer */}
                         {item.answer && (
-                          <div className="ml-4 pl-4 border-l-2 border-yutime-secondary/30 bg-yutime-secondary/5 p-3 rounded-r-lg">
+                          <div className="ml-4 pl-4 border-l-2 border-[#2a9d8f]/30 bg-[#2a9d8f]/5 p-3 rounded-r-lg">
                             <div className="flex items-center space-x-2 mb-2 text-sm">
-                              <span className={`font-medium ${item.answer.isInstructor ? 'text-yutime-secondary' : 'text-yutime-text/60'}`}>
+                              <span className={`font-medium ${item.answer.isInstructor ? 'text-[#2a9d8f]' : 'text-yutime-text/60'}`}>
                                 {item.answer.author}
                                 {item.answer.isInstructor && (
-                                  <span className="ml-1 bg-yutime-secondary text-white px-2 py-0.5 rounded-full text-xs">講師</span>
+                                  <span className="ml-1 bg-[#2a9d8f] text-white px-2 py-0.5 rounded-full text-xs">講師</span>
                                 )}
                               </span>
                               <span className="text-yutime-text/60">•</span>
