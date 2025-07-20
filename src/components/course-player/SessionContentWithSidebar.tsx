@@ -335,7 +335,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                     {lesson.resources.map((resource, index) => (
                                       <div 
                                         key={index}
-                                        className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/10 hover:border-[#2a9d8f]/60 transition-all duration-200 cursor-pointer group"
+                                        className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
                                       >
                                         <div className="flex items-center space-x-2">
                                           {getResourceIcon(resource.type)}
@@ -504,7 +504,7 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                   {lesson.resources.map((resource, index) => (
                                     <div 
                                       key={index}
-                                      className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/10 hover:border-[#2a9d8f]/60 transition-all duration-200 cursor-pointer group"
+                                      className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
                                     >
                                       <div className="flex items-center space-x-2">
                                         {getResourceIcon(resource.type)}
