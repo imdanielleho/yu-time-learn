@@ -154,7 +154,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
               {/* Chapter Header with background shading */}
               <div
                 onClick={() => toggleChapter(chapter.id)}
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100 transition-colors border-b border-gray-200 bg-gray-50"
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-150 transition-colors border-b border-gray-200 bg-gray-100"
               >
                 <div className="flex items-center space-x-3">
                   {expandedChapters.includes(chapter.id) ? (
