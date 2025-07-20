@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -105,9 +106,9 @@ const Dashboard = () => {
           {mockCourses.map((course) => (
             <div key={course.id} className="bg-card rounded-xl p-4 md:p-6 shadow-soft hover:shadow-card transition-all duration-300">
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                {/* Course Thumbnail */}
+                {/* Course Thumbnail - 16:9 aspect ratio to match homepage */}
                 <div className="flex-shrink-0 w-full sm:w-32 md:w-40">
-                  <div className="aspect-video sm:aspect-square rounded-lg overflow-hidden bg-muted">
+                  <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: '16/9' }}>
                     <img 
                       src={course.thumbnail} 
                       alt={course.title}
@@ -145,11 +146,11 @@ const Dashboard = () => {
                     </div>
                   )}
 
-                  {/* Action Button */}
+                  {/* Action Button - Match homepage CTA styling */}
                   <div className="pt-2">
                     <Button 
                       onClick={() => handleContinueLearning(course.id)}
-                      className="btn-primary w-full sm:w-auto"
+                      className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-sm px-6 py-3 w-full md:w-auto rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
                     >
                       Continue Learning
                     </Button>

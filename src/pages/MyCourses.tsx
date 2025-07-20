@@ -116,9 +116,9 @@ const MyCourses = () => {
     return (
       <div key={course.id} className="bg-white rounded-lg p-6 shadow-sm border">
         <div className="flex gap-4 mb-4">
-          {/* Course Thumbnail */}
-          <div className="flex-shrink-0 w-32 h-20">
-            <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+          {/* Course Thumbnail - 16:9 aspect ratio to match homepage */}
+          <div className="flex-shrink-0 w-32">
+            <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: '16/9' }}>
               <img 
                 src={course.thumbnail} 
                 alt={course.title}
@@ -188,10 +188,11 @@ const MyCourses = () => {
               }
             </span>
           </div>
+          {/* CTA Button - Match homepage styling */}
           <Button 
             className={expired 
-              ? "bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
-              : "bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+              ? "bg-red-600 hover:bg-red-700 text-white text-sm px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
+              : "bg-[#2a9d8f] hover:bg-[#228b7a] text-white text-sm px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.01] shadow-sm hover:shadow-md"
             }
           >
             {expired 
