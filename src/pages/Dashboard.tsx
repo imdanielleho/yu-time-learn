@@ -101,13 +101,13 @@ const Dashboard = () => {
 
       <div data-tour="course-cards">
         <h2 className="text-lg md:text-xl font-bold text-yutime-navy mb-4">In Progress Courses</h2>
-        <div className="space-y-3">
+        <div className="grid gap-4 md:gap-6">
           {mockCourses.map((course) => (
-            <div key={course.id} className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex gap-3 h-20">
-                {/* Course Thumbnail - Full height */}
-                <div className="flex-shrink-0 w-28">
-                  <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+            <div key={course.id} className="bg-card rounded-xl p-4 md:p-6 shadow-soft hover:shadow-card transition-all duration-300">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                {/* Course Thumbnail */}
+                <div className="flex-shrink-0 w-full sm:w-32 md:w-40">
+                  <div className="aspect-video sm:aspect-square rounded-lg overflow-hidden bg-muted">
                     <img 
                       src={course.thumbnail} 
                       alt={course.title}
@@ -116,40 +116,44 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Course Info */}
-                <div className="flex-1 min-w-0 flex flex-col justify-between">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-yutime-navy text-sm md:text-base truncate leading-tight">{course.title}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{course.session}</p>
-                    </div>
-                    {course.accessType === 'limited' && course.expiryDate && (
-                      <div className="ml-3 flex-shrink-0">
-                        <ExpiryCountdown expiryDate={course.expiryDate} />
-                      </div>
-                    )}
+                {/* Course Content */}
+                <div className="flex-1 min-w-0 space-y-3">
+                  {/* Title and Session */}
+                  <div>
+                    <h3 className="font-semibold text-yutime-navy text-base md:text-lg leading-tight mb-1">{course.title}</h3>
+                    <p className="text-sm text-muted-foreground">{course.session}</p>
                   </div>
 
                   {/* Progress Section */}
-                  <div className="mt-2">
-                    <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
                       <span>{course.lessons.completed}/{course.lessons.total} lessons</span>
-                      <span className="font-medium">{course.progress}%</span>
+                      <span className="font-medium text-yutime-navy">{course.progress}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-1">
-                      <div className="bg-yutime-blue h-1 rounded-full transition-all duration-300" style={{ width: `${course.progress}%` }}></div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className="bg-yutime-secondary h-2 rounded-full transition-all duration-300" 
+                        style={{ width: `${course.progress}%` }}
+                      />
                     </div>
                   </div>
-                </div>
 
-                {/* Action Button */}
-                <div className="flex items-center ml-3">
-                  <Button 
-                    onClick={() => handleContinueLearning(course.id)}
-                    className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md"
-                  >
-                    Continue Learning
-                  </Button>
+                  {/* Expiry Countdown */}
+                  {course.accessType === 'limited' && course.expiryDate && (
+                    <div className="flex justify-start">
+                      <ExpiryCountdown expiryDate={course.expiryDate} />
+                    </div>
+                  )}
+
+                  {/* Action Button */}
+                  <div className="pt-2">
+                    <Button 
+                      onClick={() => handleContinueLearning(course.id)}
+                      className="btn-primary w-full sm:w-auto"
+                    >
+                      Continue Learning
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
