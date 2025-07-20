@@ -120,6 +120,7 @@ const Dashboard = () => {
                 <div className="flex-1">
                   <div>
                     <h3 className="font-semibold text-yutime-navy text-lg mb-2">{course.title}</h3>
+                    <p className="text-sm text-gray-500">{course.session}</p>
                   </div>
                 </div>
               </div>
@@ -136,11 +137,6 @@ const Dashboard = () => {
                     style={{ width: `${course.progress}%` }}
                   ></div>
                 </div>
-              </div>
-
-              {/* Session Name */}
-              <div className="mb-2">
-                <p className="text-sm text-gray-500">{course.session}</p>
               </div>
 
               {/* Countdown */}
