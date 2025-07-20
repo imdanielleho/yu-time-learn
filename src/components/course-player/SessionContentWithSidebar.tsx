@@ -333,10 +333,10 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                                 <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
                                   <div className="space-y-2">
                                     {lesson.resources.map((resource, index) => (
-                                      <div 
-                                        key={index}
-                                        className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
-                                      >
+                                       <div 
+                                         key={index}
+                                         className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/15 hover:border-[#2a9d8f]/60 transition-all duration-200 cursor-pointer"
+                                       >
                                         <div className="flex items-center space-x-2">
                                           {getResourceIcon(resource.type)}
                                           <div>
@@ -502,10 +502,10 @@ const SessionContentWithSidebar: React.FC<SessionContentWithSidebarProps> = ({
                               <PopoverContent className="w-64 p-3 bg-background border shadow-lg z-50" align="end">
                                 <div className="space-y-2">
                                   {lesson.resources.map((resource, index) => (
-                                    <div 
-                                      key={index}
-                                      className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
-                                    >
+                                     <div 
+                                       key={index}
+                                       className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-[#2a9d8f]/15 hover:border-[#2a9d8f]/60 transition-all duration-200 cursor-pointer"
+                                     >
                                       <div className="flex items-center space-x-2">
                                         {getResourceIcon(resource.type)}
                                         <div>
