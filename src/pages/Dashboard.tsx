@@ -104,25 +104,25 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {mockCourses.map((course) => (
             <div key={course.id} className="bg-white rounded-lg p-6 shadow-sm border">
-              <div className="flex gap-4 mb-4">
-                {/* Course Thumbnail */}
-                <div className="flex-shrink-0 w-32 h-20">
-                  <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
-                    <img 
-                      src={course.thumbnail} 
-                      alt={course.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+              {/* Course Thumbnail */}
+              <div className="w-full h-48 mb-4">
+                <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+                  <img 
+                    src={course.thumbnail} 
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+              </div>
 
-                {/* Course Header Info */}
-                <div className="flex-1">
-                  <div>
-                    <h3 className="font-semibold text-yutime-navy text-lg mb-2">{course.title}</h3>
-                    <p className="text-sm text-gray-500">{course.session}</p>
-                  </div>
-                </div>
+              {/* Course Title */}
+              <div className="mb-2">
+                <h3 className="font-semibold text-yutime-navy text-lg">{course.title}</h3>
+              </div>
+
+              {/* Session Name */}
+              <div className="mb-4">
+                <p className="text-sm text-gray-500">{course.session}</p>
               </div>
 
               {/* Progress Section */}
