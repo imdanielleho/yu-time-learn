@@ -252,7 +252,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                       {lesson.resources.map((resource, index) => (
                                         <div 
                                           key={index}
-                                          className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-yutime-neutral/30 transition-colors"
+                                          className="flex items-center justify-between p-2 border border-yutime-neutral/40 rounded-lg hover:bg-gray-200 hover:border-yutime-neutral/60 transition-colors"
                                         >
                                           <div className="flex items-center space-x-2">
                                             {getResourceIcon(resource.type)}
