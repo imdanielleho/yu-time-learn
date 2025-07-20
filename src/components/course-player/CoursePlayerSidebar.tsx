@@ -92,7 +92,9 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
     }
   };
 
-  const handleResourceDownload = (url: string) => {
+  const handleResourceDownload = (url: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     window.open(url, '_blank');
   };
 
@@ -105,6 +107,12 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
     // If clicking on a different lesson, select it and ensure it will autoplay
     onLessonSelect(globalIndex);
     // The VideoPlayer will handle autoplay when lesson changes
+  };
+
+  const handleResourceButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Let the Popover handle its own state
   };
 
   return (
@@ -224,7 +232,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                     <Button
                                       variant="outline"
                                       size="sm"
-                                      onClick={(e) => e.stopPropagation()}
+                                      onClick={handleResourceButtonClick}
                                       className="h-7 px-2 flex items-center gap-1 hover:bg-yutime-secondary/10 border border-yutime-secondary/40 hover:border-yutime-secondary text-yutime-secondary hover:text-yutime-secondary bg-yutime-secondary/5 transition-all duration-200 shadow-sm hover:shadow-md"
                                     >
                                       <Folder size={12} className="text-yutime-secondary" />
@@ -247,10 +255,7 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                             </div>
                                           </div>
                                           <Button
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              handleResourceDownload(resource.url);
-                                            }}
+                                            onClick={(e) => handleResourceDownload(resource.url, e)}
                                             className="h-6 w-6 p-0 bg-yutime-secondary hover:bg-yutime-secondary/80"
                                             size="sm"
                                           >
