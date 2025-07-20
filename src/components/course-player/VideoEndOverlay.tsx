@@ -72,7 +72,7 @@ const VideoEndOverlay: React.FC<VideoEndOverlayProps> = ({
   }
 
   return (
-    <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-[60] px-12 md:px-20 lg:px-32">
+    <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-[60] px-8 md:px-12 lg:px-16">
       <div className="bg-white rounded-2xl p-6 md:p-8 max-w-md mx-4 text-center animate-in fade-in-0 zoom-in-95 duration-300 shadow-2xl">
         <div className="mb-6">
           <h3 className="text-xl font-bold text-yutime-primary mb-3">
