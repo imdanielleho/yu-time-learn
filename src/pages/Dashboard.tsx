@@ -104,49 +104,51 @@ const Dashboard = () => {
         <div className="space-y-3">
           {mockCourses.map((course) => (
             <div key={course.id} className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex gap-3 h-20">
-                {/* Course Thumbnail - Full height */}
-                <div className="flex-shrink-0 w-28">
-                  <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
-                    <img 
-                      src={course.thumbnail} 
-                      alt={course.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                {/* Course Info */}
-                <div className="flex-1 min-w-0 flex flex-col justify-between">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-yutime-navy text-sm md:text-base truncate leading-tight">{course.title}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{course.session}</p>
+              <div className="flex flex-col space-y-3">
+                <div className="flex gap-3">
+                  {/* Course Thumbnail */}
+                  <div className="flex-shrink-0 w-28 h-20">
+                    <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+                      <img 
+                        src={course.thumbnail} 
+                        alt={course.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    {course.accessType === 'limited' && course.expiryDate && (
-                      <div className="ml-3 flex-shrink-0">
-                        <ExpiryCountdown expiryDate={course.expiryDate} />
+                  </div>
+
+                  {/* Course Info */}
+                  <div className="flex-1 min-w-0 flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-yutime-navy text-sm md:text-base truncate leading-tight">{course.title}</h3>
+                        <p className="text-xs text-gray-500 mt-1">{course.session}</p>
                       </div>
-                    )}
-                  </div>
-
-                  {/* Progress Section */}
-                  <div className="mt-2">
-                    <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
-                      <span>{course.lessons.completed}/{course.lessons.total} lessons</span>
-                      <span className="font-medium">{course.progress}%</span>
+                      {course.accessType === 'limited' && course.expiryDate && (
+                        <div className="ml-3 flex-shrink-0">
+                          <ExpiryCountdown expiryDate={course.expiryDate} />
+                        </div>
+                      )}
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-1">
-                      <div className="bg-yutime-blue h-1 rounded-full transition-all duration-300" style={{ width: `${course.progress}%` }}></div>
+
+                    {/* Progress Section */}
+                    <div className="mt-2">
+                      <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
+                        <span>{course.lessons.completed}/{course.lessons.total} lessons</span>
+                        <span className="font-medium">{course.progress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-1">
+                        <div className="bg-yutime-blue h-1 rounded-full transition-all duration-300" style={{ width: `${course.progress}%` }}></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Button */}
-                <div className="flex items-center ml-3">
+                {/* Action Button - Moved below progress */}
+                <div className="flex justify-end">
                   <Button 
                     onClick={() => handleContinueLearning(course.id)}
-                    className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md"
+                    className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md w-full sm:w-auto"
                   >
                     Continue Learning
                   </Button>
