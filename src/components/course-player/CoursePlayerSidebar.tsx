@@ -253,7 +253,13 @@ const CoursePlayerSidebar: React.FC<CoursePlayerSidebarProps> = ({
                                       {lesson.resources.map((resource, index) => (
                                         <div 
                                           key={index}
-                                          className="flex items-center justify-between border border-yutime-neutral/40 rounded-lg hover:bg-gray-100 hover:border-yutime-neutral/60 transition-colors"
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            handleResourceDownload(resource.url);
+                                            setOpenResourcePopover(null);
+                                          }}
+                                          className="flex items-center justify-between border border-yutime-neutral/40 rounded-lg hover:bg-gray-100 hover:border-yutime-neutral/60 transition-colors cursor-pointer"
                                         >
                                            <div className="flex items-center space-x-2 p-2">
                                              {getResourceIcon(resource.type)}
