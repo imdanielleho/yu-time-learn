@@ -59,7 +59,7 @@ const HeroCarousel = () => {
   }, [api]);
 
   return (
-    <section className="bg-background relative py-12 md:py-16 lg:py-20 overflow-hidden">
+    <section className="bg-white relative py-12 md:py-16 lg:py-20 overflow-hidden">
       <div className="px-0 md:container md:mx-auto md:px-8 max-w-7xl">
         <div className="relative">
           <Carousel

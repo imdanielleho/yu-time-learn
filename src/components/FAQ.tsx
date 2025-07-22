@@ -20,7 +20,7 @@ const faqItems = [{
 
 const FAQ = () => {
   return (
-    <section id="faq" className="bg-yutime-softWhite py-16 md:py-20">
+    <section id="faq" className="bg-yutime-neutral/30 py-16 md:py-20">
       <div className="container max-w-4xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
