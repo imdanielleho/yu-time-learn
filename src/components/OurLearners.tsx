@@ -2,7 +2,6 @@ import React from 'react';
 import midlifeCareerShifterImg from '@/assets/midlife-career-shifter.jpg';
 import preRetireeplannerImg from '@/assets/pre-retiree-planner.jpg';
 import asianCreativeLearnerImg from '@/assets/asian-creative-learner.jpg';
-
 const OurLearners = () => {
   const getSpanClasses = (color: string) => {
     switch (color) {
@@ -16,42 +15,33 @@ const OurLearners = () => {
         return 'bg-yutime-secondary/10 text-yutime-secondary';
     }
   };
-
-  const personas = [
-    {
-      title: "轉型前鋒",
-      ageStage: "在職",
-      tagline: "我不想等被淘汰，現在就想升級自己",
-      description: "想提升數位力、掌握 AI 工具，開展副業或轉型升級職涯。",
-      image: midlifeCareerShifterImg,
-      color: "blue"
-    },
-    {
-      title: "過渡規劃者",
-      ageStage: "準備退休", 
-      tagline: "有規劃的退場，才能有選擇的第二人生",
-      description: "掌握健康、財務與心理韌性，安心迎接轉變。",
-      image: preRetireeplannerImg,
-      color: "green"
-    },
-    {
-      title: "樂齡生活家",
-      ageStage: "已退休",
-      tagline: "現在的我，才真正有時間學自己想學的東西",
-      description: "想活得健康、有趣、有伴，學習新科技與生活實用技能。",
-      image: asianCreativeLearnerImg,
-      color: "orange"
-    }
-  ];
-
-  return (
-    <section className="bg-yutime-neutral/30 py-16 md:py-20">
+  const personas = [{
+    title: "轉型前鋒",
+    ageStage: "在職",
+    tagline: "我不想等被淘汰，現在就想升級自己",
+    description: "想提升數位力、掌握 AI 工具，開展副業或轉型升級職涯。",
+    image: midlifeCareerShifterImg,
+    color: "blue"
+  }, {
+    title: "過渡規劃者",
+    ageStage: "準備退休",
+    tagline: "有規劃的退場，才能有選擇的第二人生",
+    description: "掌握健康、財務與心理韌性，安心迎接轉變。",
+    image: preRetireeplannerImg,
+    color: "green"
+  }, {
+    title: "樂齡生活家",
+    ageStage: "已退休",
+    tagline: "現在的我，才真正有時間學自己想學的東西",
+    description: "想活得健康、有趣、有伴，學習新科技與生活實用技能。",
+    image: asianCreativeLearnerImg,
+    color: "orange"
+  }];
+  return <section className="bg-yutime-neutral/30 py-16 md:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
-              Our Learners
-            </p>
+            <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">適合對象</p>
             <h2 className="text-3xl md:text-4xl font-serif text-yutime-primary mb-6">
               Every Journey is Unique
             </h2>
@@ -61,16 +51,11 @@ const OurLearners = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {personas.map((persona, index) => (
-            <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
+          {personas.map((persona, index) => <div key={index} className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col group hover:shadow-wellness transition-all duration-300">
               <div className="flex-1">
                 <div className="flex justify-center mb-6">
                   <div className="w-40 h-40 rounded-3xl overflow-hidden shadow-soft group-hover:shadow-warm transition-all duration-300 hover-lift">
-                    <img 
-                      src={persona.image} 
-                      alt={persona.title}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={persona.image} alt={persona.title} className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <div className="mb-6">
@@ -90,13 +75,10 @@ const OurLearners = () => {
                   {persona.description}
                 </p>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default OurLearners;
