@@ -61,7 +61,7 @@ const HeroCarousel = () => {
 
   return (
     <section className="w-full bg-white py-0 md:py-6">
-      <div className="px-0 md:container md:mx-auto md:px-16 max-w-7xl">
+      <div className="px-0 md:container md:mx-auto md:px-8 max-w-7xl">
         <div className="relative">
           <Carousel
             setApi={setApi}
@@ -74,9 +74,9 @@ const HeroCarousel = () => {
             aria-roledescription="carousel"
             aria-label="Featured course banners"
           >
-            <CarouselContent className="md:-ml-8 md:py-8">
+            <CarouselContent className="md:-ml-4">
               {banners.map((banner, index) => (
-                <CarouselItem key={banner.id} className="md:pl-8 md:px-4">
+                <CarouselItem key={banner.id} className="md:pl-4">
                   <div className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] md:rounded-2xl overflow-hidden shadow-2xl md:border md:border-border/20">
                     <img
                       src={banner.image}
