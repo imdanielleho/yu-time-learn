@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, BookOpen, Sparkles } from 'lucide-react';
+
 const ValueProposition = () => {
   const values = [{
     icon: <Heart size={32} className="text-yutime-coral" />,
@@ -7,14 +8,16 @@ const ValueProposition = () => {
     description: "Discover health and wellness practices backed by science and delivered with warmth. Every course is designed to support your journey to feeling your best."
   }, {
     icon: <BookOpen size={32} className="text-yutime-secondary" />,
-    title: "Digital Confidence",
+    title: "Digital Confidence", 
     description: "Build tech skills at your own pace in a supportive environment. No judgment, just gentle guidance and celebration of every small victory."
   }, {
     icon: <Sparkles size={32} className="text-yutime-accent" />,
     title: "每堂課都是「用得上的知識」",
     description: "從生活常見場景出發，內容實用、精簡、有解法"
   }];
-  return <section className="bg-yutime-softWhite py-16 md:py-24">
+  
+  return (
+    <section className="bg-yutime-softWhite py-16 md:py-24">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
@@ -45,6 +48,8 @@ const ValueProposition = () => {
         </div>
       </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ValueProposition;
