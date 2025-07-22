@@ -26,7 +26,7 @@ const LearningProcess = () => {
       });
     }
   };
-  return <section id="how-it-works" className="relative bg-gradient-to-br from-yutime-neutral via-white to-yutime-cream py-16 md:py-20">
+  return <section id="how-it-works" className="bg-yutime-neutral/30 py-16 md:py-20">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">

@@ -56,7 +56,7 @@ const FeaturedCourses = () => {
     </div>;
 
   return (
-    <section id="courses" className="bg-white py-12 md:py-16 lg:py-20">
+    <section id="courses" className="relative bg-gradient-to-br from-yutime-neutral via-white to-yutime-cream py-12 md:py-16 lg:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 md:mb-12 text-center">
