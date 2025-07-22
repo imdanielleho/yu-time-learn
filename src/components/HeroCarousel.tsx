@@ -102,10 +102,10 @@ const HeroCarousel = () => {
               ))}
             </CarouselContent>
             
-            {/* Enhanced Desktop arrows with aesthetic design */}
+            {/* Enhanced Desktop arrows with reduced size and updated opacity */}
             <button
               onClick={() => api?.scrollPrev()}
-              className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 items-center justify-center rounded-full bg-white/95 hover:bg-white shadow-lg hover:shadow-xl border border-gray-200/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none group z-10"
+              className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-lg hover:shadow-xl border border-gray-200/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none group z-10"
               aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
             >
               <svg 
@@ -125,7 +125,7 @@ const HeroCarousel = () => {
             
             <button
               onClick={() => api?.scrollNext()}
-              className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 items-center justify-center rounded-full bg-white/95 hover:bg-white shadow-lg hover:shadow-xl border border-gray-200/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none group z-10"
+              className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-lg hover:shadow-xl border border-gray-200/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none group z-10"
               aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
             >
               <svg 
