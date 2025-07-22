@@ -62,8 +62,8 @@ const FeaturedCourses = () => {
           
           {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none">
               <Carousel className="w-full" setApi={setApi}>
-                <CarouselContent className="-ml-2 md:-ml-4">
-                  {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                <CarouselContent className="-ml-4 md:-ml-4">
+                  {courses.map(course => <CarouselItem key={course.id} className="pl-4 md:pl-4 md:basis-1/2 lg:basis-1/3">
                       <CourseCard course={course} />
                     </CarouselItem>)}
                 </CarouselContent>
