@@ -60,10 +60,10 @@ const FeaturedCourses = () => {
             <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg font-light">今天，遇見更好的自己</p>
           </div>
           
-          {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none">
-              <Carousel className="w-full" setApi={setApi}>
-                <CarouselContent className="-ml-2 md:-ml-4">
-                  {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+          {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none overflow-visible">
+              <Carousel className="w-full overflow-visible" setApi={setApi}>
+                <CarouselContent className="-ml-2 md:-ml-4 overflow-visible">
+                  {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 py-2">
                       <CourseCard course={course} />
                     </CarouselItem>)}
                 </CarouselContent>
