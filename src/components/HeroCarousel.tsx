@@ -17,31 +17,29 @@ const HeroCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
-  );
+  // Removed autoplay for better accessibility
 
   const banners = [
     {
       id: 1,
-      image: digitalMarketingBanner,
-      alt: "Digital Marketing Mastery - Learn from Industry Experts",
-      title: "Digital Marketing Mastery",
-      tagline: "Learn from Industry Experts"
+      background: "bg-gradient-to-br from-blue-600 to-blue-800",
+      title: "Master Digital Marketing",
+      tagline: "Transform Your Career Online",
+      cta: "Start Learning Today"
     },
     {
       id: 2,
-      image: financialPlanningBanner,
-      alt: "Retirement Planning Essentials - Secure Your Financial Future",
-      title: "Retirement Planning Essentials",
-      tagline: "Secure Your Financial Future"
+      background: "bg-gradient-to-br from-green-600 to-emerald-700",
+      title: "Secure Your Financial Future",
+      tagline: "Expert-Led Retirement Planning",
+      cta: "Plan Your Future"
     },
     {
       id: 3,
-      image: healthyCookingBanner,
-      alt: "Healthy Cooking Fundamentals - Nourish Your Body and Mind",
-      title: "Healthy Cooking Fundamentals",
-      tagline: "Nourish Your Body and Mind"
+      background: "bg-gradient-to-br from-orange-500 to-red-600",
+      title: "Cook Healthy, Live Better",
+      tagline: "Nutrition Made Simple",
+      cta: "Discover Recipes"
     }
   ];
 
@@ -64,10 +62,7 @@ const HeroCarousel = () => {
         <div className="relative">
         <Carousel
           setApi={setApi}
-          plugins={[plugin.current]}
           className="w-full"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
           opts={{
             align: "start",
             loop: true,
@@ -79,27 +74,19 @@ const HeroCarousel = () => {
           <CarouselContent>
             {banners.map((banner, index) => (
               <CarouselItem key={banner.id}>
-                 <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px] rounded-lg overflow-hidden">
-                   <img
-                     src={banner.image}
-                     alt={banner.alt}
-                     className="w-full h-full object-cover"
-                     loading={index === 0 ? "eager" : "lazy"}
-                   />
-                   {/* Text Overlay */}
-                   <div className="absolute inset-0 bg-black/20 flex items-center">
-                     <div className="container mx-auto px-4">
-                       <div className="max-w-2xl">
-                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
-                           {banner.title}
-                         </h2>
-                         <p className="text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-md">
-                           {banner.tagline}
-                         </p>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
+                <div className={`relative w-full h-[330px] md:h-[385px] lg:h-[440px] rounded-lg overflow-hidden ${banner.background} flex items-center justify-center`}>
+                  <div className="text-center text-white px-8 max-w-4xl">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                      {banner.title}
+                    </h2>
+                    <p className="text-xl md:text-2xl lg:text-3xl mb-8 opacity-90 font-medium">
+                      {banner.tagline}
+                    </p>
+                    <button className="bg-white text-gray-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors duration-200 shadow-lg">
+                      {banner.cta}
+                    </button>
+                  </div>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
