@@ -30,8 +30,23 @@ const LearningProcess = () => {
   };
 
   return (
-    <section id="how-it-works" className="bg-white py-16 md:py-20">
-      <div className="container max-w-7xl mx-auto px-4">
+    <section id="how-it-works" className="bg-white py-16 md:py-20 relative">
+      {/* Top organic shape separator */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
+        <svg className="relative block w-full h-20 md:h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z" className="fill-yutime-softWhite"></path>
+        </svg>
+      </div>
+      
+      {/* Decorative geometric shapes */}
+      <div className="absolute top-40 right-8 opacity-10">
+        <div className="w-20 h-20 bg-yutime-secondary/20 rounded-lg rotate-12"></div>
+      </div>
+      <div className="absolute bottom-40 left-12 opacity-15">
+        <div className="w-16 h-16 border-4 border-yutime-accent/30 rotate-45"></div>
+      </div>
+      
+      <div className="container max-w-7xl mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             如何開始
@@ -91,6 +106,13 @@ const LearningProcess = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Bottom curved separator */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+        <svg className="relative block w-full h-16 md:h-20" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-yutime-neutral/30"></path>
+        </svg>
       </div>
     </section>
   );
