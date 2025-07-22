@@ -61,7 +61,7 @@ const HeroCarousel = () => {
 
   return (
     <section className="w-full bg-white py-0 md:py-6">
-      <div className="px-0 md:container md:mx-auto md:px-8 max-w-7xl">
+      <div className="px-0 md:container md:mx-auto md:px-12 max-w-7xl">
         <div className="relative">
           <Carousel
             setApi={setApi}
