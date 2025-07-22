@@ -27,7 +27,8 @@ const LearningProcess = () => {
     }
   };
   return <section id="how-it-works" className="bg-yutime-neutral/30 py-16 md:py-20">
-      <div className="container max-w-7xl mx-auto px-4">
+      <div className="container">
+        <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             如何開始
@@ -41,7 +42,6 @@ const LearningProcess = () => {
         </div>
         
         {/* Vertical Column Layout with integrated step numbers and larger icons */}
-        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {steps.map((step, index) => <div key={index}>
                 <div className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col">
