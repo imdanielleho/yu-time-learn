@@ -25,17 +25,17 @@ const HeroCarousel = () => {
   const banners = [
     {
       id: 1,
-      image: menopauseWellnessBanner,
-      alt: "Menopause Wellness Guide - Navigate Your Journey with Confidence",
-      title: "Menopause Wellness Guide",
-      tagline: "Navigate Your Journey with Confidence"
-    },
-    {
-      id: 2,
       image: financialPlanningBanner,
       alt: "Retirement Planning Essentials - Secure Your Financial Future",
       title: "Retirement Planning Essentials",
       tagline: "Secure Your Financial Future"
+    },
+    {
+      id: 2,
+      image: menopauseWellnessBanner,
+      alt: "Menopause Wellness Guide - Navigate Your Journey with Confidence",
+      title: "Menopause Wellness Guide",
+      tagline: "Navigate Your Journey with Confidence"
     },
     {
       id: 3,
