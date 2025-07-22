@@ -51,7 +51,7 @@ const FeaturedCourses = () => {
         </div>
       </Link>
     </div>;
-  return <section id="courses" className="bg-white py-6 md:py-16 lg:py-20">
+  return <section id="courses" className="bg-white py-6 md:py-10 lg:py-12">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 md:mb-12 text-center">
