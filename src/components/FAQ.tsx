@@ -20,21 +20,8 @@ const faqItems = [{
 
 const FAQ = () => {
   return (
-    <section id="faq" className="bg-yutime-softWhite py-16 md:py-20 relative">
-      {/* Top flowing separator */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
-        <svg className="relative block w-full h-20 md:h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M1200,0H0V120c0,0,218.58-55.31,416.52-55.31S833,120,833,120s218.58-55.31,416.52-55.31" className="fill-yutime-neutral/30 opacity-60"></path>
-          <path d="M1200,0H0V90.09C0,90.09,162.4,55.31,278.26,55.31S556.52,90.09,556.52,90.09s162.4-34.78,278.26-34.78S1113.04,90.09,1113.04,90.09L1200,77.91Z" className="fill-yutime-neutral/30"></path>
-        </svg>
-      </div>
-      
-      {/* Decorative question mark */}
-      <div className="absolute top-32 right-16 opacity-10">
-        <div className="text-6xl font-bold text-yutime-secondary">?</div>
-      </div>
-      
-      <div className="container max-w-4xl mx-auto relative z-10">
+    <section id="faq" className="bg-yutime-softWhite py-16 md:py-20">
+      <div className="container max-w-4xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
             Support

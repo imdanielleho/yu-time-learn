@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -57,16 +56,7 @@ const FeaturedCourses = () => {
     </div>;
 
   return (
-    <section id="courses" className="bg-white py-12 md:py-16 lg:py-20 relative">
-      {/* Top decorative dots */}
-      <div className="absolute top-8 left-8 opacity-20">
-        <div className="grid grid-cols-3 gap-2">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <div key={i} className="w-2 h-2 bg-yutime-secondary rounded-full"></div>
-          ))}
-        </div>
-      </div>
-      
+    <section id="courses" className="bg-white py-12 md:py-16 lg:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 md:mb-12 text-center">
@@ -115,13 +105,6 @@ const FeaturedCourses = () => {
             </div>
           )}
         </div>
-      </div>
-      
-      {/* Bottom wave separator */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg className="relative block w-full h-12 md:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="fill-yutime-neutral/30"></path>
-        </svg>
       </div>
     </section>
   );
