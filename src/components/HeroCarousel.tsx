@@ -79,26 +79,26 @@ const HeroCarousel = () => {
           <CarouselContent>
             {banners.map((banner, index) => (
               <CarouselItem key={banner.id}>
-                 <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px] rounded-lg overflow-hidden">
+                 <div className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] rounded-lg overflow-hidden">
                    <img
                      src={banner.image}
                      alt={banner.alt}
                      className="w-full h-full object-cover"
                      loading={index === 0 ? "eager" : "lazy"}
                    />
-                   {/* Text Overlay */}
-                   <div className="absolute inset-0 bg-black/20 flex items-center">
-                     <div className="container mx-auto px-4">
-                       <div className="max-w-2xl">
-                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
-                           {banner.title}
-                         </h2>
-                         <p className="text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-md">
-                           {banner.tagline}
-                         </p>
-                       </div>
-                     </div>
-                   </div>
+                    {/* Text Overlay - Positioned to avoid faces */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent flex items-end pb-8">
+                      <div className="container mx-auto px-4">
+                        <div className="max-w-2xl">
+                          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
+                            {banner.title}
+                          </h2>
+                          <p className="text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-md">
+                            {banner.tagline}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                  </div>
               </CarouselItem>
             ))}
