@@ -75,7 +75,7 @@ const LearningProcess = () => {
           
           {/* CTA Section */}
           <div className="text-center">
-            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 max-w-2xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/40">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-12 max-w-2xl mx-auto shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/40">
               <h3 className="text-2xl font-serif text-yutime-primary mb-4">準備好開始了嗎？</h3>
               <p className="text-yutime-text/70 mb-8 text-lg font-light">
                 Join thousands of learners who have transformed their lives through personalized education.
