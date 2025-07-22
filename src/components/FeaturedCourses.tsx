@@ -5,11 +5,13 @@ import { Timer } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { courses } from '@/data/courses';
+
 const FeaturedCourses = () => {
   const isMobile = useIsMobile();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     if (!api) {
       return;
@@ -20,6 +22,7 @@ const FeaturedCourses = () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
+
   const CourseCard = ({
     course
   }: {
@@ -51,7 +54,8 @@ const FeaturedCourses = () => {
         </div>
       </Link>
     </div>;
-  return <section id="courses" className="bg-yutime-neutral/20 py-12 md:py-16 lg:py-20">
+
+  return <section id="courses" className="bg-white py-12 md:py-16 lg:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 md:mb-12 text-center">
@@ -86,4 +90,5 @@ const FeaturedCourses = () => {
       </div>
     </section>;
 };
+
 export default FeaturedCourses;
