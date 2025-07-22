@@ -59,7 +59,7 @@ const HeroCarousel = () => {
   }, [api]);
 
   return (
-    <section className="w-full bg-background py-12 md:py-16">
+    <section className="w-full bg-white py-12 md:py-16">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="relative">
           <Carousel
@@ -101,19 +101,59 @@ const HeroCarousel = () => {
               ))}
             </CarouselContent>
             
-            {/* Smaller, less prominent navigation buttons on mobile */}
+            {/* Desktop arrows - minimal design */}
             <CarouselPrevious 
-              className="left-2 md:left-6 bg-white/80 hover:bg-white/95 text-foreground shadow-md border-0 h-8 w-8 md:h-16 md:w-16 rounded-lg md:rounded-xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 backdrop-blur-sm opacity-70 hover:opacity-100 md:opacity-95 md:hover:opacity-100"
+              className="hidden md:flex left-6 bg-white/10 hover:bg-white/20 text-white border-0 h-12 w-12 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 backdrop-blur-sm"
               aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
             />
             <CarouselNext 
-              className="right-2 md:right-6 bg-white/80 hover:bg-white/95 text-foreground shadow-md border-0 h-8 w-8 md:h-16 md:w-16 rounded-lg md:rounded-xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 backdrop-blur-sm opacity-70 hover:opacity-100 md:opacity-95 md:hover:opacity-100"
+              className="hidden md:flex right-6 bg-white/10 hover:bg-white/20 text-white border-0 h-12 w-12 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 backdrop-blur-sm"
               aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
             />
           </Carousel>
           
-          {/* Larger, more visible indicators */}
-          <div className="flex justify-center items-center space-x-3 mt-8" role="tablist" aria-label="Carousel slide indicators">
+          {/* Mobile layout with arrows beside indicators */}
+          <div className="flex md:hidden justify-center items-center space-x-4 mt-8">
+            <button
+              onClick={() => api?.scrollPrev()}
+              className="bg-muted-foreground/20 hover:bg-muted-foreground/30 text-foreground h-8 w-8 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 flex items-center justify-center"
+              aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            
+            <div className="flex items-center space-x-3" role="tablist" aria-label="Carousel slide indicators">
+              {banners.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 focus-visible:outline-none rounded-full ${
+                    current === index + 1 
+                      ? 'w-8 h-3 bg-primary shadow-lg' 
+                      : 'w-3 h-3 bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                  }`}
+                  role="tab"
+                  aria-selected={current === index + 1}
+                  aria-label={`Go to slide ${index + 1}: ${banners[index].title}`}
+                />
+              ))}
+            </div>
+            
+            <button
+              onClick={() => api?.scrollNext()}
+              className="bg-muted-foreground/20 hover:bg-muted-foreground/30 text-foreground h-8 w-8 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 flex items-center justify-center"
+              aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+          
+          {/* Desktop indicators only */}
+          <div className="hidden md:flex justify-center items-center space-x-3 mt-8" role="tablist" aria-label="Carousel slide indicators">
             {banners.map((_, index) => (
               <button
                 key={index}
