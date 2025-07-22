@@ -77,7 +77,7 @@ const HeroCarousel = () => {
             <CarouselContent className="md:-ml-4">
               {banners.map((banner, index) => (
                 <CarouselItem key={banner.id} className="md:pl-4">
-                  <div className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] md:rounded-2xl overflow-hidden shadow-2xl md:border md:border-border/20">
+                  <div className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] md:rounded-2xl overflow-hidden md:border md:border-border/20">
                     <img
                       src={banner.image}
                       alt={banner.alt}
