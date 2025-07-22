@@ -101,13 +101,13 @@ const HeroCarousel = () => {
               ))}
             </CarouselContent>
             
-            {/* Larger, more accessible navigation buttons */}
+            {/* Smaller, less prominent navigation buttons on mobile */}
             <CarouselPrevious 
-              className="left-4 md:left-6 bg-white/95 hover:bg-white text-foreground shadow-lg border-0 h-14 w-14 md:h-16 md:w-16 rounded-xl transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 backdrop-blur-sm"
+              className="left-2 md:left-6 bg-white/80 hover:bg-white/95 text-foreground shadow-md border-0 h-8 w-8 md:h-16 md:w-16 rounded-lg md:rounded-xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 backdrop-blur-sm opacity-70 hover:opacity-100 md:opacity-95 md:hover:opacity-100"
               aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
             />
             <CarouselNext 
-              className="right-4 md:right-6 bg-white/95 hover:bg-white text-foreground shadow-lg border-0 h-14 w-14 md:h-16 md:w-16 rounded-xl transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 backdrop-blur-sm"
+              className="right-2 md:right-6 bg-white/80 hover:bg-white/95 text-foreground shadow-md border-0 h-8 w-8 md:h-16 md:w-16 rounded-lg md:rounded-xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 backdrop-blur-sm opacity-70 hover:opacity-100 md:opacity-95 md:hover:opacity-100"
               aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
             />
           </Carousel>
