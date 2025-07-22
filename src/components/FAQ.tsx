@@ -17,7 +17,7 @@ const faqItems = [{
   answer: "We offer a 30-day satisfaction guarantee. If you're not completely happy with your course, contact us within 30 days of enrollment for a full refund."
 }];
 const FAQ = () => {
-  return <section id="faq" className="section bg-white">
+  return <section id="faq" className="section bg-yutime-softWhite">
       <div className="container max-w-4xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
