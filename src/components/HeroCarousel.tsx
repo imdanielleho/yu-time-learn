@@ -60,7 +60,7 @@ const HeroCarousel = () => {
   }, [api]);
 
   return (
-    <section className="w-full bg-white py-0 md:py-8">
+    <section className="w-full bg-white py-0 md:py-4">
       <div className="px-0 md:container md:mx-auto md:px-8 max-w-7xl">
         <div className="relative">
           <Carousel
@@ -102,25 +102,66 @@ const HeroCarousel = () => {
               ))}
             </CarouselContent>
             
-            {/* Desktop arrows - minimal design */}
-            <CarouselPrevious 
-              className="hidden md:flex left-6 bg-white/10 hover:bg-white/20 text-white border-0 h-12 w-12 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 backdrop-blur-sm"
-              aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
-            />
-            <CarouselNext 
-              className="hidden md:flex right-6 bg-white/10 hover:bg-white/20 text-white border-0 h-12 w-12 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 backdrop-blur-sm"
-              aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
-            />
-          </Carousel>
-          
-          {/* Mobile layout with arrows beside indicators */}
-          <div className="flex md:hidden justify-center items-center space-x-4 mt-8">
+            {/* Enhanced Desktop arrows with aesthetic design */}
             <button
               onClick={() => api?.scrollPrev()}
-              className="bg-muted-foreground/20 hover:bg-muted-foreground/30 text-foreground h-8 w-8 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 flex items-center justify-center"
+              className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 items-center justify-center rounded-full bg-white/95 hover:bg-white shadow-lg hover:shadow-xl border border-gray-200/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none group z-10"
               aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-yutime-primary group-hover:text-yutime-secondary transition-colors"
+              >
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            
+            <button
+              onClick={() => api?.scrollNext()}
+              className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 items-center justify-center rounded-full bg-white/95 hover:bg-white shadow-lg hover:shadow-xl border border-gray-200/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none group z-10"
+              aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
+            >
+              <svg 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-yutime-primary group-hover:text-yutime-secondary transition-colors"
+              >
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          </Carousel>
+          
+          {/* Mobile layout with enhanced arrows beside indicators */}
+          <div className="flex md:hidden justify-center items-center space-x-6 mt-8">
+            <button
+              onClick={() => api?.scrollPrev()}
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-white border-2 border-yutime-primary/20 hover:border-yutime-secondary hover:bg-yutime-secondary/5 shadow-md hover:shadow-lg transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none"
+              aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
+            >
+              <svg 
+                width="18" 
+                height="18" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-yutime-primary"
+              >
                 <path d="M15 18l-6-6 6-6"/>
               </svg>
             </button>
@@ -130,10 +171,10 @@ const HeroCarousel = () => {
                 <button
                   key={index}
                   onClick={() => api?.scrollTo(index)}
-                  className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 focus-visible:outline-none rounded-full ${
+                  className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-yutime-secondary/30 focus-visible:outline-none rounded-full ${
                     current === index + 1 
-                      ? 'w-8 h-3 bg-primary shadow-lg' 
-                      : 'w-3 h-3 bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                      ? 'w-8 h-3 bg-yutime-secondary shadow-lg' 
+                      : 'w-3 h-3 bg-yutime-primary/30 hover:bg-yutime-primary/50'
                   }`}
                   role="tab"
                   aria-selected={current === index + 1}
@@ -144,10 +185,20 @@ const HeroCarousel = () => {
             
             <button
               onClick={() => api?.scrollNext()}
-              className="bg-muted-foreground/20 hover:bg-muted-foreground/30 text-foreground h-8 w-8 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 flex items-center justify-center"
+              className="w-12 h-12 flex items-center justify-center rounded-full bg-white border-2 border-yutime-primary/20 hover:border-yutime-secondary hover:bg-yutime-secondary/5 shadow-md hover:shadow-lg transition-all duration-300 focus-visible:ring-2 focus-visible:ring-yutime-secondary/50 focus-visible:outline-none"
               aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg 
+                width="18" 
+                height="18" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-yutime-primary"
+              >
                 <path d="M9 18l6-6-6-6"/>
               </svg>
             </button>
@@ -159,10 +210,10 @@ const HeroCarousel = () => {
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
-                className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 focus-visible:outline-none rounded-full ${
+                className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-yutime-secondary/30 focus-visible:outline-none rounded-full ${
                   current === index + 1 
-                    ? 'w-8 h-3 bg-primary shadow-lg' 
-                    : 'w-3 h-3 bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                    ? 'w-8 h-3 bg-yutime-secondary shadow-lg' 
+                    : 'w-3 h-3 bg-yutime-primary/40 hover:bg-yutime-primary/60'
                 }`}
                 role="tab"
                 aria-selected={current === index + 1}
