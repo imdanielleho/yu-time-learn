@@ -1,6 +1,4 @@
 
-import bannerAsianCooking from '@/assets/banner-asian-elderly-cooking.jpg';
-
 export interface Course {
   id: number;
   title: string;
@@ -51,32 +49,35 @@ export const courses: Course[] = [
   },
   {
     id: 2,
-    title: "Traditional Asian Cooking Basics", 
-    category: "Cooking & Nutrition",
-    level: "Beginner",
-    lessons: 10,
-    totalTime: "4 小時 30 分鐘",
-    image: bannerAsianCooking,
+    title: "Gentle Yoga for Better Mobility", 
+    category: "Health & Wellness",
+    level: "All Levels",
+    lessons: 12,
+    totalTime: "4 小時 45 分鐘",
+    image: "https://www.pristyncare.com/blog/wp-content/uploads/2020/06/Veera-Bhadra-Asana-e1591386373995.jpg",
     price: 120,
-    description: "Learn authentic Asian recipes and cooking techniques for healthy, delicious meals.",
-    longDescription: "Discover the art of traditional Asian cooking with simple, healthy recipes perfect for everyday meals. Learn essential techniques, ingredient selection, and time-saving tips from an experienced instructor who shares family recipes passed down through generations.",
-    instructor: "Lily Chen",
-    rating: 4.9,
-    students: 1156,
+    description: "Improve flexibility and reduce pain with gentle, age-appropriate yoga practices.",
+    longDescription: "Discover the benefits of gentle yoga designed specifically for adults 45+. This course focuses on improving flexibility, reducing joint pain, and enhancing overall well-being through safe, accessible yoga practices that can be done at home.",
+    instructor: "Maria Rodriguez",
+    rating: 4.8,
+    students: 892,
     curriculum: [
-      "Essential Asian pantry ingredients",
-      "Basic knife skills and preparation",
-      "Perfect rice cooking techniques",
-      "Simple stir-fry fundamentals",
-      "Healthy soup and broth recipes",
-      "Steaming and braising methods",
-      "Traditional dumpling making",
-      "Seasoning and flavor balancing",
-      "Meal planning and prep tips",
-      "Adapting recipes for dietary needs"
+      "Introduction to gentle yoga principles",
+      "Basic breathing techniques",
+      "Warm-up stretches and movements",
+      "Standing poses for strength",
+      "Seated poses for flexibility",
+      "Floor poses and modifications",
+      "Relaxation and meditation",
+      "Morning routine sequences",
+      "Evening wind-down practice",
+      "Chair yoga for limited mobility",
+      "Managing common aches and pains",
+      "Creating your personal practice"
     ],
     isPurchased: false,
-    accessType: 'unlimited'
+    accessType: 'limited',
+    accessDuration: '18 months'
   },
   {
     id: 3,
