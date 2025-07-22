@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 
@@ -36,7 +37,7 @@ const communityAvatars = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="bg-yutime-neutral/30 py-16 md:py-20">
+    <section id="testimonials" className="bg-white py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-20">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">

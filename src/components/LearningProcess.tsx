@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Users, BookOpen, Award, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -30,7 +31,7 @@ const LearningProcess = () => {
   };
 
   return (
-    <section id="how-it-works" className="bg-white py-16 md:py-20">
+    <section id="how-it-works" className="bg-yutime-softWhite py-16 md:py-20">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">

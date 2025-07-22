@@ -17,7 +17,7 @@ const ValueProposition = () => {
   }];
   
   return (
-    <section className="bg-yutime-softWhite py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
