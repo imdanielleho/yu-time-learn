@@ -42,7 +42,7 @@ const LearningProcess = () => {
         
         {/* Vertical Column Layout with integrated step numbers and larger icons */}
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16 max-w-sm md:max-w-none mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {steps.map((step, index) => <div key={index}>
                 <div className="bg-white rounded-3xl p-8 shadow-card border border-yutime-neutral/20 text-center h-full flex flex-col">
                   
