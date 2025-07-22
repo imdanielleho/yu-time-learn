@@ -12,6 +12,7 @@ import Autoplay from "embla-carousel-autoplay";
 import digitalMarketingBanner from "@/assets/banner-digital-marketing.jpg";
 import financialPlanningBanner from "@/assets/banner-financial-planning.jpg";
 import healthyCookingBanner from "@/assets/banner-healthy-cooking.jpg";
+import asianCookingBanner from "@/assets/banner-asian-cooking.jpg";
 
 const HeroCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -25,10 +26,10 @@ const HeroCarousel = () => {
   const banners = [
     {
       id: 1,
-      image: digitalMarketingBanner,
-      alt: "Digital Marketing Mastery - Learn from Industry Experts",
-      title: "Digital Marketing Mastery",
-      tagline: "Learn from Industry Experts"
+      image: asianCookingBanner,
+      alt: "Traditional Asian Cooking - Master Authentic Recipes",
+      title: "Traditional Asian Cooking",
+      tagline: "Master Authentic Recipes"
     },
     {
       id: 2,
@@ -43,6 +44,13 @@ const HeroCarousel = () => {
       alt: "Healthy Cooking Fundamentals - Nourish Your Body and Mind",
       title: "Healthy Cooking Fundamentals",
       tagline: "Nourish Your Body and Mind"
+    },
+    {
+      id: 4,
+      image: digitalMarketingBanner,
+      alt: "Digital Marketing Mastery - Learn from Industry Experts",
+      title: "Digital Marketing Mastery",
+      tagline: "Learn from Industry Experts"
     }
   ];
 
