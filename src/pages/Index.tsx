@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import HeroCarousel from '@/components/HeroCarousel';
+import Hero from '@/components/Hero';
 import ValueProposition from '@/components/ValueProposition';
 import FeaturedCourses from '@/components/FeaturedCourses';
 import LearningProcess from '@/components/LearningProcess';
@@ -52,7 +52,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-1" style={{ paddingBottom: isMobile ? '0' : '0' }}>
         <div id="hero">
-          <HeroCarousel />
+          <Hero />
         </div>
         <div id="courses">
           <FeaturedCourses />
