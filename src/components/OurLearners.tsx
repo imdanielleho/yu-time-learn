@@ -45,7 +45,7 @@ const OurLearners = () => {
   ];
 
   return (
-    <section className="bg-yutime-neutral/30 py-16 md:py-20">
+    <section className="bg-[#EEF2F6] py-16 md:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
