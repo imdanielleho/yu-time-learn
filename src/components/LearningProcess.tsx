@@ -73,19 +73,21 @@ const LearningProcess = () => {
               </div>)}
           </div>
           
-          {/* CTA Section */}
+          {/* Enhanced CTA Section with stronger visual presence */}
           <div className="text-center">
-            <div className="bg-white border border-yutime-secondary/20 rounded-3xl p-12 max-w-2xl mx-auto shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-yutime-secondary/5 to-yutime-primary/5"></div>
-              <div className="relative z-10">
-                <h3 className="text-2xl font-serif text-yutime-primary mb-4">準備好開始了嗎？</h3>
-                <p className="text-yutime-text/70 mb-8 text-lg font-light">
-                  Join thousands of learners who have transformed their lives through personalized education.
-                </p>
-                <Button onClick={() => scrollToSection('courses')} className="bg-[#2a9d8f] hover:bg-[#228b7a] text-white px-10 py-4 text-lg rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg">
-                  Start Learning Today
-                  <ArrowRight className="ml-2" size={20} />
-                </Button>
+            <div className="relative bg-gradient-to-br from-yutime-secondary via-yutime-accent to-yutime-secondary rounded-3xl p-1 max-w-2xl mx-auto shadow-wellness hover:shadow-warm transition-all duration-300 group animate-fade-in">
+              <div className="bg-white rounded-3xl p-12 h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-yutime-secondary/5 via-transparent to-yutime-accent/5 rounded-3xl"></div>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-serif text-yutime-primary mb-4 group-hover:text-yutime-secondary transition-colors">準備好開始了嗎？</h3>
+                  <p className="text-yutime-text/70 mb-8 text-lg font-light">
+                    Join thousands of learners who have transformed their lives through personalized education.
+                  </p>
+                  <Button onClick={() => scrollToSection('courses')} className="bg-gradient-to-r from-yutime-secondary to-yutime-accent hover:from-yutime-accent hover:to-yutime-secondary text-white px-12 py-4 text-lg rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-warm hover:shadow-wellness">
+                    Start Learning Today
+                    <ArrowRight className="ml-2" size={20} />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
