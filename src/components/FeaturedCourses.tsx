@@ -27,7 +27,7 @@ const FeaturedCourses = () => {
     course
   }: {
     course: typeof courses[0];
-  }) => <div className="bg-white border border-yutime-neutral/30 rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-wellness focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300">
+  }) => <div className="bg-white border border-yutime-neutral/20 rounded-2xl overflow-hidden flex flex-col h-full group shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)] focus-within:ring-2 focus-within:ring-yutime-secondary/20 transition-all duration-300 transform hover:-translate-y-1">
       <Link to={`/courses/${course.id}`} className="block flex-1 flex flex-col">
         <div className="relative overflow-hidden" style={{
         aspectRatio: '16/9'
