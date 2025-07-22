@@ -144,24 +144,8 @@ const HeroCarousel = () => {
             </button>
           </Carousel>
           
-          {/* Mobile indicators only - consistent with FeaturedCourses */}
-          <div className="flex md:hidden justify-center space-x-3 mt-6">
-            {Array.from({ length: count }).map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
-                  index === current - 1 
-                    ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' 
-                    : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'
-                }`}
-                onClick={() => api?.scrollTo(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-          
-          {/* Desktop indicators only */}
-          <div className="hidden md:flex justify-center items-center space-x-3 mt-8" role="tablist" aria-label="Carousel slide indicators">
+          {/* Unified indicators for all screen sizes with desktop pill design */}
+          <div className="flex justify-center items-center space-x-3 mt-6 md:mt-8" role="tablist" aria-label="Carousel slide indicators">
             {banners.map((_, index) => (
               <button
                 key={index}

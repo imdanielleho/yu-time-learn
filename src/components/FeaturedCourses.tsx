@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -56,7 +55,8 @@ const FeaturedCourses = () => {
       </Link>
     </div>;
 
-  return <section id="courses" className="bg-white py-12 md:py-16 lg:py-20">
+  return (
+    <section id="courses" className="bg-white py-12 md:py-16 lg:py-20">
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 md:mb-12 text-center">
@@ -65,40 +65,49 @@ const FeaturedCourses = () => {
             <p className="text-yutime-text/70 max-w-2xl mx-auto text-lg font-light">從數位生活到身心健康，陪你每一段熟齡成長旅程</p>
           </div>
           
-          {isMobile ? <div className="w-full max-w-sm mx-auto sm:max-w-none">
-            <Carousel className="w-full" setApi={setApi}>
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {courses.map(course => <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                    <CourseCard course={course} />
-                  </CarouselItem>)}
-              </CarouselContent>
-              <div className="hidden sm:block">
-                <CarouselPrevious />
-                <CarouselNext />
+          {isMobile ? (
+            <div className="w-full max-w-sm mx-auto sm:max-w-none">
+              <Carousel className="w-full" setApi={setApi}>
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {courses.map(course => (
+                    <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <CourseCard course={course} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="hidden sm:block">
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </div>
+              </Carousel>
+              
+              {/* Mobile carousel indicators using desktop pill design */}
+              <div className="flex justify-center items-center space-x-3 mt-6 sm:hidden">
+                {Array.from({ length: count }).map((_, index) => (
+                  <button
+                    key={index}
+                    className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-yutime-secondary/30 focus-visible:outline-none rounded-full ${
+                      index === current - 1 
+                        ? 'w-8 h-3 bg-yutime-secondary shadow-lg' 
+                        : 'w-3 h-3 bg-yutime-primary/40 hover:bg-yutime-primary/60'
+                    }`}
+                    onClick={() => api?.scrollTo(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
-            </Carousel>
-            
-            {/* Mobile carousel indicators consistent with HeroCarousel */}
-            <div className="flex justify-center space-x-3 mt-6 sm:hidden">
-              {Array.from({ length: count }).map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
-                    index === current - 1 
-                      ? 'bg-yutime-secondary border-yutime-secondary shadow-lg' 
-                      : 'bg-white/80 border-yutime-primary/60 shadow-md hover:border-yutime-secondary/70 hover:bg-yutime-neutral/40'
-                  }`}
-                  onClick={() => api?.scrollTo(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {courses.map(course => (
+                <CourseCard key={course.id} course={course} />
               ))}
             </div>
-          </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map(course => <CourseCard key={course.id} course={course} />)}
-          </div>}
+          )}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default FeaturedCourses;
