@@ -60,7 +60,8 @@ const HeroCarousel = () => {
 
   return (
     <section className="w-full bg-gradient-to-r from-primary/5 to-secondary/5 py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 md:px-20">
+        <div className="relative">
         <Carousel
           setApi={setApi}
           plugins={[plugin.current]}
@@ -103,11 +104,11 @@ const HeroCarousel = () => {
             ))}
           </CarouselContent>
           <CarouselPrevious 
-            className="left-4 bg-background/90 hover:bg-background border border-border shadow-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="-left-12 md:-left-16 bg-background/95 hover:bg-background border-2 border-border shadow-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 h-12 w-12 rounded-full backdrop-blur-sm"
             aria-label={`Go to previous slide. Currently showing slide ${current} of ${count}`}
           />
           <CarouselNext 
-            className="right-4 bg-background/90 hover:bg-background border border-border shadow-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="-right-12 md:-right-16 bg-background/95 hover:bg-background border-2 border-border shadow-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 h-12 w-12 rounded-full backdrop-blur-sm"
             aria-label={`Go to next slide. Currently showing slide ${current} of ${count}`}
           />
         </Carousel>
@@ -128,6 +129,7 @@ const HeroCarousel = () => {
               aria-label={`Go to slide ${index + 1}: ${banners[index].title}`}
             />
           ))}
+        </div>
         </div>
       </div>
     </section>
