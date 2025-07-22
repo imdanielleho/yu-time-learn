@@ -59,77 +59,76 @@ const HeroCarousel = () => {
   }, [api]);
 
   return (
-    <section className="w-full bg-gradient-to-r from-primary/5 to-secondary/5 py-8">
-      <div className="container mx-auto px-4 md:px-20">
+    <section className="w-full bg-background py-12 md:py-16">
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="relative">
-        <Carousel
-          setApi={setApi}
-          plugins={[plugin.current]}
-          className="w-full"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Featured course banners"
-        >
-          <CarouselContent>
-            {banners.map((banner, index) => (
-              <CarouselItem key={banner.id}>
-                 <div className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] rounded-lg overflow-hidden">
-                   <img
-                     src={banner.image}
-                     alt={banner.alt}
-                     className="w-full h-full object-cover"
-                     loading={index === 0 ? "eager" : "lazy"}
-                   />
-                    {/* Text Overlay - Positioned to avoid faces */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent flex items-end pb-8">
-                      <div className="container mx-auto px-4">
-                        <div className="max-w-2xl">
-                          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
+          <Carousel
+            setApi={setApi}
+            className="w-full"
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Featured course banners"
+          >
+            <CarouselContent className="-ml-4">
+              {banners.map((banner, index) => (
+                <CarouselItem key={banner.id} className="pl-4">
+                  <div className="relative w-full h-[360px] md:h-[420px] lg:h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-border/20">
+                    <img
+                      src={banner.image}
+                      alt={banner.alt}
+                      className="w-full h-full object-cover"
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                    {/* Simplified overlay with better contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+                      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                        <div className="max-w-3xl">
+                          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-3 leading-tight">
                             {banner.title}
                           </h2>
-                          <p className="text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-md">
+                          <p className="text-base md:text-lg lg:text-xl text-white/95 font-medium leading-relaxed">
                             {banner.tagline}
                           </p>
                         </div>
                       </div>
                     </div>
-                 </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious 
-            className="-left-12 md:-left-16 bg-background/95 hover:bg-background border-2 border-border shadow-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 h-12 w-12 rounded-full backdrop-blur-sm"
-            aria-label={`Go to previous slide. Currently showing slide ${current} of ${count}`}
-          />
-          <CarouselNext 
-            className="-right-12 md:-right-16 bg-background/95 hover:bg-background border-2 border-border shadow-xl transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 h-12 w-12 rounded-full backdrop-blur-sm"
-            aria-label={`Go to next slide. Currently showing slide ${current} of ${count}`}
-          />
-        </Carousel>
-        
-        {/* Carousel Indicators */}
-        <div className="flex justify-center space-x-2 mt-4" role="tablist" aria-label="Carousel slide indicators">
-          {banners.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => api?.scrollTo(index)}
-              className={`w-2 h-2 rounded-full transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                current === index + 1 
-                  ? 'bg-primary' 
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-              }`}
-              role="tab"
-              aria-selected={current === index + 1}
-              aria-label={`Go to slide ${index + 1}: ${banners[index].title}`}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            {/* Larger, more accessible navigation buttons */}
+            <CarouselPrevious 
+              className="left-4 md:left-6 bg-white/95 hover:bg-white text-foreground shadow-lg border-0 h-14 w-14 md:h-16 md:w-16 rounded-xl transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 backdrop-blur-sm"
+              aria-label={`Previous slide. Currently showing slide ${current} of ${count}`}
             />
-          ))}
-        </div>
+            <CarouselNext 
+              className="right-4 md:right-6 bg-white/95 hover:bg-white text-foreground shadow-lg border-0 h-14 w-14 md:h-16 md:w-16 rounded-xl transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 backdrop-blur-sm"
+              aria-label={`Next slide. Currently showing slide ${current} of ${count}`}
+            />
+          </Carousel>
+          
+          {/* Larger, more visible indicators */}
+          <div className="flex justify-center items-center space-x-3 mt-8" role="tablist" aria-label="Carousel slide indicators">
+            {banners.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-primary/30 focus-visible:outline-none rounded-full ${
+                  current === index + 1 
+                    ? 'w-8 h-3 bg-primary shadow-lg' 
+                    : 'w-3 h-3 bg-muted-foreground/40 hover:bg-muted-foreground/60'
+                }`}
+                role="tab"
+                aria-selected={current === index + 1}
+                aria-label={`Go to slide ${index + 1}: ${banners[index].title}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
