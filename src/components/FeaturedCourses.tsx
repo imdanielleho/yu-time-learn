@@ -79,8 +79,10 @@ const FeaturedCourses = () => {
               length: count
             }).map((_, index) => <button key={index} className={`transition-all duration-300 focus-visible:ring-4 focus-visible:ring-yutime-secondary/30 focus-visible:outline-none rounded-full ${index === current - 1 ? 'w-8 h-3 bg-yutime-secondary shadow-lg' : 'w-3 h-3 bg-yutime-primary/40 hover:bg-yutime-primary/60'}`} onClick={() => api?.scrollTo(index)} aria-label={`Go to slide ${index + 1}`} />)}
               </div>
-            </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {courses.map(course => <CourseCard key={course.id} course={course} />)}
+            </div> : <div className="px-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {courses.map(course => <CourseCard key={course.id} course={course} />)}
+              </div>
             </div>}
         </div>
       </div>
