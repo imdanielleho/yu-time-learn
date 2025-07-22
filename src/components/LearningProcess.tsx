@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { Users, BookOpen, Award, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-
 const LearningProcess = () => {
   const steps = [{
     number: "1",
@@ -10,7 +8,7 @@ const LearningProcess = () => {
     title: "選擇課程",
     description: "根據你的階段與興趣選課"
   }, {
-    number: "2", 
+    number: "2",
     icon: <BookOpen size={40} className="text-yutime-secondary" />,
     title: "按照你的節奏學",
     description: "影片短、可回放，手機隨時可看"
@@ -20,7 +18,6 @@ const LearningProcess = () => {
     title: "Assess and adapt",
     description: "Track your progress and celebrate achievements as you develop new skills at your own pace."
   }];
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -29,9 +26,7 @@ const LearningProcess = () => {
       });
     }
   };
-
-  return (
-    <section id="how-it-works" className="bg-yutime-softWhite py-16 md:py-20">
+  return <section id="how-it-works" className="bg-white py-16 md:py-20">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">
@@ -93,8 +88,6 @@ const LearningProcess = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default LearningProcess;

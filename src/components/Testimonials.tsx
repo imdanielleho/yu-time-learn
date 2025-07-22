@@ -37,7 +37,7 @@ const communityAvatars = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="bg-white py-16 md:py-20">
+    <section id="testimonials" className="section bg-yutime-neutral/30">
       <div className="container">
         <div className="text-center mb-20">
           <p className="text-base font-medium text-yutime-secondary tracking-wide uppercase mb-4">

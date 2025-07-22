@@ -1,6 +1,5 @@
 import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-
 const faqItems = [{
   question: "How are YŪTIME courses different?",
   answer: "Our courses are specifically designed for adults 45+ with clear, step-by-step instructions, practical real-world applications, and a pace that respects your learning style."
@@ -17,10 +16,8 @@ const faqItems = [{
   question: "Is there a refund policy?",
   answer: "We offer a 30-day satisfaction guarantee. If you're not completely happy with your course, contact us within 30 days of enrollment for a full refund."
 }];
-
 const FAQ = () => {
-  return (
-    <section id="faq" className="bg-yutime-neutral/30 py-16 md:py-20">
+  return <section id="faq" className="section bg-white">
       <div className="container max-w-4xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <p className="text-sm font-medium text-yutime-secondary tracking-wide uppercase mb-4">
@@ -55,8 +52,6 @@ const FAQ = () => {
           </p>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default FAQ;
