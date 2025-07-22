@@ -1,4 +1,6 @@
 
+import bannerAsianCooking from '@/assets/banner-asian-elderly-cooking.jpg';
+
 export interface Course {
   id: number;
   title: string;
@@ -54,7 +56,7 @@ export const courses: Course[] = [
     level: "Beginner",
     lessons: 10,
     totalTime: "4 小時 30 分鐘",
-    image: "/src/assets/banner-asian-elderly-cooking.jpg",
+    image: bannerAsianCooking,
     price: 120,
     description: "Learn authentic Asian recipes and cooking techniques for healthy, delicious meals.",
     longDescription: "Discover the art of traditional Asian cooking with simple, healthy recipes perfect for everyday meals. Learn essential techniques, ingredient selection, and time-saving tips from an experienced instructor who shares family recipes passed down through generations.",
