@@ -61,7 +61,7 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
             <Avatar className="h-8 w-8">
               <AvatarImage src={user.avatar} alt={user.name} />
               <AvatarFallback className="bg-yutime-blue text-white">
-                {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                <User className="h-4 w-4" />
               </AvatarFallback>
             </Avatar>
           </Button>
@@ -86,7 +86,6 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
         {!hasPurchasedCourses && (
           <DropdownMenuItem onClick={handleAccountSettings} className="cursor-pointer">
             <Settings className="mr-2 h-4 w-4" />
