@@ -7,8 +7,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -56,7 +58,12 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
           {...triggerProps}
         >
           <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 hover:bg-transparent">
-            <User className="h-6 w-6 text-yutime-navy" />
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarFallback className="bg-yutime-blue text-white">
+                {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
           </Button>
           {enableHover && (
             <ChevronDown 
@@ -79,6 +86,7 @@ const ProfileDropdown = ({ enableHover = false }: ProfileDropdownProps) => {
             </p>
           </div>
         </DropdownMenuLabel>
+        <DropdownMenuSeparator />
         {!hasPurchasedCourses && (
           <DropdownMenuItem onClick={handleAccountSettings} className="cursor-pointer">
             <Settings className="mr-2 h-4 w-4" />
