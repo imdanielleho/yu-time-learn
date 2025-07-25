@@ -12,13 +12,9 @@ interface LoginSignupTabsProps {
   email: string;
   password: string;
   confirmPassword: string;
-  firstName: string;
-  lastName: string;
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onConfirmPasswordChange: (value: string) => void;
-  onFirstNameChange: (value: string) => void;
-  onLastNameChange: (value: string) => void;
   onScreenSwitch: (screen: ModalScreen) => void;
   onSubmit: (e: React.FormEvent) => void;
   onForgotPassword: () => void;
@@ -29,13 +25,9 @@ const LoginSignupTabs = ({
   email,
   password,
   confirmPassword,
-  firstName,
-  lastName,
   onEmailChange,
   onPasswordChange,
   onConfirmPasswordChange,
-  onFirstNameChange,
-  onLastNameChange,
   onScreenSwitch,
   onSubmit,
   onForgotPassword
@@ -72,23 +64,6 @@ const LoginSignupTabs = ({
       </div>
 
       <form onSubmit={onSubmit} className="space-y-2 sm:space-y-3">
-        {activeScreen === 'signup' && (
-          <div className="grid grid-cols-2 gap-2 sm:gap-4">
-            <Input
-              placeholder="First Name"
-              value={firstName}
-              onChange={(e) => onFirstNameChange(e.target.value)}
-              className="w-full py-2 sm:py-3 bg-white"
-            />
-            <Input
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(e) => onLastNameChange(e.target.value)}
-              className="w-full py-2 sm:py-3 bg-white"
-            />
-          </div>
-        )}
-        
         <Input
           type="email"
           placeholder="Email"

@@ -20,8 +20,6 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [resetEmail, setResetEmail] = useState("");
   const [resetEmailError, setResetEmailError] = useState("");
 
@@ -31,7 +29,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       onLogin(email, password);
     } else if (activeScreen === 'signup') {
       // Handle signup logic
-      console.log("Signup attempted with:", { email, firstName, lastName, password });
+      console.log("Signup attempted with:", { email, password });
       onLogin(email, password); // For demo, treat signup as login
     }
     onClose();
@@ -61,8 +59,6 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-    setFirstName("");
-    setLastName("");
     setResetEmail("");
     setResetEmailError("");
   };
@@ -94,13 +90,9 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             email={email}
             password={password}
             confirmPassword={confirmPassword}
-            firstName={firstName}
-            lastName={lastName}
             onEmailChange={setEmail}
             onPasswordChange={setPassword}
             onConfirmPasswordChange={setConfirmPassword}
-            onFirstNameChange={setFirstName}
-            onLastNameChange={setLastName}
             onScreenSwitch={handleScreenSwitch}
             onSubmit={handleSubmit}
             onForgotPassword={handleForgotPassword}
@@ -129,13 +121,9 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             email={email}
             password={password}
             confirmPassword={confirmPassword}
-            firstName={firstName}
-            lastName={lastName}
             onEmailChange={setEmail}
             onPasswordChange={setPassword}
             onConfirmPasswordChange={setConfirmPassword}
-            onFirstNameChange={setFirstName}
-            onLastNameChange={setLastName}
             onScreenSwitch={handleScreenSwitch}
             onSubmit={handleSubmit}
             onForgotPassword={handleForgotPassword}
