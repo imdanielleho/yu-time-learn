@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     
     // Set course purchase status immediately for demo purposes
     console.log("Setting hasPurchasedCourses to true");
-    setHasPurchasedCourses(false);
+    setHasPurchasedCourses(true);
     setLastActiveCourse({
       id: '1',
       title: 'Japanese Basics',
